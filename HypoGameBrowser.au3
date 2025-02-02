@@ -3,44 +3,69 @@
 #AutoIt3Wrapper_Outfile=HypoGameBrowser_1.0.exe
 #AutoIt3Wrapper_Compression=4
 #AutoIt3Wrapper_UseX64=n
-#AutoIt3Wrapper_Res_Comment=Kingpin Game Browser by hypo_v8
-#AutoIt3Wrapper_Res_Description=Game browser for Kingpin, KingpinQ3 and Quake2
-#AutoIt3Wrapper_Res_Fileversion=1.0.3.0
+#AutoIt3Wrapper_Res_Comment='Kingpin Game Browser by hypo_v8'
+#AutoIt3Wrapper_Res_Description='Game browser for Kingpin, KingpinQ3 and Quake2'
+#AutoIt3Wrapper_Res_Fileversion=1.0.4.0
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=p
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\1.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\2.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\3.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\4.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\5.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\6.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\7.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\8.ico
-#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\logo_1.bmp,rt_bitmap,logo_1
-#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\logo_3.bmp,rt_bitmap,logo_2
-#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\buttons_1.bmp,rt_bitmap,button_1
-#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\buttons_2.bmp,rt_bitmap,button_2
-#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\buttons_3.bmp,rt_bitmap,button_3
-#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\buttons_4.bmp,rt_bitmap,button_4
-#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\buttons_5.bmp,rt_bitmap,button_5
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\1.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\2.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\3.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\4.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\5.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\6.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\7.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gspyicons\8.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\kp1.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\kp1.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\q2.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\hex.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\hw.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\hr2.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\q1.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\qw.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\sof.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\dak.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\pb2.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\unvan.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\sin.ico"
+#AutoIt3Wrapper_Res_Icon_Add="D:\_code_\hypoBrowser\gameicons\m.ico"
+#AutoIt3Wrapper_Res_File_Add="D:\_code_\hypoBrowser\icons\logo_5.bmp",rt_bitmap,logo_1
 #AutoIt3Wrapper_AU3Check_Parameters=-d
+#Au3Stripper_Parameters=/so /rm
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
-;#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\po.mp3,rt_rcdata, AUDIO_0
-;#AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\1p.mp3,rt_rcdata, AUDIO_1
-
 ;======= hypo do not delet above ====================
+;icons from https://github.com/XQF/xqf/tree/master/src/xpm
 
 Global Const $versionName = "HypoGameBrowser"
-Global Const $versionNum = "1.0.3" ;1.0.0
-;1.0.1 fixed issue with kp refresh. when a servre times out the updated responce may stil get skiped
-;1.0.2 fixed 'mod' display issue. using 'gametype' from responce now
+Global Const $versionNum = "1.0.4" ;1.0.0
+#region ;About
+;1.0.1
+;      fixed issue with kp refresh. when a servre times out the updated responce may stil get skiped
+;1.0.2
+;      fixed 'mod' display issue. using 'gametype' from responce now
 ;      added proper gamespy protocol encrypter. fixes non qtracker master issues. eg.. master.333networks.com
-;1.0.3 added fix to prevent font scale changing
+;1.0.3
+;      added fix to prevent font scale changing
 ;      updated offline list.
-;
-;1.0.4.... 	todo update offline list.
-;			todo support additional games. (lots of work required)
-;			todo option to combine all masters lists into 1 big list. (lots of work required)
+;1.0.4
+;      fixed mbrowser game port
+;      updated offline list
+;      cleaned up dupe code
+;      added kpq3 mLink (need to recheck enable mLinks to update reg)
+;      added additional games.
+;      cleaned up ui for additional games
 
+
+;1.0.x todo
+;      update offline list.
+;      support additional games.
+;      option to combine all masters lists into 1 big list.
+;      option to set max servers to ping per 1000ms
+;      handel GameSpy port with master protocol
+;      ...
+#EndRegion
+
+#Region ;=> includes
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
 #include <GUIConstantsEx.au3>
@@ -72,756 +97,876 @@ Global Const $versionNum = "1.0.3" ;1.0.0
 #include <GuiListBox.au3>
 #include <IE.au3>
 #include <GDIPlus.au3>
+#include <GuiEdit.au3>
+#include <GuiComboBox.au3>
+#include <ComboConstants.au3>
+#include <GuiComboBoxEx.au3>
+#EndRegion
+
+AutoItSetOption("GUICloseOnESC", 0)
+
+#Region ;=> global Varables
+
+;$NET_PROTOCOL_
+Global Enum _
+	$NET_PROTOCOL_NONE, _
+	$NET_PROTOCOL_TCP, _
+	$NET_PROTOCOL_UDP, _
+	$NET_PROTOCOL_WEB, _
+	$NET_PROTOCOL_HTTP, _
+	$NET_PROTOCOL_HTTPS
+
+;listview index
+Global Enum _
+	$LV_A_IDX, _
+	$LV_A_IP, _
+	$LV_A_NAME
+
+;recieve packet array
+Global Enum _
+	$PACKET_DATA, _
+	$PACKET_IP, _
+	$PACKET_PORT, _
+	$PACKET_PING, _
+	$PACKET_SIZE = $PACKET_PING, _
+	$COUNT_PACKET
+
+;multi game ID (must match tab button order)
+Global Enum _
+	$ID_KP1, _
+	$ID_KPQ3, _
+	$ID_Q2, _
+	$ID_HEX, _
+	$ID_HW, _
+	$ID_HER, _ ; Heretic
+	$ID_Q1, _
+	$ID_QW, _
+	$ID_SOF1, _
+	$ID_DAIK, _
+	$ID_PAINT, _ ;PAINTBALL2
+	$ID_UNVAN, _ ;Unvanquished
+	$ID_SIN, _ ;todo ADD GAMES
+	$COUNT_GAME, _ ;, _ ;store last game index
+	$ID_M = $COUNT_GAME ;used for startup game index
+
+;tab ID
+Global Enum _
+	$TAB_GB, _
+	$TAB_MB, _
+	$TAB_CHAT, _
+	$TAB_CFG, _
+	$COUNT_TABS ;total tabs count
+
+Global Const $MAX_PLAYERS = 64
+Global Const $g_iMaxSer = 750 ; global max servers to get, q2/qw list is huge
+Global Const $g_iMaxIP = 50 ;max servers ping will get at once. update
+Global Const $GUIMINWID = 824, $GUIMINHT = 650 ;set restricted GUI size
+
+;============
+;Game Names
+Global Enum _
+	$GNAME_MENU, _ ;0: gamename. used for dropdown menu and exe names
+	$GNAME_SAVE, _ ;1: abbreviated names (save file)
+	$GNAME_GS, _   ;2: gamespy name (to send to TCP master)
+	$GNAME_DP, _   ;3: darkplace name (to send to master UDP)
+	$COUNT_GNAME   ;ARRAY SIZE
+Global Const $g_sGameNames[$COUNT_GAME][$COUNT_GNAME] = [ _
+	['Kingpin',            'KP',     'kingpin',                 ''], _
+	['KingpinQ3',          'KPQ3',   'kingpinQ3',    'KingpinQ3-1'], _
+	['Quake2',             'Q2',     'Quake2',                  ''], _
+	['Hexen2',             'HEX2',   'hexen2',                  ''], _
+	['HexenWorld',         'HEXW',   'hexenworld',              ''], _
+	['Heretic2',           'HER2',   'heretic2',                ''], _
+	['Quake1',             'Q1',     'quake1',                  ''], _
+	['QuakeWorld',         'QW' ,    'quakeworld',              ''], _
+	['Soldier of Fortune', 'SOF1',   'sofretail',               ''], _
+	['Daikatana',          'DAIK',   'daikatana',               ''], _
+	['PaintBall 2',        'PAINT',  'paintball',               ''], _
+	['Unvanquished',       'UNVAN',  'unvanquished',            ''], _ ;UNVANQUISHED ;master not using darkplace
+	['Sin',                'SIN',    'sin',                     '']];todo ADD GAMES
+;	 #0                    #1        #2                         #3
+
+;=============================
+;client/server communication
+Global Enum _
+	$NET_C2S, _  ;0 CLIENT-> SERVER  (send message to server) (gamespy port uses '\status\')
+	$NET_S2C, _  ;1 SERVER-> CLIENT  (recieve message from server )(unused for now, they all have '\' after header)
+	$NET_GS_P, _ ;2 CLIENT-> SERVER  (communication port, not game port)
+	$COUNT_SV    ;ARRAY SIZE
+Global Const $g_aNetMsg_UDP_Server[$COUNT_GAME][$COUNT_SV] = [ _
+	['\status\',                                   '\', -10], _  ;kingpin
+	['ÿÿÿÿgetstatus'&@LF,         'ÿÿÿÿstatusResponse',   0], _  ;kpq3
+	['ÿÿÿÿstatus'&@LF,                             '\',   0], _  ;quake2
+	[BinaryToString('0x8000000C02')&'HEXENII',     '\',   0], _  ;hexen2
+	['ÿÿÿÿÿstatus'&@LF,                        'ÿÿÿÿn',   0], _  ;hexenworld. ÿ prefix
+	['\status\'&@LF,                               '\',   1], _  ;heretic2
+	[BinaryToString('0x8000000A02')&'QUAKE',       '\',   0], _  ;quake1 EOT(0xd192)
+	['ÿÿÿÿstatus'&@LF,                             '\',   0], _  ;quakeworld EOT(0xd192)
+	['\status\'&@LF,                               '\',   1], _  ;sof1
+	['\status\'&@LF,                               '\', -10], _  ;daikatana
+	['ÿÿÿÿstatus'&@LF,                     'ÿÿÿÿprint',   0], _  ;paintball
+	['ÿÿÿÿgetstatus'&@LF,         'ÿÿÿÿstatusResponse',   0], _  ;unvanquished
+	['\status\'&@LF,                               '\',   1]]    ;sin
+;	 #0                                            #1     #2     ;todo ADD GAMES
+
+;=============================
+;client/master communication
+Global Enum _
+	$NET_C2M, _       ;0 CLIENT-> MASTER (send message to master)
+	$NET_C2M_Q3PRO, _ ;1 CLIENT-> MASTER (USE PROTOCOL) (send message to master using Q3 protocol 0/1)
+	$NET_M2C, _       ;2 MASTER-> CLIENT (receive message from master)
+	$NET_M2C_SEP, _   ;3 MASTER-> CLIENT (IP SEPERATOR) (receive message from master. ip seperator <length>)
+	$NET_M2C_EOT, _   ;4 MASTER-> CLIENT (END OF DATA) (receive message from master. end of transmition string)
+	$COUNT_MAST       ;ARRAY SIZE
+Global Const $g_aNetMsg_UDP_Master[$COUNT_GAME][$COUNT_MAST] = [ _
+	['query'&@lf,           0,  'ÿÿÿÿservers',              0, 'gp' ], _  ;kingpin
+	['ÿÿÿÿgetservers',      1,  'ÿÿÿÿgetserversResponse',   1, 'EOT'&chr(0)&chr(0)&chr(0) ], _  ;kpq3
+	['query'&@lf,           0,  'ÿÿÿÿservers',              0, 'gp' ], _  ;quake2
+	['ÿc'&chr(0),           0,  'ÿÿÿÿÿd',                   0, 'gp' ], _  ;hexen2
+	['ÿc'&@lf,              0,  'ÿÿÿÿÿd',                   0, ''   ], _  ;hexenworld. ÿ prefix
+	['query'&@lf,           0,  'ÿÿÿÿservers',              0, 'gp' ], _  ;heretic
+	['c'&@lf,               0,  'ÿÿÿÿd',                    0, 'Ñ’' ], _  ;quake1 EOT(0xd192)
+	['c'&@lf,               0,  'ÿÿÿÿd',                    0, 'Ñ’' ], _  ;quakeworld EOT(0xd192)
+	['query'&@lf,           0,  'ÿÿÿÿservers',              0, 'gp' ], _  ;sof1
+	['query'&@lf,           0,  'ÿÿÿÿservers',              0, 'gp' ], _  ;daikatana
+	['ÿÿÿÿserverlist2',     0,  'ÿÿÿÿserverlist2response',  0, 'gp' ], _  ;paintball
+	['ÿÿÿÿgetservers',      1,  'ÿÿÿÿgetserversResponse',   1, 'EOT'&chr(0)&chr(0)&chr(0) ], _  ;unvanquished
+	['query'&@lf,           0,  'ÿÿÿÿservers',              0, 'gp' ]]    ;sin
+;	  #0                    #1   #2                        #3  #4       ;todo ADD GAMES
 
 
-#Region global Varables
-Global $HypoGameBrowser, $tabGroupGames, $TabSheet1, $ListView1KP, $ListView2, $ListView3, $TabSheet2, $ListView1KPQ3, $ListView2KPQ3
-Global $ListView3KPQ3, $TabSheet3, $ListView1Q2, $ListView2Q2, $ListView3Q2, $TabSheet4, $SettingsBgBlack
-Global $InputMaster1, 		$InputMaster2, 		$InputMaster3, 		$InputMaster4, 		$RadioMaster1, 		$RadioMaster2, 		$RadioMaster3, 		$RadioMaster4, 		$GroupKingpin
-Global $InputMaster1KPQ3, 	$InputMaster2KPQ3, 	$InputMaster3KPQ3, 	$InputMaster4KPQ3, 	$RadioMaster1KPQ3, 	$RadioMaster2KPQ3, 	$RadioMaster3KPQ3, 	$RadioMaster4KPQ3,	$GroupKingpinQ3
-Global $InputMaster1Q2,		$InputMaster2Q2, 	$InputMaster3Q2, 	$InputMaster4Q2, 	$RadioMaster1Q2, 	$RadioMaster2Q2, 	$RadioMaster3Q2, 	$RadioMaster4Q2, 	$GroupQuake2
-Global $RadioMasterTCP_KPQ3, $RadioMasterUDP_KPQ3, $RadioMasterTCP_Q2, $RadioMasterUDP_Q2, $InputKPQ3_proto, $LabelMasterKPQ3_proto
-Global $Game_Config, $path_Kingpin, $path_KPQ3, $path_Quake2, $Button_kp, $Button_kpq3, $Button_q2, $runCommands, $RunKingpinCMD, $RunKingpinQ3CMD, $RunQuake2CMD, $PlayerNames
-Global $InputNameKP, $InputNameKPQ3, $InputNameQ2, $Group_M_Settings, $hosted_server, $getPort, $remove_Server, $add_Server, $ExcludeSrever
-Global $addKPQ3, $addQuake2, $MLinkGroup, $MLink, $StartupMBrowser, $StartupMChkBox, $refreshAutoGrp, $refreshTimeImput, $refreshChkBox
-Global $textRefresh, $soundChkBox, $About, $Label1, $Label2, $Label3, $Label4, $Label5, $Label6, $Label7, $Web_links, $Link_KP_info
-Global $Link_Ham_web, $Link_ham_chat, $Link_Ham_feedback, $Link_kpq3, $TabSheet5, $ChatGroup1, $SettingsBgBlack2, $ConnectChatBtn
-Global $TabSheet6, $ListView1M, $ListView2M, $ListView3M, $Group3, $playersOnline, $playersOnlineKPQ3, $playersOnlineQ2, $GetServersBtn
-Global $RefServerBtn, $FavServerBtn, $OffLineServeBtn, $Icon1, $Icon2, $Icon3, $SettingsBtn, $LowerStatus, $trayExit, $trayMax, $tray_mini, $webObj_ctrl
-Global $MOTD_Input, $ProgressBar_Group, $ProgressBar
-Global $GBG_gamebrowser, $GBG_Refresh, $GB_RB_Kingpin, $GB_RB_KingpinQ3, $GB_RB_Quake2, $GBG_Sounds, $GB_Players_sound, $Master_server_address
-Global $GB_IN_refreshTime, $GB_TXT_refreshTime, $link_hypo_email, $RadioMasterHTTP_Q2
-Global $Group_opt_window, $opt_minToTray, $hotKey_Input, $hotKey_btn, $hotKey_alt, $hotKey_ctrl
+;=============================================
+;preset master addresses for dropdown list
+Global Const $g_aMasterAddresses[$COUNT_GAME] = [ _
+	"master.kingpin.info:28900|master.maraakate.org|master.hambloch.com:28900|master.333networks.com:28900", _                ;kingpin
+	"master.kingpinq3.com:27950|master.kingpin.info:28900|master.ioquake3.org:27950|gsm.qtracker.com:28900", _                ;kpq3
+	"http://q2servers.com/?mod=&raw=1|master.netdome.biz:27900|master.quakeservers.net:27900|master.333networks.com:28900", _ ;q2servers.com:80
+	"https://hexenworld.org/hexen2|master.maraakate.org|master.hexenworld.org:27900", _                                       ;hexen2
+	"master.hexenworld.org:27900|master.maraakate.org|https://www.qtracker.com/server_list_details.php?game=hexenworld", _    ;hexenworld
+	"https://hexenworld.org/heretic2|master.openspy.net:28900|master.333networks.com:28900|master.maraakate.org", _           ;heretic2
+	"master.maraakate.org:28900|https://www.quakeservers.net/lists/servers/global.txt|gsm.qtracker.com:28900", _              ;quake1
+	"master.quakeservers.net:27000|qwmaster.fodquake.net:27000|master.quakeworld.nu:27000|qwmaster.ocrana.de:27000|master.maraakate.org:28900", _    ;quakeworld
+	"sof1master.megalag.org|gsm.qtracker.com|https://www.qtracker.com/server_list_details.php?game=soldieroffortune|master.333networks.com:28900", _ ;sof1
+	"master.maraakate.org:28900|master.333networks.com:28900|master.openspy.net:28900|gsm.qtracker.com:28900", _              ;daikatana
+	"dplogin.com:27900|http://www.otb-server.de/serverlist.txt|http://dplogin.com/serverlist.php", _                          ;paintball2
+	"master.unvanquished.net:27950|master2.unvanquished.net:27950|master.ioquake3.org:27950", _                               ;unvanquished
+	"master.maraakate.org|master.gameranger.com|master.333networks.com:28900" _                                               ;sin
+	] ;todo ADD GAMES
 
 
-Global $webObj = _IECreateEmbedded()
-Global $aDPI = _GDIPlus_GraphicsGetDPIRatio() ;windows font scale
+
+;listview column ID
+Global Enum _
+	$COL_NAME, _
+	$COL_IP, _
+	$COL_PORT, _ ;communication port
+	$COL_PING, _
+	$COL_PORTGS, _ ;gamespy reported game port
+	$COL_TIME, _
+	$COL_PLAYERS, _
+	$COL_INFOSTR, _ ;stored as array
+	$COL_INFOPLYR, _ ; stored as string
+	$COL_MAP, _
+	$COL_MOD, _
+	$COL_IDX, _  ;sorted list, index
+	$COUNT_COL
+;multi game arrays
+Global $g_aServerStrings[$COUNT_GAME][$g_iMaxSer][$COUNT_COL];keep each server array in memory [num][string/ip/port/ping/HostPort]
+Global $g_aFavList[$COUNT_GAME] ;= ["", "", ""]
+Global $g_aGameSetup_Master_Combo[$COUNT_GAME] ;idx
+Global $g_aGameSetup_Master_Cust[$COUNT_GAME] ;string
+Global $g_aGameSetup_EXE[$COUNT_GAME]   ;path
+Global $g_aGameSetup_Name[$COUNT_GAME]   ;string
+Global $g_aGameSetup_RunCmd[$COUNT_GAME] ;string
+Global $g_aGameSetup_Master_Proto[$COUNT_GAME] = [ _
+	"", _ ; kingpin
+	"74", _ ; kpq3
+	"", _   ; quake2
+	"", _   ; hexen2
+	"", _   ; hexenworld
+	"", _   ; heretic2
+	"", _   ; quake1
+	"", _   ; quakeworld
+	"", _   ; sof1
+	"", _   ; daikatana
+	"", _   ; paintball
+	"86", _   ; unvanquished
+	"" _ ;sin
+] ;todo ADD GAMES
+
+;========
+;main UI
+Global $HypoGameBrowser, $tabGroupGames, $UI_Combo_gameSelector, $UI_TabSheet[$COUNT_TABS]
+Global $UI_Btn_pingList, $UI_Btn_loadFav, $UI_Btn_offlineList, $UI_Btn_settings, $UI_Btn_expand, $UI_Btn_refreshMaster
+Global $UI_Icon_hypoLogo, $UI_Tray_exit, $UI_Tray_max, $UI_Tray_minimize
+;games TAB
+Global $UI_ListV_svData_A, $UI_ListV_svData_B, $UI_ListV_svData_C
+;settings TAB
+Global $UI_Combo_master, $UI_Text_setupTitle, $UI_In_master_Cust, $UI_In_gamePath, $UI_In_playerName, $UI_In_runCmd, $UI_In_master_proto
+Global $UI_Text_masterAddress, $UI_Text_gamePath, $UI_Text_playerName, $UI_Text_runCmd, $UI_Btn_gamePath, $UI_Text_setupBG
+Global $UI_CBox_autoRefresh, $UI_Combo_M_addServer, $UI_Combo_hkey, $UI_Label_hotkey, $UI_TextAbout, $UI_Grp_hosted, $UI_CBox_theme
+Global $UI_Grp_gameConfig, $UI_CBox_tryNextMaster, $UI_CBox_useMLink, $UI_In_refreshTime, $UI_Tex_refreshTime
+Global $UI_Grp_mBrowser, $UI_In_getPortM, $UI_MHost_removeServer, $UI_MHost_addServer, $UI_MHost_excludeSrever
+Global $UI_Grp_webLinks, $UI_Text_linkKPInfo, $UI_Text_linkMServers, $UI_Text_linkSupport, $UI_Text_linkContactM
+Global $UI_CBox_sound, $UI_Grp_gameSetup, $UI_Text_linkKPQ3, $UI_Text_linkHypoEmail, $UI_Text_linkDiscord
+Global $UI_Grp_browserOpt, $UI_CBox_minToTray, $UI_In_hotKey, $UI_Btn_setHotKey
+;m-browser TAB
+Global $UI_ListV_mb_ABC[3], $UI_Text_countMPlayers
+;chat TAB
+Global $UI_Text_chatBG, $UI_Btn_chatConnect, $UI_Obj_webPage = _IECreateEmbedded(), $UI_Obj_webPage_ctrl
+;statusbar
+Global $MOTD_Input, $UI_Prog_getServer, $UI_Text_masterDisplay ;$MOTD_Background,
+;main  gui
+Global $aDPI[2]
+Global $HypoGameBrowser_AccelTable[1][2] ;todo local?
+
+;========================================================
+; -->Global settings
+Global $g_iGSGameLast = 0 ;store menu
+Global $g_isGettingServers = 0 ;0=no, 1=yes, -1=finished
+
+;total server counts
+Global $g_iServerCountTotal = 0 ;get # of servers to use later to stop refresh
+Global $g_iServerCountTotal_Responded = 0	;count the server if we recieved info
+
+Global $g_iTabNum = 0
+Global $g_iCurGameID = 0 ; startup kp?
+Global $g_iGameSetupLastIdx = 0 ;settings gameIdx
+
+;delayed update. exit WM
+Global $g_iListview_changed = 0
+
+;==> sockets. one for master, one for client
+Global $g_hSocketServerUDP = -1 ; socket for servers communication
+Global $g_hSocketMasterUDP = -1 ; socket for master communication
+Global $g_hSocReqNum = 0 ; console log
+
+Global $g_aStoredWinSize[4] ;store win size b4 minimizing it. or it causes error when exiting
+Global $g_bWasMaximized = False
+Global $g_bWasMinimized = False
+Global $g_bGuiResized = False
+
+;set time of last refresh. for auto refresh
+Global $g_iLastRefreshTime ;
+
+;-->  player counts for audio
+Global $g_iPlayerCount_GS = 0
+Global $g_aPlayerCount_M[3] = [0, 0, 0]
+
+Global $iMGameType = 0 ;Tab m-browser. needs extra info to lunch game
+Global $g_iM_AutoRefresh = 0 ;enable auto refresh, default off. saved to settings
+;Global $g_iLoadOnStartup_M = 0
+
+Global $g_tmpStatusbarString = ""
+Global $g_statusBarTime = 0
+;Global $g_ResizeListView = 0
+
+Global $g_bAutoRefresh = False ; = _GUICtrlComboBox_GetCurSel($UI_CBox_autoRefresh)
+
+;==> color for visual theme
+Global Const $COLOR_HYPO_GREY = 0x373737 	;grey (0x7a7a7a)
+Global Const $COLOR_HYPO_BLACK = 0x272727	;dark grey. button color (0xe58816)
+Global Const $COLOR_HYPO_ORANGE = 0xff8c00 	;orange
+
+;====================
+;--> M BROWER Globals
+Global $MPopupInfo, $serverInfoRefBtn, $serverInfoConBtn, $ListView1POP, $ListView2POP
+Global Const $g_sMWebString[3] = [ _
+	"https://hambloch.com/kingpin/mbrowser.php?game=kingpin&username=hypobrowser&v=1.0", _
+	"https://hambloch.com/kingpin/mbrowser.php?game=kingpinq3&username=hypobrowser&v=1.0", _
+	"https://hambloch.com/kingpin/mbrowser.php?game=quake2&username=hypobrowser&v=1.0"] ;unused..
+
+; files that should be deleted
+Global Const $g_sM_tmpFile_reg = @TempDir & "\kingpin_MLink.reg"
+Global Const $g_sM_tmpFile[3] = [ _
+	@TempDir & "\KP_Server_Array.txt", _
+	@TempDir & "\KPQ3_Server_Array.txt", _
+	@TempDir & "\Q2Web_Server_Array.txt"]
+
+Global Const $mp3path[11] = [ _
+	@TempDir & "\1_po.mp3", _
+	@TempDir & "\2_po.mp3", _
+	@TempDir & "\3_po.mp3", _
+	@TempDir & "\4_po.mp3", _
+	@TempDir & "\5_po.mp3", _
+	@TempDir & "\6_po.mp3", _
+	@TempDir & "\7_po.mp3", _
+	@TempDir & "\8_po.mp3", _
+	@TempDir & "\9_po.mp3", _
+	@TempDir & "\10_po.mp3", _
+	@TempDir & "\10plus_po.mp3"]
 
 ;get icons from internal resources. 0=global 1-3=autoit
 Global $ImageList1 = _GUIImageList_Create(16, 16, 5)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 4, True)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 5, True)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 6, True)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 7, True)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 8, True)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 9, True)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 10, True)
-_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, 11, True)
+Global $ImageListGames = _GUIImageList_Create(16, 16, 5, 3)
+
+Global $bEventStartKingpin = False 	;while loop call for $WM_NOTIFY
+;popup menu
+Global  Enum $ContextKP_Connect = 2800, $ContexKP_Refresh, $ContexKP_AddFav, $ContexKP_RemFav, _
+			$ContexKP_RefreshM, $ContextKP_ConnectM, $ContexKP_AddFavM, $ContexKP_RemFavM, _
+			$ContextKP_CopyIP, $ContexKP_GetInfoM  ; these are used in menu definition to link to WM_COMMAND
+
+Global Const $g_listID_offset = 3000
+
+Global $bEventRightClick = False 	;while loop call for $WM_NOTIFY
+Global $bEventRightClickM = False 	;while loop call for $WM_NOTIFY
+
+;sort listview
+Global $g_ilastColumn_A = -1
+Global $g_ilastColumn_C = -1
+Global $g_vSortSense_C[2] = [False, False]
+Global $g_bLV_A_startUpdate = False
+
+;~ Global $g_vSortSense_A[7] = [ _  ;updateLV
+;~ 	False, _ ;id
+;~ 	False, _ ;ip
+;~ 	False, _ ;name
+;~ 	False, _ ;ping
+;~ 	True, _  ;player count
+;~ 	False, _ ;map
+;~ 	False _  ;mod
+;~ ]
+;~ global const $g_vSortSense_A_default[7] = [ _
+;~ 	$g_vSortSense_A[0], _
+;~ 	$g_vSortSense_A[1], _
+;~ 	$g_vSortSense_A[2], _
+;~ 	$g_vSortSense_A[3], _
+;~ 	$g_vSortSense_A[4], _
+;~ 	$g_vSortSense_A[5], _
+;~ 	$g_vSortSense_A[6] _
+;~ ]
+
 #EndRegion
 
 ;DllCall("uxtheme.dll", "none", "SetThemeAppProperties", "int", 0)
 ;DllCall("UxTheme.dll", "int", "SetWindowTheme", "hwnd", GUICtrlGetHandle($HypoGameBrowser), "wstr", 0, "wstr", 0)
 _WinAPI_SetThemeAppProperties(1) ;1= allow aero outter
-
-#Region ### START Koda GUI section ### Form=C:\Programs\codeing\autoit-v3\SciTe\Koda\Dave\hypogamebrowser.kxf
-;~ $HypoGameBrowser = GUICreate("HypoGameBrowser", 808, 614, -1, -1, BitOR($GUI_SS_DEFAULT_GUI,$WS_MAXIMIZEBOX,$WS_SIZEBOX,$WS_THICKFRAME,$WS_TABSTOP))
-$HypoGameBrowser = GUICreate("HypoGameBrowser", 810, 615, -1, -1, BitOR($GUI_SS_DEFAULT_GUI,$WS_MAXIMIZEBOX,$WS_SIZEBOX,$WS_THICKFRAME,$WS_TABSTOP))
-GUISetIcon(@AutoItExe, -1)
-GUISetFont(8* $aDPI[0], 0, 0,  "MS Sans Serif", $HypoGameBrowser)
-$tabGroupGames = GUICtrlCreateTab(61, 4, 746, 589, BitOR($TCS_FLATBUTTONS,$TCS_FORCELABELLEFT,$TCS_BUTTONS))
-GUICtrlSetFont(-1, 10*$aDPI[0], 800, 0, "MS Sans Serif")
-ConsoleWrite("!GIU DPI= "&$aDPI[0] & @CRLF)
+Opt("GUIResizeMode", $GUI_DOCKAUTO+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+Opt("TrayMenuMode", 3)
+Opt("TrayOnEventMode", 1) ; Enable TrayOnEventMode.
+Opt("TCPTimeout", 1000)
+Opt("GUIOnEventMode", 1)
+Opt("GUIDataSeparatorChar", "|") ;"|" is the default
 
 
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
+#Region --> STARTUP
+BuildIconList()
+_GDIPlus_GraphicsGetDPIRatio($aDPI) ;windows font scale
+
+BulidMainGui()
+BulidMainGui_Finish()
+iniFile_Load() ;load ini first for game path?
+M_RunGameFrom_MLInk() ;check if a command lunched the exe, then exit
+CheckSingleState() ;close if multiple are open
+startupMainUI()
+UpdateRegForMBrowserLinks()
+
+Func BuildTabViewPage($iTab, $sName)
+	$UI_TabSheet[$iTab] = GUICtrlCreateTabItem($sName)
+	Switch $iTab
+		Case $TAB_GB ;0 to $COUNT_GAME-1
+			GUICtrlSetState($UI_TabSheet[$iTab],$GUI_SHOW)
+			;GUISwitch($HypoGameBrowser, $UI_TabSheet[$iTab])
+			$UI_ListV_svData_A = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map|Mod", 65, 34, 738, 382, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
+			;GUICtrlRegisterListViewSort($UI_ListV_svData_A, "ListViewSort_A");updateLV
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 6, 170)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
+			$UI_ListV_svData_B = GUICtrlCreateListView("Name|Frags|Ping|Deaths|Team", 65, 420, 445, 168, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 200)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 50)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 50)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 50)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 50)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
+			$UI_ListV_svData_C = GUICtrlCreateListView("Rules|Value", 515, 420, 288, 168, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 100)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 120)
+			GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+		Case $TAB_MB
+			$UI_ListV_mb_ABC[0] = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map", 65, 34, 738, 290, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
+			$UI_ListV_mb_ABC[1] = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map", 65, 348, 738, 148, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
+			$UI_ListV_mb_ABC[2] = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map", 65, 500, 738, 88, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
+			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
+			$UI_Text_countMPlayers = GUICtrlCreateLabel("", 65, 328, 738, 17, BitOR($SS_CENTER,$SS_CENTERIMAGE), $WS_EX_STATICEDGE)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
+		Case $TAB_CHAT
+			$UI_Text_chatBG = GUICtrlCreateLabel("", 65, 34, 738, 554, -1, $WS_EX_STATICEDGE)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+			;$UI_Obj_webPage = ObjCreate("DHTMLEdit.DHTMLEdit.1")
+			$UI_Obj_webPage_ctrl = GUICtrlCreateObj($UI_Obj_webPage, 74, 42, 720, 512)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKRIGHT+$GUI_DOCKTOP)
+
+			$UI_Btn_chatConnect = GUICtrlCreateButton("Connect", 74, 558, 81, 25)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+		Case $TAB_CFG
+			;$UI_Text_setupBG = GUICtrlCreateLabel("", 65, 34, 737, 554, BitOR($SS_CENTER,$SS_SUNKEN))
+			$UI_Text_setupBG = GUICtrlCreateLabel("", 65, 34, 738, 554, -1, $WS_EX_STATICEDGE)	;BitOR($SS_CENTER,$SS_SUNKEN)
+			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
+			GUICtrlSetState(-1, $GUI_DISABLE)
+
+			;================
+			; master settings
+			$UI_Grp_gameSetup = GUICtrlCreateGroup("Game Setup", 73, 38, 216, 292, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Text_setupTitle = GUICtrlCreateLabel("Kingpin", 85, 62, 192, 24, BitOR($SS_CENTER,$SS_CENTERIMAGE), $WS_EX_STATICEDGE)
+				GUICtrlSetFont(-1, 12, 800, 0, "MS Sans Serif")
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Text_masterAddress = GUICtrlCreateLabel("Master Address", 81, 98, 76, 13)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Combo_master = GUICtrlCreateCombo("", 81, 114, 164, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_In_master_Cust = GUICtrlCreateInput("gsm.qtracker.com:28900", 81, 138, 200, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_In_master_proto = GUICtrlCreateInput("74", 249, 114, 32, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Game Protocol for IOQ3 masters"&@CRLF&"74=Beta, 75=Release")
+				$UI_Btn_gamePath = GUICtrlCreateButton("Browse", 81, 175, 61, 21)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Text_gamePath = GUICtrlCreateLabel("Game Path", 147, 180, 57, 13)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_In_gamePath = GUICtrlCreateInput("Game.exe", 81, 199, 200, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_READONLY,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Text_playerName = GUICtrlCreateLabel("Player Name", 81, 234, 64, 13)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_In_playerName = GUICtrlCreateInput("", 81, 250, 200, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Text_runCmd = GUICtrlCreateLabel("Additional Run Commands", 81, 282, 128, 13)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_In_runCmd = GUICtrlCreateInput("+set developer 1", 81, 298, 200, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+			GUICtrlCreateGroup("", -99, -99, 1, 1)
+			;end master settings
+			;================
+
+			;===============
+			;browser options
+			$UI_grp_browserOpt = GUICtrlCreateGroup("Browser Options", 297, 38, 128, 292, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_CBox_sound = GUICtrlCreateCheckbox("Play Sounds", 309, 62, 105, 21)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Play a sound if there is a player in a server")
+				$UI_CBox_minToTray = GUICtrlCreateCheckbox("Minimize to tray", 309, 86, 105, 21)
+				GUICtrlSetState(-1, $GUI_CHECKED)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "This is used in tray menu(Minimize) and on game lunch")
+				$UI_CBox_theme = GUICtrlCreateCheckbox("Dark Theme", 309, 110, 105, 21)
+				GUICtrlSetState(-1, $GUI_CHECKED)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Enable custom colors on GUI."&@CRLF&"Requires restart.")
+				$UI_CBox_useMLink = GUICtrlCreateCheckbox("Use M Web Link", 309, 134, 105, 21)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Enable web links to connect to 'servers' listed on M's Website."& @CRLF&"Make sure to set Kingpin Game Path first. Then enable option.")
+				$UI_CBox_autoRefresh = GUICtrlCreateCheckbox("Auto Refresh", 309, 194, 97, 21)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Auto refresh active game.")
+				$UI_In_refreshTime = GUICtrlCreateInput("3", 309, 218, 29, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
+				$UI_Tex_refreshTime = GUICtrlCreateLabel("Refresh Time", 341, 218, 67, 21, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
+				$UI_Label_hotkey = GUICtrlCreateLabel("Hotkey (Restore)", 309, 258, 102, 13)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Combo_hKey = GUICtrlCreateCombo("", 309, 274, 104, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+				GUICtrlSetData(-1, "ALT +|CTRL +|CTRL + ALT +", "ALT +")
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_In_hotKey = GUICtrlCreateInput("", 309, 298, 33, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_LOWERCASE,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "HotKey. Accepts a-z")
+				$UI_Btn_setHotKey = GUICtrlCreateButton("Apply", 349, 298, 64, 21)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Apply a Windows global hotkey")
+				$UI_CBox_tryNextMaster = GUICtrlCreateCheckbox("Ping Next Master", 309, 158, 105, 21)
+				GUICtrlSetState(-1, $GUI_CHECKED)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "If master fails to respond, ping the next one in list.")
+			GUICtrlCreateGroup("", -99, -99, 1, 1)
+			;end browser
+			;===============
+
+			;=============
+			;hosted server
+			$UI_Grp_hosted = GUICtrlCreateGroup("Hosted Server", 433, 38, 109, 172, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_MHost_addServer = GUICtrlCreateButton("Add Server", 441, 62, 93, 25)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Add a server to 'M' Website listing so game can be seen in M-Browser")
+				$UI_MHost_removeServer = GUICtrlCreateButton("Remove Server", 441, 90, 93, 25)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Remove a server to 'M' Website listing so game can not be seen in M-Browser")
+				$UI_MHost_excludeSrever = GUICtrlCreateButton("Exclude Server", 441, 118, 93, 25)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Exclude a server from 'M' Website listing so game can not be seen in M-Browser. Even if listed at Qtracker")
+				$UI_Combo_M_addServer = GUICtrlCreateCombo("", 441, 150, 93, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+				GUICtrlSetData(-1, "kingpin|kingpinq3|quake2", "kingpin")
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_In_getPortM = GUICtrlCreateInput("31510", 441, 178, 93, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Set Server port" & @CRLF & "Default Game Kingpin")
+			GUICtrlCreateGroup("", -99, -99, 1, 1)
+			;end hosted
+			;=============
+
+			;=============
+			;weblinks
+			$UI_Grp_webLinks = GUICtrlCreateGroup("Web Links", 549, 38, 124, 172, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Text_linkKPInfo = GUICtrlCreateLabel("Kingpin.info", 557, 58, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Kingpin.info Website")
+				GUICtrlSetCursor (-1, 0)
+				$UI_Text_linkMServers = GUICtrlCreateLabel("M's Server List", 557, 78, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Server List Website (hambloch.com)")
+				GUICtrlSetCursor (-1, 0)
+				$UI_Text_linkContactM = GUICtrlCreateLabel("Contact M", 557, 98, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Contact M Via His Website (hambloch.com)")
+				GUICtrlSetCursor (-1, 0)
+				$UI_Text_linkKPQ3 = GUICtrlCreateLabel("KingpinQ3", 557, 118, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "KingpinQ3 Website")
+				GUICtrlSetCursor (-1, 0)
+				$UI_Text_linkDiscord = GUICtrlCreateLabel("Kingpin Discord", 557, 138, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Kingpin Discord")
+				GUICtrlSetCursor (-1, 0)
+				$UI_Text_linkHypoEmail = GUICtrlCreateLabel("Contact Hypov8", 557, 158, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Email Me")
+				GUICtrlSetCursor (-1, 0)
+				$UI_Text_linkSupport = GUICtrlCreateLabel("Support Me", 557, 178, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Buy Me a Coffee")
+				GUICtrlSetCursor (-1, 0)
+			GUICtrlCreateGroup("", -99, -99, 1, 1)
+			;weblinks
+			;=============
+
+			;=============
+			;mbrowser
+			$UI_Grp_mBrowser = GUICtrlCreateGroup("M Browser Info", 433, 214, 240, 116, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_TextAbout = GUICtrlCreateEdit("", 441, 234, 225, 89, BitOR($ES_NOHIDESEL,$ES_READONLY))
+				GUICtrlSetData(-1, StringFormat("M-Browser GUI Version\r\nBy David Smyth (hypo_v8)\r\n\r\nThe original M-Browser is a command line \r\ninterface that Michael Hambloch(M) released.\r\nUsing M"&Chr(39)&"s Website to Source Kingpin Servers."))
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+			GUICtrlCreateGroup("", -99, -99, 1, 1)
+			;mbrowser
+			;=============
+	EndSwitch
+EndFunc
+
+Func BulidMainGui()
+	;#Region ### START Koda GUI section ### Form=C:\Programs\codeing\autoit-v3\SciTe\Koda\Dave\hypogamebrowser.kxf
+	$HypoGameBrowser = GUICreate("HypoGameBrowser", 810, 615, -1, -1, BitOR($GUI_SS_DEFAULT_GUI,$WS_MAXIMIZEBOX,$WS_SIZEBOX,$WS_THICKFRAME,$WS_TABSTOP))
+	GUISetIcon(@AutoItExe, -1)
+	GUISetFont(8* $aDPI[0], 0, 0,  "MS Sans Serif", $HypoGameBrowser)
+
+	;==> tabs
+	$tabGroupGames = GUICtrlCreateTab(61, 4, 746, 607, BitOR($TCS_FLATBUTTONS,$TCS_FORCELABELLEFT,$TCS_BUTTONS))
+		GUICtrlSetFont(-1, 10*$aDPI[0], 400, 0, "MS Sans Serif") ;was 800
+		GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
+		;TABS
+		BuildTabViewPage($TAB_GB,   "Games") ; now combined
+		BuildTabViewPage($TAB_MB,   "M-Browser")
+		BuildTabViewPage($TAB_CHAT, "Chat")
+		BuildTabViewPage($TAB_CFG,  "Setup")
+	GUICtrlCreateTabItem("")
+
+	;==> game selector
+	;~ $UI_Combo_gameSelector = GUICtrlCreateCombo("", 652, 10, 149, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+	$UI_Combo_gameSelector = _GUICtrlComboBoxEx_Create($HypoGameBrowser, "", 652, 8, 149, 325, $CBS_DROPDOWNLIST )
+	;GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	;~ $UI_Text_gameSelector = GUICtrlCreateLabel("Game", 592, 10, 49, 21, BitOR($SS_RIGHT,$SS_CENTERIMAGE))
+	;~ GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 
 
-;==> TAB 1  -=Kingpin=-
-$TabSheet1 = GUICtrlCreateTabItem("Kingpin")
-$ListView1KP = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map|Mod", 65, 36, 738, 317, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 6, 170)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
-$ListView2 = GUICtrlCreateListView("Name|Frags|Ping", 65, 354, 445, 231, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 200)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 50)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 50)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
-$ListView3 = GUICtrlCreateListView("Rules|Value", 513, 354, 289, 231, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL), BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 130)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 120)
-GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-;==> TAB 2  -=KingpinQ3=-
-$TabSheet2 = GUICtrlCreateTabItem("KingpinQ3")
-$ListView1KPQ3 = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map|Mod", 65, 36, 738, 317, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 6, 170)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
-$ListView2KPQ3 = GUICtrlCreateListView("Name|Frags|Ping", 65, 354, 445, 231, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 200)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 50)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 50)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
-$ListView3KPQ3 = GUICtrlCreateListView("Rules|Value", 513, 354, 289, 231, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 130)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 120)
-GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-;==> TAB 3  -=Quake2=-
-$TabSheet3 = GUICtrlCreateTabItem("Quake2")
-$ListView1Q2 = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map|Mod", 65, 36, 738, 317, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 6, 170)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
-$ListView2Q2 = GUICtrlCreateListView("Name|Frags|Ping", 65, 354, 445, 231, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 200)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 50)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 50)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
-$ListView3Q2 = GUICtrlCreateListView("Rules|Value", 513, 354, 289, 231, BitOR($GUI_SS_DEFAULT_LISTVIEW,$LVS_AUTOARRANGE,$LVS_ALIGNLEFT,$WS_HSCROLL,$WS_VSCROLL))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 130)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 120)
-GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	;==> buttons
+	$UI_Btn_refreshMaster = GUICtrlCreateButton("Refresh", 3, 56+8, 56, 41, $BS_BITMAP)
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "Get servers from the master and refresh them" & @CRLF &" Shortcut F5")
+	$UI_Btn_pingList = GUICtrlCreateButton("Ping List", 3, 104+4, 56, 41, $BS_BITMAP)
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "Refresh game servers in current list, without talking to the master.")
+	$UI_Btn_loadFav = GUICtrlCreateButton("Favorite", 3, 152, 56, 41, $BS_BITMAP)
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "View favorite server list."&@CRLF&" PingList will run once they are loaded")
+	$UI_Btn_offlineList = GUICtrlCreateButton("OffLine", 3, 212, 56, 41, $BS_BITMAP)
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "Load offline server list for the selected game."&@CRLF&" You will need to refresh list with PingList..")
+	$UI_Btn_settings = GUICtrlCreateButton("Setup", 3, 310, 56, 41, $BS_BITMAP)
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "Settings")
+	$UI_Btn_expand = GUICtrlCreateButton("^", 30, 552, 31, 31, $BS_BITMAP) ; 65
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "Expand")
+
+	;$UI_Icon_hypoLogo = GUICtrlCreateIcon(@AutoItExe, -1, 3, 4, 56, 56)
+	;$UI_Icon_hypoLogo = GUICtrlCreatePic("", 3, 4, 56, 56)
+	;$UI_Icon_hypoLogo = GUICtrlCreateButton("", 3, 4, 56, 56)
+	$UI_Icon_hypoLogo = GUICtrlCreateLabel("", 3, 4, 56, 56, $SS_SUNKEN, 0)
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "Support Me"&@CRLF&"Buy Me a Coffee")
+	GUICtrlSetCursor (-1, 0)
+
+	;==> statusbar background
+	;~ $MOTD_Background = GUICtrlCreateLabel("", 61, 589, 746, 22) ;, $WS_CLIPSIBLINGS)
+	;~ GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
+
+	;==> progress bar
+	$UI_Prog_getServer = GUICtrlCreateProgress(65, 591, 51, 17, 1, $WS_EX_STATICEDGE);$PBS_SMOOTH =1
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+
+	;==> statusbar text
+	$MOTD_Input = GUICtrlCreateLabel("", 119, 591, 391, 17, $SS_CENTERIMAGE, $WS_EX_STATICEDGE) ; BitOR($SS_CENTERIMAGE,$WS_BORDER)) ;, $SS_CENTERIMAGE)
+	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKRIGHT+$GUI_DOCKHEIGHT)
+
+	;==> statusbar master
+	$UI_Text_masterDisplay = GUICtrlCreateLabel("Master:", 515, 591, 288, 17, BitOR($SS_RIGHT,$SS_CENTERIMAGE), $WS_EX_STATICEDGE)
+	GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+	GUICtrlSetTip(-1, "Sklvggh")
+	GUICtrlSetState(-1, $GUI_ONTOP)
+
+	TraySetIcon(@AutoItExe, -1)
+	TraySetClick("16")
+	$UI_Tray_exit = TrayCreateItem("Exit")
+	TrayCreateItem("")
+	$UI_Tray_max = TrayCreateItem("Restore/Maximize")
+	$UI_Tray_minimize = TrayCreateItem("Minimize")
+
+	GUISetState(@SW_HIDE , $HypoGameBrowser) ;;;GUISetState(@SW_SHOW, $HypoGameBrowser)
+	;#EndRegion ### END Koda GUI section ###
+
+	_GUICtrlComboBox_SetDroppedWidth($UI_Combo_master, 350)
+	WinSetTitle($HypoGameBrowser,"", string($versionName &"  (v"& $versionNum&")"))
+	GUICtrlSetData($MOTD_Input , "Use Refresh to receive list from master. Use Ping to updates current servers in view. Offline loads internal servers")
+	GUICtrlSetTip($UI_In_master_proto, _
+		"Game Protocol for Q3 UDP masters"&@CRLF& _
+		"  KingpinQ3:  74=Beta1, 75=Beta2"&@CRLF& _
+		"  Quake3:  66=v1.30 67=1.31 68=1.32" &@CRLF& _
+		"  Unvanquished:  86=v0.55"&@CRLF& _
+		""&@CRLF _
+	)
+
+EndFunc
+
+Func BulidMainGui_Finish()
+	Local $sNames = ""
+
+	;update listview
+	_GUICtrlListView_JustifyColumn(GUICtrlGetHandle($UI_ListV_svData_A), 0, 0) ;IDX
+	_GUICtrlListView_JustifyColumn(GUICtrlGetHandle($UI_ListV_svData_A), 1, 0) ;IP
+	_GUICtrlListView_JustifyColumn(GUICtrlGetHandle($UI_ListV_svData_A), 3, 0) ;ping align right
+	_GUICtrlListView_JustifyColumn(GUICtrlGetHandle($UI_ListV_svData_A), 4, 0) ;players align right
+	;_GUICtrlListView_SetColumn(GUICtrlGetHandle($UI_ListV_svData_A), 3, "Ping", 50, 1, 2, True)
+
+	_GUICtrlComboBoxEx_SetImageList($UI_Combo_gameSelector, $ImageListGames) ; icons
+	_GUICtrlComboBoxEx_InitStorage($UI_Combo_gameSelector, $COUNT_GAME, 160)
+	_GUICtrlComboBoxEx_SetItemHeight($UI_Combo_gameSelector, -1, 16)
+	_GUICtrlComboBoxEx_BeginUpdate($UI_Combo_gameSelector)
+	for $i = 0 to $COUNT_GAME-1 ; COUNT_GAME
+		_GUICtrlComboBoxEx_AddString($UI_Combo_gameSelector, $g_sGameNames[$i][$GNAME_MENU], $i, $i)
+		;$sNames &= "|" &$g_sGameNames[$i][$GNAME_MENU]
+	Next
+	_GUICtrlComboBoxEx_AddString($UI_Combo_gameSelector, 'M-Browser (Tab)', $COUNT_GAME, $COUNT_GAME)
+	_GUICtrlComboBoxEx_EndUpdate($UI_Combo_gameSelector)
 
 
-;==> TAB 4  -=SETUP=-
-$TabSheet4 = GUICtrlCreateTabItem("Setup ")
-$SettingsBgBlack = GUICtrlCreateLabel("", 65, 34, 737, 554, BitOR($SS_CENTER,$SS_SUNKEN))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$Master_server_address = GUICtrlCreateGroup("Master Server Settings", 73, 38, 242, 436, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$GroupKingpin = GUICtrlCreateGroup("Kingpin Masters", 81, 52, 226, 121, BitOR($GUI_SS_DEFAULT_GROUP,$BS_LEFT))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$InputMaster1 = GUICtrlCreateInput("master.kingpin.info:28900", 105, 72, 193, 21, $ES_READONLY);
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster2 = GUICtrlCreateInput("master.hambloch.com:28900", 105, 96, 193, 21, $ES_READONLY);master1.kingpin.info:28900
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster3 = GUICtrlCreateInput("master.333networks.com:28900", 105, 120, 193, 21, $ES_READONLY);""
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster4 = GUICtrlCreateInput("gsm.qtracker.com:28900", 105, 144, 193, 21);
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster1 = GUICtrlCreateRadio("", 89, 72, 13, 21)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster2 = GUICtrlCreateRadio("", 89, 96, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster3 = GUICtrlCreateRadio("", 89, 120, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster4 = GUICtrlCreateRadio("", 89, 144, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$GroupKingpinQ3 = GUICtrlCreateGroup("KingpinQ3 Masters", 81, 176, 226, 145, BitOR($GUI_SS_DEFAULT_GROUP,$BS_LEFT))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$InputMaster1KPQ3 = GUICtrlCreateInput("masterkpq3.kingpin.info:27950", 105, 196, 193, 21, $ES_READONLY)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster2KPQ3 = GUICtrlCreateInput("master.hambloch.com:28900", 105, 220, 193, 21, $ES_READONLY)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster3KPQ3 = GUICtrlCreateInput("master.ioquake3.org:27950", 105, 244, 193, 21, $ES_READONLY)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster4KPQ3 = GUICtrlCreateInput("gsm.qtracker.com:28900", 105, 268, 193, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster1KPQ3 = GUICtrlCreateRadio("", 89, 196, 13, 21)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster2KPQ3 = GUICtrlCreateRadio("", 89, 220, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster3KPQ3 = GUICtrlCreateRadio("", 89, 244, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster4KPQ3 = GUICtrlCreateRadio("", 89, 268, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMasterTCP_KPQ3 = GUICtrlCreateCheckbox("TCP", 104, 292, 45, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-GUICtrlSetTip(-1, "Gamespy protocol"&@CRLF&"Qtracker etc..")
-$RadioMasterUDP_KPQ3 = GUICtrlCreateCheckbox("UDP", 156, 292, 45, 21)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-GUICtrlSetTip(-1, "UDP for Quake protocol Requests"&@CRLF&"Same as the ingame browser")
-$InputKPQ3_proto = GUICtrlCreateInput("74", 205, 292, 30, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-;GUICtrlSetState(-1, $GUI_DISABLE)
-GUICtrlSetTip(-1, "Game Protocol for IOQ3 masters"&@CRLF&"74=Beta, 75=Release")
-$LabelMasterKPQ3_proto = GUICtrlCreateLabel("Protocol", 240, 295, 43, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Game Protocol for IOQ3 masters"&@CRLF&"74=Beta, 75=Release")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$GroupQuake2 = GUICtrlCreateGroup("Quake2 Masters", 81, 324, 226, 141, BitOR($GUI_SS_DEFAULT_GROUP,$BS_LEFT))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$InputMaster1Q2 = GUICtrlCreateInput("q2servers.com:80", 105, 344, 193, 21, $ES_READONLY)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster2Q2 = GUICtrlCreateInput("master.netdome.biz:27900", 105, 368, 193, 21, $ES_READONLY)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster3Q2 = GUICtrlCreateInput("master.quakeservers.net:27900", 105, 392, 193, 21, $ES_READONLY)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$InputMaster4Q2 = GUICtrlCreateInput("gsm.qtracker.com:28900", 105, 416, 193, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster1Q2 = GUICtrlCreateRadio("", 89, 344, 13, 21)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster2Q2 = GUICtrlCreateRadio("", 89, 368, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster3Q2 = GUICtrlCreateRadio("", 89, 392, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMaster4Q2 = GUICtrlCreateRadio("RadioMaster4Q2", 89, 416, 13, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RadioMasterTCP_Q2 = GUICtrlCreateCheckbox("TCP", 104, 440, 45, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-GUICtrlSetTip(-1, "Gamespy protocol"&@CRLF&"Qtracker etc..")
-$RadioMasterUDP_Q2 = GUICtrlCreateCheckbox("UDP", 152, 440, 49, 17)
+	;;;;;;$sNames &= "|M-Browser (Tab)"
 
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-GUICtrlSetTip(-1, "UDP for Quake protocol Requests"&@CRLF&"Same as the ingame browser")
-$RadioMasterHTTP_Q2 = GUICtrlCreateCheckbox("WEB", 200, 440, 97, 17)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetState(-1, $GUI_DISABLE)
-GUICtrlSetTip(-1, "Get master list webite at q2servers.com" &@CRLF& "Disables all the above masters")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$Group_M_Settings = GUICtrlCreateGroup("M Browser Settings", 373, 38, 420, 213, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$hosted_server = GUICtrlCreateGroup("Hosted Server", 381, 53, 113, 189, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$add_Server = GUICtrlCreateButton("Add Server", 389, 76, 93, 29)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Add a server to 'M' Website listing so game can be seen in M-Browser")
-$remove_Server = GUICtrlCreateButton("Remove Server", 389, 112, 93, 29)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Remove a server to 'M' Website listing so game can not be seen in M-Browser")
-$ExcludeSrever = GUICtrlCreateButton("Exclude Server", 389, 148, 93, 29)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Exclude a server from 'M' Website listing so game can not be seen in M-Browser. Even if listed at Qtracker")
-$getPort = GUICtrlCreateInput("31510", 389, 188, 93, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Set Server port" & @CRLF & "Default Game Kingpin")
-$addKPQ3 = GUICtrlCreateCheckbox("KPQ3", 389, 213, 49, 25)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Add KingpinQ3 Ports")
-$addQuake2 = GUICtrlCreateCheckbox("Q2", 445, 213, 37, 25)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Add Quake2 Ports")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$MLinkGroup = GUICtrlCreateGroup("Use 'M' Web Links", 501, 53, 109, 49, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$MLink = GUICtrlCreateCheckbox("Enable", 509, 73, 65, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Enable web links to connect to 'servers' listed on M's Website."& @CRLF&"Make sure to set Kingpin Game Path first. Then enable option.")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$StartupMBrowser = GUICtrlCreateGroup("Startup 'M' Browser", 501, 105, 109, 45, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$StartupMChkBox = GUICtrlCreateCheckbox("Enable", 509, 125, 61, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Startup using  M-Browser. Getting servers straightaway")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$refreshAutoGrp = GUICtrlCreateGroup("Misc", 501, 153, 109, 89, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$refreshTimeImput = GUICtrlCreateInput("3", 509, 213, 29, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
-$refreshChkBox = GUICtrlCreateCheckbox("Auto Refresh", 509, 189, 85, 25)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Auto refresh all games." & @CRLF & "Will not refresh when minimized.")
-$textRefresh = GUICtrlCreateLabel("Refresh Time", 541, 217, 67, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
-$soundChkBox = GUICtrlCreateCheckbox("Play Sound", 509, 169, 93, 21)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Play a sound if there is a player in a server")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$About = GUICtrlCreateGroup("About", 617, 53, 169, 189, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Label1 = GUICtrlCreateLabel("M-Browser GUI Version", 625, 73, 114, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Label2 = GUICtrlCreateLabel("By David Smyth (hypo_v8)", 625, 89, 129, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Label3 = GUICtrlCreateLabel("The original M-Browser is a ", 625, 113, 134, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Label4 = GUICtrlCreateLabel("command line interface that ", 625, 129, 137, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Label5 = GUICtrlCreateLabel("Michael Hambloch (M) released.", 625, 145, 156, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Label6 = GUICtrlCreateLabel("Using M's Website to", 625, 170, 104, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Label7 = GUICtrlCreateLabel("Source Kingpin Servers", 625, 186, 115, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$GBG_gamebrowser = GUICtrlCreateGroup("GameSpy Browser Settings", 373, 258, 272, 117, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$GBG_Refresh = GUICtrlCreateGroup("Auto Refresh", 381, 274, 145, 91, BitOR($GUI_SS_DEFAULT_GROUP,$BS_LEFT))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$GB_RB_Kingpin = GUICtrlCreateCheckbox("Kingpin", 389, 290, 65, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Game to be auto refreshed" & @CRLF & "Will not refresh when minimized")
-$GB_RB_KingpinQ3 = GUICtrlCreateCheckbox("KingpinQ3", 389, 314, 77, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Game to be auto refreshed" & @CRLF & "Will not refresh when minimized")
-$GB_RB_Quake2 = GUICtrlCreateCheckbox("Quake2", 389, 338, 65, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Game to be auto refreshed" & @CRLF & "Will not refresh when minimized")
-$GB_IN_refreshTime = GUICtrlCreateInput("3", 457, 290, 29, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
-$GB_TXT_refreshTime = GUICtrlCreateLabel("Time", 489, 294, 27, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$GBG_Sounds = GUICtrlCreateGroup("Sounds", 533, 274, 104, 91, BitOR($GUI_SS_DEFAULT_GROUP,$BS_LEFT))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$GB_Players_sound = GUICtrlCreateCheckbox("Players Online", 541, 290, 89, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Play a sound if there is a player in a server")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-GUICtrlSetState(-1, $GUI_HIDE)
-$Web_links = GUICtrlCreateGroup("Web Links", 673, 258, 120, 117, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Link_KP_info = GUICtrlCreateLabel("Kingpin.info", 685, 274, 59, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetCursor (-1, 0)
-$Link_Ham_web = GUICtrlCreateLabel("M's Server List", 685, 290, 73, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetCursor (-1, 0)
-$Link_ham_chat = GUICtrlCreateLabel("Chat", 685, 306, 26, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetCursor (-1, 0)
-$Link_Ham_feedback = GUICtrlCreateLabel("Contact M", 685, 322, 53, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetCursor (-1, 0)
-$Link_kpq3 = GUICtrlCreateLabel("KingpinQ3", 685, 338, 53, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetCursor (-1, 0)
-$link_hypo_email = GUICtrlCreateLabel("Email Me", 685, 354, 47, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Email me")
-GUICtrlSetCursor (-1, 0)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$Game_Config = GUICtrlCreateGroup("Game Path", 73, 478, 312, 101, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$path_Kingpin = GUICtrlCreateInput("Kingpin.exe", 169, 494, 209, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$path_KPQ3 = GUICtrlCreateInput("KingpinQ3-32.exe", 169, 522, 209, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$path_Quake2 = GUICtrlCreateInput("Quake2.exe", 169, 550, 209, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Button_kp = GUICtrlCreateButton("Kingpin", 81, 494, 81, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Button_kpq3 = GUICtrlCreateButton("KingpinQ3", 81, 522, 81, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$Button_q2 = GUICtrlCreateButton("Quake2", 81, 550, 81, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-GUICtrlSetState(-1, $GUI_HIDE)
-$PlayerNames = GUICtrlCreateGroup("Player Names", 389, 478, 128, 101, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$InputNameKP = GUICtrlCreateInput("", 397, 494, 113, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$InputNameKPQ3 = GUICtrlCreateInput("", 397, 522, 113, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$InputNameQ2 = GUICtrlCreateInput("", 397, 550, 113, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$runCommands = GUICtrlCreateGroup("Additional Run Commands", 521, 478, 272, 101, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RunKingpinCMD = GUICtrlCreateInput("+set developer 1", 529, 494, 256, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RunKingpinQ3CMD = GUICtrlCreateInput("", 529, 522, 256, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$RunQuake2CMD = GUICtrlCreateInput("+set developer 1", 529, 550, 256, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
+	;;;;;;;;;;GUICtrlSetData($UI_Combo_gameSelector, $sNames , $g_sGameNames[$ID_KP1][$GNAME_MENU])
+EndFunc
+
+Func BuildIconList()
+	for $i = 0 to $COUNT_GAME
+		_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, $i+ 4, True)
+	Next
+
+	for $i = 0 to $COUNT_GAME
+		_GUIImageList_AddIcon($ImageListGames, @ScriptFullPath, $i+12)
+	Next
+EndFunc
+
+Func _GDIPlus_GraphicsGetDPIRatio(ByRef $aDPI)
+	local $iDPIDef = 96
+	$aDPI[0] = 1
+	$aDPI[1] = 1
+
+	_GDIPlus_Startup()
+	Local $hGfx = _GDIPlus_GraphicsCreateFromHWND(0)
+	If Not @error Then
+		#forcedef $__g_hGDIPDll, $ghGDIPDll
+		Local $aRet = DllCall($__g_hGDIPDll, "int", "GdipGetDpiX", "handle", $hGfx, "float*", 0)
+		If not @error Then
+			$aDPI[0] = $iDPIDef / $aRet[2]
+			$aDPI[1] = $aRet[2] / $iDPIDef
+		EndIf
+		_GDIPlus_GraphicsDispose($hGfx)
+	EndIf
+	_GDIPlus_Shutdown()
+EndFunc   ;==>_GDIPlus_GraphicsGetDPIRatio
 
 
-$Group_opt_window = GUICtrlCreateGroup("Browser Options", 673, 382, 121, 93, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$opt_minToTray = GUICtrlCreateCheckbox("Minimize to tray", 684, 400, 93, 21)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "This is used in tray menu(Minimize) and on game lunch")
-$hotKey_Input = GUICtrlCreateInput("", 737, 426, 49, 21)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "HotKey. Accepts a-z")
-$hotKey_alt = GUICtrlCreateRadio("Alt +", 681, 430, 41, 17)
-GUICtrlSetState(-1, $GUI_CHECKED)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$hotKey_ctrl = GUICtrlCreateRadio("Ctrl +", 681, 450, 49, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$hotKey_btn = GUICtrlCreateButton("Apply", 737, 450, 49, 17)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Apply a global HotKey bind."&@CRLF&"This will bring hypobrowser window to the front(active)")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
+;======================
+;--> SHOW UI. SET THEME
+Func startupMainUI()
+	;add this to let everything load
+	EnableUIButtons(False)
+
+	GameSetup_UpdateUI()
+
+	;load dark theme
+	if _IsChecked($UI_CBox_theme) Then
+		GUISetColor()
+	EndIf
+
+	$g_bAutoRefresh = _IsChecked($UI_CBox_autoRefresh)
+	ConsoleWrite("!startup refresh id:"&$g_bAutoRefresh&@CRLF)
 
 
-;==>CHAT TAB 5
-$TabSheet5 = GUICtrlCreateTabItem("Chat")
-$ChatGroup1 = GUICtrlCreateGroup("", 65, 40, 735, 549)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
-$SettingsBgBlack2 = GUICtrlCreateLabel("", 65, 44, 735, 549)
-GUICtrlSetBkColor(-1, 0x000000)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
-GUICtrlSetState(-1, $GUI_DISABLE)
-$webObj_ctrl = GUICtrlCreateObj($webObj, 69, 48, 728, 504)
-GUICtrlSetResizing($webObj_ctrl,$GUI_DOCKBORDERS ) ;==>add hypo
+	_ResourceSetImageToCtrl($UI_Icon_hypoLogo, "logo_1") ;todo use icon
 
-$ConnectChatBtn = GUICtrlCreateButton("Connect", 69, 556, 81, 25)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\1_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\2_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\3_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\4_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\5_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\6_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\7_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\8_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\9_po.mp3",      @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\10_po.mp3",     @TempDir & "\")
+	FileInstall("D:\_code_\hypoBrowser\sounds\M_old\10plus_po.mp3", @TempDir & "\")
 
-
-;==>M-BROWSER TAB
-$TabSheet6 = GUICtrlCreateTabItem("M-Browser")
-$ListView1M = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map", 65, 36, 736, 257, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKTOP+$GUI_DOCKBOTTOM)
-$ListView2M = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map", 65, 296, 735, 149, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
-$ListView3M = GUICtrlCreateListView("Num|IP|Server Name|Ping|Players|Map", 65, 448, 735, 101, -1, BitOR($WS_EX_CLIENTEDGE,$LVS_EX_SUBITEMIMAGES,$LVS_EX_FULLROWSELECT))
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 0, 1)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 4)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 2, 240)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 3, 65)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 4, 70)
-GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 5, 160)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
-$Group3 = GUICtrlCreateGroup("", 69, 548, 357, 41)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-$playersOnline = GUICtrlCreateInput("kingpin", 77, 562, 118, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_RIGHT,$ES_READONLY,$WS_BORDER), $WS_EX_STATICEDGE)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Players")
-$playersOnlineKPQ3 = GUICtrlCreateInput("KingpinQ3", 199, 562, 118, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_RIGHT,$ES_READONLY,$WS_BORDER), $WS_EX_STATICEDGE)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Players")
-$playersOnlineQ2 = GUICtrlCreateInput("Quake2", 321, 562, 94, 21, BitOR($ES_RIGHT,$ES_READONLY,$WS_BORDER), $WS_EX_STATICEDGE)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Players")
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-GUICtrlCreateTabItem("")
-;==> end tabs
-
-;==> buttons
-$GetServersBtn = GUICtrlCreateButton("Refresh", 3, 56+8, 56, 41, $BS_BITMAP)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Get servers from the master and refresh them" & @CRLF &" Shortcut F5")
-$RefServerBtn = GUICtrlCreateButton("Ping List", 3, 104+4, 56, 41, $BS_BITMAP)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Refresh game servers in current list, without talking to the master.")
-$FavServerBtn = GUICtrlCreateButton("Favorite", 3, 152, 56, 41, $BS_BITMAP)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "View favorite server list."&@CRLF&" PingList will run once they are loaded")
-$OffLineServeBtn = GUICtrlCreateButton("OffLine", 3, 212, 56, 41, $BS_BITMAP)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Load offline server list for the selected game."&@CRLF&" You will need to refresh list with PingList..")
-$SettingsBtn = GUICtrlCreateButton("Setup", 3, 310, 56, 41, $BS_BITMAP)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Settings")
-
-;$Icon1 = GUICtrlCreateIcon(@AutoItExe, -1, 3, 4, 56, 56)
-;$Icon1 = GUICtrlCreatePic("", 3, 4, 56, 56)
-;$Icon1 = GUICtrlCreateButton("", 3, 4, 56, 56)
-$Icon1 = GUICtrlCreateLabel("", 3, 4, 56, 56, $SS_SUNKEN, 0)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlSetTip(-1, "Setup all games and M-Browser")
-
-;~ $Icon2 = GUICtrlCreateLabel("", 20, 371, 22, 216, -1, 0);$WS_EX_CLIENTEDGE
-;~ GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-;~ GUICtrlSetTip(-1, "Setup all games and M-Browser")
+	GUISetState(@SW_SHOW, $HypoGameBrowser) ;ready to be shown
 
 
+	_GUICtrlListView_SetImageList($UI_ListV_svData_A, $ImageList1, 1)
 
-;_WinAPI_SetThemeAppProperties(6)
-
-;==>statusbar
-;$MOTD_Input = GUICtrlCreateInput(" Use Refresh to receive list from master. Use Ping to updates current servers in view. Offline loads internal servers", 61, 591, 746, 19)
-;GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
-;GUICtrlSetState(-1, $GUI_DISABLE)
-;==> MOTD
-$MOTD_Input = GUICtrlCreateInput(" Use Refresh to receive list from master. Use Ping to updates current servers in view. Offline loads internal servers", 118, 591, 689, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_READONLY))
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
-;==> progress bar
-$ProgressBar_Group = GUICtrlCreateGroup("", 61, 585, 57, 27)
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-GUICtrlCreateGroup("", -99, -99, 1, 1)
-$ProgressBar = GUICtrlCreateProgress(64, 593, 51, 17, 1);$PBS_SMOOTH =1
-GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-
-TraySetIcon(@AutoItExe, -1)
-TraySetClick("16")
-$trayExit = TrayCreateItem("Exit")
-TrayCreateItem("")
-$trayMax = TrayCreateItem("Restore/Maximize")
-$tray_mini = TrayCreateItem("Minimize")
+	GUICtrlRegisterListViewSort($UI_ListV_svData_A, "ListViewSort_A")	;updateLV
 
 
-Dim $HypoGameBrowser_AccelTable[1][2] = [["{F5}", $GetServersBtn]]
-GUISetAccelerators($HypoGameBrowser_AccelTable)
-GUISetState(@SW_SHOW)
-#EndRegion ### END Koda GUI section ###
+	;_GUICtrlListView_SimpleSort($UI_ListV_svData_A, $g_vSortSense_A, 0, False)
+
+	;_GUICtrlListView_RegisterSortCallBack($UI_ListV_svData_A, 1, True)
+	;_GUICtrlListView_RegisterSortCallBack($UI_ListV_svData_C, 0, True)
 
 
-#Region --> COLORS
-;==> color for visual theme
-Global $COLOR_1BLACK = 0x373737 	;grey
-Global $COLOR_2BLACK =0x272727		;dark grey
-Global $COLOR_1ORANGE = 0xff8c00 	;orange
+	$HypoGameBrowser_AccelTable[0][0] = "{F5}"
+	$HypoGameBrowser_AccelTable[0][1] = $UI_Btn_refreshMaster
+	GUISetAccelerators($HypoGameBrowser_AccelTable)
+EndFunc
+;=================
 
+;=================
+;--> CHECK M-LINKS
+Func UpdateRegForMBrowserLinks()
+	Local $regKeyMBrowser = _WinAPI_RegOpenKey($HKEY_CLASSES_ROOT, 'M-Browser', $KEY_QUERY_VALUE)
+	If Not ($regKeyMBrowser = 0) Then
+		GUICtrlSetState( $UI_CBox_useMLink, $GUI_CHECKED )
+	EndIf
+	_WinAPI_RegCloseKey($regKeyMBrowser)
+EndFunc
+;=============
 
-GUISetColor()
+;=====================
+;--> THEME COLORS
 Func GUISetColor()
-	Local $iloop
+	;input enabled
+	Local Const $COLOR_IN1_TEXT = 0xe58816 ;orange
+	Local Const $COLOR_IN1_BG = 0x202020   ;black
+	;input disabled
+	Local Const $COLOR_IN2_TEXT = 0xbbbbbb ;GREY disabled
+	Local Const $COLOR_IN2_BG = 0x373737   ;orange disabled
+
 	;gui parts to color
-	Local $hwNames1= [$SettingsBgBlack, $SettingsBgBlack2, $ListView1KP, $ListView1KPQ3, $ListView1M, $ListView1Q2, $ListView2, _
-		$ListView2KPQ3,$ListView2M ,$ListView2Q2 ,$ListView3 ,$ListView3KPQ3 ,$ListView3M ,$ListView3Q2, _
-		$GroupKingpin, $GroupKingpinQ3, $GroupQuake2 ,$Game_Config ,$runCommands ,$PlayerNames ,$Web_links, $Label2, $Label3, $Label4, $Label5, $Label6, $Label7, _
-		$Group_M_Settings, $hosted_server, $MLinkGroup, $StartupMBrowser, $refreshAutoGrp, $About, $addKPQ3, $addQuake2, $MLink, $StartupMChkBox, $refreshChkBox, $textRefresh, $soundChkBox,$Label1, _ ;M config
-		$Link_KP_info, $Link_Ham_web, $Link_ham_chat, $Link_Ham_feedback, $Link_kpq3, $link_hypo_email, _ ;web links
-		$GBG_gamebrowser, $GBG_Refresh, $GB_RB_Kingpin, $GB_RB_KingpinQ3, $GB_RB_Quake2, $GBG_Sounds, $GB_Players_sound, $GB_TXT_refreshTime, $Master_server_address, $LabelMasterKPQ3_proto, _
-		$RadioMasterTCP_KPQ3, $RadioMasterUDP_KPQ3, $RadioMasterTCP_Q2, $RadioMasterUDP_Q2, $RadioMasterHTTP_Q2, _
-		$Group_opt_window, $opt_minToTray, $hotKey_alt, $hotKey_ctrl]
+	Local Const $hwNames1 = [$UI_Text_setupBG, $UI_Text_chatBG, _
+		$UI_ListV_svData_A, $UI_ListV_svData_B, $UI_ListV_svData_C, _
+		$UI_ListV_mb_ABC[0], $UI_ListV_mb_ABC[1], $UI_ListV_mb_ABC[2], _
+		$UI_Grp_gameConfig, $UI_Grp_webLinks, _
+		$UI_Grp_mBrowser, $UI_CBox_useMLink, _ ;M config
+		$UI_Text_linkKPInfo, $UI_Text_linkMServers, $UI_Text_linkSupport, $UI_Text_linkContactM, _ ;web links
+		$UI_Text_linkKPQ3, $UI_Text_linkHypoEmail, $UI_Text_linkDiscord, _ ;web links
+		$UI_CBox_sound, $UI_Tex_refreshTime, $UI_Grp_gameSetup, $UI_CBox_autoRefresh, $UI_CBox_tryNextMaster, _
+		$UI_Grp_browserOpt, $UI_CBox_minToTray, $UI_Label_hotkey, $UI_TextAbout, $UI_Grp_hosted, $UI_CBox_theme, _
+		$UI_Text_masterAddress, $UI_Text_gamePath, $UI_Text_playerName, $UI_Text_runCmd, $UI_Btn_gamePath, $UI_Text_setupTitle]
 
-
-	GUICtrlSetDefColor($COLOR_1ORANGE,$HypoGameBrowser)
-	GUISetBkColor($COLOR_1BLACK, $HypoGameBrowser)
+	GUICtrlSetDefColor($COLOR_HYPO_ORANGE,$HypoGameBrowser)
+	GUISetBkColor($COLOR_HYPO_GREY, $HypoGameBrowser)
 
 	;set all gui item colors
 	For $iloop = 0 to UBound($hwNames1)-1
-		GUICtrlSetColor	 ($hwNames1[$iloop], $COLOR_1ORANGE)
-		GUICtrlSetBkColor($hwNames1[$iloop], $COLOR_1BLACK)
+		GUICtrlSetColor	 ($hwNames1[$iloop], $COLOR_HYPO_ORANGE)
+		GUICtrlSetBkColor($hwNames1[$iloop], $COLOR_HYPO_GREY)
 	Next
 
-	;add image to left buttons
-	_ResourceSetImageToCtrl($GetServersBtn, 	"button_1")
-	_ResourceSetImageToCtrl($RefServerBtn, 		"button_2")
-	_ResourceSetImageToCtrl($FavServerBtn, 		"button_3")
-	_ResourceSetImageToCtrl($OffLineServeBtn, 	"button_4")
-	_ResourceSetImageToCtrl($SettingsBtn, 		"button_5")
+	;statusbar (win/user set colors)
+	local $hColor_btn = Int("0x" & StringRegExpReplace(Hex(_WinAPI_GetSysColor($COLOR_BTNFACE), 6), "(..)(..)(..)", "\3\2\1"))
+	;GUICtrlSetBkColor($MOTD_Background, $hColor_btn)
+	GUICtrlSetBkColor($MOTD_Input, $hColor_btn)
+	;GUICtrlSetBkColor($UI_Text_gameSelector, $hColor_btn)
+	GUICtrlSetBkColor($UI_Text_masterDisplay, $hColor_btn)
 
-	_ResourceSetImageToCtrl($Icon1, 			"logo_1")
-	_ResourceSetImageToCtrl($Icon2, 			"logo_2")
+	;button colors
+	Local Const $hwNamesBtn = [$UI_Btn_refreshMaster, $UI_Btn_pingList, $UI_Btn_loadFav, $UI_Btn_offlineList, $UI_Btn_settings, $UI_Btn_expand, _
+		$UI_MHost_addServer, $UI_MHost_removeServer, $UI_MHost_excludeSrever, $UI_Btn_gamePath, $UI_Btn_setHotKey, $UI_Btn_chatConnect]
+	For $iloop = 0 to UBound($hwNamesBtn)-1
+		GUICtrlSetColor	 ($hwNamesBtn[$iloop], $COLOR_HYPO_ORANGE)
+		GUICtrlSetBkColor($hwNamesBtn[$iloop], $COLOR_HYPO_BLACK)
+	Next
 
-	;remove theme off progressbar
-	DllCall("UxTheme.dll", "int", "SetWindowTheme", "hwnd", GUICtrlGetHandle($ProgressBar), "wstr", 0, "wstr", 0)
+	;settings inputs
+	Local Const $hwNamesInput = [$UI_In_hotKey,$UI_In_gamePath, $UI_In_playerName, $UI_In_runCmd, _
+		$UI_In_master_Cust, $UI_In_master_proto, $UI_In_getPortM, $UI_In_refreshTime]
+	For $iloop = 0 to UBound($hwNamesInput)-1
+		GUICtrlSetColor	 ($hwNamesInput[$iloop],$COLOR_IN1_TEXT)
+		GUICtrlSetBkColor($hwNamesInput[$iloop], $COLOR_IN1_BG)
+	Next
+
+	;disabled input colors
+	Local Const $hwInputDis = [$UI_Combo_M_addServer, $UI_Combo_hkey, $UI_Combo_master, $UI_Combo_gameSelector]
+	For $iloop = 0 to UBound($hwInputDis)-1
+		GUICtrlSetColor	 ($hwInputDis[$iloop], $COLOR_IN2_TEXT)
+		GUICtrlSetBkColor($hwInputDis[$iloop], $COLOR_IN2_BG)
+	Next
+
+	;remove theme on progressbar
+	DllCall("UxTheme.dll", "int", "SetWindowTheme", "hwnd", GUICtrlGetHandle($UI_Prog_getServer), "wstr", 0, "wstr", 0)
 
 	;$ProgressBar
-	GUICtrlSetColor($ProgressBar, $COLOR_1ORANGE)
-
-
-	;==> buttons. M settings
-	GUICtrlSetStyle($add_Server, 0) ;hypo reset style
-	GUICtrlSetStyle($remove_Server, 0) ;hypo reset style
-	GUICtrlSetStyle($ExcludeSrever, 0) ;hypo reset style
-	;==> buttons. game path
-	GUICtrlSetStyle($Button_kp, 0) ;hypo reset style
-	GUICtrlSetStyle($Button_kpq3, 0) ;hypo reset style
-	GUICtrlSetStyle($Button_q2, 0) ;hypo reset style
-	GUICtrlSetStyle($hotKey_btn, 0) ;hypo reset style
-
+	GUICtrlSetColor($UI_Prog_getServer, $COLOR_HYPO_ORANGE)
 EndFunc
-#EndRegion
-
-
-#Region --> GLOBAL
-;========================================================
-; -->Global settings
-
-Opt("GUIResizeMode", $GUI_DOCKAUTO+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-
-Opt("TrayMenuMode", 3)
-Opt("TrayOnEventMode", 1) ; Enable TrayOnEventMode.
-
-Opt("TCPTimeout", 1000)
-Opt("GUIOnEventMode", 1)
-
-
-WinSetTitle($HypoGameBrowser,"", string($versionName &"  (v"& $versionNum&")"))
-
-Global $serverRefreshTimer = TimerInit() ;global functions
-Global $isGettingServers = 0
-
-Global $iMaxSer = 350 ; global max servers to get, q2 list is huge
-Global $iMaxIP = Int(25) ;max servers ping will get at once
-
-;set a time of sent packet
-;Global $serverPingArray[$iMaxSer]
-
-;keep each server array in memory [num][string/ip/port/ping/HostPort] //#5 store kingpin gameport contained in server string
-Global $sServerStringArray[$iMaxSer][5]
-Global $sServerStringArrayKPQ3[$iMaxSer][4]
-Global $sServerStringArrayQ2[$iMaxSer][4]
-
-Global $iServerCountTotal = 0 ;get # of servers to use later to stop refresh
-Global $iServerCountAdd = 0	;count the server if we recieved info
-
-Global $tabNum = 1 ;hypo todo: set option 4 startup tab??
-
-DisableUIButtons() ;hypo add this to let ui load
-
-Global $changedListview = 0
-
-Global $iOldSelectNumKp 	= -1
-Global $iOldSelectNumKPQ3 	= -1
-Global $iOldSelectNumQ2 	= -1
-
-Global $iMOldSelectNumKp 	= -1
-Global $iMOldSelectNumKPQ3 	= -1
-Global $iMOldSelectNumQ2 	= -1
-
-Global $iLastListviewSortStatus = -1
-Global $iLastListviewSortStatusKPQ3 = -1
-Global $iLastListviewSortStatusQ2 = -1
-
-;sort server rules
-Global $iLastRulesSortStatus = -1
-Global $iLastRulesSortStatusKPQ3 = -1
-Global $iLastRulesSortStatusQ2 = -1
-
-Global $iListVewID[$iMaxSer]
-Global $iListVewIDKPQ3[$iMaxSer]
-Global $iListVewIDQ2[$iMaxSer]
-
-Global $bOffline 		= True
-Global $bOfflineKPQ3 	= True
-Global $bOfflineQ2 		= True
-
-Global $aFavKP[0]
-Global $aFavKPQ3[0]
-Global $aFavQ2[0]
-Global $bStartupFav = False
-
-;==> sockets. one for master, one for client
-Global $hSocketServerUDP = -1 ; socket for servers communication
-Global $hSocketMasterUDP = -1 ; socket for master communication
-Global $hSocReqNum = 0 ; console log
-
-Global Const $GUIMINWID = 824, $GUIMINHT = 650 ;set your restricted GUI size here
-
-Global $StoredWinSize[4] ;store win size b4 minimizing it. or it causes error when exiting
-Global $wasMaximized =False
-Global $wasMinimized =False
-Global $guiResized = False
-Global $minToTray = 1 ;goto tray on minimize
-
-Global $GS_countPlayers = 0
-
-Global $gsIsChecked_KP = 0
-Global $gsIsChecked_KPQ3 = 0
-Global $gsIsChecked_Q2 = 0
-Global $GS_lastRefreshTime
-Global $Q2Web_lastRefreshTime
-
-Global $tmpStatusbarString = ""
-Global $statusBarChanged = False
-
-;hotkeys
-Global $sHkeyPlus=""
-Global $sHkeyKey=""
-
-;==================
-;--> M BROWER COPY
-; files that should be deleted
-
-Global $MPopupInfo, $serverInfoRefBtn, $serverInfoConBtn, $ListView1POP, $ListView2POP
-
-;Global Const $versionName = "hypobrowser"
-;Global Const $versionNum = 1.00
-Global 		 $m_GameName ; = "Kingpin"
-
-Global Const $isTmpFilePath_KP = @TempDir & "\KP_Server_Array.txt"
-Global Const $isTmpFilePath_KPQ3 = @TempDir & "\KPQ3_Server_Array.txt"
-Global Const $isTmpFilePath_Q2Web = @TempDir & "\Q2Web_Server_Array.txt"
-
-Global $mp3path1 = @TempDir & "\1_po.mp3"
-Global $mp3path2 = @TempDir & "\2_po.mp3"
-Global $mp3path3 = @TempDir & "\3_po.mp3"
-Global $mp3path4 = @TempDir & "\4_po.mp3"
-Global $mp3path5 = @TempDir & "\5_po.mp3"
-Global $mp3path6 = @TempDir & "\6_po.mp3"
-Global $mp3path7 = @TempDir & "\7_po.mp3"
-Global $mp3path8 = @TempDir & "\8_po.mp3"
-Global $mp3path9 = @TempDir & "\9_po.mp3"
-Global $mp3path10 = @TempDir & "\10_po.mp3"
-Global $mp3path10p = @TempDir & "\10plus_po.mp3"
-
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\1_po.mp3", $mp3path1)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\2_po.mp3", $mp3path2)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\3_po.mp3", $mp3path3)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\4_po.mp3", $mp3path4)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\5_po.mp3", $mp3path5)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\6_po.mp3", $mp3path6)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\7_po.mp3", $mp3path7)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\8_po.mp3", $mp3path8)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\9_po.mp3", $mp3path9)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\10_po.mp3", $mp3path10)
-FileInstall("D:\_code_\hypoBrowser\sounds\M_old\10plus_po.mp3", $mp3path10p)
-
-
-Global Const $mLinkFilePathDel = @TempDir & "\disableMLink.reg"	;Global $mLinkFilePathDel = 0
-Global Const $mLinkFilePathEnable = @TempDir & "\enableMlink.reg"
-
-Global $M_lastRefreshTime; stored difference in time. for auto refresh
-
-Global $PortToUse = 0
-Global $refreshChkBoxState = 0 ;enable auto refresh, default off. saved to settings
-Global $useSounds = 1
-Global $useMStartup = 0
-
-;-->  disaply player count
-Global $countPlayers = 0
-Global $countServers = 0
-Global $countPlayersKPQ3 = 0
-Global $countServersKPQ3 = 0
-Global $countPlayersQ2 = 0
-Global $countServersQ2 = 0
-Global $iMOldSelectNumKp
-Global $iMOldSelectNumKPQ3
-Global $iMOldSelectNumQ2
-
-Global $iMGameType = 1 ;Tab 6(m-browser) needs extra info to lunch game
-
-iniFileLoad() ;load ini first for game path?
-runGameFromM_LInk() ;check if a command lunched the exe, then exit
-CheckSingleState() ;close if multiple are open
-
-$M_lastRefreshTime = TimerInit() ;set time of last refresh
-
-
-; chek reg for key in use and set check box for offline
-Local $regKeyMBrowser = _WinAPI_RegOpenKey($HKEY_CLASSES_ROOT, 'M-Browser' , $KEY_QUERY_VALUE)
-If Not $regKeyMBrowser = 0 Then GUICtrlSetState( $MLink, $GUI_CHECKED )
-_WinAPI_RegCloseKey($regKeyMBrowser)
-;--> M-BROWSER
-;=============
-
 ;====================
-;-- ONLY ONE INSTANCE
+
+;=====================
+;--> ONLY ONE INSTANCE
 func CheckSingleState()
 	If _Singleton("HypoGameBrowser", 1) = 0 Then
 		MsgBox($MB_SYSTEMMODAL, "Warning", "HypoGameBrowser is already running")
@@ -838,580 +983,590 @@ UDPStartup()
 
 
 ;==============
-;--> RAND PORT
-Global $portRand = Random(50000, 55532, 1)
-
-; port for servers communication
-Func _BIND_SERVER_SOCKET()
-	Local $ipSet
-
-	For $ipSet = 0 to 5
-		If $ipSet =5 Then
-			MsgBox($MB_SYSTEMMODAL, "ERROR",  "Can Not allocate a local port",0, $HypoGameBrowser)
-		EndIf
-		$hSocketServerUDP =_UDPBind("", 0) ;$portRand
-		If $hSocketServerUDP > 0 Then
-			$portRand += 20
-			ExitLoop
-		Else
-			$portRand += 1
-		EndIf
-	Next ;--> Rand Port
-EndFunc
-
-; port for master communication
-Func _BIND_MASTER_SOCKET()
-	Local $ipSet
-
-	For $ipSet = 0 to 5
-		If $ipSet = 5 Then
-			MsgBox($MB_SYSTEMMODAL, "ERROR",  "Can Not allocate a local port",0, $HypoGameBrowser)
-		EndIf
-		$hSocketMasterUDP =_UDPBind("", 0) ;$portRand
-		If $hSocketMasterUDP > 0 Then
-			ExitLoop
-		Else
-			$portRand += 1
-		EndIf
-	Next ;--> Rand Port
-
-EndFunc
-;==============
-
-$GS_lastRefreshTime = TimerInit() ;set time of last refresh
-$Q2Web_lastRefreshTime = TimerInit() ;set time of last refresh
-
-;==============
 ;--> Reset Refresh Timers
+ResetRefreshTimmers()
 Func ResetRefreshTimmers()
-	$M_lastRefreshTime = TimerInit() ;set time of last refresh
-	$GS_lastRefreshTime = TimerInit() ;set time of last refresh
-	$Q2Web_lastRefreshTime = TimerInit() ;set time of last refresh
+	$g_iLastRefreshTime = TimerInit() ;set time of last refresh
 EndFunc
 ;==============
+
+GUICtrlSetOnEvent($UI_Combo_master, 'UI_Combo_masterChange')
+Func UI_Combo_masterChange()
+	Local $idx = _GUICtrlComboBox_GetCurSel($UI_Combo_master)
+
+	ConsoleWrite(">master changed idx="&$idx&@CRLF)
+	If $idx <= 0 Then ;catch -1
+		GUICtrlSetState($UI_In_master_Cust, $GUI_ENABLE)
+	Else
+		GUICtrlSetState($UI_In_master_Cust, $GUI_DISABLE)
+	EndIf
+	GameSetup_Store() ; update master used
+
+	UpdateMasterDisplay()
+EndFunc
+
+GUICtrlSetOnEvent($UI_Combo_gameSelector, 'UI_Combo_gameSelectorChange')
+Func UI_Combo_gameSelectorChange()
+	ConsoleWrite("!channn"&@CRLF)
+	GameSetup_Store() ;save prev settings
+	ComboChanged_SyncTab() ;switch tab if
+	GameSetup_UpdateUI()
+
+	SetSelectedGameID()
+	If $g_iTabNum = $TAB_MB then
+		return
+	EndIf
+
+	;clear selected column.
+	GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, -1, 0) ;updateLV
+
+	;EnableUIButtons(False)
+	BeginGettinServers()
+
+	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	local $end = GetServerCountInArray($iGameIdx) -1
+	Local $ListViewA = getListView_A_CID()
+	Local $ListViewB = getListView_B_CID()
+	Local $ListViewC = getListView_C_CID()
+	_GUICtrlListView_DeleteAllItems($ListViewA)
+	_GUICtrlListView_DeleteAllItems($ListViewB)
+	_GUICtrlListView_DeleteAllItems($ListViewC)
+
+	;FillServerStringArrayIP($iGameIdx, $ipArray)
+	;FillServerStringArrayPing($iGameIdx, 999, $g_iServerCountTotal)
+
+	ConsoleWrite('-game sel changed'&@CRLF)
+	FillServerListView_popData($iGameIdx, $ListViewA) ;update listview ip
+	FillListView_A_FullData($iGameIdx, 0, $end, 0) ;full update
+
+	;ResetServerListArrays
+	FinishedGettinServers();/
+EndFunc
+
+Func SetActiveTab($iTab)
+	_GUICtrlTab_SetCurSel($tabGroupGames, $iTab)
+	_GUICtrlTab_ActivateTab($tabGroupGames, $iTab)
+EndFunc
+
+Func ComboChanged_SyncTab()
+	;sync tab/gameSelector
+	Local $iTab = GUICtrlRead($tabGroupGames)
+	Local $idx = ComboBoxEx_GetCurSel()
+
+	Switch $idx
+		Case $ID_M
+			if $iTab = $TAB_GB Then
+				$g_iTabNum = $TAB_MB
+				SetActiveTab($TAB_MB)
+			EndIf
+		Case 0 to $COUNT_GAME -1
+			$g_iGSGameLast = $idx
+			if $iTab = $TAB_MB Then
+				$g_iTabNum = $TAB_GB
+				SetActiveTab($TAB_GB)
+			EndIf
+	EndSwitch
+EndFunc
+
+Func FixGameComboIndex(ByRef $idx, $iGameIdx)
+	;FixGameComboIndex($g_aGameSetup_Master_Combo[$idx])
+	if $idx	= -1 then
+		$idx = 0
+		ConsoleWrite("!fixed combo index1"&@CRLF)
+	Else
+		Local $iCount = StringSplit($g_aMasterAddresses[$iGameIdx], "|")[0] ; _GUICtrlComboBox_GetCount($UI_Combo_master)
+		;ConsoleWrite(">Combo id:"&$iCount&" game:"& $iGameIdx&@CRLF)
+		If $iCount > 0 and $idx > $iCount Then
+			$idx = $iCount
+			ConsoleWrite("!fixed combo idx2"&@CRLF)
+		EndIf
+	EndIf
+EndFunc
+
+Func GameSetup_Store() ;store values (tab-change or ini-save)
+	Local $idx = $g_iGameSetupLastIdx  ; _GUICtrlComboBox_GetCurSel($UI_Combo_gameSetup)
+	if $idx >= 0 And $idx < $COUNT_GAME Then
+		;ConsoleWrite("+Game Setup stored id:"&$idx& " g:" & $g_sGameNames[$idx][$GNAME_MENU]&@CRLF)
+		;ConsoleWrite("-path:"&$g_aGameSetup_EXE[$idx] &@CRLF&"-UI:"&GUICtrlRead($UI_In_gamePath)&@CRLF)
+		$g_aGameSetup_Master_Combo[$idx] = _GUICtrlComboBox_GetCurSel($UI_Combo_master)
+		$g_aGameSetup_Master_Cust[$idx]  = GUICtrlRead($UI_In_master_Cust)
+		$g_aGameSetup_Master_Proto[$idx] = GUICtrlRead($UI_In_master_proto)
+		$g_aGameSetup_EXE[$idx]          = GUICtrlRead($UI_In_gamePath)
+		$g_aGameSetup_Name[$idx]         = GUICtrlRead($UI_In_playerName)
+		$g_aGameSetup_RunCmd[$idx]       = GUICtrlRead($UI_In_runCmd)
+		;check counts
+		FixGameComboIndex($g_aGameSetup_Master_Combo[$idx], $idx)
+	EndIf
+EndFunc
+
+Func UpdateMasterDisplay()
+	Local $idx = ComboBoxEx_GetCurSel()
+	switch $idx
+		Case 0 to $COUNT_GAME -1
+			local $aMaster_addy = GetMasterAddressFromSettings($idx)
+			GUICtrlSetData($UI_Text_masterDisplay,  " " &$aMaster_addy& " ") ;"Master: "&
+			GUICtrlSetTip($UI_Text_masterDisplay, $aMaster_addy)
+		case else
+			GUICtrlSetData($UI_Text_masterDisplay, "")
+			GUICtrlSetTip($UI_Text_masterDisplay,"")
+	EndSwitch
+EndFunc
+
+;load game data
+Func GameSetup_UpdateUI()
+	Local $idx = ComboBoxEx_GetCurSel()
+	$g_iGameSetupLastIdx = $idx
+	ConsoleWrite("+gameChanged update UI="&$idx&@CRLF)
+	if $idx > -1 Then
+		if $idx < $COUNT_GAME Then
+			GUICtrlSetData($UI_Text_setupTitle, $g_sGameNames[$idx][$GNAME_MENU])            ;title
+			GUICtrlSetData($UI_Combo_master, "|Custom Master|" & $g_aMasterAddresses[$idx ]) ;master list. rebuild
+			_GUICtrlComboBox_SetCurSel($UI_Combo_master, $g_aGameSetup_Master_Combo[$idx])   ;selection id
+			GUICtrlSetData($UI_In_master_Cust, $g_aGameSetup_Master_Cust[$idx])
+			GUICtrlSetData($UI_In_master_proto, $g_aGameSetup_Master_Proto[$idx])
+			GUICtrlSetData($UI_In_gamePath, $g_aGameSetup_EXE[$idx])
+			GUICtrlSetData($UI_In_playerName, $g_aGameSetup_Name[$idx])
+			GUICtrlSetData($UI_In_runCmd, $g_aGameSetup_RunCmd[$idx])
+		ElseIf $idx = $ID_M Then
+			;$g_iTabNum = $TAB_GB
+			GUICtrlSetData($UI_Text_setupTitle, "M-Browser")
+			GUICtrlSetData($UI_Combo_master, "|") ;master list. rebuild
+			_GUICtrlComboBox_SetCurSel($UI_Combo_master, 0)   ;selection id
+			GUICtrlSetData($UI_In_master_Cust, "")
+			GUICtrlSetData($UI_In_master_proto, "")
+			GUICtrlSetData($UI_In_gamePath, "")
+			GUICtrlSetData($UI_In_playerName, "")
+			GUICtrlSetData($UI_In_runCmd, "")
+			;_GUICtrlTab_ActivateTab($tabGroupGames, $TAB_MB)
+		EndIf
+		UpdateMasterDisplay()
+	EndIf
+	;update disabled state
+	UI_Combo_masterChange()
+EndFunc
 
 ;==============
 ;M load startup
-;LoadMStartupOpt()
-Func LoadMStartupOpt()
-	If $useMStartup =1 Then
-		_GUICtrlTab_ActivateTab($tabGroupGames, 5)
-		;GUICtrlSetState($GetServersBtn, $GUI_HIDE)
-		GUICtrlSetState($FavServerBtn, $GUI_HIDE)
-		GUICtrlSetState($OffLineServeBtn, $GUI_HIDE)
-		$tabNum = 6
-		MRefresh()
+;LoadGameOnStartupOpt()
+Func LoadGameOnStartupOpt()
+	Local $idx = ComboBoxEx_GetCurSel()
+	If $idx = -1 Then
+		$idx = $ID_KP1
+	ElseIf $idx >= $COUNT_GAME Then
+		$idx = $ID_M
+	EndIf
+
+	If $idx = $ID_M Then
+		$g_iTabNum = $TAB_MB
+		SetActiveTab($TAB_MB)
+		SetButtoShowState($TAB_MB)
+		;MRefresh()
 	Else
-		_GUICtrlTab_ActivateTab($tabGroupGames, 0)
-		$tabNum = 1
+		$g_iTabNum = $TAB_GB
+		SetActiveTab($TAB_GB)
+		ComboBoxEx_SetCurSel($idx)
+		$g_iGSGameLast = $idx
 	EndIf
 EndFunc
 ;==============
 
-_GUICtrlListView_SetImageList($ListView1KP, $ImageList1, 1)
-_GUICtrlListView_SetImageList($ListView1KPQ3, $ImageList1, 1)
-_GUICtrlListView_SetImageList($ListView1Q2, $ImageList1, 1)
-
-_GUICtrlListView_RegisterSortCallBack($ListView1KP)
-_GUICtrlListView_RegisterSortCallBack($ListView1KPQ3)
-_GUICtrlListView_RegisterSortCallBack($ListView1Q2)
-
-_GUICtrlListView_RegisterSortCallBack($ListView3)
-_GUICtrlListView_RegisterSortCallBack($ListView3KPQ3)
-_GUICtrlListView_RegisterSortCallBack($ListView3Q2)
-
-
-
-; --> global settings
-;========================================================
-#EndRegion --> END GLOBAL
+#EndRegion --> END STARTUP
 
 
 #Region --> INI FILE
 ;========================================================
 ;--> ini file setup
-Func iniFileLoad()
-	ConsoleWrite("-----========= loading=========-----" & @CRLF)
-	Local $aArray, $i, $j=0, $k=0, $l=0, $aTmp
 
-	If Not _FileReadToArray(StringTrimRight(@ScriptFullPath, 4) & ".ini", $aArray, 0)=0 Then
+Func iniFileSetChkBox(ByRef $sValue, ByRef $hw, ByRef $globalVal)
+	Local $aTmp = _StringBetween($sValue, '"' , '"')
+	;ConsoleWrite("chkbox:"&$sValue&@CRLF)
+	If not @error Then
+		If $aTmp[0] = "1" Then
+			GUICtrlSetState($hw, $GUI_CHECKED)
+			if Not ($globalVal = Null) Then $globalVal = True
+		Else
+			GUICtrlSetState($hw , $GUI_UNCHECKED)
+			if Not ($globalVal = Null) Then $globalVal = False
+		EndIf
+	EndIf
+EndFunc
+
+Func iniFileSetCtrlData(ByRef $sValue, ByRef $hw)
+	Local $aTmp = _StringBetween($sValue, '"' , '"')
+	If not @error Then
+		GUICtrlSetData($hw, $aTmp[0])
+	EndIf
+EndFunc
+
+Func iniFileSetDropdown(ByRef $sValue, ByRef $hw)
+	Local $aTmp = _StringBetween($sValue, '"' , '"')
+	If not @error Then
+		Local $iVal = Number($aTmp[0])
+		if $iVal >= 0 Then
+			_GUICtrlComboBox_SetCurSel($hw, $iVal)
+		EndIf
+	EndIf
+EndFunc
+
+Func iniFileSetDropdownEx(ByRef $sValue, ByRef $hw)
+	Local $aTmp = _StringBetween($sValue, '"' , '"')
+	If not @error Then
+		Local $iVal = Number($aTmp[0])
+		if $iVal >= 0 Then
+			_GUICtrlComboBoxEx_SetCurSel($hw, $iVal)
+		EndIf
+	EndIf
+EndFunc
+
+Func iniFileSetFav(ByRef $sValue, $iGameIDx)
+	Local $aTmp = _StringBetween($sValue, '"' , '"')
+	If not @error Then
+		If $g_aFavList[$iGameIDx] <> "" Then
+			$g_aFavList[$iGameIDx] &= "|" & $aTmp[0]
+		Else
+			$g_aFavList[$iGameIDx] = $aTmp[0]
+		EndIf
+	EndIf
+EndFunc
+
+Func iniFileSetDropdownGame(ByRef $sValue, ByRef $array)
+	Local $aTmp = _StringBetween($sValue, '"' , '"')
+	If not @error Then
+		$array = Number($aTmp[0]) ;todo check this
+	EndIf
+EndFunc
+
+Func iniFileSet_GameSettings_Str(Const $sValue, ByRef $array)
+	Local $aTmp = _StringBetween($sValue, '"' , '"')
+	If not @error Then
+		$array = String($aTmp[0])
+	Else
+		ConsoleWrite("ini error in:"&$sValue&@CRLF)
+	EndIf
+EndFunc
+
+Func iniFile_Load()
+	local $sFileName = StringTrimRight(@ScriptFullPath, 4) & ".ini"
+
+	;check for first run
+	If not FileExists($sFileName) Then
+		;fill defaults
+		For $i = 0 to $COUNT_GAME -1
+			$g_aGameSetup_EXE[$i] = StringFormat("%s.exe", $g_sGameNames[$i][$GNAME_MENU]) ;game.exe
+			$g_aGameSetup_Master_Combo[$i] = 1 ;idx
+		Next
+		Return
+	EndIf
+
+	ConsoleWrite("-----========= loading ini =========-----" & @CRLF)
+	Local $aArray, $aTmp
+	Local $aVarInput = [['Hotkey=', $UI_In_hotKey], ['AutoRefreshTime=', $UI_In_refreshTime]]
+	Local $aVarCBox = [ _
+		['PlaySounds=', $UI_CBox_sound, Null], _
+		['MinimizeToTray=', $UI_CBox_minToTray, Null], _
+		['UseTheme=', $UI_CBox_theme, Null], _
+		['PingNextMaster=', $UI_CBox_tryNextMaster, Null], _
+		['AutoRefresh=', $UI_CBox_autoRefresh, $g_bAutoRefresh]]
+	Local $aVarCombo = [["HotkeyAlt=", $UI_Combo_hKey]]
+	Local $aVarComboEx = [["StartupGame=", $UI_Combo_gameSelector]]
+	Local $aIni_GameSettings_masterUsed[$COUNT_GAME]   ;[MasterUsed]
+	Local $aIni_GameSettings_masterCust[$COUNT_GAME]   ;[MasterCustom]
+	Local $aIni_GameSettings_masterProto[$COUNT_GAME]  ;[MasterProtocol]
+	Local $aIni_GameSettings_masterExe[$COUNT_GAME]    ;[exePath]
+	Local $aIni_GameSettings_masterName[$COUNT_GAME]   ;[Name]
+	Local $aIni_GameSettings_masterRunCmd[$COUNT_GAME] ;[Commands]
+	local $g_sFavName[$COUNT_GAME]
+
+	For $i=0 To $COUNT_GAME -1
+		$g_sFavName[$i]                     = StringFormat('Fav%s=',            $g_sGameNames[$i][$GNAME_SAVE])
+		$aIni_GameSettings_masterUsed[$i]   = StringFormat('MasterUsed%s=',     $g_sGameNames[$i][$GNAME_SAVE])
+		$aIni_GameSettings_masterCust[$i]   = StringFormat('MasterCustom%s=',   $g_sGameNames[$i][$GNAME_SAVE])
+		$aIni_GameSettings_masterProto[$i]  = StringFormat('MasterProtocol%s=', $g_sGameNames[$i][$GNAME_SAVE])
+		$aIni_GameSettings_masterExe[$i]    = StringFormat('ExePath%s=',        $g_sGameNames[$i][$GNAME_SAVE])
+		$aIni_GameSettings_masterName[$i]   = StringFormat('Name%s=',           $g_sGameNames[$i][$GNAME_SAVE])
+		$aIni_GameSettings_masterRunCmd[$i] = StringFormat('RunOpt%s=',         $g_sGameNames[$i][$GNAME_SAVE])
+	Next
+
+
+	If Not (_FileReadToArray($sFileName, $aArray, 0) = 0) Then
 		For $i = 0 to UBound($aArray) -1
-			If StringInStr($aArray[$i], 'Kingpin=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $path_Kingpin , 	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'KingpinQ3=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $path_KPQ3 ,		$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'Quake2=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $path_Quake2 ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'M_TimeRefresh=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $refreshTimeImput ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'M_AutoRefresh=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					If $aTmp[0] = "1" Then
-						GUICtrlSetState( $refreshChkBox, $GUI_CHECKED)
-						$refreshChkBoxState = 1
-					Else
-						GUICtrlSetState( $refreshChkBox , $GUI_UNCHECKED)
-						$refreshChkBoxState = 0
-					EndIf
-				EndIf
-			ElseIf	StringInStr($aArray[$i], 'M_Sounds=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					If $aTmp[0] = "1" Then
-						GUICtrlSetState( $soundChkBox, $GUI_CHECKED)
-						$useSounds = 1
-					Else
-						GUICtrlSetState( $soundChkBox , $GUI_UNCHECKED)
-						$useSounds = 0
-					EndIf
-				EndIf
-			ElseIf	StringInStr($aArray[$i], 'FavKP=') Then
-				ReDim $aFavKP[$j+1]
-				$aFavKP[$j] = _StringBetween( $aArray[$i], '"' , '"')[0]
-				ConsoleWrite("fav KP found = "&$aFavKP[$j]&@CRLF)
-				$j += 1
-			ElseIf	StringInStr($aArray[$i], 'FavKPQ3=') Then
-				ReDim $aFavKPQ3[$k+1]
-				$aFavKPQ3[$k] = _StringBetween( $aArray[$i], '"' , '"')[0]
-				ConsoleWrite("fav KPQ3 found = "&$aFavKPQ3[$k]&@CRLF)
-				$k += 1
-			ElseIf	StringInStr($aArray[$i], 'FavQ2=') Then
-				ReDim $aFavQ2[$l+1]
-				$aFavQ2[$l] = _StringBetween( $aArray[$i], '"' , '"')[0]
-				ConsoleWrite("fav Q2 found = "&$aFavQ2[$l]&@CRLF)
-				$l += 1
-			ElseIf	StringInStr($aArray[$i], 'MasterKP=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $InputMaster4 ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'MasterKPQ3=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $InputMaster4KPQ3 ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'MasterQ2=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $InputMaster4Q2 ,	$aTmp[0])
+			if $aArray[$i] = "" then ContinueLoop
+			if StringInStr($aArray[$i], "[", $STR_CASESENSE, 1, 1, 1) then ContinueLoop
+			;ConsoleWrite(">debug key="&$aArray[$i]&@CRLF)
 
-			ElseIf	StringInStr($aArray[$i], 'NameKP=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $InputNameKP ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'NameKPQ3=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $InputNameKPQ3 ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'NameQ2=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $InputNameQ2 ,	$aTmp[0])
+			; input box
+			For $j = 0 to UBound($aVarInput)-1
+				If StringInStr($aArray[$i], $aVarInput[$j][0], 0) Then
+					iniFileSetCtrlData($aArray[$i], $aVarInput[$j][1])
+					ContinueLoop(2)
+				EndIf
+			Next
+			;checkbox
+			For $j = 0 to UBound($aVarCBox)-1
+				If StringInStr($aArray[$i], $aVarCBox[$j][0], 0) Then
+					iniFileSetChkBox($aArray[$i], $aVarCBox[$j][1], $aVarCBox[$j][2])
+					ContinueLoop(2)
+				EndIf
+			Next
+			;dropdown
+			For $j = 0 to UBound($aVarCombo)-1
+				If StringInStr($aArray[$i], $aVarCombo[$j][0], 0) Then
+					iniFileSetDropdown($aArray[$i], $aVarCombo[$j][1])
+					ContinueLoop(2)
+				EndIf
+			Next
+			;dropdownEx
+			For $j = 0 to UBound($aVarComboEx)-1
+				If StringInStr($aArray[$i], $aVarComboEx[$j][0], 0) Then
+					iniFileSetDropdownEx($aArray[$i], $aVarComboEx[$j][1])
+					ContinueLoop(2)
+				EndIf
+			Next
 
-			ElseIf	StringInStr($aArray[$i], 'RunOptKP=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $RunKingpinCMD ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'RunOptKPQ3=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $RunKingpinQ3CMD ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'RunOptQ2=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $RunQuake2CMD ,	$aTmp[0])
+			;fav
+			For $j = 0 to UBound($g_sFavName)-1
+				If StringInStr($aArray[$i], $g_sFavName[$j], 0) Then
+					iniFileSetFav($aArray[$i], $j)
+					ContinueLoop(2)
+				EndIf
+			Next
+			;game setup [MasterUsed]
+			For $j = 0 to $COUNT_GAME -1
+				If StringInStr($aArray[$i], $aIni_GameSettings_masterUsed[$j], 0) Then
+					iniFileSetDropdownGame($aArray[$i], $g_aGameSetup_Master_Combo[$j])
+					FixGameComboIndex($g_aGameSetup_Master_Combo[$j], $j) ;fix invalid save index
+					ContinueLoop(2)
+				EndIf
+			Next
+			;game setup [MasterCustom]
+			For $j = 0 to UBound($aIni_GameSettings_masterCust)-1
+				If StringInStr($aArray[$i], $aIni_GameSettings_masterCust[$j], 0) Then
+					iniFileSet_GameSettings_Str($aArray[$i], $g_aGameSetup_Master_Cust[$j])
+					ContinueLoop(2)
+				EndIf
+			Next
+			;game setup [MasterProtocol]
+			For $j = 0 to UBound($aIni_GameSettings_masterProto)-1
+				If StringInStr($aArray[$i], $aIni_GameSettings_masterProto[$j], 0) Then
+					iniFileSet_GameSettings_Str($aArray[$i], $g_aGameSetup_Master_Proto[$j])
+					ContinueLoop(2)
+				EndIf
+			Next
+			;game setup [exePath]
+			For $j = 0 to UBound($aIni_GameSettings_masterExe)-1
+				If StringInStr($aArray[$i], $aIni_GameSettings_masterExe[$j], 0) Then
+					iniFileSet_GameSettings_Str($aArray[$i], $g_aGameSetup_EXE[$j])
+					ContinueLoop(2)
+				EndIf
+			Next
+			;game setup [Name]
+			For $j = 0 to UBound($aIni_GameSettings_masterName)-1
+				If StringInStr($aArray[$i], $aIni_GameSettings_masterName[$j], 0) Then
+					iniFileSet_GameSettings_Str($aArray[$i], $g_aGameSetup_Name[$j])
+					ContinueLoop(2)
+				EndIf
+			Next
+			;game setup [Commands] 'RunOpt'
+			For $j = 0 to UBound($aIni_GameSettings_masterRunCmd)-1
+				If StringInStr($aArray[$i], $aIni_GameSettings_masterRunCmd[$j], 0) Then
+					iniFileSet_GameSettings_Str($aArray[$i], $g_aGameSetup_RunCmd[$j])
+					ContinueLoop(2)
+				EndIf
+			Next
 
 
-			ElseIf	StringInStr($aArray[$i], 'MasterUsedKP=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					_GUICtrlButton_SetCheck($RadioMaster1, $BST_UNCHECKED)
-					If StringCompare($aTmp[0],"1")=0 Then _GUICtrlButton_SetCheck($RadioMaster1, $BST_CHECKED)
-					If StringCompare($aTmp[0],"2")=0 Then _GUICtrlButton_SetCheck($RadioMaster2, $BST_CHECKED)
-					If StringCompare($aTmp[0],"3")=0 Then _GUICtrlButton_SetCheck($RadioMaster3, $BST_CHECKED)
-					If StringCompare($aTmp[0],"4")=0 Then _GUICtrlButton_SetCheck($RadioMaster4, $BST_CHECKED)
-				EndIf
-			ElseIf	StringInStr($aArray[$i], 'MasterUsedKPQ3=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					_GUICtrlButton_SetCheck($RadioMaster1KPQ3, $BST_UNCHECKED)
-					If StringCompare($aTmp[0],"1")=0 Then _GUICtrlButton_SetCheck($RadioMaster1KPQ3, $BST_CHECKED)
-					If StringCompare($aTmp[0],"2")=0 Then _GUICtrlButton_SetCheck($RadioMaster2KPQ3, $BST_CHECKED)
-					If StringCompare($aTmp[0],"3")=0 Then _GUICtrlButton_SetCheck($RadioMaster3KPQ3, $BST_CHECKED)
-					If StringCompare($aTmp[0],"4")=0 Then _GUICtrlButton_SetCheck($RadioMaster4KPQ3, $BST_CHECKED)
-					If StringCompare($aTmp[0],"1")=0 Then DisableKPQ3_TCP_UDP(1)
-					If StringCompare($aTmp[0],"2")=0 Then DisableKPQ3_TCP_UDP(2)
-					If StringCompare($aTmp[0],"3")=0 Then DisableKPQ3_TCP_UDP(3)
-					If StringCompare($aTmp[0],"4")=0 Then DisableKPQ3_TCP_UDP(4)
-					If StringCompare($aTmp[0],"1")=0 Then AutoSelectKPQ3_TCP_UDP(1)
-					If StringCompare($aTmp[0],"2")=0 Then AutoSelectKPQ3_TCP_UDP(2)
-					If StringCompare($aTmp[0],"3")=0 Then AutoSelectKPQ3_TCP_UDP(3)
-					If StringCompare($aTmp[0],"4")=0 Then AutoSelectKPQ3_TCP_UDP(4)
-				EndIf
-			ElseIf	StringInStr($aArray[$i], 'MasterUsedQ2=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					_GUICtrlButton_SetCheck($RadioMaster1Q2, $BST_UNCHECKED)
-					If StringCompare($aTmp[0],"1")=0 Then _GUICtrlButton_SetCheck($RadioMaster1Q2, $BST_CHECKED)
-					If StringCompare($aTmp[0],"2")=0 Then _GUICtrlButton_SetCheck($RadioMaster2Q2, $BST_CHECKED)
-					If StringCompare($aTmp[0],"3")=0 Then _GUICtrlButton_SetCheck($RadioMaster3Q2, $BST_CHECKED)
-					If StringCompare($aTmp[0],"4")=0 Then _GUICtrlButton_SetCheck($RadioMaster4Q2, $BST_CHECKED)
-					If StringCompare($aTmp[0],"1")=0 Then DisableQ2_TCP_UDP(1)
-					If StringCompare($aTmp[0],"2")=0 Then DisableQ2_TCP_UDP(2)
-					If StringCompare($aTmp[0],"3")=0 Then DisableQ2_TCP_UDP(3)
-					If StringCompare($aTmp[0],"4")=0 Then DisableQ2_TCP_UDP(4)
-					If StringCompare($aTmp[0],"1")=0 Then AutoSelectQ2_TCP_UDP(1)
-					If StringCompare($aTmp[0],"2")=0 Then AutoSelectQ2_TCP_UDP(2)
-					If StringCompare($aTmp[0],"3")=0 Then AutoSelectQ2_TCP_UDP(3)
-					If StringCompare($aTmp[0],"4")=0 Then AutoSelectQ2_TCP_UDP(4)
-				EndIf
-;~ 			ElseIf	StringInStr($aArray[$i], 'Q2SERVERS=') Then
-;~ 				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-;~ 				If not @error Then
-;~ 					if $aTmp[0] = "Yes" Then
-;~ 						GUICtrlSetState( $RadioMasterHTTP_Q2, $GUI_CHECKED)
-;~ 					Else
-;~ 						GUICtrlSetState( $RadioMasterHTTP_Q2, $GUI_UNCHECKED)
-;~ 					EndIf
-;~ 				EndIf
-			ElseIf	StringInStr($aArray[$i], 'KPQ3Protocol=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $InputKPQ3_proto ,	$aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'KPQ3UDP=') Then
-					If SelectedGameMasterKPQ3Num() = 4 Then
-						$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-						If not @error Then
-							if StringCompare($aTmp[0],"Yes")=0 Then
-								GUICtrlSetState( $RadioMasterUDP_KPQ3, $GUI_CHECKED)
-								GUICtrlSetState( $RadioMasterTCP_KPQ3, $GUI_UNCHECKED)
-								;DisableKPQ3_TCP_UDP(4)
-								AllowUDP_Input(1)
-							Else
-								GUICtrlSetState( $RadioMasterUDP_KPQ3, $GUI_UNCHECKED)
-								GUICtrlSetState( $RadioMasterTCP_KPQ3, $GUI_CHECKED)
-							EndIf
-						EndIf
-					EndIf
-			ElseIf	StringInStr($aArray[$i], 'M_UseMStartup=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					If StringCompare($aTmp[0],"1")=0 Then
-						GUICtrlSetState( $StartupMChkBox, $GUI_CHECKED)
-						$useMStartup = 1
-					Else
-						GUICtrlSetState( $StartupMChkBox, $GUI_UNCHECKED)
-						$useMStartup = 0
-					EndIf
-				EndIf
-
-			ElseIf	StringInStr($aArray[$i], 'MinimizeToTray=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					If StringCompare($aTmp[0],"1")=0 Then
-						GUICtrlSetState( $opt_minToTray, $GUI_CHECKED)
-						$minToTray = 1
-					Else
-						GUICtrlSetState( $opt_minToTray, $GUI_UNCHECKED)
-						$minToTray = 0
-					EndIf
-				EndIf
-			ElseIf	StringInStr($aArray[$i], 'Hotkey=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					GUICtrlSetData($hotKey_Input, $aTmp[0])
-				EndIf
-			ElseIf	StringInStr($aArray[$i], 'HotkeyAlt=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					If StringCompare($aTmp[0],"1")=0 Then
-						GUICtrlSetState( $hotKey_alt, $GUI_CHECKED)
-						GUICtrlSetState( $hotKey_ctrl, $GUI_UNCHECKED)
-					Else
-						GUICtrlSetState( $hotKey_alt, $GUI_UNCHECKED)
-						GUICtrlSetState( $hotKey_ctrl, $GUI_CHECKED)
-					EndIf
-
-					If StringLen( GUICtrlRead($hotKey_Input))>=1 Then
-						ApplyhotKey(0)
-					EndIf
-				EndIf
-
-			ElseIf	StringInStr($aArray[$i], 'Position=') Then
+			;window cords
+			If StringInStr($aArray[$i], 'Position=') Then
 				$aTmp = _StringBetween( $aArray[$i], '"' , '"', $STR_ENDNOTSTART)
-				If not @error Then
-					;if $aTmp[0]= -32000 Then $aTmp[0]= 0
-					;if $aTmp[1]= -32000 Then $aTmp[1]= 0
+				If not @error And UBound($aTmp) >= 4 Then
 					WinMove($HypoGameBrowser, $HypoGameBrowser, $aTmp[0], $aTmp[1], $aTmp[2], $aTmp[3])
 					SetWinSizeForMinimize() ; save location to memory now, incase
 				EndIf
-			ElseIf	StringInStr($aArray[$i], 'GS_AutoGame=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					If StringCompare($aTmp[0],"1")=0 Then
-						GUICtrlSetState( $GB_RB_Kingpin, $GUI_CHECKED)
-					ElseIf StringCompare($aTmp[0],"2")=0 Then
-						GUICtrlSetState( $GB_RB_KingpinQ3, $GUI_CHECKED)
-					ElseIf StringCompare($aTmp[0],"3")=0 Then
-						GUICtrlSetState( $GB_RB_Quake2, $GUI_CHECKED)
-					EndIf
-				EndIf
-			ElseIf	StringInStr($aArray[$i], 'GS_AutoTime=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then GUICtrlSetData( $GB_IN_refreshTime, $aTmp[0])
-			ElseIf	StringInStr($aArray[$i], 'GS_Sounds=') Then
-				$aTmp = _StringBetween( $aArray[$i], '"' , '"')
-				If not @error Then
-					If StringCompare($aTmp[0],"1")=0 Then
-						GUICtrlSetState($GB_Players_sound, $GUI_CHECKED)
-					EndIf
-				EndIf
+				ContinueLoop
 			EndIf
-		Next
 
+			ConsoleWrite("unknown ini entry:"&$aArray[$i]&@CRLF)
+		Next
 	EndIf
 
-ConsoleWrite("-----========= loading DONE=========-----" & @CRLF)
-
+	ConsoleWrite("-----========= loading ini DONE=========-----" & @CRLF)
 EndFunc
 
+Func getCboxStr(ByRef $hw)
+	;return value as string
+	if _IsChecked($hw) Then
+		Return "1"
+	Else
+		Return "0"
+	EndIf
+EndFunc
 
-Func iniFileSave()
+Func getComboStr(ByRef $hw)
+	Return String(_GUICtrlComboBox_GetCurSel($hw))
+EndFunc
+
+Func getComboExStr(ByRef $hw)
+	Return String(_GUICtrlComboBoxEx_GetCurSel($hw))
+EndFunc
+
+Func iniFile_Save()
 	ConsoleWrite("-----========= saving=========-----" & @CRLF)
 	local $iniFileCFG = string(StringTrimRight(@ScriptFullPath, 4) & ".ini")
-	Local $iSize = 43 ;LINES... quick set default array size, minus fav
-	Local $iniFileArray[$iSize]
-	Local $i, $j, $k
+	Local $iSize = 44 ;LINES... quick set default array size, minus fav
+	Local $iniFileArray
 
 	local $stateMinimized = WinGetState($HypoGameBrowser)
-
-	Local $v[4]
-	$v = WinGetPos($HypoGameBrowser)
-
-						;16=minimized 32 maximized
-	if BitAND($stateMinimized,16) Or BitAND($stateMinimized, 32) Then
-		$v = $StoredWinSize
+	Local $v = WinGetPos($HypoGameBrowser)
+	if BitAND($stateMinimized,16) Or BitAND($stateMinimized, 32) Then ;16=minimized 32 maximized
+		$v = $g_aStoredWinSize
 		ConsoleWrite(" window old resize saved instead.."&@CRLF)
 	EndIf
+
+	GameSetup_Store() ; save current master values
 
 	;make sure size is not below min allowed
 	If $v[2] < $GUIMINWID Then $v[2] = $GUIMINWID
 	If $v[3] < $GUIMINHT Then $v[3] = $GUIMINHT
 
-	Local $GameToRefresh = 0
-	if _IsChecked($GB_RB_Kingpin) Then
-		$GameToRefresh = 1
-	Elseif _IsChecked($GB_RB_KingpinQ3) Then
-		$GameToRefresh = 2
-	Elseif _IsChecked($GB_RB_Quake2) Then
-		$GameToRefresh = 3
-	EndIf
+	;todo cleanup key names. use array
+	$iniFileArray = ""& _
+		"[Settings]"           &@CRLF& StringFormat( _
+		'Position="%s" "%s" "%s" "%s"', $v[0], $v[1], $v[2], $v[3])    &@CRLF& StringFormat( _ ;todo cleanup str
+		'StartupGame="%s"',     getComboExStr($UI_Combo_gameSelector)) &@CRLF& StringFormat( _ ;new
+		'PlaySounds="%s"',      getCboxStr($UI_CBox_sound))            &@CRLF& StringFormat( _
+		'MinimizeToTray="%s"',  getCboxStr($UI_CBox_minToTray))        &@CRLF& StringFormat( _
+		'UseTheme="%s"',        getCboxStr($UI_CBox_theme))            &@CRLF& StringFormat( _
+		'PingNextMaster="%s"',  getCboxStr($UI_CBox_tryNextMaster))    &@CRLF& StringFormat( _
+		'AutoRefresh="%s"',     getCboxStr($UI_CBox_autoRefresh))      &@CRLF& StringFormat( _
+		'AutoRefreshTime="%s"', GUICtrlRead($UI_In_refreshTime))       &@CRLF& StringFormat( _
+		'HotkeyAlt="%s"',       getComboStr($UI_Combo_hkey))           &@CRLF& StringFormat( _
+		'Hotkey="%s"',          GUICtrlRead($UI_In_hotKey))            &@CRLF& _
+		""                      &@CRLF
 
-	Local $GS_sounsEnable = 0
-	if _IsChecked($GB_Players_sound) Then
-		$GS_sounsEnable = 1
-	EndIf
-
-	Local $opt_hotkey = 1
-	if _IsChecked($hotKey_ctrl) Then
-		$opt_hotkey = 0
-	EndIf
-
-	$iniFileArray[0] = "[MBrowser]"
-	$iniFileArray[1] = String('M_TimeRefresh=' & '"' & 	GUICtrlRead($refreshTimeImput) 	& '"')
-	$iniFileArray[2] = String('M_AutoRefresh=' & '"' & 	$refreshChkBoxState & '"')
-	$iniFileArray[3] = String('M_Sounds=' & '"' & 		$useSounds 						& '"')
-	$iniFileArray[4] = String('M_UseMStartup=' & '"' & 	$useMStartup 					& '"')
-	$iniFileArray[5] = ""
-	$iniFileArray[6] = "[exePath]"
-	$iniFileArray[7] = String( 'Kingpin=' & '"' & 		GUICtrlRead($path_Kingpin) 		& '"')
-	$iniFileArray[8] = String( 'KingpinQ3=' & '"' & 	GUICtrlRead($path_KPQ3) 		& '"')
-	$iniFileArray[9] = String( 'Quake2=' & '"' & 		GUICtrlRead($path_Quake2) 		& '"')
-	$iniFileArray[10] = ""
-	$iniFileArray[11] = "[Name]"
-	$iniFileArray[12] = String( 'NameKP=' & '"' & 		GUICtrlRead($InputNameKP) 		& '"')
-	$iniFileArray[13] = String( 'NameKPQ3=' & '"' & 	GUICtrlRead($InputNameKPQ3) 	& '"')
-	$iniFileArray[14] = String( 'NameQ2=' & '"' & 		GUICtrlRead($InputNameQ2) 		& '"')
-	$iniFileArray[15] = ""
-	$iniFileArray[16] = "[Commands]"
-	$iniFileArray[17] = String( 'RunOptKP=' & '"' & 	GUICtrlRead($RunKingpinCMD) 	& '"')
-	$iniFileArray[18] = String( 'RunOptKPQ3=' & '"' &	GUICtrlRead($RunKingpinQ3CMD) 	& '"')
-	$iniFileArray[19] = String( 'RunOptQ2=' & '"' & 	GUICtrlRead($RunQuake2CMD) 		& '"')
-	$iniFileArray[20] = ""
-	$iniFileArray[21] = "[Master]"
-	$iniFileArray[22] = String( 'MasterKP=' & '"' & 	GUICtrlRead($InputMaster4) 		& '"')
-	$iniFileArray[23] = String( 'MasterKPQ3=' & '"' & 	GUICtrlRead($InputMaster4KPQ3) 	& '"')
-	$iniFileArray[24] = String( 'MasterQ2=' & '"' & 	GUICtrlRead($InputMaster4Q2)	& '"')
-	$iniFileArray[25] = ""
-	$iniFileArray[26] = "[MasterUsed]"
-	$iniFileArray[27] = String( 'MasterUsedKP=' & '"' &	SelectedGameMasterKPNum() 		& '"')
-	$iniFileArray[28] = String( 'MasterUsedKPQ3='& '"'&	SelectedGameMasterKPQ3Num() 	& '"')
-	$iniFileArray[29] = String( 'MasterUsedQ2=' & '"' &	SelectedGameMasterQ2Num() 		& '"')
-;~ 	$iniFileArray[30] = String( 'Q2SERVERS=' 	& '"' &	SelectedGameMasterQ2Web() 		& '"') ;Q2SERVERS																							;Q2SERVERS
-	$iniFileArray[30] = String( 'KPQ3Protocol=' & '"' &	GUICtrlRead($InputKPQ3_proto) 	& '"')
-	$iniFileArray[31] = String( 'KPQ3UDP=' 		& '"' &	SelectUDPMasterKPQ3() 			& '"')
-	$iniFileArray[32] = ""
-	$iniFileArray[33] = "[Settings]"
-	$iniFileArray[34] = String('Position='&'"'&$v[0]&'" "'&$v[1]&'" "'&$v[2]&'" "'&$v[3]&'"')
-	$iniFileArray[35] = String('GS_AutoGame=' & '"' & 	$GameToRefresh 					& '"')
-	$iniFileArray[36] = String( 'GS_AutoTime=' & '"' & 	GUICtrlRead($GB_IN_refreshTime)	& '"')
-	$iniFileArray[37] = String('GS_Sounds=' & '"' & 	$GS_sounsEnable					& '"')
-	$iniFileArray[38] = String('MinimizeToTray='& '"' &	$minToTray						& '"')
-	$iniFileArray[39] = String('Hotkey='& '"' &			GUICtrlRead($hotKey_Input)		& '"')
-	$iniFileArray[40] = String('HotkeyAlt='& '"' &		$opt_hotkey						& '"')
-
-	$iniFileArray[41] = ""
-	$iniFileArray[42] = "[Favourites]"
-	;======= array[] = +1 ============
-
-
-	;kingpin fav
-	ConsoleWrite(" Fav kp   "&UBound($aFavKP) &@CRLF)
-	For $i = 0 To UBound($aFavKP)-1
-		;If $i = UBound($aFavKP) Then ExitLoop(1)
-		If $aFavKP[$i] > "" Then
-			ReDim $iniFileArray[$iSize+1+$i]
-			$iniFileArray[$iSize+$i] = String('FavKP=' & '"' & $aFavKP[$i] & '"')
-		EndIf
+	$iniFileArray &= "[MasterUsed]" &@CRLF
+	For $i = 0 to $COUNT_GAME-1
+		$iniFileArray &= StringFormat('MasterUsed%s="%s"',$g_sGameNames[$i][$GNAME_SAVE],getSelectedMasterIndex($i) ) &@CRLF
 	Next
-	;kingpinq3 fav
-	ConsoleWrite(" Fav kpq3 "&UBound($aFavKPQ3) &@CRLF)
-	For $j = 0 To UBound($aFavKPQ3)-1
-
-		;If $i = UBound($aFavKPQ3) Then ExitLoop(1)
-		If $aFavKPQ3[$k] > "" Then
-			ReDim $iniFileArray[$iSize+1+$i+$j]
-			$iniFileArray[$iSize+$i+$j] = String('FavKPQ3=' & '"' & $aFavKPQ3[$j] & '"')
-		EndIf
+	$iniFileArray &= @CRLF&"[MasterCustom]" &@CRLF
+	For $i = 0 to $COUNT_GAME-1
+		$iniFileArray &= StringFormat('MasterCustom%s="%s"',$g_sGameNames[$i][$GNAME_SAVE], $g_aGameSetup_Master_Cust[$i]) &@CRLF
 	Next
-	;quake fav
-	ConsoleWrite(" Fav q2   "&UBound($aFavQ2) &@CRLF)
-	For $k = 0 To UBound($aFavQ2)-1
-
-		;If $i = UBound($aFavQ2) Then ExitLoop(1)
-		If $aFavQ2[$k] > "" Then
-			ReDim $iniFileArray[$iSize+1+$i+$j+$k]
-			$iniFileArray[$iSize+$i+$j+$k] = String('FavQ2=' & '"' & $aFavQ2[$k] & '"')
-		EndIf
+	$iniFileArray &= @CRLF&"[MasterProtocol]" &@CRLF
+	For $i = 0 to $COUNT_GAME-1
+		$iniFileArray &= StringFormat('MasterProtocol%s="%s"',$g_sGameNames[$i][$GNAME_SAVE], $g_aGameSetup_Master_Proto[$i] ) &@CRLF
+	Next
+	;exe paths
+	$iniFileArray &= @CRLF&"[exePath]" &@CRLF;
+	For $i = 0 to $COUNT_GAME-1
+		$iniFileArray &= StringFormat('ExePath%s="%s"',$g_sGameNames[$i][$GNAME_SAVE], $g_aGameSetup_EXE[$i] ) &@CRLF
+	Next
+	$iniFileArray &= @CRLF&"[Name]" &@CRLF;
+	For $i = 0 to $COUNT_GAME-1
+		$iniFileArray &= StringFormat('Name%s="%s"',$g_sGameNames[$i][$GNAME_SAVE], $g_aGameSetup_Name[$i] ) &@CRLF
+	Next
+	$iniFileArray &= @CRLF&"[Commands]" &@CRLF; todo name... but users will have to re'setup
+	For $i = 0 to $COUNT_GAME-1
+		$iniFileArray &= StringFormat('RunOpt%s="%s"',$g_sGameNames[$i][$GNAME_SAVE], $g_aGameSetup_RunCmd[$i] ) &@CRLF
 	Next
 
+	;favourite
+	$iniFileArray &= @CRLF&"[Favourites]" &@CRLF
+	For $i = 0 to $COUNT_GAME-1
+		Local $aTmp = StringSplit($g_aFavList[$i], "|")
+		For $j = 1 to $aTmp[0]
+			If $aTmp[$j] <> "" Then
+				$iniFileArray &= StringFormat('Fav%s="%s"',$g_sGameNames[$i][$GNAME_SAVE], $aTmp[$j]) &@CRLF
+			EndIf
+		Next
+	Next
 
+	$iniFileArray &= @CRLF
 
-	Local $testWrite = _FileWriteFromArray( $iniFileCFG, $iniFileArray, 0 )
-
-	If @error Or $testWrite = 0 Then
-		MsgBox($MB_SYSTEMMODAL, "", "Could not Save Settings ",0, $HypoGameBrowser )
+	Local $hFile = FileOpen($iniFileCFG, $FO_OVERWRITE + $FO_UTF8)
+	if $hFile = -1 Then
+		MsgBox($MB_SYSTEMMODAL, "", "Could not Save Settings.",0, $HypoGameBrowser)
 		ResetRefreshTimmers()
+	Else
+		FileWrite($hFile, $iniFileArray) ;_FileWriteFromArray($iniFileCFG, $iniFileArray, 0)
+		FileClose($hFile)
 	EndIf
 
-ConsoleWrite("-----========= saving DONE=========-----" & @CRLF)
+	ConsoleWrite("-----========= saving DONE=========-----" & @CRLF)
 EndFunc ;--> end ini file setup
 ;========================================================
 #EndRegion
 
 
-#Region --> MBROWSER
-
-	#Region -->EVENTS
-	;GUICtrlSetOnEvent($Button_Refresh,"MRefresh")
-		Func MRefresh()
-			GetServerList()
-			setServerTabArray()
-		EndFunc
-	#EndRegion --> EVENTS
-
-
-	#Region --> add server ports
-	;========================================================
-	;-->add server ports
-	;================
-	;-->add KingpinQ3
-	Func TickedGamePortKPQ3()
-		If _IsChecked($addKPQ3) Then
-			GUICtrlSetState( $addQuake2, $GUI_UNCHECKED)
-		Else
-			GUICtrlSetState( $addQuake2, $GUI_UNCHECKED)
-		EndIf
+#Region --> M-BROWSER
+	Func MRefresh()
+		M_GetServerList()
+		M_SetServerTabArray()
 	EndFunc
 
-	;=============
-	;-->add Quake2
-	Func TickedGamePortQuake()
-		If _IsChecked($addQuake2) Then
-			GUICtrlSetState( $addKPQ3, $GUI_UNCHECKED)
-		Else
-			GUICtrlSetState( $addKPQ3, $GUI_UNCHECKED)
-		EndIf
-	EndFunc
+	#Region --> M-BROWSER add server ports
 
 	;================
 	;-->selected game
-	Func GameNameToSetPort()
-		if  _IsChecked($addKPQ3) Then
-			$m_GameName = "kingpinq3"
-		ElseIf  _IsChecked($addQuake2) Then
-			$m_GameName = "quake2"
+	Func M_Host_getGameName()
+		;_GUICtrlComboBox_GetCurSel
+		Local $sGame = GUICtrlRead($UI_Combo_M_addServer)
+		If $sGame = "" Then
+			Return "kingpin" ;  "kingpinq3" "quake2"
 		Else
-			$m_GameName = "kingpin"
+			Return $sGame ;"kingpin"|"kingpinq3"|"quake2"
 		EndIf
 	EndFunc
 
 	;===================
 	;--> set port string
-	Func setPortString()
-		$PortToUse = GUICtrlRead($getPort)
+	Func M_Host_getPortString()
+		return GUICtrlRead($UI_In_getPortM)
+	EndFunc
+
+	Func M_Hosted_sendData($sCommand, $sInfo)
+		Local $sPortToUse = M_Host_getPortString() ;set port from string
+		Local $sGameName = M_Host_getGameName();set global Gamename for sent port
+		;/mbrowser.php?game=kingpin		&	username=	M-Browser+1.8&v=1.8 &join=	removeserver	:31520	&quit=1
+		;/mbrowser.php?game=kingpinQ3	&	username=	hypobrowser&v=1.01	&join=	excludeserver	:31620	&quit=1
+
+		Local $sData = StringFormat( _
+			"https://hambloch.com/kingpin/mbrowser.php?game=%s&username=%s&v=%s&join=%s:%s&quit=1", _
+			$sGameName, StringLower($versionName), $versionNum, $sCommand, $sPortToUse)
+
+		ConsoleWrite($sData&@CRLF)
+		Local $ret = MsgBox($MB_OKCANCEL, $sInfo, 'Send "'&$sCommand& '" ?'&@CRLF&@CRLF& $sData, 0, $HypoGameBrowser )
+		if $ret = $IDOK Then
+			local $tmpSize = InetGetSize($sData,$INET_FORCERELOAD)
+		EndIf
+
+		ResetRefreshTimmers()
+
 	EndFunc
 
 	;==============
 	;--> add server
-	Func ServerAddPortKP()
-		setPortString() ;set port from string
-		GameNameToSetPort();set global Gamename for sent port
-
-		;/mbrowser.php?game=kingpin		&	username=	M-Browser+1.8&v=1.8 &join=	removeserver	:31520	&quit=1
-		;/mbrowser.php?game=kingpinQ3	&	username=	hypobrowser&v=1.01	&join=	excludeserver	:31620	&quit=1
-
-		Local $stringCombineVars = String("http://kingpin.hambloch.com/mbrowser.php?game=" & $m_GameName & "&username=" & _
-										$versionName &  "&v=" & $versionNum & "&join=addserver:" & $PortToUse & "&quit=1")
-
-									ConsoleWrite(	$stringCombineVars&@CRLF)
-		local $tmpSize = InetGetSize($stringCombineVars,$INET_FORCERELOAD)
-
-		MsgBox($MB_SYSTEMMODAL, "Add Port", "Game = " & $m_GameName & @CRLF & "Port = " & $PortToUse,0, $HypoGameBrowser )
-		ResetRefreshTimmers()
+	Func M_ServerAddPortKP()
+		M_Hosted_sendData('addserver', "Add Port")
 	EndFunc
 
 	;=================
 	;--> remove server
-	Func ServerRemovePortKP()
-		setPortString()
-		GameNameToSetPort();set global Gamename for sent port
-
-		Local $stringCombineVars = String("http://kingpin.hambloch.com/mbrowser.php?game=" & $m_GameName & "&username=" & _
-									$versionName &  "&v=" & $versionNum & "&join=removeserver:" & $PortToUse & "&quit=1")
-		local $tmpSize = InetGetSize($stringCombineVars,$INET_FORCERELOAD)
-									ConsoleWrite(	$stringCombineVars&@CRLF)
-
-		MsgBox($MB_SYSTEMMODAL, "Remove Port", "Game = " & $m_GameName & @CRLF & "Port = " & $PortToUse,0, $HypoGameBrowser )
-		ResetRefreshTimmers()
+	Func M_ServerRemovePortKP()
+		M_Hosted_sendData('removeserver', "Remove Port")
 	EndFunc
 
 	;==================
 	;--> exclude server
-	Func ServerExcludePortKP()
-		setPortString()
-		GameNameToSetPort();set global Gamename for sent port
-
-		Local $stringCombineVars = String("http://kingpin.hambloch.com/mbrowser.php?game=" & $m_GameName & "&username=" & _
-									$versionName &  "&v=" & $versionNum & "&join=excludeserver:" & $PortToUse & "&quit=1")
-		local $tmpSize = InetGetSize($stringCombineVars,$INET_FORCERELOAD)
-								ConsoleWrite(	$stringCombineVars&@CRLF)
-
-		MsgBox($MB_SYSTEMMODAL, "Exclude Port", "Game = " & $m_GameName & @CRLF & "Port = " & $PortToUse,0, $HypoGameBrowser )
-		ResetRefreshTimmers()
+	Func M_ServerExcludePortKP()
+		M_Hosted_sendData('excludeserver', "Exclude Port")
 	EndFunc
 	; -->PORT end add game via port settings
 	;=============================================================================
 	#EndRegion
 
-
-	#Region --> ServerDetailArray
 	;=====================
-	;--> ServerDetailArray
-	Func ServerDetailArray($serverInfoString)
+	;--> M_ServerDetailArray
+	Func M_ServerDetailArray($serverInfoString)
 		ConsoleWrite("string.. " &$serverInfoString& @CRLF)
 
 		If $serverInfoString = "" Then
@@ -1429,7 +1584,7 @@ EndFunc ;--> end ini file setup
 			Local $numLines = $tmpstr[0] ;3 lines standard >= players
 			;MsgBox($MB_SYSTEMMODAL, "","finnn:" & $numLines )
 
-			If Not StringInStr($tmpstr[1],"ÿÿÿÿprint") And Not StringInStr($tmpstr[1],"ÿÿÿÿstatusResponse") Then
+			If Not StringInStr($tmpstr[1],"ÿÿÿÿprint") And Not StringInStr($tmpstr[1],"ÿÿÿÿstatusResponse") Then ;todo system
 				MsgBox($MB_SYSTEMMODAL, "","error in packet header (no 'yyyy')" )
 				ResetRefreshTimmers()
 				Return
@@ -1443,28 +1598,27 @@ EndFunc ;--> end ini file setup
 		;;;; set server string varables
 			local $servrVarArray = StringSplit($serverVars, "\" ) ;setup server strings
 			if Not @error Then
+				_GUICtrlListView_BeginUpdate($ListView2POP)
 				_GUICtrlListView_DeleteAllItems($ListView2POP)
 				For $i2 = 2 To $servrVarArray[0] Step 2
-
-				$intADD1 = $i2
-				$intADD1 += 1
-
-				_GUICtrlListView_AddItem($ListView2POP, $servrVarArray[$i2],-1, 0)
-				_GUICtrlListView_AddSubItem($ListView2POP,$iRay, $servrVarArray[$intADD1]	 ,1)	;string
-				$iRay +=1
+					$intADD1 = $i2
+					$intADD1 += 1
+					_GUICtrlListView_AddItem($ListView2POP, $servrVarArray[$i2],-1, 0)
+					_GUICtrlListView_AddSubItem($ListView2POP,$iRay, $servrVarArray[$intADD1]	 ,1)	;string
+					$iRay += 1
 				Next
+				_GUICtrlListView_EndUpdate($ListView2POP)
 			EndIf
 
 		;;;; add players info, max 31 char for player name
 			Local $iply = 3
-			If Not $tmpstr[3] = "" Then
-				local $plyr = 0
-				Local $playerName =""
-				local $plyrStatus
-				Local $plyrStatusArray
+			If Not ($tmpstr[3] = "") Then
+				local $plyr = 0, $playerName ="", $plyrStatus, $plyrStatusArray
+
+				_GUICtrlListView_BeginUpdate($ListView1POP)
 				_GUICtrlListView_DeleteAllItems($ListView1POP)
 				For $iply = 3 To $numLines Step 1
-					If Not $tmpstr[$iply] ="" Then ;catch end line @LF, EOT
+					If Not ($tmpstr[$iply] = "") Then ;catch end line @LF, EOT
 
 						$playerName = _StringBetween($tmpstr[$iply], '"', '"' ) ;get server name[0]
 						$plyrStatus = StringReplace($tmpstr[$iply], '"' & $playerName[0] & '"', "") ;
@@ -1473,54 +1627,54 @@ EndFunc ;--> end ini file setup
 						_GUICtrlListView_AddItem($ListView1POP, $playerName[0],-1, 0)				;Name
 						_GUICtrlListView_AddSubItem($ListView1POP,$plyr, $plyrStatusArray[1] ,1)	;Frags
 						_GUICtrlListView_AddSubItem($ListView1POP,$plyr, $plyrStatusArray[2] ,2)	;Ping
-
 						$plyr += 1 ;increase 1
 					EndIf
 				Next
+				_GUICtrlListView_EndUpdate($ListView1POP)
 			EndIf
 		EndIf
 
 		Return True
 	EndFunc
-	;--> ServerDetailArray
+	;--> M_ServerDetailArray
 	;=====================
-	#EndRegion
 
 
 	#Region --> M Get server info strings
 	;========================================================
 	;--> Get server info strings
-	Func GetServerPacket()
-		Local $serverIP, $serverPort, $status, $timeCounted, $data
+	Func M_GetServerPacket($iGameIdx)
+		Local $serverIP, $serverPort, $status, $data
 		local $getTimeDiffServer = TimerInit()
 		Local $sIPAddress, $iPort, $iErrorX
 
-		Local $serverAddress = StringSplit(GetTabSelectedArrayStringIP(),":")
-		If @error Then Return ""
+		Local $serverAddress = StringSplit(GetServerListA_SelectedData($LV_A_IP),":")
+		If @error Then
+			ConsoleWrite("Error: splitting string in M_GetServerPacket()"& @CRLF)
+			Return ""
+		EndIf
 
-		$sIPAddress = TCPNameToIP( $serverAddress[1])
+		$sIPAddress = TCPNameToIP( $serverAddress[1]) ;todo move this
 		$iPort = $serverAddress[2]
 
-		$iErrorX = _UDPSendTo($sIPAddress, $iPort, sendStatusMessageType(), ($hSocketServerUDP))
+		$iErrorX = _UDPSendTo($sIPAddress, $iPort, sendStatusMessageType_UDP($iGameIdx, True), ($g_hSocketServerUDP))
 		if @error Then
 			ConsoleWrite("UDP Send \status\ sock error =  " & $iErrorX & " error" & @CRLF)
 			Return
 		EndIf
 
-
 		Do ;loop untill complet info string is recieved or timed out. 3.5 seconds
-			$data = _UDPRecvFrom(($hSocketServerUDP),2048,0)
-			$timeCounted = TimerDiff($getTimeDiffServer)
-			If $timeCounted > 3500 Then
+			$data = _UDPRecvFrom(($g_hSocketServerUDP),2048,0)
+			If TimerDiff($getTimeDiffServer) > 3500 Then
 				ConsoleWrite("error geting packet "&@CRLF)
 				Return ""
 			EndIf
+			Sleep(20)
 		Until IsArray($data)
 
+		ConsoleWrite(" packet recieved: "& $data[$PACKET_DATA]& @CRLF)
 
-		ConsoleWrite(" packet recieved "& $data[0]& @CRLF)
-
-		Return $data[0] ;$serverInfoString
+		Return $data[$PACKET_DATA] ;$serverInfoString
 	EndFunc
 	;--> END Get server info strings
 	;========================================================
@@ -1528,21 +1682,13 @@ EndFunc ;--> end ini file setup
 
 
 	#Region --> server info POPUP
-	;=====================
-	;--> server info POPUP
-	Global $posX = WinGetPos($HypoGameBrowser)[0]
-	Global $posY = WinGetPos($HypoGameBrowser)[1]
+	M_GetServerDetailsPopupFunc()
+	Func M_GetServerDetailsPopupFunc()
+		Local $posXY = WinGetPos($HypoGameBrowser)
 
-	GetServerDetailsPopupFunc()
-	Func GetServerDetailsPopupFunc()
-		;;;GUISetState(@SW_DISABLE,$HypoGameBrowser)
-
-		;;--> creat PopUp GUI
+		;--> creat PopUp GUI
 		#Region ### START Koda GUI section ### Form=C:\Programs\codeing\autoit-v3\SciTe\Koda\Templates\M_Browser_GUI_ServerInfo1.kxf
-		;$MPopupInfo = GUICreate("Server Info", 547, 426, $posX, $posY, -1, -1, $HypoGameBrowser) ;note hypov8 using main window position
-		$MPopupInfo = GUICreate("Server Info", 547, 426, $posX, $posY, BitOR($WS_CAPTION, $WS_POPUP, $WS_SYSMENU), -1, $HypoGameBrowser)
-		;$MPopupInfo = GUICreate("Server Info", 547, 426, -1, -1, BitOR($GUI_SS_DEFAULT_GUI,$WS_MINIMIZE), -1, $HypoGameBrowser)
-		;$Group1POP = GUICtrlCreateGroup("", 8, 8, 297, 409)
+		$MPopupInfo = GUICreate("Server Info", 547, 426, $posXY[0], $posXY[1], BitOR($WS_CAPTION, $WS_POPUP, $WS_SYSMENU), -1, $HypoGameBrowser)
 		$ListView1POP = GUICtrlCreateListView("Name|Frags|Ping", 8, 16, 296, 401)
 		GUICtrlSendMsg($ListView1POP, $LVM_SETCOLUMNWIDTH, 0, 195)
 		GUICtrlSendMsg($ListView1POP, $LVM_SETCOLUMNWIDTH, 1, 45)
@@ -1552,77 +1698,63 @@ EndFunc ;--> end ini file setup
 		$ListView2POP = GUICtrlCreateListView("Server Rules|Value", 312, 16, 225, 361)
 		GUICtrlSendMsg($ListView2POP, $LVM_SETCOLUMNWIDTH, 0, 85)
 		GUICtrlSendMsg($ListView2POP, $LVM_SETCOLUMNWIDTH, 1, 110)
-		Global $tmpCtrl = GUICtrlCreateGroup("", -99, -99, 1, 1)
+		GUICtrlCreateGroup("", -99, -99, 1, 1)
 		$serverInfoRefBtn = GUICtrlCreateButton("Refresh", 440, 384, 81, 33)
 		$serverInfoConBtn = GUICtrlCreateButton("Connect", 336, 384, 89, 33)
 		GUICtrlSetFont($serverInfoConBtn, 8* $aDPI[0], 800, 0, "MS Sans Serif")
 		GUISetState(@SW_HIDE,$MPopupInfo)
 		GUISetFont(8* $aDPI[0], 0, 0,  "MS Sans Serif", $MPopupInfo)
 		#EndRegion ### END Koda GUI section ###
-		;;--> END creat PopUp GUI
+		;--> END creat PopUp GUI
 
-		GUICtrlSetColor($ListView1POP, $COLOR_1ORANGE)
-		GUICtrlSetBkColor ($ListView1POP,$COLOR_1BLACK)
-		GUICtrlSetColor($ListView2POP, $COLOR_1ORANGE)
-		GUICtrlSetBkColor ($ListView2POP,$COLOR_1BLACK)
+		if _IsChecked($UI_CBox_theme) Then
+			GUICtrlSetColor($ListView1POP, $COLOR_HYPO_ORANGE)
+			GUICtrlSetBkColor ($ListView1POP,$COLOR_HYPO_GREY)
+			GUICtrlSetColor($ListView2POP, $COLOR_HYPO_ORANGE)
+			GUICtrlSetBkColor ($ListView2POP,$COLOR_HYPO_GREY)
+		EndIf
 
-;~ 			If StringInStr(@OSTYPE, "WIN32_NT") Then
-;~ 				DllCall("UxTheme.dll", "int", "SetWindowTheme", "hwnd", GUICtrlGetHandle($ListView1POP), "wstr", 0, "wstr", 0)
-;~ 				DllCall("UxTheme.dll", "int", "SetWindowTheme", "hwnd", GUICtrlGetHandle($ListView2POP), "wstr", 0, "wstr", 0)
-;~ 				DllCall("UxTheme.dll", "int", "SetWindowTheme", "hwnd", GUICtrlGetHandle($tmpCtrl ), "wstr", 0, "wstr", 0)
-;~ 			EndIf
+		GUISetOnEvent($GUI_EVENT_CLOSE,"M_ExitLoopForm", $MPopupInfo)
+		GUICtrlSetOnEvent($serverInfoConBtn,"M_ServerInfoConnectBtn")
+		GUICtrlSetOnEvent($serverInfoRefBtn, "M_ServerInfoRefreshBtn")
 
-
-		GUISetOnEvent($GUI_EVENT_CLOSE,"ExitLoopForm", $MPopupInfo)
-		GUICtrlSetOnEvent($serverInfoConBtn,"serverInfoConnectBtn")
-		GUICtrlSetOnEvent($serverInfoRefBtn, "serverInfoRefreshBtn")
 	EndFunc
-	;--> END Get server info strings
-	;==============================
 
-	Func GetServerDetailsPopup()
-		;GUISetState(
-		;GUICtrlSetPos(
-
-		$posX = WinGetPos($HypoGameBrowser)[0]
-		$posY = WinGetPos($HypoGameBrowser)[1]
-		$posX += 56
-		$posY += 78
-
-
-		GUISetState(@SW_DISABLE,$HypoGameBrowser)
-		GUISetState(@SW_SHOW,$MPopupInfo)
-		WinMove($MPopupInfo, WinMove,$posX, $posY)
+	Func M_GetServerDetailsPopup()
+		Local $posXY = WinGetPos($HypoGameBrowser)
+		GUISetState(@SW_DISABLE, $HypoGameBrowser)
+		GUISetState(@SW_SHOW, $MPopupInfo)
+		WinMove($MPopupInfo, WinMove, $posXY[0] + 56, $posXY[1] + 78)
 		GUISetCoord(33, 33,-1, -1, $MPopupInfo)
-
-		serverInfoRefreshBtn()
+		M_ServerInfoRefreshBtn()
 	EndFunc
 
-	Func serverInfoRefreshBtn()
-		DisableMPopupButtons()
-		_BIND_SERVER_SOCKET()
+	Func M_ServerInfoRefreshBtn()
+		SetSelectedGameID() ;todo check this
+		M_DisablePopupButtons()
+		_BIND_UDP_SOCKET($g_hSocketServerUDP)
 
-		Local	$serverInfoString = GetServerPacket()
-		If Not $serverInfoString = "" Then ServerDetailArray($serverInfoString)
-		_UDPCloseSocket($hSocketServerUDP)
-		EnableMPopupButtons()
+		Local $serverInfoString = M_GetServerPacket(GetActiveGameIndex()) ;$g_iCurGameID
+		If Not ($serverInfoString = "") Then
+			M_ServerDetailArray($serverInfoString)
+		EndIf
+		_UDPCloseSocket($g_hSocketServerUDP)
+		M_EnableMPopupButtons()
 	EndFunc
 
-	func DisableMPopupButtons()
+	func M_DisablePopupButtons()
 		GUICtrlSetState($serverInfoConBtn, $GUI_DISABLE)
 		GUICtrlSetState($serverInfoRefBtn, $GUI_DISABLE)
 		GUISetState(@SW_DISABLE,$MPopupInfo)
 	EndFunc
 
-	func EnableMPopupButtons()
+	func M_EnableMPopupButtons()
 		GUICtrlSetState($serverInfoConBtn, $GUI_ENABLE)
 		GUICtrlSetState($serverInfoRefBtn, $GUI_ENABLE)
 		GUISetState(@SW_ENABLE,$MPopupInfo)
 	EndFunc
 
-
-
-	Func serverInfoConnectBtn()
+	Func M_ServerInfoConnectBtn()
 		_GUICtrlListView_DeleteAllItems($ListView2POP) ;hypo delet data
 		_GUICtrlListView_DeleteAllItems($ListView1POP) ;hypo delet data
 		GUISetState(@SW_HIDE,$MPopupInfo)
@@ -1633,7 +1765,7 @@ EndFunc ;--> end ini file setup
 		Start_Kingpin()
 	EndFunc
 
-	Func ExitLoopForm()
+	Func M_ExitLoopForm()
 		_GUICtrlListView_DeleteAllItems($ListView2POP) ;hypo delet data
 		_GUICtrlListView_DeleteAllItems($ListView1POP) ;hypo delet data
 		GUISetState(@SW_HIDE,$MPopupInfo)
@@ -1645,31 +1777,30 @@ EndFunc ;--> end ini file setup
 	#EndRegion
 
 
-	#Region --> runGameFromM_LInk
+	#Region --> M_RunGameFrom_MLInk
 	;========================================================
-	Func runGameFromM_LInk() ;If FileExists("kingpin.exe") OR ($CmdLine[0]<>"" AND
-		If Not $CmdLine[0] Then return
+	Func M_RunGameFrom_MLInk() ;If FileExists("kingpin.exe") OR ($CmdLine[0]<>"" AND
+		Local $idx
+		Local Const $cmdString[2][3] = [ _
+			["m-browser://", 12, 1], _     ;kp
+			["m-browser2://", 13, 2]]      ;kpq3
 
-		Local $cmdString = "m-browser://"
-
-		If StringInStr($CmdLine[1], $cmdString)=1 Then
-			local $serverIP = StringTrimLeft($CmdLine[1], StringLen($cmdString))
-			If FileExists("kingpin.exe") Then
-				ShellExecute( "kingpin.exe"," +set developer 1 +connect " & $serverIP)
-			Else
-				Local $rungame = GUICtrlRead($path_Kingpin)
-				local $aArrayPath = $rungame
-				$aArrayPath =StringReverse($aArrayPath)
-				Local $tmpstr = string(StringSplit( $aArrayPath, "\" )[1])
-				local $tmpLen = StringLen($tmpstr )
-				local $trimEXE = StringTrimRight($rungame,$tmpLen) ;kingpin.exe ;trim exe to seet active path (stop missing color map issue)
-				ShellExecute( $rungame, " +set developer 1 +connect " & $serverIP, $trimEXE )
-				Exit
-			EndIf
+		If Not $CmdLine[0] Then
+			;no commands to process
+			return
 		EndIf
 
-		;GUISetState(@SW_RESTORE, $HypoGameBrowser)
-		;no commands to process
+		For $i = 0 To 1
+			$idx = StringInStr($CmdLine[1], $cmdString[$i][0])
+			If $idx Then
+				Local $runServerAddress = StringTrimLeft($CmdLine[1], $idx + $cmdString[$i][1] -1)
+				$runServerAddress = StringRegExpReplace($runServerAddress, "[^0-9]*$", "") ;trim any chars at end
+				MsgBox("", "", "$CmdLine:"&$runServerAddress)
+				LaunchGame($runServerAddress, $cmdString[$i][2])
+				Exit
+			EndIf
+		Next
+		Exit
 	EndFunc
 	;========================================================
 	#EndRegion
@@ -1679,926 +1810,457 @@ EndFunc ;--> end ini file setup
 	EndFunc
 
 
-	#Region --> use auto refresh
-	;========================================================
-	; --> use auto refresh
-	Func AutoRefreshTimer()
-		Local $intTimeStringBox, $oldTabNum
-		Local $timeCounted
-		local $stateMinimized = WinGetState( $HypoGameBrowser)
-		Local $getWinState = WinGetState($MPopupInfo)
-
-		;disable autor efresh if not ready
-		If  BitAND($stateMinimized,16) Then Return ;$WIN_STATE_MINIMIZED
-		if BitAND($getWinState,2) Then Return ;$WIN_STATE_VISIBLE ;if M-popup showing, disable refresh
-		if $isGettingServers > 0 Then Return ;todo: <> or -1?
-
-		;mBrowser
-		If $refreshChkBoxState = 1 Then ;$GUI_CHECKED
-			$intTimeStringBox = Int(GUICtrlRead($refreshTimeImput))
-			If $intTimeStringBox <= 1 Then $intTimeStringBox = 1
-			$intTimeStringBox *= 1000 * 60
-			$timeCounted = TimerDiff($M_lastRefreshTime)
-			If $timeCounted > $intTimeStringBox Then
-				GetServerList()
-				setServerTabArray()
-			EndIf
-		EndIf
-
-		;gameSpy
-		If  _IsChecked($GB_RB_Kingpin) Then
-			$intTimeStringBox = Int(GUICtrlRead($GB_IN_refreshTime)) ; get time
-			If $intTimeStringBox <= 1 Then $intTimeStringBox = 1
-			$intTimeStringBox *= 1000 * 60
-			;check last refresh time
-			$timeCounted = TimerDiff($GS_lastRefreshTime)
-			If $timeCounted > $intTimeStringBox Then
-				$oldTabNum = $tabNum
-				$tabNum = 1
-				GetMasterServerList(True, 1)
-				$tabNum = $oldTabNum
-			EndIf
-		ElseIf _IsChecked($GB_RB_KingpinQ3) Then
-			$intTimeStringBox = Int(GUICtrlRead($GB_IN_refreshTime)) ; get time
-			If $intTimeStringBox <= 1 Then $intTimeStringBox = 1
-			$intTimeStringBox *= 1000 * 60
-			;check last refresh time
-			$timeCounted = TimerDiff($GS_lastRefreshTime)
-			If $timeCounted > $intTimeStringBox Then
-				$oldTabNum = $tabNum
-				$tabNum = 2
-				GetMasterServerList(True, 2)
-				$tabNum = $oldTabNum
-			EndIf
-		ElseIf _IsChecked($GB_RB_Quake2) Then
-			$intTimeStringBox = Int(GUICtrlRead($GB_IN_refreshTime)) ; get time
-			If $intTimeStringBox <= 1 Then $intTimeStringBox = 1
-			$intTimeStringBox *= 1000 * 60
-			;check last refresh time
-			$timeCounted = TimerDiff($GS_lastRefreshTime)
-			If $timeCounted > $intTimeStringBox Then
-				$oldTabNum = $tabNum
-				$tabNum = 3
-				GetMasterServerList(True, 3)
-				$tabNum = $oldTabNum
-			EndIf
-		EndIf
-	EndFunc
-
-
-	;=======================
-	;--> RefreshChkBoxToggle
-	GUICtrlSetOnEvent($refreshChkBox, "RefreshChkBoxToggle")
-		Func RefreshChkBoxToggle()
-			If _IsChecked($refreshChkBox) Then
-				$refreshChkBoxState = 1
-				$M_lastRefreshTime = TimerInit()
-			Else
-				$refreshChkBoxState = 0
-			EndIf
-		EndFunc
-	;=====================
-	;--> SoundChkBoxToggle
-	GUICtrlSetOnEvent($soundChkBox, "SoundChkBoxToggle")
-		Func SoundChkBoxToggle()
-				If _IsChecked($soundChkBox) Then
-				$useSounds = 1
-			Else
-				$useSounds = 0
-			EndIf
-		EndFunc
-	; --> END auto refresh
-	;========================================================
-	#EndRegion
-
-
-	#Region -->  disaply player count
-	;=============================================================================
-	;-->  disaply player count
-
+	#Region --> M-BROWSER disaply player count
 	;============================
 	;-->update the info bar Kingpin
-	Func UpdatePlayersStatus( $getPlayerIinfo)
-		If $getPlayerIinfo = ""	Then Return False ;make sure string exists
-		Local $String = StringSplit($getPlayerIinfo, '/', $STR_CHRSPLIT)
-		if @error Then Return 0 ;todo: check
-		Local $count = $String[1]
-		$countPlayers += Int($count)
-		If int($count) > 0 Then Return True
-	EndFunc
-
-	Func SetPlayersOnlineString()
-		GUICtrlSetData($playersOnline,"KP Players: " & $countPlayers & " " );& "  and " & $countServers & " Servers")
-		If $countPlayers > 0 Then
-			GUICtrlSetColor( $playersOnline, $COLOR_RED)
-		Else
-			GUICtrlSetColor( $playersOnline, $COLOR_BLACK)
+	Func M_UpdatePlayersStatus($iGameIdx, $getPlayerIinfo)
+		If $getPlayerIinfo <> "" Then
+			Local $String = StringSplit($getPlayerIinfo, '/')
+			if @error Then Return False
+			Local $count = Number($String[1])
+			If $count > 0 Then
+				$g_aPlayerCount_M[$iGameIdx] += $count
+				Return True
+			EndIf
 		EndIf
+		Return False
 	EndFunc
 
-	;============================
-	;-->update the info bar KPQ3
-	Func UpdatePlayersStatusKPQ3( $getPlayerIinfoKPQ3)
-		If $getPlayerIinfoKPQ3 = ""	Then Return False ;make sure string exists
-		Local $String = StringSplit($getPlayerIinfoKPQ3, '/', $STR_CHRSPLIT)
-		if @error Then Return 0 ;todo: check
-		Local $count = $String[1]
-		$countPlayersKPQ3 += Int($count)
-		If int($count) > 0 Then Return True
-	EndFunc
-
-	Func SetPlayersOnlineStringKPQ3()
-		GUICtrlSetData($playersOnlineKPQ3,"KPQ3 Players: " & $countPlayersKPQ3 & " " );& " Servers:" & $countServersKPQ3)
-		If $countPlayersKPQ3 > 0 Then
-			GUICtrlSetColor( $playersOnlineKPQ3, $COLOR_RED)
-		Else
-			GUICtrlSetColor( $playersOnlineKPQ3, $COLOR_BLACK)
-		EndIf
-	EndFunc
-
-	;============================
-	;-->update the info bar Q2
-	Func UpdatePlayersStatusQ2( $getPlayerIinfoQ2)
-		If $getPlayerIinfoQ2 = "" Then Return False ;make sure string exists
-		Local 	$String = StringSplit($getPlayerIinfoQ2, '/', $STR_CHRSPLIT)
-		if @error Then Return 0 ;todo: check
-		Local 	$count = $String[1]
-		$countPlayers += Int($count)
-		If int($count) > 0 Then Return True
-	EndFunc
-
-	;============================
-	;--> Quake2 players
-	Func SetPlayersOnlineStringQ2()
-		GUICtrlSetData($playersOnlineQ2,"Q2 Players: " & $countPlayersQ2 & " " );& " Servers:" & $countServersKPQ3)
-		If $countPlayersQ2 > 0 Then
-			GUICtrlSetColor( $playersOnlineQ2, $COLOR_RED)
-		Else
-			GUICtrlSetColor( $playersOnlineQ2, $COLOR_BLACK)
-		EndIf
+	Func M_SetPlayersOnlineString()
+		GUICtrlSetData($UI_Text_countMPlayers, StringFormat( _
+			"Online Players.   Kingpin: %i     KingpinQ3: %i     Quake2: %i                    ", _
+			$g_aPlayerCount_M[0], _
+			$g_aPlayerCount_M[1], _
+			$g_aPlayerCount_M[2]));& "  and " & $countServers & " Servers")
 	EndFunc
 	;-->  END disaply player count
 	;=============================================================================
 	#EndRegion
 
 
-	#Region --> GetServerList File
+	#Region --> M-BROWSER M_GetServerList File
 	;=============================================================================
-	;--> GetServerList File
-	Func GetServerList()
-		Local $i
-		DisableUIButtons()
+	;--> M_GetServerList File
+	Func M_GetServerList()
+		Local $i, $hDownload, $iTimeout
+		EnableUIButtons(False)
 
 		;loop through 2 files
-		For $i = 1 To 2
-			Local $hDownload
-			$M_lastRefreshTime = TimerInit() ;set a new time for auto refresh
-			If $i = 2 Then
-				FileDelete($isTmpFilePath_KPQ3)
-				$hDownload = InetGet("http://kingpin.hambloch.com/mbrowser.php?game=kingpinq3&username=hypobrowser&v=1.0", _
-				$isTmpFilePath_KPQ3, $INET_FORCERELOAD, $INET_DOWNLOADBACKGROUND ) ;$INET_DOWNLOADBACKGROUND $INET_DOWNLOADWAIT
-				ConsoleWrite("getting kpq3 web file"&@CRLF)
-			Else
-				FileDelete($isTmpFilePath_KP)
-				;$hDownload = InetGet("http://hypov8.kingpin.info/motd.htm", _
-				$hDownload = InetGet("http://kingpin.hambloch.com/mbrowser.php?game=kingpin&username=hypobrowser&v=1.0", _
-				$isTmpFilePath_KP, $INET_FORCERELOAD, $INET_DOWNLOADBACKGROUND )
-				ConsoleWrite("getting kp web file"&@CRLF)
-			EndIf
+		For $i = 0 To 1
+			$iTimeout = TimerInit()
+			FileDelete($g_sM_tmpFile[$i])
+			$hDownload = InetGet($g_sMWebString[$i], $g_sM_tmpFile[$i], $INET_FORCERELOAD, $INET_DOWNLOADBACKGROUND ) ;$INET_DOWNLOADBACKGROUND $INET_DOWNLOADWAIT
+			ConsoleWrite("getting web file idx:"&$i&@CRLF)
 
-			Local $timeCounted = TimerDiff($M_lastRefreshTime)
-
-		   Do
-				If $timeCounted > 3000 Then
-					InetClose($hDownload)
+			Do ;wait for file to complete
+				If TimerDiff($iTimeout) > 3000 Then
+					ConsoleWrite("tieout"&@CRLF)
 					ExitLoop
 				EndIf
-				Sleep(250)
-		   Until InetGetInfo($hDownload, $INET_DOWNLOADCOMPLETE )
-
+				Sleep(150)
+			Until InetGetInfo($hDownload, $INET_DOWNLOADCOMPLETE)
 			InetClose($hDownload)
 		Next
+		EnableUIButtons(True)
 
-		EnableUIButtons()
+		ResetRefreshTimmers();set a new time for auto refresh
 	EndFunc
-	;--> GetServerList File
+	;--> M_GetServerList File
 	;=============================================================================
-	#EndRegion
 
+	Func M_CheckFileReadToArray($sFilePath, $gameName, ByRef $aArray)
+		If FileExists($sFilePath) Then
+			$aArray = FileReadToArray($sFilePath)
+			If @error Then ;error ask to use offline list
+				MsgBox($MB_SYSTEMMODAL, "ERROR: In Server List", "The Server list format is incorrect", 0, $HypoGameBrowser)
+				ResetRefreshTimmers()
+				Return 0 ;error loading to array
+			Else
+				return 1
+			EndIf
+		Else
+			MsgBox($MB_SYSTEMMODAL, _
+				"ERROR: Cant Get 'M' Server List", "There was an error downloading the " &$gameName& " Server list." &@CRLF& _
+				"Check Your Connection?", 0, $HypoGameBrowser)
+			ResetRefreshTimmers()
+			Return 0 ;error geting file
+		EndIf
+	EndFunc
 
-	#Region --> set ServerList per tab
+	Func M_UpdateListView($sLineData, $ListID, $iGameIdx, ByRef $iIdx)
+		Local $hw, $hostName, $sString, $aData
+		;fix each line string, remove server name and replace consecitive spaces with "|"
+		$hostName = _StringBetween($sLineData, '"', '"' ) ;get server name[0]
+		if not @error Then
+			$sString = StringReplace($sLineData, '"' & $hostName[0] & '"', "") ; clear hostname
+			$sString = StringRegExpReplace($sString, "\h+", "|") ;replace spaces with '|'
+			$aData = StringSplit($sString, '|')
+			$hw = GUICtrlCreateListViewItem($iIdx, $ListID)
+			; _GUICtrlListView_AddItem($UI_List, $aData[1],-1, $iKP1)
+			_GUICtrlListView_AddSubItem($ListID, $iIdx, $aData[1]    ,1)	;IP
+			_GUICtrlListView_AddSubItem($ListID, $iIdx, $hostName[0] ,2)	;server
+			_GUICtrlListView_AddSubItem($ListID, $iIdx, $aData[3]    ,5)	;map
+			_GUICtrlListView_AddSubItem($ListID, $iIdx, $aData[6]    ,4)	;players
+			_GUICtrlListView_AddSubItem($ListID, $iIdx, $aData[8]    ,3)	;ping
+			If M_UpdatePlayersStatus($iGameIdx, $aData[6]) Then
+				GUICtrlSetBkColor($hw, $COLOR_YELLOW) ;found player, highlight it
+			EndIf
+			$iIdx += 1 ;increase list by 1
+		EndIf ;end error
+	EndFunc
+
 	;=============================================================================
 	;--> set ServerList per tab
-	Func setServerTabArray()
-
-		Local $aArray, $aArrayKPQ3, $i
-		Local $noLoadOffLine = 0
-		Local $sString
+	Func M_SetServerTabArray()
+		Local $aArray, $i, $sString
+		Local $noLoadOffLine = 0, $iKP1 = 0, $iQ2 = 0, $iKPQ3 = 0
 		local $stringCol[100] ;max collums
 		Local $stringColQ2[20]
 
-		$GS_countPlayers = 0
+		$g_iPlayerCount_GS = 0
+		For $i = 0 to 2
+			_GUICtrlListView_BeginUpdate($UI_ListV_mb_ABC[$i])
+			_GUICtrlListView_DeleteAllItems($UI_ListV_mb_ABC[$i])
+			$g_aPlayerCount_M[$i] = 0
+			;$g_aCountServers[$i] = 0
+		Next
 
-;============> start kp
-		If FileExists($isTmpFilePath_KP)=0 Then
-			MsgBox($MB_SYSTEMMODAL, "ERROR: Cant Get 'M' Server List", "There was an error downloading the Kingpin Server list." & _
-			@CRLF & "Check Your Connection?",0, $HypoGameBrowser )
-			ResetRefreshTimmers()
-			Return
-		EndIf
-
-		$aArray = FileReadToArray($isTmpFilePath_KP)
-		If @error Then ;error ask to use offline list
-			MsgBox($MB_SYSTEMMODAL, "ERROR: In Server List", "The Server list format is incorrect", 0, $HypoGameBrowser )
-			ResetRefreshTimmers()
-			Return
-		EndIf ;end error geting file
-
-		If IsArray($aArray) Then
-			ConsoleWrite("web kp file is array"&@CRLF)
-			_GUICtrlListView_DeleteAllItems($ListView1M)
-			Local $i1 = 0
-			Local $iQ = 0
-			Local $fixed, $hostName
-
-			$countPlayers = 0
-			$countServers = 0
+		;============> start kp
+		If M_CheckFileReadToArray($g_sM_tmpFile[0], "Kingpin", $aArray) Then
+			;_ArrayDisplay($aArray, "m server list", Default, Default, 8)
 			For $i = 0 To UBound($aArray) - 1 ; Loop through the array.
-				If  StringInStr($aArray[$i], "MOTD:") Then
+				If StringInStr($aArray[$i], "MOTD:") Then
 					GUICtrlSetData($MOTD_Input , String(" " & $aArray[$i]))
-				ElseIf StringInStr($aArray[$i],"ERROR <host not found>") Then
-					ConsoleWrite("ERROR <host not found>"&@CRLF)
+				ElseIf StringInStr($aArray[$i],"ERROR <host not found>") Then ;todo check this
+					ConsoleWrite("!!!ERROR <host not found>"&@CRLF)
 				ElseIf StringInStr($aArray[$i],"Quakematch") Then
-					;fix each line string, remove server name and replace consecitive spaces with "|"
-					$fixed = StringReplace($aArray[$i], '""', '"(hostname unkown)"') ;replace ""
-					$hostName = _StringBetween($fixed, '"', '"' ) ;get server name[0]
-					if not @error Then
-						$sString = StringReplace($fixed, '"' & $hostName[0] & '"', "") ;
-						$sString = StringRegExpReplace($sString, "\h+", "|")
-						;$sString = StringReplace($sString, '""', "") ;replace ""
-						$sString = StringSplit($sString, '|', $STR_CHRSPLIT)
-						$stringColQ2[int($iQ)] = GUICtrlCreateListViewItem($iQ, $ListView3M)
-						; _GUICtrlListView_AddItem($ListView1M, $sString[1],-1, $i1)
-						_GUICtrlListView_AddSubItem($ListView3M,$iQ, $sString[1]	,1)			;IP
-						_GUICtrlListView_AddSubItem($ListView3M,$iQ, $hostName[0] 	,2) 			;server
-						_GUICtrlListView_AddSubItem($ListView3M,$iQ, $sString[3]	,5)			;map
-						_GUICtrlListView_AddSubItem($ListView3M,$iQ, $sString[6]	,4)			;players
-						_GUICtrlListView_AddSubItem($ListView3M,$iQ, $sString[8]	,3)			;ping
-						If UpdatePlayersStatusQ2( $sString[6]) Then GUICtrlSetBkColor( $stringColQ2[int($iQ)], $COLOR_YELLOW)
-						$iQ += 1 ;increase list by 1
-					EndIf ;end error
-				Else
-					;fix each line string, remove server name and replace consecitive spaces with "|"
-					$fixed = StringReplace($aArray[$i], '""', '"(hostname unkown)"') ;replace ""
-					$hostName = _StringBetween($fixed, '"', '"' ) ;get server name[0]
-					if not @error then
-						$sString = StringReplace($fixed, '"' & $hostName[0] & '"', "") ;
-						$sString = StringRegExpReplace($sString, "\h+", "|")
-						;$sString = StringReplace($sString, '""', "") ;replace ""
-						$sString = StringSplit($sString, '|', $STR_CHRSPLIT)
-						$stringCol[int($i1)] = GUICtrlCreateListViewItem($i1, $ListView1M)
-						; _GUICtrlListView_AddItem($ListView1M, $sString[1],-1, $i1)						;ip
-						_GUICtrlListView_AddSubItem($ListView1M,$i1, $sString[1]	,1)						;IP
-						_GUICtrlListView_AddSubItem($ListView1M,$i1, $hostName[0] 	,2) 						;server
-						_GUICtrlListView_AddSubItem($ListView1M,$i1, $sString[3]	,5)						;map
-						_GUICtrlListView_AddSubItem($ListView1M,$i1, $sString[6]	,4)						;players
-						_GUICtrlListView_AddSubItem($ListView1M,$i1, $sString[8]	,3)						;ping
-						If UpdatePlayersStatus( $sString[6]) Then GUICtrlSetBkColor( $stringCol[int($i1)], $COLOR_YELLOW)
-						$i1 += 1 ;increase list by 1
-					EndIf
+					M_UpdateListView($aArray[$i], $UI_ListV_mb_ABC[2], 2, $iQ2)
+				Else ;kingpin
+					M_UpdateListView($aArray[$i], $UI_ListV_mb_ABC[0], 0, $iKP1)
 				EndIf
 			Next
-			;_GUICtrlListView_SimpleSort($ListView1M,False, 1)
-			$countServers = $i1
-			$countServersQ2 = $iQ
-			SetPlayersOnlineString()
-			SetPlayersOnlineStringQ2()
-			;_GUICtrlListView_SetItemSelected($ListView1M,0, True)
-		Else ;end tab num
+		Else
 			ConsoleWrite("!web kp file is not array"&@CRLF)
 		EndIf
 
-;============> start kpq3
-		If FileExists ($isTmpFilePath_KPQ3)=0 Then
-			MsgBox($MB_SYSTEMMODAL, "ERROR: Cant Get 'M' Server List", "There was an error downloading the KingpinQ3 Server list." & _
-			@CRLF & "Check Your Connection?",0, $HypoGameBrowser )
-			ResetRefreshTimmers()
-			Return
-		EndIf
-
-		$aArrayKPQ3 = FileReadToArray($isTmpFilePath_KPQ3)
-		If @error Then ;error ask to use offline list
-					MsgBox($MB_SYSTEMMODAL, "ERROR: Cant Get Server List", "There was an error downloading the KingpinQ3 Server list." & _
-					@CRLF & "Check Your Connection?",0, $HypoGameBrowser )
-					ResetRefreshTimmers()
-					Return
-				;EndIf
-		EndIf ;end error geting file
-
-		If IsArray($aArrayKPQ3) Then
-			ConsoleWrite("web kpq3 file is array"&@CRLF)
-			_GUICtrlListView_DeleteAllItems($ListView2M)
-			Local $iQ3 = 0
-			$countPlayersKPQ3 = 0
-			$countServersKPQ3 = 0
-			For $i = 0 To UBound($aArrayKPQ3) - 1 ; Loop through the array.
-				If  StringInStr($aArrayKPQ3[$i], "MOTD:") Then
-;~ 					_GUICtrlStatusBar_SetText($StatusBar1, $aArrayKPQ3[$i],2)
-					GUICtrlSetData($MOTD_Input , String(" " & $aArrayKPQ3[$i]))
-				ElseIf StringInStr($aArrayKPQ3[$i],"ERROR <host not found>") Then
-					;Next
+		;============> start kpq3
+		If M_CheckFileReadToArray($g_sM_tmpFile[1], "KingpinQ3", $aArray) Then
+			For $i = 0 To UBound($aArray) - 1 ; Loop through the array.
+				If  StringInStr($aArray[$i], "MOTD:") Then
+					GUICtrlSetData($MOTD_Input , String(" " & $aArray[$i]))
+				ElseIf StringInStr($aArray[$i],"ERROR <host not found>") Then ;todo check this
+					ConsoleWrite("!!!ERROR <host not found>"&@CRLF)
 				Else
-					;fix each line string, remove server name and replace consecitive spaces with "|"
-					$fixed = StringReplace($aArrayKPQ3[$i], '""', '"(hostname unkown)"') ;replace ""
-					$hostName = _StringBetween($fixed, '"', '"' ) ;get server name[0]
-					;MsgBox( $MB_SYSTEMMODAL, "", $fixed)
-					if not @error then
-						$sString = StringReplace($fixed, '"' & $hostName[0] & '"', "") ;
-						$sString = StringRegExpReplace($sString, "\h+", "|")
-						;$sString = StringReplace($sString, '""', "") ;replace ""
-						$sString = StringSplit($sString, '|', $STR_CHRSPLIT)
-
-						$stringCol[int($iQ3)] = GUICtrlCreateListViewItem($iQ3, $ListView2M)
-						If UpdatePlayersStatusKPQ3( $sString[6]) Then GUICtrlSetBkColor( $stringCol[int($iQ3)], $COLOR_YELLOW)
-
-						_GUICtrlListView_AddSubItem($ListView2M,$iQ3, $sString[1]	,1)		;IP
-						_GUICtrlListView_AddSubItem($ListView2M,$iQ3, $hostName[0] 	,2) 	;server
-						_GUICtrlListView_AddSubItem($ListView2M,$iQ3, $sString[3]	,5)		;map
-						_GUICtrlListView_AddSubItem($ListView2M,$iQ3, $sString[6]	,4)		;players
-						_GUICtrlListView_AddSubItem($ListView2M,$iQ3, $sString[8]	,3)		;ping
-						$iQ3 += 1 ;increase list by 1
-					EndIf
+					M_UpdateListView($aArray[$i], $UI_ListV_mb_ABC[1], 1, $iKPQ3)
 				EndIf
 			Next
-			$countServersKPQ3 = $iQ3
-			SetPlayersOnlineStringKPQ3()
-			;_GUICtrlListView_SetItemSelected($ListView2M,0, True)
 		Else ;end tab num
 			ConsoleWrite("!web kpq3 file is not array"&@CRLF)
 		EndIf
 
+		M_SetPlayersOnlineString()
 
-;$GS_countPlayers
-		If $useSounds = 1 Then
-			selectAudoToPlay(0)
+		_GUICtrlListView_EndUpdate($UI_ListV_mb_ABC[0])
+		_GUICtrlListView_EndUpdate($UI_ListV_mb_ABC[1])
+		_GUICtrlListView_EndUpdate($UI_ListV_mb_ABC[2])
+
+		If _IsChecked($UI_CBox_sound) Then ; $g_useSounds = 1 Then
+			selectAudoToPlay(0) ; 0=mbrowser 1=gamespy
 		EndIf
-
 	EndFunc
 	;=-->set ServerList per tab
 	;========================================================
 	#EndRegion
 
-	#Region --> Regedit m-links
 	;=============================================================================
 	;--> Regedit m-links
+	GUICtrlSetOnEvent($UI_CBox_useMLink,"M_Regedit_Mlinks")
+	Func M_Regedit_Mlinks()
+		local $exePath = StringReplace(@AutoItExe, "\", "\\")
+		local $arrayRegEdit
 
-	GUICtrlSetOnEvent($MLink,"RegeditMlinks")
-	Func RegeditMlinks()
-			local $arrayRegEdit[16]
-			local $getpath
-			local $getAppName
+		If _IsChecked($UI_CBox_useMLink) Then
+			If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "M-Links", "Enable M-Browser Web Link Support", 0, $HypoGameBrowser ) = $IDOK Then
+				Local Const $aMBLink[2] = ["M-Browser", "M-Browser2"]
 
-			local $exePath = StringReplace(@AutoItExe, "\", "\\")
+				$arrayRegEdit = "Windows Registry Editor Version 5.00"      &@CRLF&@CRLF
+				For $i =0 to 1
+				 	$arrayRegEdit &= "" & _
+						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&']'             &@CRLF& _
+						'@="URL:'&$aMBLink[$i]&' Protocol"'                &@CRLF& _
+						'"URL Protocol"=""'                                &@CRLF&@CRLF& _
+						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\DefaultIcon]' &@CRLF& _         ;@AutoItExe ;@WorkingDir
+						'@="' &$exePath& ',0"'                             &@CRLF&@CRLF& _   ;('@="D:\\Kingpin\\Kingpin_M_Browser.exe,0"')
+						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\shell]'       &@CRLF&@CRLF& _
+						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\shell\open]'  &@CRLF& _
+						'@=""'                                                    &@CRLF&@CRLF& _
+						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\shell\open\command]' &@CRLF& _
+						'@="\"' &$exePath& '\" \"%1\""'                           &@CRLF&@CRLF     ;('@="\"D:\\Kingpin\\Kingpin_M_Browser.exe\" \"%1\""')
+				Next
 
-		If _IsChecked($MLink) Then
-			If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "M-Links", "Enable M-Browser Web Link Support",0, $HypoGameBrowser ) = $IDOK Then
-				$arrayRegEdit[0] = string("Windows Registry Editor Version 5.00")
-				$arrayRegEdit[1] = string("")
-				$arrayRegEdit[2] = string("[HKEY_CLASSES_ROOT\M-Browser]")
-				$arrayRegEdit[3] = string('@="URL:M-Browser Protocol"')
-				$arrayRegEdit[4] = string('"URL Protocol"=""')
-				$arrayRegEdit[5] = string('')
-				$arrayRegEdit[6] = string('[HKEY_CLASSES_ROOT\M-Browser\DefaultIcon]') ;@AutoItExe ;@WorkingDir
-				$arrayRegEdit[7] = string('@="' & $exePath& ',0"') ;('@="D:\\Kingpin\\Kingpin_M_Browser.exe,0"')
-				$arrayRegEdit[8] = string('')
-				$arrayRegEdit[9] = string('[HKEY_CLASSES_ROOT\M-Browser\shell]')
-				$arrayRegEdit[10] = string('')
-				$arrayRegEdit[11] = string('[HKEY_CLASSES_ROOT\m-browser\shell\open]')
-				$arrayRegEdit[12] = string('@=""')
-				$arrayRegEdit[13] = string('')
-				$arrayRegEdit[14] = string('[HKEY_CLASSES_ROOT\M-Browser\shell\open\command]')
-				$arrayRegEdit[15] = string('@="\"' & $exePath & '\" \"%1\""') ;('@="\"D:\\Kingpin\\Kingpin_M_Browser.exe\" \"%1\""')
-
-				; Create a file in the users %TEMP% directory.
-				;$mLinkFilePathEnable = @TempDir & "\enableMlink.reg"
-
-				; Write array to a file by passing the file name.
-				_FileWriteFromArray($mLinkFilePathEnable, $arrayRegEdit, 0)
-
-				; Run the file.
-				ShellExecute($mLinkFilePathEnable)
-
+				Local $hFile = FileOpen($g_sM_tmpFile_reg, $FO_OVERWRITE + $FO_UTF8)
+				if $hFile = -1 Then
+					setTempStatusBarMessage("Could not Save Settings")
+				Else
+					FileWrite($hFile, $arrayRegEdit) ;_FileWriteFromArray($iniFileCFG, $iniFileArray, 0)
+					FileClose($hFile)
+					ShellExecute($g_sM_tmpFile_reg); Run the file.
+				EndIf
 			Else
-				GUICtrlSetState ( $MLink, $GUI_UNCHECKED ) ;disable offline radio box
+				GUICtrlSetState ( $UI_CBox_useMLink, $GUI_UNCHECKED ) ;disable offline radio box
 			EndIf
 		Else ;reset reg to disable mlinks
-			If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "M-Links", "Disable M-Browser Web Link Support",0, $HypoGameBrowser ) = $IDOK Then
-				$arrayRegEdit[0] = string("Windows Registry Editor Version 5.00")
-				$arrayRegEdit[1] = string("")
-				$arrayRegEdit[2] = string("[-HKEY_CLASSES_ROOT\M-Browser]")
+			If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "M-Links", "Disable M-Browser Web Link Support", 0, $HypoGameBrowser ) = $IDOK Then
+				$arrayRegEdit = ""& _
+					"Windows Registry Editor Version 5.00" &@CRLF& _
+					""                                     &@CRLF& _
+					"[-HKEY_CLASSES_ROOT\M-Browser]"       &@CRLF& _
+					"[-HKEY_CLASSES_ROOT\M-Browser2]"       &@CRLF
 
-				; Create a file in the users %TEMP% directory.
-				;$mLinkFilePathDel = @TempDir & "\disableMLink.reg"
-
-				; Write array to a file by passing the file name.
-				_FileWriteFromArray($mLinkFilePathDel, $arrayRegEdit, 0)
-
-				; Run the file.
-				ShellExecute($mLinkFilePathDel)
+				Local $hFile = FileOpen($g_sM_tmpFile_reg, $FO_OVERWRITE + $FO_UTF8)
+				if $hFile = -1 Then
+					setTempStatusBarMessage("Could not Save Settings")
+				Else
+					FileWrite($hFile, $arrayRegEdit) ;_FileWriteFromArray($iniFileCFG, $iniFileArray, 0)
+					FileClose($hFile)
+					ShellExecute($g_sM_tmpFile_reg); Run the file.
+				EndIf
 			Else
-				GUICtrlSetState ( $MLink, $GUI_CHECKED ) ;enable offline radio box
+				GUICtrlSetState ( $UI_CBox_useMLink, $GUI_CHECKED ) ;enable offline radio box
 			EndIf
 
 		EndIf
-	ResetRefreshTimmers()
-
+		ResetRefreshTimmers()
 	EndFunc
 	;--> Regedit m-links
 	;=============================================================================
-	#EndRegion
-
 
 #EndRegion --> M-BROWSER
 
-
 #Region --> SERVER ARRAYS: RESET
-
-Func resetArray()
-	Local $i
-; Set all arrays with nul values
-	If $tabNum = 1 Or $tabNum > 3  Then
-		For $i = 0 To $iMaxSer-1
-			$sServerStringArray[$i][0] = "" 	;server string
-			$sServerStringArray[$i][1] = ""		;ip
-			$sServerStringArray[$i][2] = 0		;port
-			$sServerStringArray[$i][3] = 0		;GamePort
-			$sServerStringArray[$i][4] = 0		;time/ping
-		Next
-	ElseIf	$tabNum = 2 Then
-		For $i = 0 To $iMaxSer-1
-			$sServerStringArrayKPQ3[$i][0] = ""
-			$sServerStringArrayKPQ3[$i][1] = ""
-			$sServerStringArrayKPQ3[$i][2] = 0
-			$sServerStringArrayKPQ3[$i][3] = 0
-		Next
-	ElseIf	$tabNum = 3 Then
-		For $i = 0 To $iMaxSer-1
-			$sServerStringArrayQ2[$i][0] = ""
-			$sServerStringArrayQ2[$i][1] = ""
-			$sServerStringArrayQ2[$i][2] = 0
-			$sServerStringArrayQ2[$i][3] = 0
-		Next
-	EndIf
-EndFunc
-
-resetArrayStartup()
-Func resetArrayStartup() ; Set all arrays with nul values
-	Local $i, $j
-	For $i = 0 To $iMaxSer-1
-		$sServerStringArray[$i][0] = ""
-		$sServerStringArray[$i][1] = ""
-		$sServerStringArray[$i][2] = 0
-		$sServerStringArray[$i][3] = 0
-		$sServerStringArray[$i][4] = 0
-		$sServerStringArrayKPQ3[$i][0] = ""
-		$sServerStringArrayKPQ3[$i][1] = ""
-		$sServerStringArrayKPQ3[$i][2] = 0
-		$sServerStringArrayKPQ3[$i][3] = 0
-		$sServerStringArrayQ2[$i][0] = ""
-		$sServerStringArrayQ2[$i][1] = ""
-		$sServerStringArrayQ2[$i][2] = 0
-		$sServerStringArrayQ2[$i][3] = 0
+ResetServerListArrays(BitShift(1,-$COUNT_GAME)-1) ; startup. reset all arrays
+Func ResetServerListArrays($listID)
+	Local $bit
+	; Set all arrays with nul values
+	For $i = 0 to $COUNT_GAME -1
+		$bit = BitShift(1, -$i)
+		If BitAND($listID, $bit) = $bit Then
+			;ConsoleWrite("+clear id:"&$i &@CRLF)
+			For $j = 0 To $g_iMaxSer-1
+				$g_aServerStrings[$i][$j][$COL_NAME]     = ""  ;server string
+				$g_aServerStrings[$i][$j][$COL_IP]       = ""  ;ip
+				$g_aServerStrings[$i][$j][$COL_PORT]     = 0   ;port
+				$g_aServerStrings[$i][$j][$COL_PING]     = 0   ;ping
+				$g_aServerStrings[$i][$j][$COL_PORTGS]   = 0   ;GamePort
+				$g_aServerStrings[$i][$j][$COL_TIME]     = 0   ;timediff
+				$g_aServerStrings[$i][$j][$COL_PLAYERS]  = 0   ;player count
+				$g_aServerStrings[$i][$j][$COL_INFOSTR]  = ""  ;infostring (array)
+				$g_aServerStrings[$i][$j][$COL_INFOPLYR] = ""  ;infostring players
+				$g_aServerStrings[$i][$j][$COL_MAP]       = ""  ;MAP
+				$g_aServerStrings[$i][$j][$COL_MOD]       = ""  ;MOD
+				$g_aServerStrings[$i][$j][$COL_IDX]      = $j  ;listview indx (sort used)
+			Next
+		EndIf
 	Next
 EndFunc
-
 
 #EndRegion --> END RESET ARRAY
 
 #Region --> SETTINGS: Get Master info
 
-; what master to use from settings
-Func SelectedGameMasterAddressKP($retryCount)
-	Local $ipPort[3], $tmp
-	If _GUICtrlButton_GetCheck($RadioMaster1) Then
-		If $retryCount = 0 Then $tmp = GUICtrlRead($InputMaster1)
-		If $retryCount = 1 Then $tmp = GUICtrlRead($InputMaster2)
-		If $retryCount = 2 Then $tmp = GUICtrlRead($InputMaster3)
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster2) Then
-		If $retryCount = 0 Then $tmp = GUICtrlRead($InputMaster2)
-		If $retryCount = 1 Then $tmp = GUICtrlRead($InputMaster3)
-		If $retryCount = 2 Then $tmp = GUICtrlRead($InputMaster1)
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster3) Then
-		If $retryCount = 0 Then $tmp = GUICtrlRead($InputMaster3)
-		If $retryCount = 1 Then $tmp = GUICtrlRead($InputMaster1)
-		If $retryCount = 2 Then $tmp = GUICtrlRead($InputMaster2)
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster4) Then
-		If $retryCount = 0 Then $tmp = GUICtrlRead($InputMaster4)
-		If $retryCount > 0 Then Return -1 ;fail when user has selected own master
-	EndIf
-
-	If Not StringInStr($tmp,":") Then $tmp = String($tmp & ":28900")
-	$ipPort = StringSplit($tmp,":")
-
-	Return $ipPort
-EndFunc
-
-; what master to use from settings
-Func SelectedGameMasterAddressKPQ3($retryCount)
-	Local $ipPort[3], $tmp, $userInputMaster = 0, $tmp2
-	;#4 = tcp
-
-	If _GUICtrlButton_GetCheck($RadioMaster1KPQ3) Then
-		If $retryCount = 0 Then
-			$tmp = GUICtrlRead($InputMaster1KPQ3)
-			AutoSelectKPQ3_TCP_UDP(1)
-		EndIf
-		If $retryCount = 1 Then
-			$tmp = GUICtrlRead($InputMaster2KPQ3)
-			AutoSelectKPQ3_TCP_UDP(2)
-		EndIf
-		If $retryCount = 2 Then
-			$tmp = GUICtrlRead($InputMaster3KPQ3)
-			AutoSelectKPQ3_TCP_UDP(3)
-		EndIf
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster2KPQ3) Then
-		If $retryCount = 0 Then
-			$tmp = GUICtrlRead($InputMaster2KPQ3)
-			AutoSelectKPQ3_TCP_UDP(2)
-		EndIf
-		If $retryCount = 1 Then
-			$tmp = GUICtrlRead($InputMaster3KPQ3)
-			AutoSelectKPQ3_TCP_UDP(3)
-		EndIf
-		If $retryCount = 2 Then
-			$tmp = GUICtrlRead($InputMaster1KPQ3)
-			AutoSelectKPQ3_TCP_UDP(1)
-		EndIf
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster3KPQ3) Then
-		If $retryCount = 0 Then
-			$tmp = GUICtrlRead($InputMaster3KPQ3)
-			AutoSelectKPQ3_TCP_UDP(3)
-		EndIf
-		If $retryCount = 1 Then
-			$tmp = GUICtrlRead($InputMaster1KPQ3)
-			AutoSelectKPQ3_TCP_UDP(1)
-		EndIf
-		If $retryCount = 2 Then
-			$tmp = GUICtrlRead($InputMaster2KPQ3)
-			AutoSelectKPQ3_TCP_UDP(2)
-		EndIf
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster4KPQ3) Then
-		If $retryCount = 0 Then $tmp = GUICtrlRead($InputMaster4KPQ3)
-		If $retryCount > 0 Then Return -1 ;fail when user has selected own master
-		$userInputMaster = 1
-	EndIf
-
-	If Not StringInStr($tmp,":") Then
-		if _IsChecked($RadioMasterTCP_KPQ3) Then
-			$tmp = String($tmp & ":28900")
-		Else
-			$tmp = String($tmp & ":27950")
-		EndIf
-	ElseIf  $userInputMaster = 1 Then
-		$tmp2 = StringSplit($tmp, ":")
-		if StringCompare($tmp2[2],"28900")=0 Then
-			GUICtrlSetState( $RadioMasterUDP_KPQ3, $GUI_UNCHECKED)
-			GUICtrlSetState( $RadioMasterTCP_KPQ3, $GUI_CHECKED)
-			AllowUDP_Input(0)
-		Else
-			GUICtrlSetState( $RadioMasterUDP_KPQ3, $GUI_CHECKED)
-			GUICtrlSetState( $RadioMasterTCP_KPQ3, $GUI_UNCHECKED)
-			AllowUDP_Input(1)
-		EndIf
-	EndIf
-	ConsoleWrite("ip string= "&$tmp&@CRLF)
-	$ipPort = StringSplit($tmp,":")
-	Return $ipPort
-EndFunc
-
-; what master to use from settings
-Func SelectedGameMasterAddressQ2($retryCount)
-	Local $ipPort[3], $tmp, $userInputMaster = 0, $tmp2
-	If _GUICtrlButton_GetCheck($RadioMaster1Q2) Then
-		If $retryCount = 0 Then
-			$tmp = GUICtrlRead($InputMaster1Q2)
-			AutoSelectQ2_TCP_UDP(1)
-		EndIf
-		If $retryCount = 1 Then
-			$tmp = GUICtrlRead($InputMaster2Q2)
-			AutoSelectQ2_TCP_UDP(2)
-		EndIf
-		If $retryCount = 2 Then
-			$tmp = GUICtrlRead($InputMaster3Q2)
-			AutoSelectQ2_TCP_UDP(3)
-		EndIf
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster2Q2) Then
-		If $retryCount = 0 Then
-			$tmp = GUICtrlRead($InputMaster2Q2)
-			AutoSelectQ2_TCP_UDP(2)
-		EndIf
-		If $retryCount = 1 Then
-			$tmp = GUICtrlRead($InputMaster3Q2)
-			AutoSelectQ2_TCP_UDP(3)
-		EndIf
-		If $retryCount = 2 Then
-			$tmp = GUICtrlRead($InputMaster1Q2)
-			AutoSelectQ2_TCP_UDP(1)
-		EndIf
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster3Q2) Then
-		If $retryCount = 0 Then
-			$tmp = GUICtrlRead($InputMaster3Q2)
-			AutoSelectQ2_TCP_UDP(3)
-		EndIf
-		If $retryCount = 1 Then
-			$tmp = GUICtrlRead($InputMaster1Q2)
-			AutoSelectQ2_TCP_UDP(1)
-		EndIf
-		If $retryCount = 2 Then
-			$tmp = GUICtrlRead($InputMaster2Q2)
-			AutoSelectQ2_TCP_UDP(2)
-		EndIf
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster4Q2) Then
-		If $retryCount = 0 Then $tmp = GUICtrlRead($InputMaster4Q2)
-		If $retryCount > 0 Then Return -1 ;fail when user has selected own master
-		$userInputMaster = 1
-	EndIf
-
-
-
-	;must be a user input
-	If Not StringInStr($tmp,":") Then
-		if _IsChecked($RadioMasterTCP_Q2) Then
-			$tmp = String($tmp & ":28900")
-			ConsoleWrite("master= 28900" &$ipPort[1]&@CRLF)
-		Else
-			$tmp = String($tmp & ":27900")
-			ConsoleWrite("master= 27900"&@CRLF)
-		EndIf
-	ElseIf  $userInputMaster =1 Then ;sellect tcp auto for 28900
-		$tmp2 = StringSplit($tmp, ":")
-		if StringCompare($tmp2[2], "28900")=0 Then
-			GUICtrlSetState( $RadioMasterUDP_Q2, $GUI_UNCHECKED)
-			GUICtrlSetState( $RadioMasterTCP_Q2, $GUI_CHECKED)
-			ConsoleWrite("master= TCP"&@CRLF)
-		Else
-			GUICtrlSetState( $RadioMasterUDP_Q2, $GUI_CHECKED)
-			GUICtrlSetState( $RadioMasterTCP_Q2, $GUI_UNCHECKED)
-			ConsoleWrite("master= UDP"&@CRLF)
-		EndIf
-
-	EndIf
-
-	$ipPort = StringSplit($tmp,":")
-	Return $ipPort
-EndFunc
-
-;radio button, selected master
-Func SelectedGameMasterKPNum()
-	If _GUICtrlButton_GetCheck($RadioMaster1) Then
-		Return 1
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster2) Then
-		Return 2
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster3) Then
-		Return 3
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster4) Then
-		Return 4
-	EndIf
-EndFunc
-;radio button, selected master
-Func SelectedGameMasterKPQ3Num()
-	If _GUICtrlButton_GetCheck($RadioMaster1KPQ3) Then
-		Return 1
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster2KPQ3) Then
-		Return 2
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster3KPQ3) Then
-		Return 3
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster4KPQ3) Then
-		Return 4
-	EndIf
-EndFunc
-;radio button, selected master
-Func SelectedGameMasterQ2Num()
-	If _GUICtrlButton_GetCheck($RadioMaster1Q2) Then
-		Return 1
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster2Q2) Then
-		Return 2
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster3Q2) Then
-		Return 3
-	ElseIf _GUICtrlButton_GetCheck($RadioMaster4Q2) Then
-		Return 4
-	EndIf
-EndFunc
-;~ Func SelectedGameMasterQ2Web()
-;~ 	If _GUICtrlButton_GetCheck($RadioMasterHTTP_Q2) Then
-;~ 		Return "Yes"
-;~ 	Else
-;~ 		Return "No"
-;~ 	EndIf
-;~ EndFunc
-
-Func SelectUDPMasterKPQ3()
-	If SelectedGameMasterKPQ3Num() = 4 And _IsChecked($RadioMasterUDP_KPQ3) Then
-		Return "Yes"
+Func GetMasterAddressFromSettings($iGameIdx)
+	Local $iMasterIdx = getSelectedMasterIndex($iGameIdx)
+	If $iMasterIdx = 0 Then ; custom master address
+		Return $g_aGameSetup_Master_Cust[$iGameIdx]
 	Else
-		Return "No"
+		Local $aDropdownText = StringSplit($g_aMasterAddresses[$iGameIdx], "|")
+		Return $aDropdownText[$iMasterIdx]
 	EndIf
 EndFunc
+
+; what master to use from settings
+Func SelectedGameMasterAddress($iGameIdx, $retryCount)
+	Local  $idx, $iPortType, $sMaster = "", $aRet[2]
+	Local $iMasterIdx = getSelectedMasterIndex($iGameIdx)
+	ConsoleWrite("+master id:"&$iMasterIdx&@CRLF)
+
+	If $iMasterIdx = 0 Then ; custom master address
+		If $retryCount > 0 Then Return -1 ; fail
+		$sMaster = $g_aGameSetup_Master_Cust[$iGameIdx]
+	Else
+		Local $aDropdownText = StringSplit($g_aMasterAddresses[$iGameIdx], "|")
+		Local $iCount = $aDropdownText[0]
+		ConsoleWrite("+master count:"&$iCount&@CRLF)
+		If $retryCount >= $iCount Then
+			ConsoleWrite("!master try count:"&$iCount&@CRLF)
+			Return -1 ;exhausted list
+		EndIf
+		$iMasterIdx -= 1 ; subtract user
+		$idx = Mod($iMasterIdx+$retryCount, $iCount) + 1 ;1-based
+		$sMaster = $aDropdownText[$idx]
+		ConsoleWrite("master=" &$sMaster&@CRLF)
+	EndIf
+
+	If Not StringInStr($sMaster,":") Then
+		$sMaster = String($sMaster & ":28900") ; append port
+	EndIf
+
+	$aRet[0] = GetMasterProtocol($sMaster)
+
+	Switch $aRet[0]
+		Case $NET_PROTOCOL_WEB
+			$aRet[1] = "http://" & $sMaster ;port 80 without protocol
+		Case $NET_PROTOCOL_HTTP, $NET_PROTOCOL_HTTPS
+			$aRet[1] = $sMaster ;full string
+		Case Else
+			; "ip:port:extraData"
+			$aRet[1] = StringFormat("%s:%s", $sMaster,  getMaterExtraInfo($iGameIdx)) ;$g_aGameSetup_Master_Proto
+			$aRet[1] = StringSplit($aRet[1],":", $STR_NOCOUNT)
+			If @error Then Return -1
+	EndSwitch
+
+	Return $aRet
+EndFunc
+
+Func getSelectedMasterIndex($iGameIdx)
+	Local $idx = $g_aGameSetup_Master_Combo[$iGameIdx]
+	if $idx < 0 Then
+		Return 0
+	Else
+		Return $idx
+	EndIf
+EndFunc
+
 #EndRegion
 
+
 #Region --> PROTOCOL: Relted settings
-Func sendStatusMessageType()
-	If $tabNum = 1 Or $tabNum > 3 And Not ($tabNum = 6) Then
-		Return String('\status\') ; gamespy query protocol
-	ElseIf $tabNum = 2 Then
-		Return String('ÿÿÿÿgetstatus' & @LF) ; getinfo
-	ElseIf $tabNum = 3 Then
-		Return String('ÿÿÿÿstatus' & @LF)
-	ElseIf 	$tabNum = 6 Then
-		If $iMGameType =1 Then
-			Return String('ÿÿÿÿstatus') ;quake query protocol
-		ElseIf $iMGameType = 2 Then
-			Return String('ÿÿÿÿgetstatus' & @LF)
-		ElseIf $iMGameType = 3 Then
-			Return String('ÿÿÿÿstatus' & @LF)
-		EndIf
+Func sendStatusMessageType_UDP($iGameIdx, $isMBrowser) ;udp
+	Local Const $g_aServerPingMessage_M[3] = ['ÿÿÿÿstatus'& @LF, 'ÿÿÿÿgetstatus'& @LF, 'ÿÿÿÿstatus'& @LF] ;mbrowser message(kp using gameport)
+
+	if $isMBrowser Then
+		Switch $iGameIdx ;user right click-> get-info
+			Case 2
+				Return String($g_aServerPingMessage_M[2])
+			Case 1
+				Return String($g_aServerPingMessage_M[1])
+			Case Else
+				Return String($g_aServerPingMessage_M[0]) ;kp gameport
+		EndSwitch
+	Else
+		Return String($g_aNetMsg_UDP_Server[$iGameIdx][$NET_C2S])  ;$g_aServerSendStatus_UDP[$g_iTabNum]
 	EndIf
+	Return ""
 EndFunc
 
 #EndRegion
 
 #Region --> LISTVIEW: GET UI SELECTIONS
+
+
 ;=============
 ;-->Set tabNum
-Func SelectedTabNum()
-	If _GUICtrlTab_GetItemState($tabGroupGames, 0) =$TCIS_BUTTONPRESSED Then
-		$tabNum = 1
-		Return 1
-	ElseIf _GUICtrlTab_GetItemState($tabGroupGames, 1) =$TCIS_BUTTONPRESSED Then
-		$tabNum = 2
-		Return 2
-	ElseIf _GUICtrlTab_GetItemState($tabGroupGames, 2) =$TCIS_BUTTONPRESSED Then
-		$tabNum = 3
-		Return 3
-	ElseIf _GUICtrlTab_GetItemState($tabGroupGames, 3) =$TCIS_BUTTONPRESSED Then
-		$tabNum = 4
-		Return 4
-	ElseIf _GUICtrlTab_GetItemState($tabGroupGames, 4) =$TCIS_BUTTONPRESSED Then
-		$tabNum = 5
-		Return 5
-	ElseIf _GUICtrlTab_GetItemState($tabGroupGames, 5) =$TCIS_BUTTONPRESSED Then
-		$tabNum = 6
-		Return 6
+Func SetSelectedGameID()
+	$g_iTabNum = GUICtrlRead($tabGroupGames)
+	$g_iCurGameID = ComboBoxEx_GetCurSel()
+
+	If $g_iCurGameID < 0 Then
+		$g_iCurGameID = 0
+	ElseIf $g_iCurGameID >= $COUNT_GAME Then
+		$g_iCurGameID = $ID_KP1
+	EndIf
+EndFunc
+
+
+Func GetServerListA_SelectedData($column);get listview #0 string (array number)
+	Local $tmp, $sRet = ""
+	Local $ListViewA = getListView_A_CID()
+	If _GUICtrlListView_GetSelectedCount($ListViewA) Then
+		$tmp = _GUICtrlListView_GetSelectionMark($ListViewA)
+		$sRet = _GUICtrlListView_GetItemText($ListViewA, $tmp, $column)
+	EndIf
+
+	If $column = $LV_A_IDX Then
+		Return Number($sRet) ;index
 	Else
-		$tabNum = 1
-		Return 1
+		Return String($sRet) ;string
 	EndIf
 EndFunc
 
-Func GetTabSelectedStringNumber();get listview #0 string (array number)
-	Local $serSelNum, $listSelNum
-	If $tabNum = 1 Then
-		If Not _GUICtrlListView_GetSelectedCount($ListView1KP) Then Return 0
-		$listSelNum = _GUICtrlListView_GetSelectionMark($ListView1KP)
-		$serSelNum = _GUICtrlListView_GetItemText($ListView1KP,$listSelNum,0)
-	ElseIf $tabNum = 2 Then
-		If Not _GUICtrlListView_GetSelectedCount($ListView1KPQ3) Then Return 0
-		$listSelNum = _GUICtrlListView_GetSelectionMark($ListView1KPQ3)
-		$serSelNum = _GUICtrlListView_GetItemText($ListView1KPQ3,$listSelNum,0)
-	ElseIf $tabNum = 3 Then
-		If Not _GUICtrlListView_GetSelectedCount($ListView1Q2) Then Return 0
-		$listSelNum = _GUICtrlListView_GetSelectionMark($ListView1Q2)
-		$serSelNum = _GUICtrlListView_GetItemText($ListView1Q2,$listSelNum,0)
-	EndIf
-	Return $serSelNum
-EndFunc
+Func GetServerCountInArray($iGameIdx) ;total displayed servers (in memory)
+	Local $countServ = 0
 
-Func GetTabSelectedArrayStringIP() ;get listview #1 string (ip/port)
-	Local $tmp, $serSelNum
-	If $tabNum = 1 Then
-		If Not _GUICtrlListView_GetSelectedCount($ListView1KP) Then Return ""
-		$tmp = _GUICtrlListView_GetSelectionMark($ListView1KP)
-		$serSelNum = _GUICtrlListView_GetItemText($ListView1KP,$tmp,1)
-	ElseIf $tabNum = 2 Then
-		If Not _GUICtrlListView_GetSelectedCount($ListView1KPQ3) Then Return ""
-		$tmp = _GUICtrlListView_GetSelectionMark($ListView1KPQ3)
-		$serSelNum = _GUICtrlListView_GetItemText($ListView1KPQ3,$tmp,1)
-	ElseIf $tabNum = 3 Then
-		If Not _GUICtrlListView_GetSelectedCount($ListView1Q2) Then Return ""
-		$tmp = _GUICtrlListView_GetSelectionMark($ListView1Q2)
-		$serSelNum = _GUICtrlListView_GetItemText($ListView1Q2,$tmp,1)
-	ElseIf	$tabNum = 6 Then
-		If $iMGameType = 1 Then
-			If Not _GUICtrlListView_GetSelectedCount($ListView1M) Then Return ""
-			$tmp = _GUICtrlListView_GetSelectionMark($ListView1M)
-			$serSelNum = _GUICtrlListView_GetItemText($ListView1M,$tmp,1)
-		ElseIf $iMGameType = 2 Then
-			If Not _GUICtrlListView_GetSelectedCount($ListView2M) Then Return ""
-			$tmp = _GUICtrlListView_GetSelectionMark($ListView2M)
-			$serSelNum = _GUICtrlListView_GetItemText($ListView2M,$tmp,1)
-		ElseIf $iMGameType = 3 Then
-			If Not _GUICtrlListView_GetSelectedCount($ListView3M) Then Return ""
-			$tmp = _GUICtrlListView_GetSelectionMark($ListView3M)
-			$serSelNum = _GUICtrlListView_GetItemText($ListView3M,$tmp,1)
+	For $i = 0 To $g_iMaxSer -1
+		;[1]=ip exists
+		If $g_aServerStrings[$iGameIdx][$i][$COL_IP] <> "" Then
+			$countServ += 1
+		Else
+			ExitLoop
 		EndIf
-	EndIf
-
-	Return $serSelNum
-EndFunc
-
-Func GetServerCountInArray() ;total displayed servers (in memory)
-	Local $countServ =0
-
-	If $tabNum = 1 Or $tabNum > 3 Then
-		For $i = 0 To $iMaxSer -1
-			;[1]=ip exists
-			If Not $sServerStringArray[$i][1] = "" Then
-				$countServ +=1
-			Else
-				ExitLoop
-			EndIf
-		Next
-	ElseIf $tabNum = 2 Then
-		For $i = 0 To $iMaxSer -1
-			If Not $sServerStringArrayKPQ3[$i][1] = "" Then
-				$countServ +=1
-			Else
-				ExitLoop
-			EndIf
-		Next
-	ElseIf $tabNum = 3 Then
-		For $i = 0 To $iMaxSer -1
-			If Not $sServerStringArrayQ2[$i][1] = "" Then
-				$countServ +=1
-			Else
-				ExitLoop
-			EndIf
-		Next
-	EndIf
+	Next
 	Return $countServ
 EndFunc
 
-Func ListviewResetSortOrder() ;sort servers. using previous stored setting
-	If $tabNum = 1 or $tabNum >3 Then
-		If $iLastListviewSortStatus = -1 Then Return
-		_GUICtrlListView_SortItems($ListView1KP, $iLastListviewSortStatus)
-		_GUICtrlListView_SortItems($ListView1KP, $iLastListviewSortStatus)
-	ElseIf $tabNum = 2 Then
-		If $iLastListviewSortStatusKPQ3 = -1 Then Return
-		_GUICtrlListView_SortItems($ListView1KPQ3, $iLastListviewSortStatusKPQ3)
-		_GUICtrlListView_SortItems($ListView1KPQ3, $iLastListviewSortStatusKPQ3)
-	ElseIf  $tabNum = 3 Then
-		If $iLastListviewSortStatusQ2 = -1 Then Return
-		_GUICtrlListView_SortItems($ListView1Q2, $iLastListviewSortStatusQ2)
-		_GUICtrlListView_SortItems($ListView1Q2, $iLastListviewSortStatusQ2)
-	EndIf
-EndFunc
+;~ Func ListviewResetSortOrder() ;sort servers. using previous stored setting
+;~ 	Local $iHwd = $UI_ListV_svData_A
+;~ 	Local $iSort = GUICtrlGetState($iHwd)
+;~ 	;last sort
+;~ 	;$g_iLastSort_C[] ;updateLV
 
-Func RulesResetSortOrder();sort server rules (window3)
-	If $tabNum = 1 or $tabNum >3 Then
-		If $iLastRulesSortStatus = -1 Then Return
-		_GUICtrlListView_SortItems($ListView3, $iLastRulesSortStatus)
-		_GUICtrlListView_SortItems($ListView3, $iLastRulesSortStatus)
-	ElseIf $tabNum = 2 Then
-		If $iLastRulesSortStatusKPQ3 = -1 Then Return
-		_GUICtrlListView_SortItems($ListView3KPQ3, $iLastRulesSortStatusKPQ3)
-		_GUICtrlListView_SortItems($ListView3KPQ3, $iLastRulesSortStatusKPQ3)
-	ElseIf  $tabNum = 3 Then
-		If $iLastRulesSortStatusQ2 = -1 Then Return
-		_GUICtrlListView_SortItems($ListView3Q2, $iLastRulesSortStatusQ2)
-		_GUICtrlListView_SortItems($ListView3Q2, $iLastRulesSortStatusQ2)
-	EndIf
+;~ 	if $iSort > 0 Then
+;~ 		ConsoleWrite("++update++ id:"&$iSort&@CRLF)
+;~ 		_GUICtrlListView_BeginUpdate($iHwd)
+;~ 		_GUICtrlListView_SortItems($iHwd, $iSort) ;$g_iLastListviewSortStatus[0]
+;~ 		_GUICtrlListView_SortItems($iHwd, $iSort) ;$g_iLastListviewSortStatus[0]
+;~ 		_GUICtrlListView_EndUpdate($iHwd)
+;~ 		$g_iLastSort_C[$g_iCurGameID] = $iSort
+;~ 	EndIf
+;~ EndFunc
+
+;store listview index to internal data
+Func ListviewStoreIndexToArray($iGameIDx, $ListViewA)
+	Local $idx
+
+	For $i = 0 To _GUICtrlListView_GetItemCount($ListViewA)-1
+		$idx = Number(_GUICtrlListView_GetItemText($ListViewA, $i, 0))
+		$g_aServerStrings[$iGameIDx][$idx][$COL_IDX] = $i
+	Next
 EndFunc
 
 Func ChangedListview_NowFillServerStrings() ;if list selection changed. fill server rules
-	Local $ListViewA = ServerArray1ToFill()
+	Local $ListViewA = getListView_A_CID()
 	Local $listSelNum = _GUICtrlListView_GetSelectionMark($ListViewA)
-	If $tabNum =1 Then FillSelectedServerStrings(1, $listSelNum) ;<tabnum> | <selected array num>
-	If $tabNum =2 Then FillSelectedServerStrings(2, $listSelNum)
-	If $tabNum =3 Then FillSelectedServerStrings(3, $listSelNum)
 
+	If $g_iTabNum = $TAB_GB Then
+		Switch $g_iCurGameID
+			Case 0 to $COUNT_GAME-1
+				FillListView_BC_Selected($g_iCurGameID, $listSelNum)
+			case Else ;$ID_KP1
+				FillListView_BC_Selected(0, $listSelNum) ;<tabnum> | <selected array num>
+		EndSwitch
+	EndIf
 EndFunc
 
 #EndRegion END LISTVIEW: GET UI SELECTIONS
 
 #Region --> TCP GAMESPY CHALLANGE
 Func gsvalfunc($reg_)
-ConsoleWrite(">bitshift=" &$reg_& @CRLF)
-    if($reg_ < 26) then return($reg_ + Asc('A'));
-    if($reg_ < 52) then return($reg_ + Asc('G'));
-    if($reg_ < 62) then return($reg_ - 4);
-    if($reg_ == 62) then return(Asc('+'));
-    if($reg_ == 63) then return(Asc('/'));
-    return(0);
+	if($reg_ < 26) then return($reg_ + Asc('A'));
+	if($reg_ < 52) then return($reg_ + Asc('G'));
+	if($reg_ < 62) then return($reg_ - 4);
+	if($reg_ == 62) then return(Asc('+'));
+	if($reg_ == 63) then return(Asc('/'));
+	return(0);
 EndFunc
 
 Func getStringKeyValue($sIn, $sTest)
 	if StringInStr($sIn, "\") Then
 		Local $aTmp= StringSplit($sIn, "\")
-		For $i1=1 to $aTmp[0]
-			if StringCompare($aTmp[$i1],$sTest) ==0 Then
+		For $i=1 to $aTmp[0]
+			if StringCompare($aTmp[$i], $sTest) = 0 Then
 				;make sure string exists
-				If $i1+1 <= $aTmp[0] Then
-					Return $aTmp[$i1+1]
+				If $i+1 <= $aTmp[0] Then
+					Return $aTmp[$i+1]
 				Else
 					Return ("") ;error
 				EndIf
@@ -2609,7 +2271,7 @@ Func getStringKeyValue($sIn, $sTest)
 EndFunc
 
 Func GameSpyChallenge($sInput, $sGameKey)
-	Local $i1,$sOut,$keysz
+	Local $i, $sOut, $keysz
 	;Local $aRcv= StringSplit($sInput, "\")
 	Local $aGameKey=  StringSplit($sGameKey, "", 2) ;kingpin gslite=mgNUaC
 
@@ -2625,26 +2287,26 @@ Func GameSpyChallenge($sInput, $sGameKey)
 			Local $enctmp[256],$a_, $b_,$x_, $y_,$z_,$p_[89], $tmp_[66], $size_=6, $iCnt=0
 
 			;==>1
-			$size_= 6 	;strlen(src);StringLen($size_)
-			$keysz = 6 ;strlen(key)	;StringLen($keysz)
+			$size_= 6
+			$keysz = 6
 			;==>2
-			for $i1= 0 to 255	; 256
-				$enctmp[$i1] = $i1;
+			for $i= 0 to 255	; 256
+				$enctmp[$i] = $i;
 			Next
 			;==>3
 			$a_= 0
-			for $i1= 0 to 255	; 256
-				$a_ += $enctmp[$i1] + Asc($aGameKey[mod($i1, $keysz)])
+			for $i= 0 to 255	; 256
+				$a_ += $enctmp[$i] + Asc($aGameKey[mod($i, $keysz)])
 				$a_= Mod($a_, 256)
 				$x_ = $enctmp[$a_];
-				$enctmp[$a_] = $enctmp[$i1];
-				$enctmp[$i1] = $x_;
+				$enctmp[$a_] = $enctmp[$i];
+				$enctmp[$i] = $x_;
 			Next
 			;==>4
 			$a_= 0
 		    $b_= 0;
-			for $i1 = 0 to UBound($aSrc)-1; Asc($aSrc[$i1]);todo ha??? ubound
-				$a_ += Asc($aSrc[$i1]) + 1;
+			for $i = 0 to UBound($aSrc)-1; Asc($aSrc[$i])
+				$a_ += Asc($aSrc[$i]) + 1;
 				$a_= Mod($a_, 256)
 				$x_ = $enctmp[$a_];
 				$b_ += $x_;
@@ -2652,25 +2314,19 @@ Func GameSpyChallenge($sInput, $sGameKey)
 				$y_ = $enctmp[$b_];
 				$enctmp[$b_] = $x_;
 				$enctmp[$a_] = $y_;
-				$tmp_[$i1] = Mod(BitXOR(Asc($aSrc[$i1]), $enctmp[ BitAND(($x_ + $y_),0xff) ]),256);mod just incase
-				ConsoleWrite("+out1="&$tmp_[$i1]&@CRLF)
+				$tmp_[$i] = Mod(BitXOR(Asc($aSrc[$i]), $enctmp[ BitAND(($x_ + $y_),0xff) ]),256);mod just incase
 			next
 
 			;==>5
-			ConsoleWrite(">$i1="&$i1&@CRLF)
-			for $size_ = $i1 to Mod($size_, 3) ; size++)
+			ConsoleWrite(">GS Challenge i="&$i&@CRLF)
+			for $size_ = $i to Mod($size_, 3) ; size++)
 				$tmp_[$size_] = 0;
 			next
 
-			;==>6
-			;$p_="" ;= $sOut;
-
-			for $i1 = 0 to  $size_-1 step 3
-				$x_ = $tmp_[$i1];
-				$y_ = $tmp_[$i1 + 1];
-				$z_ = $tmp_[$i1 + 2];
-				ConsoleWrite("!x="&$x_&" y="&$y_& " z="&$z_&@CRLF)
-				ConsoleWrite("!x1="& BitAND($x_,3)&" y="& BitShift( BitAND($x_,3), -4)& " z="&BitShift($y_, 4)&@CRLF)
+			for $i = 0 to  $size_-1 step 3
+				$x_ = $tmp_[$i];
+				$y_ = $tmp_[$i + 1];
+				$z_ = $tmp_[$i + 2];
 				$p_[0+$iCnt] = Chr(gsvalfunc(		BitShift($x_, 2)));
 				$p_[1+$iCnt] = Chr(gsvalfunc(BitOR (BitShift( BitAND($x_,3), -4), BitShift($y_, 4))));
 				$p_[2+$iCnt] = Chr(gsvalfunc(BitOR (BitShift( BitAND($y_,15), -2), BitShift($z_, 6))));
@@ -2679,18 +2335,13 @@ Func GameSpyChallenge($sInput, $sGameKey)
 			next
 
 			$sOut=""
-			for $i1 = 0 to UBound($p_)-1
-				If $p_[$i1] <> "" Then
-					$sOut= string($sOut & $p_[$i1])
+			for $i = 0 to UBound($p_)-1
+				If $p_[$i] <> "" Then
+					$sOut= string($sOut & $p_[$i])
 				Else
 					ExitLoop
 				EndIf
 			Next
-			;*$p_ = 0;LO/WUC4c
-			;wwke+FSs
-			;TQ87uZfr
-
-			ConsoleWrite("!out challenge2=" &@CRLF&$p_[0]&@CRLF&$p_[1]&@CRLF&$p_[2]&@CRLF)
 		Else
 			$sOut ="ERROR___"
 		EndIf
@@ -2703,594 +2354,670 @@ EndFunc
 
 #EndRegion
 
+
 #Region --> TCP GET LIST FROM MASTER
 Func GetListFromMasterTCP($sIPAddressDNS, $iPort)
-	;resetArray() ;zero serverArray
-
-	Local $tcpSocket,$dataRecv,$sIPAddress
+	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	Local $tcpSocket, $data ="", $dataRecv, $dataRecv2, $sIPAddress, $iTmpTime
 	Local $sGameKey=  "mgNUaC" ;gspylite="mgNUaC" ;kingpin="QFWxY2" "Quake2"="rtW0xg"
 	Local $gameSpyString="" ; = "\gamename\gspylite\gamever\01\location\0\validate\LO/WUC4c\final\\queryid\1.1"
-	Local 				$gameSpyString2 = "\list\\gamename\kingpin"
-	If $tabNum =2 Then 	$gameSpyString2 = "\list\\gamename\kingpinQ3"
-	If $tabNum =3 Then 	$gameSpyString2 = "\list\\gamename\Quake2"
-
-
 
 	$sIPAddress = TCPNameToIP($sIPAddressDNS)
+	$iTmpTime = TimerInit()
 
 	;try connect a few times then give up
 	For $i3 =0 to 3
 		$tcpSocket = TCPConnect($sIPAddress, $iPort)
-		If $tcpSocket < 0 or @error Then
-			If $i3 < 3 Then
-				ConsoleWrite("retry connect to master" &@CRLF)
-				TCPCloseSocket($tcpSocket)
-				Sleep(1000)
-				ContinueLoop
-			Else
+		If $tcpSocket <= 0 or @error Then
+			If @error = 1 or @error = 2 or $i3 >= 3 Then ; @error 1=ip 2=port
 				ConsoleWrite("error TCP 1" &  $tcpSocket & "@err=" &@error&@CRLF)
 				TCPCloseSocket($tcpSocket)
 				Return -1
 			EndIf
+			ConsoleWrite("retry connect to master" &@CRLF)
+			TCPCloseSocket($tcpSocket)
+			Sleep(1000)
+			ContinueLoop
 		EndIf
 		ExitLoop ;connected ok
 	Next
-
 	;TCP connected
-	$dataRecv = TCPRecv($tcpSocket, 1500,0) 	;recieve= 	\basic\\secure\TXKOAT
-	If @error Or $dataRecv = "" Then
-		ConsoleWrite("error TCP 3" &@CRLF)
-		TCPCloseSocket($tcpSocket)
-		Return -1
-	EndIf
+	if Not TcpRecvDataFromMaster($tcpSocket, $dataRecv, 1500) Then Return -1 ;recieve= 	\basic\\secure\TXKOAT
 
-	;$dataRecv = "\basic\\secure\TXKOAT"
-	ConsoleWrite ("tcp data recieved= "& $dataRecv& @CRLF)
+	;~ ConsoleWrite ("tcp data recieved= "& $dataRecv& @CRLF);$dataRecv = "\basic\\secure\TXKOAT"
 
+	;recieved challenge
 	If StringInStr($dataRecv, "\secure\") Then ;"TXKOAT
-		Local $sChall_resp = GameSpyChallenge($dataRecv, $sGameKey)
+		;send= \gamename\gspylite\gamever\01\location\0\validate\LO/WUC4c\final\\queryid\1.1
+		;~ $gameSpyString = StringFormat("\\gamename\\gspylite\\location\\0\\validate\\%s\\final\\", GameSpyChallenge($dataRecv, $sGameKey))
+		;~ if not TcpSendDataToMaster($tcpSocket, $gameSpyString) Then Return -1
 
-		$gameSpyString = string("\gamename\gspylite\location\0\validate\"&$sChall_resp& "\final\")
+		;~ ;send= \list\\gamename\kingpin
+		;~ $gameSpyString = StringFormat("\\list\\\\gamename\\%s\\final\\", $g_sGameNames[$iGameIdx][$GNAME_GS])
+		;~ if not TcpSendDataToMaster($tcpSocket, $gameSpyString) Then Return -1
 
-		TCPSend($tcpSocket, $gameSpyString) 	;send= 		\gamename\gspylite\gamever\01\location\0\validate\LO/WUC4c\final\\queryid\1.1
-		ConsoleWrite("TCP Send1= " &$gameSpyString& @CRLF)
-		If @error Then
-			ConsoleWrite("error TCP 2" &@CRLF)
-			TCPCloseSocket($tcpSocket)
-			Return -1
-		EndIf
+		$gameSpyString = StringFormat("\\gamename\\gspylite\\location\\0\\validate\\%s\\final\\\\list\\\\gamename\\%s\\final\\", _
+			GameSpyChallenge($dataRecv, $sGameKey), $g_sGameNames[$iGameIdx][$GNAME_GS])
+		if not TcpSendDataToMaster($tcpSocket, $gameSpyString) Then Return -1
 
 
-		TCPSend($tcpSocket, $gameSpyString2) 	;send= 		\list\\gamename\kingpin
-		consoleWrite("TCP Send2= " &$gameSpyString2& @CRLF)
-		If @error Then
-			ConsoleWrite("error TCP 2" &@CRLF)
-			TCPCloseSocket($tcpSocket)
-			Return -1
-		EndIf
-
-		$dataRecv = TCPRecv($tcpSocket, 2500,0)	;recieve= 	\ip\10.10.10:31510\ip\10.10.10:31520
-		If @error Or $dataRecv = "" Then
-			ConsoleWrite("error TCP 4" &@CRLF)
-			TCPCloseSocket($tcpSocket)
-			Return -1
-		EndIf
-		ConsoleWrite("TCP recieve string"& "0 "& $dataRecv &" "&@CRLF)
-
+		;$dataRecv = ""
 		For $i4 = 0 To 5 ;recieve upto 5 more lists, if long
-			If Not StringInStr($dataRecv,"\final\") Then
-				Local $dataRecv2 = TCPRecv($tcpSocket, 2500,0)
-				If Not @error Or Not $dataRecv2 = "" Then
-					$dataRecv = String($dataRecv & $dataRecv2)
-					ConsoleWrite("TCP recieve string"& $i4+1 &" "& $dataRecv2 &" "&@CRLF)
-					If StringInStr($dataRecv2,"\final\") Then ExitLoop
-				EndIf
-			Else
+			if Not TcpRecvDataFromMaster($tcpSocket, $dataRecv, 2500) Then Return -1 ;recieve= \ip\10.10.10:31510\ip\10.10.10:31520\final\
+			;~ ConsoleWrite("TCP recieve string idx:"& $i4+1 &" Data:"& $dataRecv &@CRLF)
+			$data &= $dataRecv
+			If StringInStr($data, "\final\", 0, -1) Then
+				ConsoleWrite("+tcp EOT"&@CRLF)
 				ExitLoop
 			EndIf
 		Next
 	EndIf
-	;ConsoleWrite ("data recieved.."& $abc& " " & $dataRecv& @CRLF)
-	ConsoleWrite ("data recieved.."& $dataRecv& @CRLF)
-;WEnd ;hypo test master
+	;ConsoleWrite ("data recieved.."& $dataRecv& @CRLF)
+	TCPCloseSocket($tcpSocket)
 
-
- TCPCloseSocket($tcpSocket)
-
-
- 	If Not $dataRecv = "" Then
-
-		Local $countIP = StringSplit($dataRecv, "ip\", 1)
-		if Not @error Then ConsoleWrite("num servers recieved== " &$countIP[0]-1&@CRLF)
-
-		ConsoleWrite("data recievedTCP1=" & $dataRecv&@CRLF)
-		Return $dataRecv
-	Else
-		Return -1
+	If $data <> "" Then
+		Local $countIP = StringSplit($data, "ip\", 1)
+		if Not @error and $countIP[0] > 0 Then
+			;ConsoleWrite("num servers:" &$countIP[0]-1&@CRLF)
+			;ConsoleWrite("data recievedTCP1=" & $data&@CRLF)
+			Return $data
+		EndIf
 	EndIf
+	Return -1
 EndFunc
+
+Func TcpSendDataToMaster(ByRef $iSock, $sMsg)
+	;ConsoleWrite("TCP Send:"& $sMsg &@CRLF)
+	TCPSend($iSock, $sMsg)
+	If @error Then
+		ConsoleWrite("error TCP 2 err:" &@error&@CRLF)
+		TCPCloseSocket($iSock)
+		Return False
+	EndIf
+	Return True
+EndFunc
+
+Func TcpRecvDataFromMaster(ByRef $iSock, ByRef $sMsg, $iMaxLen)
+	$sMsg = TCPRecv($iSock, $iMaxLen, 0)
+	;ConsoleWrite("TCP Recv:"& $sMsg &@CRLF)
+	If @error Or $sMsg = "" Then
+		ConsoleWrite("error TCP 4 err:"&@error&@CRLF)
+		TCPCloseSocket($iSock)
+		Return False
+	EndIf
+	Return True
+EndFunc
+
 #EndRegion --> TCP GET LIST FROM MASTER
 
-#Region --> UDP GET LIST FROM MASTER
-Func GetListFromMasterUDP($sIPAddressDNS, $iPort)
-	;resetArray() ;zero serverArray
 
-	If @error Then ConsoleWrite("error startup")
-	Local $tcpSocket
-	Local $dataRecv
-	Local $gameSpyString = ""
-										  ;getservers KingpinQ3-1 75 full empty
-	Local $gameSpyStringKPQ3 = string("ÿÿÿÿgetservers KingpinQ3-1 "& GUICtrlRead($InputKPQ3_proto) &" full empty"& Chr(0))
-	Local $gameSpyStringQ2 = String("query"& Chr(10)& Chr(0)) ; query..
-	Local $sIPAddress
+#Region --> UDP GET
 
-	Local $iErrorX, $tmpStr, $output = "-1", $i, $ipLen = 0
+Func GetMessage_toSendMasterUDP($iGameIdx, $iProtocol)
+	;ÿÿÿÿgetservers KingpinQ3-1 %s full empty
+	;ÿÿÿÿgetservers 66 empty full demo.
 
-
-	If $tabNum =2 Then $gameSpyString = $gameSpyStringKPQ3
-	If $tabNum =3 Then $gameSpyString = $gameSpyStringQ2
-
-
-
-	$sIPAddress = TCPNameToIP($sIPAddressDNS)
-
-	$iErrorX = _UDPSendTo($sIPAddress, $iPort, $gameSpyString, $hSocketMasterUDP)
-	if @error Then
-		ConsoleWrite("UDP Send \status\ sock error =  " & $iErrorX & " error" & @CRLF)
-		;ConsoleWrite("server sent num= " &$iIP&@CRLF)
-	Else
-
-		$serverRefreshTimer = TimerInit()
-		Do
-			$dataRecv = _UDPRecvFrom($hSocketMasterUDP,2048,0)
-;~ 			If serverRefreshButtonState() Then
-			If TimerDiff($serverRefreshTimer) > 3000 Then
-				ConsoleWrite("button state up, timeout 3seconds"&@CRLF)
-				ExitLoop(1) ;stop do
-			EndIf
-							;Sleep(10)
-		Until IsArray($dataRecv)
-
-
-
-		if $dataRecv = -1 Then
-			ConsoleWrite("!!!Packet ERROR = " &$dataRecv&@CRLF)
-			Return -1
+	;q3 master protocol
+	If $g_aNetMsg_UDP_Master[$iGameIdx][$NET_C2M_Q3PRO] Then ;q3 uses protocol
+		If $g_sGameNames[$iGameIdx][$GNAME_DP] <> "" Then ;dp master
+			Return StringFormat("%s %s %s full empty\n", _
+				$g_aNetMsg_UDP_Master[$iGameIdx][$NET_C2M], $g_sGameNames[$iGameIdx][$GNAME_DP], $iProtocol) & chr(0) ; add gamename
 		Else
-			;resetArray() ;zero serverArray
-			ConsoleWrite("!UDP zero array"&@CRLF)
-			ConsoleWrite("PacketData= " &String($dataRecv[0])&@CRLF)
+			return StringFormat("%s %s full empty\n", $g_aNetMsg_UDP_Master[$iGameIdx][$NET_C2M], $iProtocol) & chr(0) ;quake3
+		EndIf
+	Else
+		return StringFormat("%s\n", $g_aNetMsg_UDP_Master[$iGameIdx][$NET_C2M] & Chr(0))
+	EndIf
+EndFunc
 
-			;start the string
-			$output = ""
-			;////////////////// KPQ3 ///////////////////// ToDo: ipv6
-			if StringInStr($dataRecv[0], "getserversResponse") Then
-				ConsoleWrite("getserversResponse"&@CRLF)
-				$dataRecv[0] = StringTrimLeft($dataRecv[0], StringLen("ÿÿÿÿgetserversResponse\")) ; kpq3
-				$tmpStr	= StringSplit($dataRecv[0], "")
-				If Not @error Then
-					For $i = 1 To $tmpStr[0]
-						$ipLen += 1
-						If StringCompare($tmpStr[$i],"\")=0 Then;==> address end char
-							if StringCompare($tmpStr[$i+1],"E")=0 And StringCompare($tmpStr[$i+2], "O")=0 And StringCompare($tmpStr[$i+3], "T")=0  Then ; \EOT
-								$output = string( $output & "\final\")
-								;ConsoleWrite(@CRLF)
-								ExitLoop ;done!!
-							EndIf
-							$ipLen = 0
-							ContinueLoop
-						EndIf
+Func CleanupResponce_fromMasterUDP($iGameIdx, ByRef $data)
+	Local $idx1, $iLen
 
-						If $ipLen = 1 Then
-							$output = string( $output & "\ip\")
-							$output = string( $output & Asc($tmpStr[$i]) ) ; add every character
-							$output = string( $output & ".")
-						ElseIf $ipLen < 4 Then
-							$output = string( $output & Asc($tmpStr[$i]) ) ; add every character
-							$output = string( $output & ".")
-						ElseIf $ipLen = 4 Then
-							$output = string( $output & Asc($tmpStr[$i]) ) ; add every character
-							$output = string( $output & ":")
-						ElseIf $ipLen = 5 Then;==> port
-							Local $tmpp1, $tmpp2, $tmp3
-							$tmpp1 = BitShift(Asc($tmpStr[$i]), -8)
-							$tmpp1 += Asc($tmpStr[$i+1])
-							$output = string( $output & $tmpp1)
-						ElseIf $ipLen = 6 Then
-							$ipLen = 0
-						EndIf
-					Next
-				Else
-					Return -1
+	;ConsoleWrite("PacketData003=" &String($data)&@CRLF)
+	if $data <> "" Then
+		$iLen = StringLen($g_aNetMsg_UDP_Master[$iGameIdx][$NET_M2C])
+		$idx1 = StringInStr($data, $g_aNetMsg_UDP_Master[$iGameIdx][$NET_M2C], 1, 1, 1, $iLen)
+		If $idx1 Then
+			$data = StringTrimLeft($data, $idx1+$iLen) ; trim ÿÿÿÿ...
+
+			;extra message cleanup... paintball2
+			Switch $iGameIdx
+				Case $ID_PAINT
+					local const $sPBExtra = 'serverlist2' ;todo move name out of here?
+					$idx1 = StringInStr($data, $sPBExtra, 0, 1, 1, 20) ;should be at start...
+					If $idx1 Then
+						$data = StringTrimLeft($data, $idx1+StringLen($sPBExtra)+4) ; trim name + int(length)
+						;ConsoleWrite("pb cleanup:"&$data&@CRLF)
+					EndIf
+			EndSwitch
+		EndIf
+		;ConsoleWrite("PacketData004:"&$data&@CRLF)
+	EndIf
+EndFunc
+
+Func BuildIPList_fromMasterUDP($iGameIdx, ByRef $data, ByRef $retErr)
+	Local $sRet = "", $iStep = 6, $i, $iCount, $aChars
+
+	if $data <> "" Then
+		$aChars = StringToASCIIArray($data, 0, Default, $SE_ANSI)
+		if $aChars = "" or Not IsArray($aChars) Then ;Or $aChars[0] = Null
+			$retErr = -2 ;error: report no servers
+		Else
+			$iStep += $g_aNetMsg_UDP_Master[$iGameIdx][$NET_M2C_SEP] ;q3 adds '\' to end of ip
+			;_ArrayDisplay($aChars)
+			$iCount = UBound($aChars)-1
+			ConsoleWrite(">count:" &$iCount&@CRLF)
+			For $i = 0 to $iCount Step $iStep
+				if $i+$iStep-1 <= $iCount Then
+					$sRet &= StringFormat("\ip\%u.%u.%u.%u:%u", _ ;uncompress byte to int
+						($aChars[$i+0]), ($aChars[$i+1]), ($aChars[$i+2]), ($aChars[$i+3]), _ ;ip address
+						BitShift(($aChars[$i+4]), -8) + ($aChars[$i+5])) ;port
 				EndIf
-			;///////////////// QUAKE2 ////////////////////////
-			ElseIf StringInStr($dataRecv[0], "servers ") Then
-				$dataRecv[0] = StringTrimLeft($dataRecv[0], StringLen("ÿÿÿÿservers ")) ; Quake2
-				$tmpStr	= StringSplit($dataRecv[0], "")
-				If Not @error Then
-					For $i = 1 To $tmpStr[0]
-						$ipLen += 1
-						; quake2
-						If  $i = $tmpStr[0] Then
-							$output = string( $output & "\final\")
-							ConsoleWrite("\final\ "&String(Asc($tmpStr[$i]))&@CRLF)
-							ExitLoop ;done!!
-						EndIf
+			Next
+			;ConsoleWrite("-out1:"&$output&@CRLF)
+		EndIf
+		$data = "" ;cleanup
+	else
+		$retErr = -2 ;error: report no servers
+	EndIf
+	Return $sRet
+EndFunc
 
-						If $ipLen = 1 Then
-							$output = string( $output & "\ip\")
-							$output = string( $output & Asc($tmpStr[$i]) ) ; add every character
-							$output = string( $output & ".")
-						ElseIf $ipLen < 4 Then
-							$output = string( $output & Asc($tmpStr[$i]) ) ; add every character
-							$output = string( $output & ".")
-						ElseIf $ipLen = 4 Then
-							$output = string( $output & Asc($tmpStr[$i]) ) ; add every character
-							$output = string( $output & ":")
-						ElseIf $ipLen = 5 Then;==> port
-							Local $tmpp1, $tmpp2
-							$tmpp1 = BitShift(Asc($tmpStr[$i]), -8)
-							$tmpp1 += Asc($tmpStr[$i+1])
-							$output = string( $output & $tmpp1)
-						ElseIf $ipLen = 6 Then
-							$ipLen = 0
-						EndIf
+Func GetList_fromMasterUDP($iGameIdx, $sSendIPAddressDNS, $iSendPort, $iProtocol = "")
+	If @error Then ConsoleWrite("error startup")
+	Local $tcpSocket, $dataRecv, $data = "", $retErr = -1
+	Local $iErrorX, $output = ""
 
-					Next
-				Else
-					Return -1
-				EndIf
-			EndIf
-			;//////////////////////////////////////////
+	Local $gameSpyString = GetMessage_toSendMasterUDP($iGameIdx, $iProtocol)
+	ConsoleWrite("+len:"&StringLen($gameSpyString)&@CRLF) ;todo remove debug
+	ConsoleWrite("-sending to master3:" &Hex(StringToBinary($gameSpyString))&@CRLF) ;todo remove debug
+	ConsoleWrite("-sending to master2:" &$gameSpyString&@CRLF) ;todo remove debug
 
+	_BIND_UDP_SOCKET($g_hSocketMasterUDP)
+	Local $sIP = TCPNameToIP($sSendIPAddressDNS)
+	If Not @error Then
+		ConsoleWrite("ip:"&$sIP&" port:"&$iSendPort&@CRLF)
+		$iErrorX = _UDPSendTo($sIP, $iSendPort, $gameSpyString, $g_hSocketMasterUDP)
+		if @error Then
+			ConsoleWrite("!UDP Send 'status' sock error=" & $iErrorX & " error" & @CRLF)
 		EndIf
 	EndIf
 
- 	If StringCompare($output,"-1")=0 Then
-		Return -1
+	if Not @error Then
+		Local $iTimeOut = TimerInit(), $sTail, $dataLen
+		local $sEOT = $g_aNetMsg_UDP_Master[$iGameIdx][$NET_M2C_EOT] ;EOT
+
+		While 1
+			Do
+				$dataRecv = _UDPRecvFrom($g_hSocketMasterUDP, 10000, 0) ;2048
+				If TimerDiff($iTimeOut) > 3000 Then
+					ConsoleWrite("button state up, timeout 3seconds"&@CRLF)
+					ExitLoop(2) ;timedout. stop do+while
+				EndIf
+				Sleep(100)
+			Until IsArray($dataRecv)
+
+			$dataLen = $dataRecv[$PACKET_SIZE]
+			;ConsoleWrite("+$dataLen="&$dataLen&@CRLF) ;todo cleanup debug
+			;ConsoleWrite("-received master packet:"&@CRLF&"-0x"& Hex(StringToBinary($dataRecv[$PACKET_DATA]))&@CRLF) ;todo cleanup debug
+
+			;check for EOT
+			$sTail = StringMid($dataRecv[$PACKET_DATA], $dataLen - StringLen($sEOT)+1, -1)
+			ConsoleWrite("+$sTail s:"&Hex(StringToBinary($sTail))&@CRLF) ;todo cleanup debug
+			If StringCompare($sTail, $sEOT, $STR_CASESENSE) = 0 Then
+				$data &= StringMid($dataRecv[$PACKET_DATA], 1, $dataLen - StringLen($sEOT)) ; trim EOT
+				;ConsoleWrite("-packet=0x"& Hex(StringToBinary($data))&@CRLF)
+				ConsoleWrite(@CRLF&"+found 'EOT'"&@CRLF) ;todo cleanup debug
+				ExitLoop(1) ;recieved full packet
+			EndIf
+			;add recieved data
+			$data &= $dataRecv[$PACKET_DATA] ; get multiple packets?
+		WEnd
+	EndIf
+	_UDPCloseSocket($g_hSocketMasterUDP)
+	;Servers recieved string
+
+	CleanupResponce_fromMasterUDP($iGameIdx, $data)
+	$output = BuildIPList_fromMasterUDP($iGameIdx, $data, $retErr)
+
+	If $output = "" Then
+		Return $retErr
 	Else
-
 		Local $countIP = StringSplit($output, "\ip\", 1)
-		if Not @error Then ConsoleWrite("num servers recieved== " &$countIP[0]-1&@CRLF)
-
-		ConsoleWrite("PacketData Processed= " &$output&@CRLF)
+		if Not @error Then
+			ConsoleWrite("-num UDP servers recieved:" &$countIP[0]-1&@CRLF)
+		EndIf
+		;ConsoleWrite("-rec master data processed:"& @CRLF&"-0x"&$output&@CRLF)
 		Return $output
 	EndIf
-
 EndFunc
+;--> END: UDP GET LIST FROM MASTER
 
-#EndRegion --> UDP GET LIST FROM MASTER
-
-#Region --> HTTP GET LIST FROM WEB
-Func GetListFromHTTP()
-	Local $i, $hDownload, $timeCounted, $aArray
+;--> HTTP GET LIST FROM WEB
+Func GetListFromHTTP($netType, $sData)
+	Local $i, $hDownload, $iTimeout = TimerInit(), $aArray, $sWebLink
 	Local $sOutput=""
-	;DisableUIButtons()
+	;EnableUIButtons(False)
 
-	$GS_lastRefreshTime = TimerInit() ;set a new time for auto refresh
-	FileDelete($isTmpFilePath_Q2Web)
-	$hDownload = InetGet("http://q2servers.com/?mod=&raw=1&inc=1",	$isTmpFilePath_Q2Web, $INET_FORCERELOAD, $INET_DOWNLOADBACKGROUND )
+	;~ If $netType = $NET_PROTOCOL_WEB Then
+	;~ 	$sWebLink = StringFormat("http://%s", $sData) ;http://%s:%s/?mod=&raw=1&inc=1
+	;~ Else
+	;~ 	$sWebLink = StringFormat("%s", $sData)
+	;~ EndIf
+	$sWebLink = $sData
 
-	$timeCounted = TimerDiff($GS_lastRefreshTime)
+	ConsoleWrite("+master:"&$sWebLink&@CRLF)
 
+	FileDelete($g_sM_tmpFile[2])
+	$hDownload = InetGet($sWebLink,	$g_sM_tmpFile[2], $INET_FORCERELOAD, $INET_DOWNLOADBACKGROUND )
 	Do
-		If $timeCounted > 3000 Then
+		If TimerDiff($iTimeout) > 3000 Then
 			InetClose($hDownload)
-			;EnableUIButtons()
+			ResetRefreshTimmers() ;reset timers. msg box issue
 			Return -1
 		EndIf
-		Sleep(250)
-	Until InetGetInfo($hDownload, $INET_DOWNLOADCOMPLETE )
+		Sleep(150)
+	Until InetGetInfo($hDownload, $INET_DOWNLOADCOMPLETE)
 	InetClose($hDownload)
 
+	;process file
 
-;process file
-
-	$aArray = FileReadToArray($isTmpFilePath_Q2Web)
+	$aArray = FileReadToArray($g_sM_tmpFile[2])
 	If @error Then
-		MsgBox($MB_SYSTEMMODAL, "ERROR: Cant Get List", "There was an error downloading server list from Q2Servers.com." & _
+		MsgBox($MB_SYSTEMMODAL, "ERROR: Cant Get List", "There was an error downloading server list from "&$sWebLink& _
 		@CRLF & "Check Your Connection?",0, $HypoGameBrowser )
 		ResetRefreshTimmers() ;reset timers. msg box issue
-		;EnableUIButtons()
+		;EnableUIButtons(True)
 		Return -1
 	EndIf
 
+	local $sIP, $aTmp
 	For $i = 0 To UBound($aArray)-1
-		If $i = int($iMaxSer -1) Then ExitLoop
-		$sOutput = String($sOutput&"\ip\"& $aArray[$i])
+		If $i = ($g_iMaxSer -1) Then
+			ExitLoop
+		EndIf
 
+		$aTmp = StringSplit($aArray[$i], ":")
+		if $aTmp[0] = 2 Then ;ip/port
+			$sIP = TCPNameToIP(StringStripWS($aTmp[1], 2)) ;todo cleanup. fix for invalid web list
+			if not @error then $aArray[$i] = $sIP&":"&$aTmp[2]
+		ElseIf $aTmp[0] >2 Then
+			ConsoleWrite("!Invalid address. IPV6?:" &$aArray[$i]&@CRLF)
+		Else
+			ConsoleWrite("!Invalid IP address:" &$aArray[$i]&@CRLF)
+		EndIf
+
+
+		StringReplace($aArray[$i], ":", ":") ; dont do anything.. just getting count
+		If @extended = 1 Then ;only one ':' in string. catch ipv6
+			$sOutput = String($sOutput&"\ip\"& $aArray[$i])
+		Else
+			ConsoleWrite("!found IPV6:" &$aArray[$i]&@CRLF)
+		EndIf
 	Next
 
-	;add final string
-	$sOutput = String($sOutput&"\final\")
-	ConsoleWrite("q2Servers recieved string= " &$sOutput& @CRLF)
+	;ConsoleWrite("HTTP Servers recieved string= " &$sOutput& @CRLF)
 
 	ResetRefreshTimmers() ;reset timers. msg box issue
-	;EnableUIButtons()
+	;EnableUIButtons(True)
 	Return $sOutput
 EndFunc
-#EndRegion HTTP GET LIST FROM WEB
+; --> END: HTTP GET LIST FROM WEB
 
-#Region --> TCP/UDP 'REFRESH' LIST FROM MASTER ..FILL ARRAY
+; --> TCP/UDP 'REFRESH' LIST FROM MASTER ..FILL ARRAY
+Func GetIPArrayFromMasterResponce($sMasterMessage)
+	Local $idx, $sTmp
+
+	if $sMasterMessage = -1 Then ;todo fix msg box. goes to middle of screen
+		MsgBox($MB_SYSTEMMODAL, "Master Server Error","ERROR Connecting to Master Server." &@CRLF& _
+								"Try Another 'Master' in Setup" &@CRLF&@CRLF& _
+								"If they all fail, try the 'Offline' button.",0, $HypoGameBrowser )
+		return -1
+	ElseIf $sMasterMessage = -2 Then
+		MsgBox($MB_SYSTEMMODAL, "Master Server List","0 Servers in list from Master." &@CRLF& _
+								"Try Another 'Master' in Setup." &@CRLF&@CRLF& _
+								"If they all fail, try the 'Offline' button.",0, $HypoGameBrowser )
+		return -1
+	EndIf
+
+	;clean up ip's
+	if StringInStr($sMasterMessage, "\ip\", 0, 1, 1, 4) Then
+		$sMasterMessage = StringTrimLeft($sMasterMessage, 4); remove first "\ip\"
+	EndIf
+	$idx = StringInStr($sMasterMessage, "\final\", 0, -1)
+	if $idx Then
+		$sMasterMessage = StringMid($sMasterMessage, 1, $idx-1); remove end "\final\"
+	EndIf
+	;ConsoleWrite("-server msg cleaned:" &$sMasterMessage&@CRLF)
+
+	;split for return array
+	Local $ipArray = StringSplit($sMasterMessage, "\ip\", $STR_ENTIRESPLIT + $STR_NOCOUNT)
+	If Not IsArray($ipArray) Or UBound($ipArray) = 0 Then
+		;~ If StringInStr($sMasterMessage, ":") Then
+		;~ 	$ipArray[0] = $sMasterMessage ;only 1 server, cant split strinng
+		;~ Else
+		ConsoleWrite("error spliting '\ip\' " & @CRLF)
+		MsgBox($MB_SYSTEMMODAL, "Master Server List","0 Servers in list from Master." &@CRLF& _
+								"Try Another 'Master' in Setup." &@CRLF&@CRLF& _
+								"If they all fail, try the 'Offline' button.",0, $HypoGameBrowser )
+		Return -1
+		;~ EndIf
+	EndIf
+
+	;convert DNS to ip
+	For $i=0 to UBound($ipArray) - 1
+		$sTmp = TCPNameToIP($ipArray[$i])
+		If not @error Then
+			$ipArray[$i] = $sTmp
+		EndIf
+	Next
+
+	Return $ipArray
+EndFunc
+
 ;========================================================
-; --> GetMasterServerList TCP/UDP
-Func GetMasterServerList($isAutoRefresh, $tab)
-	Local $ipPort[3] , $serverMessage, $i, $splitIP, $ipArray, $iPortx
-	Local	$j =0
+; --> GetServerListFromMaster TCP/UDP
+Func GetServerListFromMaster($iGameIdx)
+	Local $aMaster_IP, $serverMessage = -1, $ipArray, $iPortx
+	Local $j =0, $iCount = 0
 
-	DisableUIButtons()
-	$GS_countPlayers = 0
-	$GS_lastRefreshTime = TimerInit(); reset refresh time
+	$g_ilastColumn_A = -1 ;reset listview
 
-	$isGettingServers = 1
-	$iServerCountTotal = 0 ;get # servers to use later to stop refresh
+	;EnableUIButtons(False)
+	BeginGettinServers()
+	$g_iPlayerCount_GS = 0
+	$g_iServerCountTotal = 0 ;get # servers to use later to stop refresh
 
-;queery master for ip list, rotate to next master if failed
-	For $i= 0 to 2
-		If $isAutoRefresh = True Then
-			If $tab = 1 Then
-				$ipPort =  SelectedGameMasterAddressKP($i)
-				$iLastListviewSortStatus = GUICtrlGetState($ListView1KP); set global sort for reset
-			ElseIf $tab = 2 Then
-				$ipPort =  SelectedGameMasterAddressKPQ3($i)
-				$iLastListviewSortStatusKPQ3 = GUICtrlGetState($ListView1KPQ3); set global sort for reset
-			ElseIf $tab = 3 Then
-				$ipPort =  SelectedGameMasterAddressQ2($i)
-				$iLastListviewSortStatusQ2 = GUICtrlGetState($ListView1Q2); set global sort for reset
-			EndIf
-		Else
-			SelectedTabNum() ;recalled with button press
-			If $tabNum = 1 Or $tabNum > 3 Then
-				$ipPort =  SelectedGameMasterAddressKP($i)
-				$iLastListviewSortStatus = GUICtrlGetState($ListView1KP); set global sort for reset
-			ElseIf $tabNum = 2 Then
-				$ipPort =  SelectedGameMasterAddressKPQ3($i)
-				$iLastListviewSortStatusKPQ3 = GUICtrlGetState($ListView1KPQ3); set global sort for reset
-			ElseIf $tabNum = 3 Then
-				$ipPort =  SelectedGameMasterAddressQ2($i)
-				$iLastListviewSortStatusQ2 = GUICtrlGetState($ListView1Q2); set global sort for reset
-			EndIf
-		EndIf
-
-		If $i = 1 Then
-			$tmpStatusbarString = GUICtrlRead($MOTD_Input)
-			GUICtrlSetData($MOTD_Input , " SERVER NOT RESPONDING. Trying another Master")
-			GUICtrlSetColor($MOTD_Input, $COLOR_RED)
-			$statusBarChanged = True
-		EndIf
+	if _IsChecked($UI_CBox_tryNextMaster) Then
+		local $aMast = StringSplit($g_aMasterAddresses[$iGameIdx], "|")
+		if not @error Then
+			$iCount = $aMast[0]-1
+		;else
+ 			;$iCount = 20
+		endif
+	EndIf
 
 
+	;queery master for ip list, rotate to next master if failed
+	For $iIdx = 0 to $iCount  ;try multiple masters
+		$aMaster_IP = SelectedGameMasterAddress($iGameIdx, $iIdx)
 
-		If $ipPort = -1 Then
+		If $aMaster_IP = -1 Then
 			$serverMessage = -1
 			ExitLoop
 		EndIf
 
-
-		If ($tabNum = 2) And _IsChecked($RadioMasterUDP_KPQ3) Then
-			_BIND_MASTER_SOCKET()
-			$serverMessage = GetListFromMasterUDP($ipPort[1], $ipPort[2])
-			_UDPCloseSocket($hSocketMasterUDP)
-		ElseIf ($tabNum = 3) And _IsChecked($RadioMasterHTTP_Q2) Then
-			$serverMessage = GetListFromHTTP() ;q2
-			ExitLoop
-		ElseIf	($tabNum = 3) And _IsChecked($RadioMasterUDP_Q2) Then
-			_BIND_MASTER_SOCKET()
-			$serverMessage = GetListFromMasterUDP($ipPort[1], $ipPort[2]) ;quake2 master, using udp
-			_UDPCloseSocket($hSocketMasterUDP)
-		Else
-			$serverMessage = GetListFromMasterTCP($ipPort[1], $ipPort[2])
+		If $iIdx = 1 Then
+			setTempStatusBarMessage("SERVER NOT RESPONDING. Trying next Master in list.", True)
 		EndIf
 
-		If Not ($serverMessage = -1) Then ExitLoop
+		;[protocol,ip,port,extraData]
+		Switch $aMaster_IP[0] ; protocol
+			Case $NET_PROTOCOL_TCP
+				$serverMessage = GetListFromMasterTCP(($aMaster_IP[1])[0], ($aMaster_IP[1])[1]) ; [ip,port]
+			Case $NET_PROTOCOL_UDP
+				$serverMessage = GetList_fromMasterUDP($iGameIdx, ($aMaster_IP[1])[0], ($aMaster_IP[1])[1], ($aMaster_IP[1])[2]) ; [ip,port,proto]
+			Case $NET_PROTOCOL_WEB, $NET_PROTOCOL_HTTP, $NET_PROTOCOL_HTTPS
+				$serverMessage = GetListFromHTTP($aMaster_IP[0], $aMaster_IP[1]) ;web
+		EndSwitch
+
+		If Not ($serverMessage = -1) Then
+			ExitLoop ;master valid
+		EndIf
 	Next
 
-	;RESET: udp/tcp selection
-	If $tabNum = 2 Then
-		SelectedGameMasterAddressKPQ3(0)
-	ElseIf $tabNum = 3 Then
-		SelectedGameMasterAddressQ2(0)
-	EndIf
-
-	_BIND_SERVER_SOCKET()
-	If $hSocketServerUDP > 0 Then _SetPacketBufferSize($hSocketServerUDP, 25600)
-
-;===================
-; send getinfo to all servers recieved from master
-	If Not ($serverMessage = -1) Then
-		$serverMessage = StringTrimLeft($serverMessage, StringLen("\ip\")); remove first "\ip\"
-		$serverMessage = StringTrimRight($serverMessage, StringLen("\final\")); remove end "\final\"
-		Local $isSingleRefresh = False
-
-		$ipArray =	StringSplit($serverMessage, "\ip\", $STR_ENTIRESPLIT + $STR_NOCOUNT)
-		If @error Then
-			If StringInStr($serverMessage, ":") Then
-				$ipArray[0] = $serverMessage ;only 1 server, cant split strinng
-				$isSingleRefresh = True
-			Else
-				ConsoleWrite("error spliting '\ip\' " & @CRLF)
-				_UDPCloseSocket($hSocketServerUDP)
-				MsgBox($MB_SYSTEMMODAL, "Master Server List","0 Servers in list from Master" &@CRLF& _
-										"Try Another 'Master' in Setup" &@CRLF&@CRLF& _
-										"If they all fail, try the 'Offline' button",0, $HypoGameBrowser )
-				$isGettingServers = -1
-				serverRefreshButtonState()
-				ResetRefreshTimmers()
-				Return
-			EndIf
-		EndIf
-
-		If $isSingleRefresh = True Then
-			$iServerCountTotal = 1
-		Else
-			$iServerCountTotal = UBound($ipArray)
-		EndIf
-
-
-		resetArray() ; remove all servers from $sServerStringArray
-
-		Local $ListViewA = ServerArray1ToFill()
-		_GUICtrlListView_DeleteAllItems($ListViewA)
-
-		; fill server strings with fresh servers and as blank info
-		For $i = 0 To UBound($ipArray) -1
-			Local $sIP_Port
-			$splitIP = StringSplit($ipArray[$i],":", $STR_NOCOUNT)
-			If Not @error Then
-				If $tabNum =1 Or $tabNum >3 And Not ($tabNum =6) Then
-					$iPortx = int($splitIP[1])+ 10 ;todo: this should use \\hostport\\.
-				Else
-					$iPortx = int($splitIP[1])
-				EndIf
-				$sIP_Port = String($splitIP[0]&":"& $iPortx)
-			Else
-				ConsoleWrite("!error invalid ip from master" & @CRLF)
-				ExitLoop
-			EndIf
-
-
-			_GUICtrlListView_AddItem($ListViewA, $i, -1)
-			_GUICtrlListView_AddSubItem($ListViewA, $i, $sIP_Port,		1,-1) ;hypo ToDo: should this displays +10 port, not GS port?
-			_GUICtrlListView_AddSubItem($ListViewA, $i, "???",			2,-1)
-			_GUICtrlListView_AddSubItem($ListViewA, $i, "999",			3,-1)
-			_GUICtrlListView_AddSubItem($ListViewA, $i, "0/0",			4,-1)
-			;$iServerCountTotal += 1 ;hypo count total earlyer
-
-			;==> fill internal ip array for each server
-			;$splitIP = StringSplit($ipArray[$i],":", $STR_NOCOUNT)
-			If $tabNum = 1 Or $tabNum > 3 Then
-				$sServerStringArray[$i][1] =  $splitIP[0]
-				$sServerStringArray[$i][2] =  $splitIP[1] ;added +10 port so connect works. shouldent need
-				$bOffline = False
-			ElseIf $tabNum = 2 Then
-				$sServerStringArrayKPQ3[$i][1] =  $splitIP[0]
-				$sServerStringArrayKPQ3[$i][2] =  $splitIP[1]
-				$bOfflineKPQ3 = False
-			ElseIf $tabNum = 3 Then
-				$sServerStringArrayQ2[$i][1] =  $splitIP[0]
-				$sServerStringArrayQ2[$i][2] =  $splitIP[1]
-				$bOfflineQ2 = False
-			EndIf
-
-			;==> send getinfo to a small group servers $iMaxIP[25]
-			If $i = ($j+ int($iMaxIP-1)) Then ;0 to 24
-				ConsoleWrite("!servers inital2= "&$i-Int($iMaxIP-1) &"to" &$i & " total= "&$iServerCountTotal&@CRLF)
-				If SendSTATUStoServers($ipArray, $i-Int($iMaxIP-1), $i ) Then ;get each server details
-					listenIncommingServers(0) ;now listen for responce
-				EndIf
-				$j = Int($i+1) ;add one because array starts at 0
-			EndIf
-		Next
-
-
-		If $j < $iServerCountTotal Then
-			ConsoleWrite("!servers final2= "& $j& "to"&$iServerCountTotal&@CRLF)
-			If SendSTATUStoServers($ipArray, $j, $i) Then ;get each server details
-				listenIncommingServers(0) ;now listen for responce
-			EndIf
-		EndIf
-
-
-		;check global recieved servers. if some failed. try recieve again
-		Local $iLoop
-		for $iLoop =0 To 3
-			If $isGettingServers And $iServerCountAdd < $iServerCountTotal Then
-				ConsoleWrite("!Some servers failed to respond. Sending Status again"&@CRLF)
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-				;hypo send ping to list 1 more time
-				Local $countServ1 = GetServerCountInArray() ;count servers in array
-				;Local $aIPArrayRef2[1]
-				Local $count =0
-				For $int = 0 To $countServ1-1 ;UBound($aIPArrayRef)-1
-
-					If	($tabNum = 1) Or ($tabNum > 3) Then
-						If $sServerStringArray[$int][0] = "" Then
-							SendSTATUStoServers($ipArray, $int, $int)
-							$count += 1
-						EndIf
-					ElseIf $tabNum =2 Then
-						If $sServerStringArrayKPQ3[$int][0] = "" Then
-							SendSTATUStoServers($ipArray, $int, $int)
-							$count += 1
-						EndIf
-					ElseIf	$tabNum = 3 Then
-						If $sServerStringArrayQ2[$int][0] = "" Then
-							SendSTATUStoServers($ipArray, $int, $int)
-							$count += 1
-						EndIf
-					EndIf
-
-				Next
-				ConsoleWrite("!count= "&$count&@CRLF)
-				If 	$count >0 Then
-					listenIncommingServers(1)
-				EndIf
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-			EndIf
-		Next
-
-	Else ;returned -1
-		MsgBox($MB_SYSTEMMODAL, "Master Server Error","ERROR Connecting to Master Server" &@CRLF& _
-								"Try Another 'Master' in Setup" &@CRLF&@CRLF& _
-								"If they all fail, try the 'Offline' button",0, $HypoGameBrowser )
+	;split masterServer message (1-base)
+	$ipArray = GetIPArrayFromMasterResponce($serverMessage)
+	If not IsArray($ipArray) Or $ipArray = -1 Then
+		FinishedGettinServers();/
 		ResetRefreshTimmers()
-		ConsoleWrite("server msg= " &$serverMessage&@CRLF)
-		$isGettingServers = -1
+		return
 	EndIf
 
-	_UDPCloseSocket($hSocketServerUDP)
-	$isGettingServers = -1
-	serverRefreshButtonState()
-	If _IsChecked($GB_Players_sound) Then selectAudoToPlay(1)
+	;clear selected column. todo work out how to re-sort without mouse click
+	GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, -1, 0) ;updateLV
 
-EndFunc; -->  GetMasterServerList TCP
+	;clear internal array ($g_aServerStrings[])
+	ResetServerListArrays(BitShift(1, -($iGameIdx)))
+
+	;populate internal array with
+	FillServerStringArrayIP($iGameIdx, $ipArray)
+
+	;refresh list using internal array
+	RefreshServersInListview($iGameIdx)
+
+	;ListviewResetSortOrder()
+	FinishedGettinServers();/
+	ResetRefreshTimmers()
+EndFunc; -->  GetServerListFromMaster TCP
 ;========================================================
-#EndRegion --> TCP GET LIST, FILL ARRAY
 
-#Region --> AUDIO
-Func selectAudoToPlay($gameType)
-	Local $players
 
-	If $gameType = 1 Then
-		$players = $GS_countPlayers
-	Else
-		$players = Int($countPlayers + $countPlayersKPQ3 +  $countPlayersQ2)
-	EndIf
-ConsoleWrite("players="&$players&@CRLF)
+;========================================================
+;--> UDP RECV listenIncommingServers()
+Func listenIncommingServers($iGameIdx, $start, $end, $iOffset) ;todo fix final
+	Local $i, $listNum, $iPing, $data, $dataRecv, $KpGsFinal, $iSVResponded = 0 ;counter
+	Local $iSVCount = $end-$start+1 ;  total this wave
+	Local $sIP, $iPort, $iOff, $idx
+	;Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	Local $countServ = GetServerCountInArray($iGameIdx) ;count servers in array
+	Local $ListViewA = getListView_A_CID()
+	Local $aResponce[$iSVCount][$COUNT_PACKET]
+	Local Const	$sSV_ErrorStr = "Info string length exceeded"
+	;~ Local Const $aSV_ResponceStr[3] = ["\gamename\kingpin\", "ÿÿÿÿstatusResponse", "ÿÿÿÿprint"]
 
-	If $players = 0 Then Return
+	;dupe list. fill global/internal later
+	For $i = 0 To $iSVCount-1
+		$iOff = $start + $i + $iOffset
+		$aResponce[$i][$PACKET_DATA] = ""
+		$aResponce[$i][$PACKET_IP]   = $g_aServerStrings[$iGameIdx][$iOff][$COL_IP]
+		$aResponce[$i][$PACKET_PORT] = $g_aServerStrings[$iGameIdx][$iOff][$COL_PORT]
+		$aResponce[$i][$PACKET_PING] = 0
+	Next
 
-	Switch($players)
-		Case 1
-			SoundPlay($mp3path1 , 0)
-		Case 2
-			SoundPlay($mp3path2 , 0)
-		Case 3
-			SoundPlay($mp3path3 , 0)
-		Case 4
-			SoundPlay($mp3path4 , 0)
-		Case 5
-			SoundPlay($mp3path5 , 0)
-		Case 6
-			SoundPlay($mp3path6 , 0)
-		Case 7
-			SoundPlay($mp3path7 , 0)
-		Case 8
-			SoundPlay($mp3path8 , 0)
-		Case 9
-			SoundPlay($mp3path9 , 0)
-		Case 10
-			SoundPlay($mp3path10 , 0)
-		Case Else
-			SoundPlay($mp3path10p , 0)
-	EndSwitch
+	ConsoleWrite(">listen Incomming Servers count:"& $iSVCount  &@CRLF)
+	GUICtrlSetData($UI_Prog_getServer, Int($start * 100 / $g_iServerCountTotal))
+
+	Local $iTimeOut = TimerInit()
+	While 1 ;loop until all servers recieved or timout hit
+		While 1
+			$dataRecv = _UDPRecvFrom($g_hSocketServerUDP, 2048, 0)
+			if IsArray($dataRecv) Then
+				ExitLoop(1)
+			ElseIf TimerDiff($iTimeOut) > 990 Then
+				ConsoleWrite(">TIMEOUT.. 1 seconds"&@CRLF)
+				ExitLoop(2) ;stop do and stop while
+			EndIf
+			Sleep(10)
+		WEnd ; Until  IsArray($dataRecv)
+
+		$data =  $dataRecv[$PACKET_DATA]         ;datastream
+		$sIP =   $dataRecv[$PACKET_IP]           ;ip
+		$iPort = Number($dataRecv[$PACKET_PORT]) ;port
+		;ConsoleWrite(StringFormat("Rec: %s:%i %s\n", $sIP, $iPort, $data ) &@CRLF)
+
+		For $i = 0 To $iSVCount -1
+			$iOff = $start + $i + $iOffset
+			if $aResponce[$i][$PACKET_PORT] = $iPort And StringCompare($aResponce[$i][$PACKET_IP], $sIP) = 0 Then
+				;ConsoleWrite("+match id:" &$iOff&@CRLF)
+				$aResponce[$i][$PACKET_DATA] &= $data
+				$aResponce[$i][$PACKET_PING] = TimerDiff($g_aServerStrings[$iGameIdx][$iOff][$COL_TIME]) ;for ping
+				$iSVResponded += 1
+				$g_iServerCountTotal_Responded +=1
+				GUICtrlSetData($UI_Prog_getServer, Int((($start + $iSVResponded ) * 100) / $g_iServerCountTotal))
+				if $iSVResponded = $iSVCount Then
+					ConsoleWrite("!got All servers"&@CRLF)
+					ExitLoop(2)
+				Else
+					ExitLoop(1)
+				EndIf
+			EndIf
+		Next
+	WEnd
+
+	For $i = 0 To $iSVCount-1
+		$iOff = $start + $i + $iOffset
+		If $aResponce[$i][$PACKET_DATA] = "" Then
+			;todo fill dead server with icon
+			ConsoleWrite("!sv missing data id:"&$iOff&@CRLF)
+			ContinueLoop
+		EndIf
+		;server responceHeader\serverRules <key/value>...
+
+		If $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] Then ;gamespy protocol
+			$data = StringTrimLeft($aResponce[$i][$PACKET_DATA], StringInStr($aResponce[$i][$PACKET_DATA], "\")) ;remove prefix, upto "\"
+			;player data
+			$idx = StringInStr($data, "\player_0\")
+			If $idx Then
+				$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOPLYR] = StringTrimLeft($data, $idx)
+				$data = StringMid($data, 1, $idx)
+			EndIf
+		Else
+			Switch $iGameIdx
+				Case $ID_HEX, $ID_Q1
+					$data = Hexen2ServerResponce($aResponce[$i][$PACKET_DATA]) ;special case
+				Case Else
+					$data = StringTrimLeft($aResponce[$i][$PACKET_DATA], StringInStr($aResponce[$i][$PACKET_DATA], "\")) ;remove prefix, upto "\"
+					;player data
+					$idx = StringInStr($data, Chr(10), 1)  ;= StringSplit($string, Chr(10), $STR_ENTIRESPLIT)
+					if $idx Then
+						$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOPLYR] = StringTrimLeft($data, $idx)
+						$data = StringMid($data, 1, $idx)
+					EndIf
+			EndSwitch
+		EndIf
+
+		$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOSTR] = StringSplit($data, "\", $STR_NOCOUNT)
+		$g_aServerStrings[$iGameIdx][$iOff][$COL_PING] = int($aResponce[$i][$PACKET_PING])
+		;ConsoleWrite(StringFormat( ">id:%i\n-data:%s\n+p:%s l:%i", _
+		;	$iOff, $data, $g_aServerStrings[$iGameIdx][$iOff][$COL_INFOPLYR], $g_aServerStrings[$iGameIdx][$iOff][$COL_IDX]) &@CRLF)
+	Next
+
+EndFunc; --> listen Incomming Servers
+;========================================================
+
+Func ReadStringInArray(ByRef $aChars, ByRef $idx, $numChars)
+	Local $sRet = ""
+	While $idx < $numChars
+		if $aChars[$idx] = 0 then ;search null
+			$idx += 1
+			ExitLoop
+		endif
+		$sRet &= chr($aChars[$idx])
+		$idx += 1
+	WEnd
+	return $sRet
 EndFunc
 
-#EndRegion
+Func ReadCharInArray(ByRef $aChars, ByRef $idx, $numChars)
+	Local $sRet = ""
+	if $idx < $numChars Then
+		$sRet &= $aChars[$idx]
+		$idx += 1
+	EndIf
+
+	Return $sRet
+EndFunc
+
+Func Hexen2ServerResponce(ByRef $data)
+	;hexen uses a comprerssed message for info string
+	local const $hex2_CCREP_SERVER_INFO = 131 ;0x83
+	local const $hex2_NETFLAG_CTL = 0x80000000 ; 32768
+	local $i = 0, $iSVLen ;, $iMsgType, $header
+	local $aChars = StringToASCIIArray($data, 0, Default, $SE_ANSI)
+	Local $iLen = UBound($aChars)
+
+	if not IsArray($aChars) or  $iLen < 4 Then return ""
+	if not (BitAND(MSG_ReadLong($aChars, $i, $iLen, True), 0xffff0000) = $hex2_NETFLAG_CTL) Then return ""
+	if not (MSG_ReadByte($aChars, $i, $iLen) = $hex2_CCREP_SERVER_INFO) Then return ""
+
+	return  StringFormat( _
+		"hostaddress\\%s\\hostname\\%s\\mapname\\%s\\numplayers\\%i\maxplayers\\%i\\protocol\\%i\\", _
+		MSG_ReadString($aChars, $i, $iLen), _ ;hostaddress
+		MSG_ReadString($aChars, $i, $iLen), _ ;hostname
+		MSG_ReadString($aChars, $i, $iLen), _ ;mapname
+		MSG_ReadByte($aChars, $i, $iLen), _   ;numplayers
+		MSG_ReadByte($aChars, $i, $iLen), _   ;maxplayers/maxclients
+		MSG_ReadByte($aChars, $i, $iLen))     ;protocol
+EndFunc
+
+Func FillListView_A_FullData($iGameIdx, $start, $end, $iOffset)
+	Local $ListViewA = getListView_A_CID() ;todo cleanup fun
+	Local $iOff, $iSVCount = $end-$start+1 ;  total this wave
+
+	_GUICtrlListView_BeginUpdate($ListViewA)
+	ConsoleWrite("$iGameIdx:"&$iGameIdx&@CRLF)
+	For $i = 0 To $iSVCount-1
+		$iOff = $start + $i + $iOffset
+		FillServerListView_SV_Responce( _
+			$iGameIdx, _
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_IP], _
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_PORT], _ ;
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_PORTGS], _ ;
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_NAME], _ ;
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_PING], _ ;
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_PLAYERS], _ ;
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOSTR], _  ;data
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOPLYR], _ ;player data
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_MAP], _
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_MOD], _
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_IDX])        ;sorted index
+	Next
+
+	;GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, GUICtrlGetState($UI_ListV_svData_A), 0) ;updateLV
+	;GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SORTITEMS, GUICtrlGetState($UI_ListV_svData_A), 'ListViewSort_A') ;updateLV
+	;GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, 3, 0)
+	;DllCall("user32.dll", "int", "InvalidateRect", "hwnd", GUICtrlGetHandle($UI_ListV_svData_A), "int", 0, "int", 1)
+	;GUICtrlSendMsg($UI_ListV_svData_A, $LVN_COLUMNCLICK, GUICtrlGetState($UI_ListV_svData_A), 'ListViewSort_A')
+	;ControlClick($HypoGameBrowser, "", _GUICtrlListView_GetHeader($UI_ListV_svData_A), "left", 40, 10, 1)
+	;~ Local $stLvi = DllStructCreate("uint;int;int;uint;uint;ptr;int;int;int;int")
+
+	;~ DllStructSetData($stLvi, 1, $LVIF_TEXT)
+	;~ DllStructSetData($stLvi, 2, $nIndex)
+	;~ DllStructSetData($stLvi, 3, $nColumn)
+	;~ DllStructSetData($stLvi, 6, DllStructGetPtr($stBuffer))
+	;~ DllStructSetData($stLvi, 7, 260)
+
+	;~ GUICtrlSendMsg($UI_ListV_svData_A, $LVM_GETITEM, 0, DllStructGetPtr($stLvi));
+
+	;;;;;;;;;;GUICtrlRegisterListViewSort($UI_ListV_svData_A, "ListViewSort_A")
+
+	_GUICtrlListView_EndUpdate($ListViewA)
+EndFunc
+
+; Post a WM_COMMAND message to a ctrl in a gui window
+Func PostButClick($hWnd, $nCtrlID)
+    DllCall("user32.dll", "int", "PostMessage", _
+            "hwnd", $hWnd, _
+            "int", 0x0111, _    ; $WM_COMMAND
+            "int", BitAND($nCtrlID, 0x0000FFFF), _
+            "hwnd", GUICtrlGetHandle($nCtrlID))
+EndFunc   ;==>PostButClick
+
+#EndRegion --> TCP GET LIST, FILL ARRAY
+
+#Region -->  UDP UTIL
+; port for master/server communication
+Func _BIND_UDP_SOCKET(ByRef $iSocket)
+	Local $portRand = Random(50000, 55532, 1) ;RAND PORT
+
+	For $ipSet = 0 to 30
+		$iSocket = _UDPBind("", 0) ;$portRand
+		If $iSocket > 0 Then
+			ExitLoop
+		Else
+			$portRand += 2
+		EndIf
+	Next ;--> Rand Port
+
+	If $iSocket <= 0 Then
+		MsgBox($MB_SYSTEMMODAL, "ERROR",  "Can Not allocate a local port",0, $HypoGameBrowser)
+	EndIf
+EndFunc
+;==============
 
 
 ;==> start external source code
-#Region -->UDP _UDPBind _UDPSendTo _UDPRecvFrom _UDPCloseSocket _getsockopt _setsockopt _SetPacketBufferSize
 ; ===============================================================================================================================
 ; #INDEX# =======================================================================================================================
 ; Title .........: Winsock
@@ -3393,8 +3120,8 @@ Func _UDPBind($sSourceAddr = "", $iSourcePort = 0)
     EndIf
 
     DllClose($hWs2)
-	$hSocReqNum+=1
-	ConsoleWrite(">BIND SOCKET eventNum= "& $hSocReqNum &@CRLF); hypo
+	$g_hSocReqNum+=1
+	ConsoleWrite(">BIND SOCKET eventNum= "& $g_hSocReqNum &@CRLF); hypo
     Return SetError($nCode, 0, $nReturn)
 EndFunc   ;==>_UDPBind
 
@@ -3500,92 +3227,96 @@ Func _UDPSendTo($sIPAddr, $iDestPort, $iData, $iMainsocket = 0)
 EndFunc   ;==>_UDPSendTo
 
 Func _UDPRecvFrom($iMainsocket, $iMaxLen, $iFlag = 0)
-    If $iFlag = Default Then $iFlag = 0
-    $iMainsocket = Number($iMainsocket)
-    $iMaxLen = Number($iMaxLen)
-    $iFlag = Number($iFlag)
-    If $iMainsocket < 0 Or _
-            $iMaxLen < 1 Or _
-            Not ($iFlag = 0 Or $iFlag = 1) Then Return SetError(-4, 0, -1) ; invalid parameter
+	Local $aRet, $nReturn, $bError = 0, $nCode = 0, $tSockAddr, $tBuf, $hWs2, $aResult[4]
+	Local Const $tagSockAddr = "short sin_family; ushort sin_port; " & _
+			"STRUCT; ulong S_addr; ENDSTRUCT; " & _ ;sin_addr
+			"char sin_zero[8]"
 
-    Local $hWs2 = DllOpen("Ws2_32.dll")
-    If @error Then Return SetError(-2, 0, -1) ;missing DLL
-    Local $bError = 0, $nCode = 0
-    Local $tagSockAddr = "short sin_family; ushort sin_port; " & _
-            "STRUCT; ulong S_addr; ENDSTRUCT; " & _ ;sin_addr
-            "char sin_zero[8]"
-	Local $aRet, $nReturn
+	If $iFlag = Default Then $iFlag = 0
+	$iMainsocket = Number($iMainsocket)
+	$iMaxLen = Number($iMaxLen)
+	$iFlag = Number($iFlag)
+	If $iMainsocket < 0 Or _
+			$iMaxLen < 1 Or _
+			Not ($iFlag = 0 Or $iFlag = 1) Then Return SetError(-4, 0, -1) ; invalid parameter
 
-    If Not $bError Then
-        $aRet = DllCall($hWs2, "int", "ioctlsocket", "uint", $iMainsocket, "long", 0x8004667e, "ulong*", 1) ;hypo default 1(dont block code);FIONBIO
-        If @error Then																						;0 will wait untill data recieved or timed out
-            $bError = -1
+	$hWs2 = DllOpen("Ws2_32.dll")
+	If @error Then Return SetError(-2, 0, -1) ;missing DLL
+
+	If Not $bError Then
+		$aRet = DllCall($hWs2, "int", "ioctlsocket", "uint", $iMainsocket, "long", 0x8004667e, "ulong*", 1) ;hypo default 1(dont block code);FIONBIO
+		If @error Then																						;0 will wait untill data recieved or timed out
+			$bError = -1
 			ConsoleWrite("!ioctlsocket= 1"&@CRLF)
-        ElseIf $aRet[0] <> 0 Then ;SOCKET_ERROR
-            $bError = 1
+		ElseIf $aRet[0] <> 0 Then ;SOCKET_ERROR
+			$bError = 1
 			ConsoleWrite("!ioctlsocket= -1"&@CRLF)
-        EndIf
-    EndIf
+		EndIf
+	EndIf
 
-    Local $tSockAddr = DllStructCreate($tagSockAddr)
-    Local $tBuf = DllStructCreate("char[" & $iMaxLen & "]")
+	$tSockAddr = DllStructCreate($tagSockAddr)
+	;$tBuf = DllStructCreate("char[" & $iMaxLen & "]")
+	$tBuf = DllStructCreate("BYTE[" & $iMaxLen & "]")
 
-    $aRet = DllCall($hWs2, "int", "recvfrom", "uint", $iMainsocket, "ptr", DllStructGetPtr($tBuf), _
+	$aRet = DllCall($hWs2, "int", "recvfrom", "uint", $iMainsocket, "ptr", DllStructGetPtr($tBuf), _
 		"int", $iMaxLen, "int", 0, "ptr", DllStructGetPtr($tSockAddr), "int*", DllStructGetSize($tSockAddr))
 
-    If @error Then
-        $bError = -1
-    ElseIf ($aRet[0] = -1) Or ($aRet[0] = 4294967295) Then ;SOCKET_ERROR
-        $bError = 1
-        $aRet = DllCall($hWs2, "int", "WSAGetLastError")
-        If @error Then
-            $bError = -1
-        ElseIf $aRet[0] = 0 Or $aRet[0] = 10035 Then ;WSAEWOULDBLOCK
-            $nCode = -10 ;internal function value, it means no error
-        EndIf
-    Else
-        If $iFlag Then
-            Local $aResult[3] = [Binary(DllStructGetData($tBuf, 1))] ;data
-        Else
-            Local $aResult[3] = [DllStructGetData($tBuf, 1)] ;data
-        EndIf
+	If @error Then
+		$bError = -1
+	ElseIf ($aRet[0] = -1) Or ($aRet[0] = 4294967295) Then ;SOCKET_ERROR
+		$bError = 1
+		$aRet = DllCall($hWs2, "int", "WSAGetLastError")
+		If @error Then
+			$bError = -1
+		ElseIf $aRet[0] = 0 Or $aRet[0] = 10035 Then ;WSAEWOULDBLOCK
+			$nCode = -10 ;internal function value, it means no error
+		EndIf
+	Else
+		$aResult[$PACKET_SIZE] = $aRet[0] ;return buffer size
 
-        $aRet = DllCall($hWs2, "ptr", "inet_ntoa", "ulong", DllStructGetData($tSockAddr, "S_addr"))
-        If @error Then
-            $bError = -1
-        ElseIf $aRet[0] = Null Then
-            $bError = 1
-        Else
-            $aResult[1] = DllStructGetData(DllStructCreate("char[15]", $aRet[0]), 1) ;IP address
-            $aRet = DllCall($hWs2, "ushort", "ntohs", "ushort", DllStructGetData($tSockAddr, "sin_port"))
-            If @error Then
-                $bError = -1
-            Else
-                $aResult[2] = $aRet[0] ;port
-            EndIf
-        EndIf
-    EndIf
+		If $iFlag Then
+			$aResult[$PACKET_DATA] = BinaryMid(Binary(DllStructGetData($tBuf, 1)), 1, $aRet[0]*8) ;data. todo check this ($aRet*x)
+		Else
+			$aResult[$PACKET_DATA] = StringMid(BinaryToString(DllStructGetData($tBuf, 1)), 1, $aRet[0])
+		EndIf
 
-    If $bError < 0 Then
-        $nCode = -1 ;internal error
-        $nReturn = -1 ;failure
-    ElseIf $bError > 0 Then
-        If Not $nCode Then
-            $aRet = DllCall($hWs2, "int", "WSAGetLastError")
-            If @error Then
-                $nCode = -1
-            Else
-                $nCode = $aRet[0]
-            EndIf
-            If $nCode = 0 Then $nCode = -3 ;undefined error
-        EndIf
-        If $nCode = -10 Then $nCode = 0
-        $nReturn = -1
-    Else
-        $nReturn = $aResult
-    EndIf
-    DllClose($hWs2)
-    Return SetError($nCode, 0, $nReturn)
+
+		$aRet = DllCall($hWs2, "ptr", "inet_ntoa", "ulong", DllStructGetData($tSockAddr, "S_addr"))
+		If @error Then
+			$bError = -1
+		ElseIf $aRet[0] = Null Then
+			$bError = 1
+		Else
+			$aResult[$PACKET_IP] = DllStructGetData(DllStructCreate("char[15]", $aRet[0]), 1) ;IP address
+			$aRet = DllCall($hWs2, "ushort", "ntohs", "ushort", DllStructGetData($tSockAddr, "sin_port"))
+			If @error Then
+				$bError = -1
+			Else
+				$aResult[$PACKET_PORT] = $aRet[0] ;port
+			EndIf
+		EndIf
+	EndIf
+
+	If $bError < 0 Then
+		$nCode = -1 ;internal error
+		$nReturn = -1 ;failure
+	ElseIf $bError > 0 Then
+		If Not $nCode Then
+			$aRet = DllCall($hWs2, "int", "WSAGetLastError")
+			If @error Then
+				$nCode = -1
+			Else
+				$nCode = $aRet[0]
+			EndIf
+			If $nCode = 0 Then $nCode = -3 ;undefined error
+		EndIf
+		If $nCode = -10 Then $nCode = 0
+		$nReturn = -1
+	Else
+		$nReturn = $aResult
+	EndIf
+	DllClose($hWs2)
+	Return SetError($nCode, 0, $nReturn)
 EndFunc   ;==>_UDPRecvFrom
 
 Func _UDPCloseSocket($iMainsocket)
@@ -3626,8 +3357,8 @@ Func _UDPCloseSocket($iMainsocket)
         $nReturn = 1
     EndIf
     DllClose($hWs2)
-	$hSocReqNum+=1
-	ConsoleWrite(">CLOSE SOCKET eventNum= "&$hSocReqNum&@CRLF) ;hypo
+	$g_hSocReqNum+=1
+	ConsoleWrite(">CLOSE SOCKET eventNum= "&$g_hSocReqNum&@CRLF) ;hypo
     Return SetError($nCode, 0, $nReturn)
 EndFunc   ;==>_UDPCloseSocket
 
@@ -3644,12 +3375,12 @@ Func _SetPacketBufferSize($sSocket, $sSize)
 
 	Local $iRes = _setsockopt($sSocket, $SOL_SOCKET, $SO_SNDBUF, $tSetting)
 	If $iRes = 0 Then
-		ConsoleWrite(">set buffer size" & @CRLF)
+		ConsoleWrite(">set 'Send' buffer size" & @CRLF)
 	EndIf
 
 	Local $iRes = _setsockopt($sSocket, $SOL_SOCKET, $SO_RCVBUF, $tSetting)
 	If $iRes = 0 Then
-		ConsoleWrite(">set buffer size" & @CRLF)
+		ConsoleWrite(">set 'Rec' buffer size" & @CRLF)
 	EndIf
 
 	Local $iRes = _getsockopt($sSocket, $SOL_SOCKET, $SO_SNDBUF, $tResult)
@@ -3681,11 +3412,11 @@ EndFunc ;==> _setsockopt
 ; ===============================================================================================================================
 #EndRegion
 
-#Region -->ICON INCLUDE
+#Region --> ICON INCLUDE
 ;==> Resources.au3 by Zedna
 Func _ResourceGet($ResName, $ResLang = 0) ; $RT_RCDATA = 10
 	Local Const $IMAGE_BITMAP = 0
-	Local $hInstance, $hBitmap, $InfoBlock, $GlobalMemoryBlock, $MemoryPointer, $ResSize
+	Local $hInstance, $hBitmap
 
 	;If $DLL = -1 Then
 	  $hInstance = _WinAPI_GetModuleHandle("")
@@ -3706,7 +3437,7 @@ Func _ResourceSetImageToCtrl($CtrlId, $ResName) ; $RT_RCDATA = 10
 	$ResData = _ResourceGet($ResName, 0)
 	If @error Then Return SetError(1, 0, 0)
 
-	_SetBitmapToCtrl($CtrlId, $ResData)
+	_SetBitmapToCtrl($CtrlId, $ResData) ;todo unuused/cleanup
 	If @error Then Return SetError(2, 0, 0)
 
 	Return 1
@@ -3715,50 +3446,48 @@ EndFunc
 ; internal helper function
 ; thanks for improvements Melba
 Func _SetBitmapToCtrl($CtrlId, $hBitmap)
-    Local Const $STM_SETIMAGE = 0x0172
-    Local Const $STM_GETIMAGE = 0x0173
-    Local Const $BM_SETIMAGE = 0xF7
-    Local Const $BM_GETIMAGE = 0xF6
-    Local Const $IMAGE_BITMAP = 0
-    Local Const $SS_BITMAP = 0x0E
-    Local Const $BS_BITMAP = 0x0080
-    Local Const $GWL_STYLE = -16
+	Local Const $STM_SETIMAGE = 0x0172
+	Local Const $STM_GETIMAGE = 0x0173
+	Local Const $BM_SETIMAGE = 0xF7
+	Local Const $BM_GETIMAGE = 0xF6
+	Local Const $IMAGE_BITMAP = 0
+	Local Const $SS_BITMAP = 0x0E
+	Local Const $BS_BITMAP = 0x0080
+	Local Const $GWL_STYLE = -16
 
-    Local $hWnd, $hPrev, $Style, $iCtrl_SETIMAGE, $iCtrl_GETIMAGE, $iCtrl_BITMAP
+	Local $hWnd, $hPrev, $Style, $iCtrl_SETIMAGE, $iCtrl_GETIMAGE, $iCtrl_BITMAP
 
-    $hWnd = GUICtrlGetHandle($CtrlId)
-    If $hWnd = 0 Then Return SetError(1, 0, 0)
+	$hWnd = GUICtrlGetHandle($CtrlId)
+	If $hWnd = 0 Then Return SetError(1, 0, 0)
 
+	$CtrlId = _WinAPI_GetDlgCtrlID($hWnd) ; support for $CtrlId = -1
+	If @error Then Return SetError(2, 0, 0)
 
-    $CtrlId = _WinAPI_GetDlgCtrlID($hWnd) ; support for $CtrlId = -1
-    If @error Then Return SetError(2, 0, 0)
-
-
-    ; determine control class and adjust constants accordingly
-    Switch _WinAPI_GetClassName($CtrlId)
-        Case "Button" ; button,checkbox,radiobutton,groupbox
-            $iCtrl_SETIMAGE = $BM_SETIMAGE
-            $iCtrl_GETIMAGE = $BM_GETIMAGE
-            $iCtrl_BITMAP = $BS_BITMAP
-        Case "Static" ; picture,icon,label
-            $iCtrl_SETIMAGE = $STM_SETIMAGE
-            $iCtrl_GETIMAGE = $STM_GETIMAGE
-            $iCtrl_BITMAP = $SS_BITMAP
-        Case Else
-            Return SetError(3, 0, 0)
+	; determine control class and adjust constants accordingly
+	Switch _WinAPI_GetClassName($CtrlId)
+		Case "Button" ; button,checkbox,radiobutton,groupbox
+			$iCtrl_SETIMAGE = $BM_SETIMAGE
+			$iCtrl_GETIMAGE = $BM_GETIMAGE
+			$iCtrl_BITMAP = $BS_BITMAP
+		Case "Static" ; picture,icon,label
+			$iCtrl_SETIMAGE = $STM_SETIMAGE
+			$iCtrl_GETIMAGE = $STM_GETIMAGE
+			$iCtrl_BITMAP = $SS_BITMAP
+		Case Else
+			Return SetError(3, 0, 0)
 	EndSwitch
 
 	; set SS_BITMAP/BS_BITMAP style to the control
-    $Style = _WinAPI_GetWindowLong($hWnd, $GWL_STYLE)
-    If @error Then Return SetError(4, 0, 0)
-    _WinAPI_SetWindowLong($hWnd, $GWL_STYLE, BitOR($Style, $iCtrl_BITMAP))
-    If @error Then Return SetError(5, 0, 0)
+	$Style = _WinAPI_GetWindowLong($hWnd, $GWL_STYLE)
+	If @error Then Return SetError(4, 0, 0)
+	_WinAPI_SetWindowLong($hWnd, $GWL_STYLE, BitOR($Style, $iCtrl_BITMAP))
+	If @error Then Return SetError(5, 0, 0)
 
 	; set image to the control
-    $hPrev  = _SendMessage($hWnd, $iCtrl_SETIMAGE, $IMAGE_BITMAP, $hBitmap)
-    If @error Then Return SetError(6, 0, 0)
+	$hPrev  = _SendMessage($hWnd, $iCtrl_SETIMAGE, $IMAGE_BITMAP, $hBitmap)
+	If @error Then Return SetError(6, 0, 0)
 
-    If $hPrev Then _WinAPI_DeleteObject($hPrev)
+	If $hPrev Then _WinAPI_DeleteObject($hPrev)
 
 	Return 1
 EndFunc
@@ -3766,368 +3495,271 @@ EndFunc
 #EndRegion
 ;==> end external source code
 
-#Region --> UDP SEND STATUS ; --> send YYYYStatus
-Func SendSTATUStoServers(Const ByRef $arrayServerX,$startNum, $endNum)
-	Local $iIP, $iErrorX, $start
-	Local $sIPAddress, $iPort, $serverAddress
 
-	;SelectedTabNum()
-	;$getTimePingServer = TimerInit()
-	$serverRefreshTimer = TimerInit()
+#Region --> UDP SEND
 
-	If Not IsArray($arrayServerX) Or $arrayServerX = "" Then
-		ConsoleWrite("!SendSTATUStoServers failed"&@CRLF)
-		Return False
-	EndIf
-	ConsoleWrite("SendSTATUStoServers array= "&UBound($arrayServerX)&" start= "&$startNum&" end= " &$endNum&@CRLF)
+Func SendStatustoServers_Init($iGameIdx, $aIPArray, $iOffset) ; id
+	;
+	_BIND_UDP_SOCKET($g_hSocketServerUDP)
+	If $g_hSocketServerUDP > 0 Then
+		_SetPacketBufferSize($g_hSocketServerUDP, 25600)
 
-	For $iIP = $startNum To UBound($arrayServerX)- 1 ;todo:
-		If $arrayServerX[$iIP] = "" Then
-			If $iIP > 0 Then
-				ConsoleWrite("!servers blank= "&$iIP&@CRLF)
-				ExitLoop
-			Else
-				ConsoleWrite("!SendSTATUStoServers failed@ "&$iIP&@CRLF)
-				Return False
-			EndIf
+		if $iOffset = -1 Then
+			SendSTATUStoServers_Split($iGameIdx, $aIPArray, 0) ; send inital ping to all
+			;SendSTATUStoServers_CheckDead($aIPArray, $iGameIdx) ; check dead servers
+		Else
+			SendSTATUStoServers_Split($iGameIdx, $aIPArray, $iOffset) ; send inital ping to all
 		EndIf
 
-		$serverAddress 	= StringSplit($arrayServerX[$iIP], ":")
+		If _IsChecked($UI_CBox_sound) Then
+			selectAudoToPlay(1) ; 0=mbrowser 1=gamespy
+		EndIf
+	Else
+		ConsoleWrite("Error: Cant get port")
+		Return False
+	EndIf
+	_UDPCloseSocket($g_hSocketServerUDP)
+
+	Return True
+EndFunc
+
+
+Func SendSTATUStoServers_Split($iGameIdx, $aIPArrayRef, $iOffset)
+	Local $end, $iLast = UBound($aIPArrayRef)-1
+	ConsoleWrite("!getting i:"&$iLast&@CRLF)
+
+	if $iLast >= $g_iMaxSer Then $iLast = $g_iMaxSer - 1 ;make sure list is not to big
+
+	For $start = 0 To $iLast Step $g_iMaxIP
+		if (($start +  $g_iMaxIP-1) > $iLast) then
+			$end = $iLast
+		else
+			$end = $start + $g_iMaxIP-1
+		endif
+
+		If SendSTATUStoServers($iGameIdx, $aIPArrayRef, $start, $end, $iOffset) Then ;get each server details
+			listenIncommingServers($iGameIdx, $start, $end, $iOffset) ;now listen for responce
+			FillListView_A_FullData($iGameIdx, $start, $end, $iOffset)
+		EndIf
+		ConsoleWrite("!end count:"& $end &@CRLF)
+	Next
+EndFunc
+
+Func SendSTATUStoServers_CheckDead($aIPArrayRef, $iGameIdx)
+	;hypo send ping to list 4 more times. if unresponsive
+	for $iLoop = 0 To 3
+		If $g_iServerCountTotal_Responded >= $g_iServerCountTotal Then
+			ExitLoop
+		EndIf
+		ConsoleWrite("!Some servers failed to respond. Sending status again"&@CRLF)
+
+		Local $count = 0, $sIPArrayRef_tmp = "", $aIPArrayRef_tmp
+		For $int = 0 To $g_iServerCountTotal -1
+			If $g_aServerStrings[$iGameIdx][$int][$COL_PING] = 999 Then
+				$sIPArrayRef_tmp &= $aIPArrayRef[$int]
+			EndIf
+		Next
+		if $sIPArrayRef_tmp <> "" Then
+			$aIPArrayRef_tmp = StringSplit($sIPArrayRef_tmp, "\", $STR_NOCOUNT)
+			SendSTATUStoServers_Split($iGameIdx, $aIPArrayRef_tmp, 0)
+		EndIf
+		ConsoleWrite("!count= "&$count&@CRLF)
+	Next
+EndFunc
+
+Func SendSTATUStoServers($iGameIdx, $arrayServerX, $startNum, $endNum, $iOffset = 0)
+	Local $iIP, $iErrorX, $start, $iRetCount = 0
+	Local $sIPAddress, $iPort, $aIP_Port, $sSTATUS_msg
+	;Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	Local $iSVCount = UBound($arrayServerX)
+
+	;ConsoleWrite("!Send STATUS to Servers count:"&$endNum -$startNum +1 &@CRLF)
+	;$getTimePingServer = TimerInit()
+	;_ArrayDisplay($arrayServerX, "SendSTATUStoServers1")
+
+	If $iSVCount = 0 or IsArray($arrayServerX) = 0 Then
+		ConsoleWrite("!Send STATUS to Servers failed"&@CRLF)
+		Return False
+	EndIf
+	;ConsoleWrite(">Send STATUS to Servers. start:"&$startNum&" end:" &$endNum&" total:"&$iSVCount & @CRLF)
+
+	$sSTATUS_msg = sendStatusMessageType_UDP($iGameIdx, False) ;todo port...
+
+	For $iIP = $startNum To $endNum
+		;ConsoleWrite("-server addy:"&$arrayServerX[$iIP]&@CRLF)
+		If $iIP >= $iSVCount Then
+			ConsoleWrite("!Error: end count larger than array. index:"&$iIP&@CRLF)
+			ExitLoop
+		EndIf
+		If $arrayServerX[$iIP] = "" Then
+			ConsoleWrite("!servers blank. index:"&$iIP&@CRLF)
+			ContinueLoop
+		EndIf
+
+		$aIP_Port = StringSplit($arrayServerX[$iIP], ":")
 		If @error Then
-			ConsoleWrite("error spliting ':' " & @CRLF)
+			ConsoleWrite("error spliting ':' str:" &$arrayServerX[$iIP] & @CRLF)
 			Return False; end??
 		EndIf
 
-		If  StringInStr($arrayServerX[$iIP] , "\final\") Or $arrayServerX[$iIP] = "" Then
-			If $iIP > 0 Then
-				Return True
-			Else
-				ConsoleWrite("fail2= "&$iIP&@CRLF)
-				Return False
-			EndIf
+		$sIPAddress = TCPNameToIP( $aIP_Port[1]) ;todo move this
+		$iPort      = Number($aIP_Port[2])
+		;ConsoleWrite("-UDP Send to:" &$sIPAddress&":"&$iPort & " msg:" &$sSTATUS_msg&@CRLF) ;todo
+
+		$iErrorX = _UDPSendTo($sIPAddress, $iPort, $sSTATUS_msg, $g_hSocketServerUDP)
+		if @error Then
+			ConsoleWrite("!UDP Send \status\ sock error =  " & $iErrorX & " error" & @CRLF)
+		Else
+			$iRetCount += 1
 		EndIf
-
-
-
-		$sIPAddress 	= TCPNameToIP( $serverAddress[1])
-		$iPort 			= Int($serverAddress[2])
-
-		;ConsoleWrite("UDP Send ip: " & $sIPAddress & " port: " & $iPort &@CRLF)
-
-		$iErrorX = _UDPSendTo($sIPAddress, $iPort, sendStatusMessageType(), $hSocketServerUDP)
-		if @error Then 	ConsoleWrite("UDP Send \status\ sock error =  " & $iErrorX & " error" & @CRLF)
-		;ConsoleWrite("server sent num= " &$iIP&@CRLF)
-
-		If $tabNum =1 or $tabNum >3 Then
-			$sServerStringArray[$iIP][3] =TimerInit()
-		ElseIf  $tabNum = 2 Then
-			$sServerStringArrayKPQ3[$iIP][3] =TimerInit()
-		ElseIf $tabNum = 3 Then
-			$sServerStringArrayQ2[$iIP][3] =TimerInit()
-		EndIf
-
-		If $iIP = $endNum Then ExitLoop ;endnum added for q2, more than 30 servers at once
+		$g_aServerStrings[$iGameIdx][$iIP+$iOffset][$COL_TIME] = TimerInit() ; store sent time
 	Next
 
-	Return True
+	Return $iRetCount
 EndFunc ; -->send YYYYStatus
 ;========================================================
-#EndRegion --> END UDP SEND
+;--> END UDP SEND
 
-#Region --> UDP RECV listenIncommingServers($iSFinal)
-;========================================================
-Func listenIncommingServers($iSFinal)
-	Local $servNum, $i, $listNum
-	Local $iPing
-	local $data
-	Local $msToGetServerinfo = TimerInit()
-	;ConsoleWrite("array size time1= "&TimerDiff($msToGetServerinfo)&@CRLF)
-	Local $countServ = GetServerCountInArray() ;count servers in array
-	Local $localServerCount = 0
-	Local $KpGsFinal
-
-	While 1 ;loop until all servers recieved or timout hit
-		$data=""
-		Do
-			$data = _UDPRecvFrom($hSocketServerUDP,2048,0)
-			If TimerDiff($serverRefreshTimer) > 1000 Then
-				ConsoleWrite(">TIMEOUT.. 1 seconds"&@CRLF)
-				ExitLoop(2) ;stop do and stop while
-			EndIf
-		Until IsArray($data)
-
-		GUICtrlSetData($ProgressBar, 0)
-
-		; loop through complet internal server array
-		For $servNum = 0 To $countServ - 1
-			If $tabNum = 1 Or $tabNum > 3 Then ;check # of existing server
-				If Not StringCompare($sServerStringArray[$servNum][1],$data[1])=0 Then ContinueLoop ;-10 gs port
-				If Not StringCompare($sServerStringArray[$servNum][2],$data[2])=0 Then ContinueLoop
-			ElseIf $tabNum = 2 Then
-				If Not StringCompare($sServerStringArrayKPQ3[$servNum][1],$data[1])=0 Then	ContinueLoop
-				If Not StringCompare($sServerStringArrayKPQ3[$servNum][2],$data[2])=0 Then	ContinueLoop
-			ElseIf $tabNum = 3 Then
-				If Not StringCompare($sServerStringArrayQ2[$servNum][1],$data[1])=0 Then ContinueLoop
-				If Not StringCompare($sServerStringArrayQ2[$servNum][2],$data[2])=0 Then ContinueLoop
-			EndIf
-
-			; shouldent happen with kingpin GS port. ToDo test.
-			if StringInStr($data[0],"Info string length exceeded") Then
-				$data[0] = StringReplace($data[0], "Info string length exceeded" & Chr(10), "",0 )
-				ConsoleWrite("!Info string length exceeded" & @CRLF)
-			EndIf
-
-			ConsoleWrite("string= " &$data[0] & @CRLF)
-			; trim start of string
-			If StringInStr($data[0], "ÿÿÿÿprint") Then
-				$data[0]=	StringTrimLeft($data[0],StringLen("ÿÿÿÿprint\n")) ;11  trim to"\"
-			ElseIf StringInStr($data[0], "ÿÿÿÿstatusResponse") Then
-				$data[0]=	StringTrimLeft($data[0], StringLen("ÿÿÿÿstatusResponse\n")) ;20  trim to"\"
-			ElseIf StringInStr($data[0], "\gamename\kingpin\") Then
-				$data[0]=	StringTrimLeft($data[0], StringLen("\gamename\kingpin\")) ;18  trim to"\"
-			EndIf
-			ConsoleWrite("+Server strings ' " &$localServerCount+1& " '= "&$data[0]&@CRLF)
-			$KpGsFinal=0
-
-			local $ListViewA1 = ServerArray1ToFill()
-			local $sIsUsed = _GUICtrlListView_GetItemText($ListViewA1,$servNum,2)
-			;ConsoleWrite("isused=" & $sIsUsed & @CRLF)
-			If $tabNum = 1 Or $tabNum > 3 Then
-				If not ($sIsUsed = "???") Then
-					ConsoleWrite("!!is used=" & $sIsUsed & @CRLF)
-					ExitLoop(1)
-				EndIf
-			ElseIf $tabNum = 2 Then
-				If not ($sIsUsed = "???") Then
-					ConsoleWrite("!!is used=" & $sIsUsed & @CRLF)
-					ExitLoop(1)
-				EndIf
-			ElseIf $tabNum = 3 Then
-				If not ($sIsUsed = "???") Then
-					ConsoleWrite("!!is used=" & $sIsUsed & @CRLF)
-					ExitLoop(1)
-				EndIf
-			EndIf
-
-
-			;todo; kp lf?
-			;$data[0] = string( $data[0]& Chr(10))	;add @LF to end (for array later. player count)
-
-			;fill internal server array
-			If $tabNum = 1 Or $tabNum > 3 Then
-				Local $tmpStrCnt = StringInStr($data[0], "\final\")	;"\queryid\" ;hypov8 todo: this should use queryID# then 111.2 111.3 etc.. to late..
-				If Not ($tmpStrCnt = 0) Then
-					$data[0] = StringLeft($data[0], $tmpStrCnt-1)
-					$data[0] = string( $data[0]& Chr(10))	;add @LF to end (for array later. player count)
-					$sServerStringArray[$servNum][0] = String($sServerStringArray[$servNum][0] & $data[0]) ; add existing+recieved data
-					$data[0] = $sServerStringArray[$servNum][0]
-					$KpGsFinal = 1
-					$iPing = TimerDiff($sServerStringArray[$servNum][3])
-				Else
-					;more than 10 clients, gamespy will send it in another packet
-					$tmpStrCnt = StringInStr($data[0],"\queryid\")
-					If Not ($tmpStrCnt = 0) Then
-						$data[0] = StringLeft($data[0], $tmpStrCnt-1)
-					EndIf
-					$sServerStringArray[$servNum][0] = String($sServerStringArray[$servNum][0] & $data[0]) ;todo: cause issues?? 20+clients?  ;$data[0] ;not "\queryid\"
-				EndIf
-			ElseIf $tabNum = 2 Then
-				$data[0] = string( $data[0]& Chr(10))	;add @LF to end (for array later. player count)
-				$sServerStringArrayKPQ3[$servNum][0] = $data[0]
-				$iPing = TimerDiff($sServerStringArrayKPQ3[$servNum][3])
-			ElseIf $tabNum = 3 Then
-				$data[0] = string( $data[0]& Chr(10))	;add @LF to end (for array later. player count)
-				$sServerStringArrayQ2[$servNum][0] = $data[0]
-				$iPing = TimerDiff($sServerStringArrayQ2[$servNum][3])
-			EndIf
-
-
-			;$iPing = TimerDiff($serverPingArray[$servNum]) ;todo all use ping array
-
-			;fill listview
-			If ($tabNum > 1) Or ($KpGsFinal = 1) Then ;StringInStr($data[0],"\final\\queryid\")
-				FillServerListArray($data, int($iPing), $servNum )	;data[0]=string   ;data[1]=ip   ;data[2]=port 22
-				$localServerCount += 1
-				$iServerCountAdd += 1
-					ConsoleWrite("getnum=" & $servNum &" ping="& $iPing & " servCnt="& $iServerCountAdd &@CRLF)
-			Else
-				ConsoleWrite("!server not done?? $KpGsFinal="&$KpGsFinal&@CRLF)
-			EndIf
-
-;~ 			ConsoleWrite("serve count.. InGroup= "&$localServerCount & " Totals= " &$iServerCountAdd& "/"& $iServerCountTotal& @CRLF)
-
-			if ($localServerCount = $iMaxIP) And ($isFinal = 0) Then ;$isFinal allow some extra time for missed servers
-				ConsoleWrite("!got MAX servers"&@CRLF)
-				ExitLoop(2) ;got every server for this wave
-			EndIf
-
-			GUICtrlSetData($ProgressBar, Int( $iServerCountAdd * 100 / $iServerCountTotal))
-
-
-			If $iServerCountAdd = $iServerCountTotal Then
-				ConsoleWrite("!got All servers"&@CRLF)
-				ExitLoop(2) ;got every server
-			EndIf
-
-
-			ExitLoop(1); go back to udp recieve
-		Next
-	WEnd
-EndFunc; --> listen Incomming Servers
-;========================================================
 #EndRegion
 
 #Region --> GAME STRINGS DISPLAYED
 ;=======================================================
 ; --> fill array kp server
-Func GetServerName($string)
-	Local $i
-	$string = StringReplace($string, Chr(10), "\") ;replace last @LF with '\', or string split will have players at end
-	Local $servVars = StringSplit($string, "\") ; Chr(92)
-	If @error Then ConsoleWrite("ERROR split... "& @CRLF)
-	For $i = 1 to $servVars[0] Step 2
-		If (StringCompare($servVars[$i],"hostname")=0) Or (StringCompare($servVars[$i], "sv_hostname")=0) Then
-			return $servVars[$i+1]
-		EndIf
-	Next
-	;Return "UNKNOWN HOSTNAME"
+Func InfoStr_GetServerName(ByRef $aData)
+	Local $sTmp = parseInfoString($aData, "hostname|sv_hostname") ;todo check game?
+	Return StringRegExpReplace($sTmp, "[^ -ÿ]+" ,"") ;remove < asc(32)
 EndFunc
+
 ;===========================
-Func GetPlayerCount($string)
-	Local $player = 0
-	Local $tmpstr
-	Local $numLines, $iply, $i7,$tmpPlyrName
-	Local $sXX[4]
+Func InfoStr_GetPlayerCount(ByRef $aData, ByRef $sPData, $iGameIdx)
+	Local $player = 0, $sRet
 
-	If $tabNum = 1 Then
-		For $i7 =0 to 64
+	;check info string first
+	$sRet = parseInfoString($aData, "numplayers")
+	if $sRet <> "" Then
+		return Number($sRet)
+	EndIf
 
-			$sXX = String("player_" & $i7 &"\") ;name player_0
-			If StringInStr($string, $sXX) Then
-			$player +=1
+	;count actual players instead
+	if $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] then ;gamespy players
+		;gs protocol...
+		Local $aTmp = StringSplit($sPData, "\", $STR_NOCOUNT)
+		For $i = 0 to $MAX_PLAYERS -1
+			if parseInfoString($aTmp, "player_"& $i) <> "" Then
+				$player += 1
 			Else
 				Return $player
 			EndIf
 		Next
-		Return $player
 	Else
-		$tmpstr = StringSplit($string, Chr(10), $STR_ENTIRESPLIT)
-			If @error Then
-				ConsoleWrite("player error no @LF" & $tmpstr&@CRLF)
-				Return 0
-			EndIf
-		$numLines = $tmpstr[0] ;3 lines standard >= players
-		For $iply = 2 To $numLines Step 1
-			If Not ($tmpstr[$iply] = "") Then ;catch end line @LF, EOT
-				$tmpPlyrName = _StringBetween($tmpstr[$iply],'"', '"')
-				If @error Then ContinueLoop
-				If (StringCompare($tmpPlyrName[0],"WallFly[BZZZ]") = 0) Then ContinueLoop
-				$player +=1
+		Local $tmpPlyrName
+		if $sPData = "" Then Return 0
+		Local $aTmp = StringSplit($sPData, Chr(10))
+		If @error Then
+			ConsoleWrite("player error no @LF" & $sPData&@CRLF)
+			Return 0
+		EndIf
+		;3 lines standard >= players
+		For $iply = 1 To $aTmp[0]
+			If $aTmp[$iply] <> "" Then ;catch end line @LF, EOT
+				$tmpPlyrName = _StringBetween($aTmp[$iply],'"', '"') ;return's array
+				If @error Or $tmpPlyrName[0] = "" Then ContinueLoop
+				Switch $iGameIdx
+					Case $ID_Q2
+						If StringInStr($tmpPlyrName[0], "WallFly", $STR_NOCASESENSE) Then ContinueLoop ;WTF is this. skip
+					Case $ID_UNVAN
+						If StringInStr($tmpPlyrName[0], "[bot]", $STR_NOCASESENSE) Then ContinueLoop ;skip bots
+					;todo ADD GAMES
+				EndSwitch
+
+				$player += 1
 			EndIf
 		Next
-		Return $player
 	EndIf
+
+	Return $player
 EndFunc
-;=======================
-Func GetPlayerMax($string)
-	Local $aServVars, $i, $tmp =0
-	$string = StringReplace($string, Chr(10), "\") ;replace last @LF with '\', or string split will have players at end
-	 $aServVars = StringSplit($string, '\', $STR_NOCOUNT)
-	If @error Then ConsoleWrite("ERROR split... GetPlayerMax"& @CRLF)
-	For $i = 0 to UBound($aServVars) -1 Step 2
-		If (StringCompare($aServVars[$i],"maxclients")=0) Or (StringCompare($aServVars[$i],"sv_maxclients")=0) Then
-			$tmp = Int($i) + 1
-			Return $aServVars[$tmp]
-		EndIf
+
+Func parseInfoString(ByRef $aData, $sSearch)
+	Local $aSearch = StringSplit($sSearch, "|", $STR_NOCOUNT) ;read multiple keys
+
+	For $sIdx = 0 to UBound($aSearch) -1
+		For $i = 0 to UBound($aData) -2 Step 2
+			If StringCompare($aData[$i], $aSearch[$sIdx]) = 0 Then
+				Return $aData[$i+1]
+			EndIf
+		Next
 	Next
-	Return 0 ;failed to find
-EndFunc
-;=======================
-Func GetMapName($string)
-	$string = StringReplace($string, Chr(10), "\") ;replace last @LF with '\', or string split will have players at end
-	Local $servVars = StringSplit($string, "\", $STR_NOCOUNT)
-	For $i = 0 to UBound($servVars) -1 Step 2
-		If StringCompare($servVars[$i],"mapname")=0 Then
-			Return $servVars[$i+1]
-		EndIf
-	Next
+
 	Return "" ;failed
 EndFunc
+
 ;=======================
-Func GetModName($string)
-	$string = StringReplace($string, Chr(10), "\") ;replace last @LF with '\', or string split will have players at end
-	Local $servVars = StringSplit($string, "\", $STR_NOCOUNT)
-	;loop. look for gametype
-	For $i = 0 to UBound($servVars) -1 Step 2
-		if StringCompare($servVars[$i],"gametype")=0 Then
-			Return $servVars[$i+1]
-		EndIf
-	Next
-	;loop through again. use "gamename"
-	For $i = 0 to UBound($servVars) -1 Step 2
-		if StringCompare($servVars[$i],"gamename")=0 Then
-			Return $servVars[$i+1]
-		EndIf
-	Next
-
-
-	;loop through again. use "game"
-	For $i = 0 to UBound($servVars) -1 Step 2
-		If StringCompare($servVars[$i], "game")=0 Then
-			Return $servVars[$i+1]
-		EndIf
-	Next
-
-
-	Return "" ;failed
+Func InfoStr_GetPlayerMax(ByRef $aData)
+	Local $aServVars = parseInfoString($aData, "maxclients|maxplayers|sv_maxclients|") ;
+	if $aServVars <> "" Then
+		Return $aServVars
+	EndIf
+	Return "0" ;failed to find
+EndFunc
+;=======================
+Func InfoStr_GetMapName(ByRef $aData)
+	Return parseInfoString($aData, "mapname|map")
+EndFunc
+;=======================
+Func InfoStr_GetModName(ByRef $aData)
+	Return parseInfoString($aData, "gametype|gamename|game|*gamedir")
 EndFunc ; --> fill array kp server
 ;=======================
-Func GetGamePort($string)
-	If $tabNum = 1 Or $tabNum >3 Then
-		$string = StringReplace($string, Chr(10), "\") ;replace last @LF with '\', or string split will have players at end
-		Local $servVars = StringSplit($string, "\", $STR_NOCOUNT)
-		For $i = 0 to UBound($servVars) -1 Step 2
-			if StringCompare($servVars[$i], "hostport")=0 Then
-				Return $servVars[$i+1]
-			EndIf
-		Next
-	EndIf
-
-	Return "" ;failed
+Func InfoStr_GetGamePort(ByRef $aData)
+	Return parseInfoString($aData, "hostport")
 EndFunc ; --> set gamespy/game port for kingpin
 
 ;=================================
 
-Func ServerArray1ToFill()
-	If $tabNum = 1 Or $tabNum >3 And Not ($tabNum =6) Then	Return $ListView1KP
-	If $tabNum = 2 Then	Return $ListView1KPQ3
-	If $tabNum = 3 Then	Return $ListView1Q2
-	If $tabNum = 6 Then
-		If $iMGameType = 1 Then	Return $ListView1M
-		If $iMGameType = 2 Then	Return $ListView2M
-		If $iMGameType = 3 Then	Return $ListView3M
-	EndIf
 
+Func getListView_A_CID()
+	Switch $g_iTabNum
+		Case $TAB_GB ; 0 to $COUNT_GAME -1
+			Return $UI_ListV_svData_A
+		Case $TAB_MB
+			Switch $iMGameType
+				Case 0 to $ID_Q2
+					Return $UI_ListV_mb_ABC[$iMGameType]
+				Case Else
+					Return $UI_ListV_mb_ABC[$ID_KP1] ;default
+			EndSwitch
+		Case Else ;1
+			Return $UI_ListV_svData_A ;default
+	EndSwitch
 EndFunc
 
-Func ServerArray2ToFill()
-	If $tabNum =1 Or $tabNum >3 Then
-		Return $ListView2
-	ElseIf $tabNum =2 Then
-		Return $ListView2KPQ3
-	ElseIf $tabNum =3 Then
-		Return $ListView2Q2
-	EndIf
+Func getListView_B_CID()
+	Switch $g_iTabNum
+		Case $TAB_GB ; 0 to $COUNT_GAME -1
+			Switch $g_iCurGameID
+				Case 0 To $COUNT_GAME-1
+					Return $UI_ListV_svData_B
+				Case Else
+					Return $UI_ListV_svData_B ;default
+			EndSwitch
+		Case Else ;1
+			Return $UI_ListV_svData_B ;default
+	EndSwitch
 EndFunc
 
-Func ServerArray3ToFill()
-	If $tabNum =1 Or $tabNum >3 Then
-		Return $ListView3
-	ElseIf $tabNum =2 Then
-		Return $ListView3KPQ3
-	ElseIf $tabNum =3 Then
-		Return $ListView3Q2
-	EndIf
+Func getListView_C_CID()
+	Switch $g_iTabNum
+		Case $TAB_GB  ;0 to $COUNT_GAME -1
+			Switch $g_iCurGameID
+				Case 0 To $COUNT_GAME-1
+					Return $UI_ListV_svData_C
+				Case Else
+					Return $UI_ListV_svData_C ;default
+			EndSwitch
+		Case Else
+			Return $UI_ListV_svData_C;default
+	EndSwitch
 EndFunc
 
 Func IconPingX($iPingX)
@@ -4137,760 +3769,662 @@ Func IconPingX($iPingX)
 EndFunc
 
 Func IconPlayerX($iPlayersX, $iPlayerMax)
-	If $iPlayersX = 0 Then Return 0 ;empty
-
-	If $iPlayersX = $iPlayerMax Then
-		;$isPlayersInServer = True
+	If $iPlayersX = 0 Then
+		Return 0 ;empty
+	ElseIf $iPlayersX = $iPlayerMax Then
 		Return 6 ;full icon
 	EndIf
-	;$isPlayersInServer = True
 	Return 7 ;half full icon
 EndFunc
 
-
 #EndRegion --> GAME STRINGS DISPLAYED
 
-#Region --> FILL ARRAY1
+
+#region --> OFFLINE LIST
+; --> BUTTON OFFLINE
+GUICtrlSetOnEvent($UI_Btn_offlineList, "UI_Btn_offlineListClicked")
+	Func UI_Btn_offlineListClicked()
+		SetSelectedGameID()
+		EnableUIButtons(False)
+		Switch $g_iCurGameID
+			Case 0 to $COUNT_GAME -1
+				LoadOffLineServerList($g_iCurGameID)
+			Case Else
+				LoadOffLineServerList($ID_KP1) ;default
+		EndSwitch
+		EnableUIButtons(True)
+	EndFunc
+
+;--> OFFLNE LIST
 ;========================================================
-; --> FillServerListArray
-Func FillServerListArray($dataX, $ping, $servNum)
-	;SelectedTabNum()
-	Local $ListViewA = ServerArray1ToFill()
+; --> set offline list
+Func LoadOffLineServerList($iGameIdx)
+	EnableUIButtons(False)
+	Local $sIP_Port, $tmpArray, $i, $sIP, $iPort, $iPortGS, $arrayOffline, $svNum = 0
+	Local $ListViewA = getListView_A_CID()
+	Local $aTmpOffline[$COUNT_GAME]
 
+	$aTmpOffline[$ID_KP1] = "" & _
+		"kp.hambloch.com:31510|Luschen Botmatch"      &@CRLF& _
+		"kp.hambloch.com:31511|Luschen Hookmatch"     &@CRLF& _
+		"kp.hambloch.com:31512|Luschen Deathmatch"    &@CRLF& _
+		"kp.hambloch.com:31515|Luschen COOP"          &@CRLF& _
+		"kp.hambloch.com:31516|Luschen Gunrace +Bots" &@CRLF& _
+		"kp.hambloch.com:31519|---Battys kit---"	  &@CRLF& _
+		"" & _
+		"150.107.201.184:31510|Newskool Classic Gangbang" &@CRLF& _
+		"150.107.201.184:31511|Newskool Instagib"         &@CRLF& _
+		"150.107.201.184:31512|Newskool Bagman"           &@CRLF& _
+		"150.107.201.184:31513|Newskool Fragfest"         &@CRLF& _
+		"150.107.201.184:31514|Newskool CTF"              &@CRLF& _
+		"150.107.201.184:31515|Newskool Crash Squad"      &@CRLF& _
+		"150.107.201.184:31516|Newskool Power2"           &@CRLF& _
+		"150.107.201.184:31517|Newskool Gunrace"          &@CRLF& _
+		"" & _
+		"150.107.201.184:31518|Newskool Killapin"                     &@CRLF& _
+		"150.107.201.184:31531|Newskool Kill Confirmed"               &@CRLF& _
+		"150.107.201.184:31532|Newskool Hitmen"                       &@CRLF& _
+		"150.107.201.184:31533|Newskool Chicken Chase"                &@CRLF& _
+		"150.107.201.184:31534|Newskool Rocketfest"                   &@CRLF& _
+		"150.107.201.184:31537|Newskool Easter/Summer/Halloween/Xmas" &@CRLF& _
+		"" & _
+		"202.169.104.136:31355|macanah.mooo.com BOTMATCH"         &@CRLF& _
+		"202.169.104.136:31399|macanah.mooo.com Kingpin Speedway" &@CRLF& _
+		"202.169.104.136:31510|macanah.mooo.com ffa"              &@CRLF& _
+		"202.169.104.136:31513|macanah.mooo.com riotz mod"        &@CRLF& _
+		"202.169.104.136:31515|macanah.mooo.com Jedi Force Mod"   &@CRLF& _
+		"202.169.104.136:31516|macanah.mooo.com Kpz COOP"         &@CRLF& _
+		"202.169.104.136:31517|macanah.mooo.com BaGmaN"           &@CRLF& _
+		"202.169.104.136:31518|macanah.mooo.com Assault"          &@CRLF& _
+		"202.169.104.136:31519|macanah.mooo.com CTF"              &@CRLF& _
+		"202.169.104.136:31556|macanah.mooo.com Crash Squad"      &@CRLF& _
+		"" & _
+		"109.205.61.174:31512|East Coast Snitch Slappa (Bagman)" &@CRLF& _
+		"109.205.61.174:31513|East Coast Deathmatch"             &@CRLF& _
+		"109.205.61.174:31514|East Coast CTF"                    &@CRLF& _
+		"109.205.61.174:31515|East Coast Crash Squad"            &@CRLF& _
+		"109.205.61.174:31517|East Coast Gunrace"                &@CRLF& _
+		"109.205.61.174:31536|East Coast Xmas Crash"             &@CRLF& _
+		"109.205.61.174:31537|East Coast Xmas"                   &@CRLF& _
+		"109.205.61.174:31538|East Coast Xmas CTF"		         &@CRLF& _
+		"" & _
+		"208.77.22.94:31510|Dark Fiber FFA Chicago"             &@CRLF& _
+		"45.89.125.89:31510|Dark Fiber FFA EU"                  &@CRLF& _
+		"" & _
+		"71.254.216.136:31510|Cent's Enhanced Bagman Server"    &@CRLF& _
+		"71.254.216.136:31512|Cent's KPQ2 Deathmatch Server"    &@CRLF& _
+		"71.254.216.136:31514|Cent's Blood Money Bagman Server" &@CRLF& _
+		"71.254.216.136:31515|Cent's Crash TDM Server"          &@CRLF& _
+		"" & _
+		"188.74.83.135:19266|KeeF's Badass Server"     &@CRLF& _
+		"188.74.83.135:19421|KeeF's Kit Mod Server"    &@CRLF& _
+		"" & _; temp servers
+		"82.15.31.92:31511|AoM's UK Riotz Server"      &@CRLF& _
+		"73.64.19.177:31510|DrBrain's Gangbang Server" &@CRLF& _
+		"82.169.45.137:31510|Fredz's server"           &@CRLF& _
+		"84.87.109.134:31510|G()AT's server"           &@CRLF& _
+		"84.87.109.134:31512|G()AT's test server"      &@CRLF& _
+		"hypo.hambloch.com:31510|hypo_v8's server"     &@CRLF& _
+		"93.41.146.9:31510|ITA KP Server"              &@CRLF& _
+		"82.69.95.83:31510|Killa's Home server"
 
-	;$stringCol[int($iQ3)] = GUICtrlCreateListViewItem("", $idListview) ;done earlyer. maybe use this later. to sort by ping+color?
-	Local $ip 			= string( $dataX[1] & ":" & $dataX[2])
-	Local $serverName 	= GetServerName($dataX[0])
-	Local $playerCount 	= GetPlayerCount($dataX[0])
-	Local $playerMax	= GetPlayerMax($dataX[0])
-	Local $mapName 		= GetMapName($dataX[0])
-	Local $modName    	= GetModName($dataX[0])
-	Local $playerCnt 	= String($playerCount &"/"& $playerMax)
-	Local $iconPlayer 	= IconPlayerX($playerCount,$playerMax )
-	Local $iconPing		= IconPingX($ping)
-	Local $portGame		= GetGamePort($dataX[0])
+	$aTmpOffline[$ID_KPQ3] = "" & _
+		"www.kingpinq3.com:31600|KingpinQ3 DM Server"                          &@CRLF& _
+		"www.kingpinq3.com:31610|KingpinQ3 CTF Server"                         &@CRLF& _
+		"www.kingpinq3.com:31630|KingpinQ3 Realmode Deathmatch Server"         &@CRLF& _
+		"www.kingpinq3.com:31640|KingpinQ3 One Flag CTF Server"                &@CRLF& _
+		"www.kingpinq3.com:31650|KingpinQ3 Team Deathmatch Development Server" &@CRLF& _
+		"www.kingpinq3.com:31660|Bagman development server"                    &@CRLF& _
+		"www.kingpinq3.com:31670|KingpinQ3 Hitmen Server"                      &@CRLF& _
+		"" & _ ;temp servers
+		"hypo.hambloch.com:31600|KingpinQ3 hypo_v8" &@CRLF& _
+		"hypo.hambloch.com:31610|KingpinQ3 hypo_v8"
 
-	$GS_countPlayers += $playerCount
+	$aTmpOffline[$ID_Q2] = "" & _
+		"kp.servegame.com:27910|Luschen Quakematch"                       &@CRLF& _
+		"202.169.104.136:56342|macanah-lurker.2fh.co CTF q2"              &@CRLF& _
+		"202.169.104.136:27916|macanah-lurker.2fh.co q2 ActioN"           &@CRLF& _
+		"202.169.104.136:27988|macanah-lurker.2fh.co q2 awaken2 assault"  &@CRLF& _
+		"202.169.104.136:27933|macanah-lurker.2fh.co q2 awaken2 ctf"      &@CRLF& _
+		"202.169.104.136:27934|macanah-lurker.2fh.co q2 Brazen CooP http" &@CRLF& _
+		"202.169.104.136:27913|macanah-lurker.2fh.co q2 coop-gibrack-mod" &@CRLF& _
+		"202.169.104.136:27915|macanah-lurker.2fh.co q2 JumP"             &@CRLF& _
+		"202.169.104.136:44444|macanah-lurker.2fh.co q2 MatriX"           &@CRLF& _
+		"202.169.104.136:27911|macanah-lurker.2fh.co q2 rocket arena"     &@CRLF& _
+		"202.169.104.136:27990|macanah-lurker.2fh.co q2OPENTDM"
 
-	If Not ($portGame = "") Then
-		$sServerStringArray[$servNum][4] = $portGame ;set gamespy reported game port
-		$ip	= string( $dataX[1] & ":" & $portGame)
-		_GUICtrlListView_AddSubItem($ListViewA,$servNum, $ip,		1, 	-1)				;IP
+	$aTmpOffline[$ID_HEX] = "" & _
+		"blackmarsh.hexenworld.org:26900|Hexen II DM w/ bots" &@CRLF& _
+		"darkravager.ddns.net:26900|DarkRavagerH2Coop"        &@CRLF& _
+		"blackmarsh.hexenworld.org:26901|"                    &@CRLF& _
+		"blackmarsh.hexenworld.org:26902|"                    &@CRLF& _
+		"blackmarsh.hexenworld.org:26903|"                    &@CRLF& _
+		"clovr.xyz:26900|"                                    &@CRLF& _
+		"romagnarines.mooo.com:26900|"                        &@CRLF& _
+		"thebleeding.strangled.net:26900|"
+	$aTmpOffline[$ID_HW] = "" & _
+		"68.83.198.53:26950|HexenWorld DM"                          &@CRLF& _
+		"168.138.68.8:26956|DarkRavager Rival Kingdoms v.90 (beta)" &@CRLF& _
+		"168.138.68.8:26955|DarkRavager DM Server"                  &@CRLF& _
+		"68.83.198.53:26951|HexenWorld CTF"                         &@CRLF& _
+		"168.138.68.8:26950|DarkRavagerSiege"                       &@CRLF& _
+		"108.61.178.207:26950|de.quake.world:26950 Siege"           &@CRLF& _
+		"51.195.189.61:26950|JakubM's Server"                       &@CRLF& _
+		"108.61.178.207:26951|de.quake.world:26951 DM"
+	$aTmpOffline[$ID_HER] = "" & _
+		"71.84.56.38:28910|MyDedServer DM"             &@CRLF& _
+		"45.235.98.10:27112|OldServers.com.ar - Coop"  &@CRLF& _
+		"blackmarsh.hexenworld.org:28910|"             &@CRLF& _
+		"clovr.xyz:28910|clovr - coop"                 &@CRLF& _
+		"66.108.83.111:27910|"
+
+	;$aTmpOffline[$ID_] = "" & _
+	;todo ADD GAMES
+	;NOTE: use actual game port. (gamespy port fixed below)
+
+	ResetServerListArrays(BitShift(1, -($iGameIDx))) ;bit
+	_GUICtrlListView_DeleteAllItems($ListViewA)
+
+	;split string
+	$arrayOffline = StringSplit($aTmpOffline[$iGameIdx], @CRLF, BitOR($STR_NOCOUNT, $STR_ENTIRESPLIT))
+	if Not @error Then
+		For $i = 0 To UBound($arrayOffline) -1
+			if $arrayOffline[$i] <> "" then
+				$tmpArray = StringSplit($arrayOffline[$i],"|", $STR_NOCOUNT)
+				$sIP_Port = StringSplit($tmpArray[0],     ":", $STR_NOCOUNT)
+
+				$sIP = TCPNameToIP($sIP_Port[0])
+				If $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] Then ;using gamespy protocol
+					; NOTE: this could fail, if server is not compliant
+					$iPort   = Number($sIP_Port[1]) + $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] ;browser communication port.
+					$iPortGS = Number($sIP_Port[1]) ; server port.
+				else
+					$iPort   = Number($sIP_Port[1])
+					$iPortGS = 0
+				endif
+
+				;fill globbal server array in memory
+				$g_aServerStrings[$iGameIdx][$i][$COL_NAME]   = $tmpArray[1] ; server name
+				$g_aServerStrings[$iGameIdx][$i][$COL_IP]     = $sIP
+				$g_aServerStrings[$iGameIdx][$i][$COL_PORT]   = $iPort
+				$g_aServerStrings[$iGameIdx][$i][$COL_PING]   = 999;"999"
+				$g_aServerStrings[$iGameIdx][$i][$COL_PORTGS] = $iPortGS ;set gamespy reported game port
+				$svNum += 1
+			EndIf
+		Next
+		$g_iServerCountTotal = $svNum
+		FillServerListView_popData($iGameIdx, $ListViewA)
+	Else
+		$g_iServerCountTotal = 0
+	EndIf
+EndFunc ; -->offline kp list
+
+; -->offline kp list
+;========================================================
+#endregion
+
+#Region -->  BUTTON's
+;--> GUI STATE enable/disble
+Func EnableUIButtons($bEnable)
+	;$UI_Btn_offlineList
+	Local Const $list1 = [$tabGroupGames, $UI_Combo_gameSelector, $UI_Btn_refreshMaster, _
+		$UI_Btn_pingList, $UI_Btn_loadFav, $UI_Btn_settings, $UI_Btn_expand, $UI_Btn_offlineList]
+	Local $iState  = ($bEnable)? ($GUI_ENABLE):($GUI_DISABLE)
+	Local $bActive = ($bEnable)? (False):(True)
+
+	;set btn disabled state
+	For $i = 0 to UBound($list1) - 1
+		GUICtrlSetState($list1[$i], $iState)
+	Next
+
+	;set btn readonly state
+	For $i = 0 to UBound($UI_ListV_mb_ABC) - 1
+		_GUICtrlEdit_SetReadOnly($UI_ListV_mb_ABC[$i], $bActive)
+	Next
+	_GUICtrlEdit_SetReadOnly($UI_ListV_svData_A, $bActive)
+
+	;todo check why this was needed? auto refresh?
+	If $g_iTabNum = $TAB_CHAT Then
+		ConsoleWrite("!!!chat tab"&@CRLF)
+		SetActiveTab($TAB_CHAT)
+	EndIf
+EndFunc
+
+Func BeginGettinServers()
+	;====================
+	$g_isGettingServers = 1
+	$g_iServerCountTotal_Responded = 0
+	EnableUIButtons(False)
+	;====================
+
+	$g_iServerCountTotal = 1 ;get # servers to use later to stop refresh
+	$g_iPlayerCount_GS = 0
+EndFunc; --> END REFRESH BUTTON
+
+;========================================================
+; --> FinishedGettinServers
+Func FinishedGettinServers()
+	$g_iServerCountTotal = 0
+	$g_iServerCountTotal_Responded = 0
+	$g_isGettingServers = 0 ; process WM_NOTIFY
+	GUICtrlSetData($UI_Prog_getServer, 0)
+	EnableUIButtons(True)
+EndFunc; --> END REFRESH BUTTON
+;========================================================
+#EndRegion
+
+#Region --> Fill server
+Func FillServerStringArrayIP($iGameIdx, $ipArray)
+	Local $sIP, $iPort, $iPortGS, $splitIP, $iCount = UBound($ipArray) -1
+	;_ArrayDisplay($ipArray)
+	; fill server strings with fresh servers and as blank info
+	if $iCount >= $g_iMaxSer then $iCount = $g_iMaxSer - 1
+
+	For $i = 0 To $iCount
+		$splitIP = StringSplit($ipArray[$i],":", $STR_NOCOUNT)
+		If @error Then
+			ConsoleWrite("!error invalid ip from master" & @CRLF)
+			$sIP = $ipArray[$i]
+			$iPort = 0
+		Else
+			$sIP = $splitIP[0]
+			$iPort = Number($splitIP[1])
+		EndIf
+
+		;ConsoleWrite("port:"&$iPort&@CRLF)
+		;ConsoleWrite("g:"&$iGameIdx& " i:"&$i& " c:"&$COL_IP&" ip:"&$sIP& " port:"&$iPort&@CRLF)
+		$g_aServerStrings[$iGameIdx][$i][$COL_IP]   = $sIP
+		$g_aServerStrings[$iGameIdx][$i][$COL_PORT] = $iPort ; browser communication port
+		$g_aServerStrings[$iGameIdx][$i][$COL_PING] = 999;"999"
+		if $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] then
+			$g_aServerStrings[$iGameIdx][$i][$COL_PORTGS] = $iPort -$g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P]
+			$g_aServerStrings[$iGameIdx][$i][$COL_NAME]   = StringFormat("%s:%i", $sIP, $g_aServerStrings[$iGameIdx][$i][$COL_PORTGS])
+			;If $iGameIdx = $ID_KP1 Then
+				;$g_aServerStrings[$iGameIdx][$i][$COL_PORTGS] = $iPort + 10 ;added +10 port so connect works. updated with real server info later
+				;$g_aServerStrings[$iGameIdx][$i][$COL_NAME]   = StringFormat("%s:%i", $sIP, $iPort + 10)
+		Else
+			$g_aServerStrings[$iGameIdx][$i][$COL_NAME]   = StringFormat("%s:%i", $sIP, $iPort) ;$sIP&":"&$iPort
+		EndIf
+	Next
+EndFunc
+
+Func FillServerStringArrayPing($iGameIdx, $sData, $iCount)
+	For $i = 0 to $iCount -1
+		$g_aServerStrings[$iGameIdx][$i][$COL_PING] = $sData
+	Next
+EndFunc
+
+;~ Func FillServerStringArrayPlayers($iGameID, $sData, $iCount)
+;~ 	For $i = 0 to $iCount -1
+;~ 		$g_aServerStrings[$iGameID-1][$i][$COL_PLAYERS] = $sData
+;~ 	Next
+;~ EndFunc
+
+Func FillServerListView_popData($iGameIDx, $ListViewA)
+	Local $splitIP, $sName, $sIP_Port, $sPing, $sPCount
+	;Local $ListViewA = getListView_A_CID()
+	Local $portIdx
+	if $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] then
+		$portIdx = $COL_PORTGS
+	else
+		$portIdx = $COL_PORT
 	endif
-	_GUICtrlListView_AddSubItem($ListViewA,$servNum, $serverName ,	2, 	-1) 			;server
-	_GUICtrlListView_AddSubItem($ListViewA,$servNum, $ping,			3,	$iconPing)		;ping
-	_GUICtrlListView_AddSubItem($ListViewA,$servNum, $playerCnt,	4,	$iconPlayer)	;players
-	_GUICtrlListView_AddSubItem($ListViewA,$servNum, $mapName,		5, 	-1)				;map
-	_GUICtrlListView_AddSubItem($ListViewA,$servNum, $modName,		6, 	-1)				;mod
 
-EndFunc ; --> FillServerListArray
+	_GUICtrlListView_BeginUpdate($ListViewA)
+	_GUICtrlListView_DeleteAllItems($ListViewA)
+	ConsoleWrite("popData gameID:"&$iGameIDx&@CRLF)
+	local $sTmp
+	For $i = 0 To $g_iMaxSer -1
+		If $g_aServerStrings[$iGameIDx][$i][$COL_PING] > 0 Then ;ping. must be valid
+			$sName = $g_aServerStrings[$iGameIDx][$i][$COL_NAME]
+			$sIP_Port = StringFormat("%s:%i", $g_aServerStrings[$iGameIDx][$i][$COL_IP], $g_aServerStrings[$iGameIDx][$i][$portIdx])
+			$sPing = StringFormat("%i", $g_aServerStrings[$iGameIDx][$i][$COL_PING]) ;int
+			$sPCount = $g_aServerStrings[$iGameIDx][$i][$COL_PLAYERS]
+			;fill listview
+			;GUICtrlCreateListViewItem($i &'|'&$sIP_Port &'|'&$sName &'|'&$sPing&'|'&$sPCount, $ListViewA) ; not used as name may have "|"
+			_GUICtrlListView_AddItem($ListViewA,    $i,              -1, $g_listID_offset+$i) ;offset ID.
+			_GUICtrlListView_AddSubItem($ListViewA, $i, $sIP_Port, 1,-1)
+			_GUICtrlListView_AddSubItem($ListViewA, $i, $sName,    2,-1)
+			_GUICtrlListView_AddSubItem($ListViewA, $i, $sPing,    3,-1)
+			_GUICtrlListView_AddSubItem($ListViewA, $i, $sPCount,  4,-1)
+			; Set icon
+			_GUICtrlListView_SetItemImage($ListViewA, $i, -1)
+		Else
+			ConsoleWrite("update:"& $i &@CRLF)
+			ExitLoop
+		EndIf
+	Next
+	_GUICtrlListView_EndUpdate($ListViewA)
+EndFunc
+
+Func CleanupServerName(ByRef $serverName, $iGameIdx)
+	Switch $iGameIdx
+		Case $ID_SOF1
+			$serverName = StringRegExpReplace($serverName, "[^ -ÿ]+" ,"") ;remove < asc(32)
+		Case $ID_KPQ3, $ID_UNVAN
+			$serverName = StringRegExpReplace($serverName, "\^." ,"") ;remove ^x
+		;Case Else
+		;todo ADD GAMES
+	EndSwitch
+EndFunc
+
+;--> FILL ARRAY1
 ;========================================================
+Func FillServerListView_SV_Responce($iGameIdx, ByRef $sIP, ByRef $sPort, ByRef $sPortGS, ByRef $svName, _
+		ByRef $ping, ByRef $iPCount, ByRef $aSvData, ByRef $sPData, ByRef $map, ByRef $mod, $iListIndex)
 
+	Local $ListViewA    = getListView_A_CID()
+	Local $serverName   = InfoStr_GetServerName($aSvData)
+	Local $playerCount  = InfoStr_GetPlayerCount($aSvData, $sPData, $iGameIdx)
+	Local $playerMax    = InfoStr_GetPlayerMax($aSvData)
+	Local $mapName      = InfoStr_GetMapName($aSvData)
+	Local $modName      = InfoStr_GetModName($aSvData)
+	Local $portGS       = InfoStr_GetGamePort($aSvData)
+	Local $playerCnt    = String($playerCount &"/"& $playerMax)
+	Local $playerIcon   = IconPlayerX($playerCount, $playerMax)
+	Local $pingIcon     = IconPingX($ping)
 
+	$g_iPlayerCount_GS += Number($playerCount)
+	if $serverName <> "" Then
+		CleanupServerName($serverName, $iGameIdx)
+	ElseIf $serverName = "" Then
+		$serverName = $svName ;invalid string(offline loaded?)
+	EndIf
 
-#EndRegion --> END FILL ARRAY1
+	; <-- return data
+	$iPCount = $playerCount
+	$svName = $serverName
+	$map = $mapName
+	$mod = $modName
 
-#Region  FILL ARRAY 2&3 STRINGS
+	;update gameport from server string
+	if $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] And $portGS <> ""  then
+		$sPortGS = Number($portGS) ;set gamespy reported game port
+		Local $ip = string($sIP &":"& $sPortGS)
+		_GUICtrlListView_SetItem($ListViewA, $ip, $iListIndex,		1,	-1)
+	EndIf
+
+	_GUICtrlListView_SetItem($ListViewA, $serverName, $iListIndex,  2,  -1)          ;server
+	_GUICtrlListView_SetItem($ListViewA, $ping,       $iListIndex,  3,  $pingIcon)   ;ping
+	_GUICtrlListView_SetItem($ListViewA, $playerCnt,  $iListIndex,  4,  $playerIcon) ;players
+	_GUICtrlListView_SetItem($ListViewA, $mapName,    $iListIndex,  5,  -1)          ;map
+	_GUICtrlListView_SetItem($ListViewA, $modName,    $iListIndex,  6,  -1)          ;mod
+EndFunc ; --> FillServerListView_SV_Responce
 ;========================================================
-; --> FillSelectedServerStrings
-Func FillSelectedServerStrings($iTab, $iListNum)
-	;#forceref $iListNum
-	;SelectedTabNum()
-	Local $serStrArray, $serSelNum
-	Local $ListViewA = ServerArray1ToFill()
-	Local $ListViewB = ServerArray2ToFill()
-	Local $ListViewC = ServerArray3ToFill()
+;--> END FILL ARRAY1
 
+Func FillListView_B(ByRef $sPlayers, $ListViewB, $iGameIdx)
+	ConsoleWrite("-players:" &$sPlayers&@CRLF)
+	If $sPlayers <> "" Then
+		;_ArrayDisplay($sPlayers)
+		_GUICtrlListView_BeginUpdate($ListViewB)
+		;-------; add players info, max 31 char for player name
+		Local $iply
+		if $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] _
+		Or $iGameIdx = $ID_Q1 Or $iGameIdx = $ID_HEX Then ;hexen/q1 decompressed
+			local const $aKey = ['player', 'frags', 'ping', 'deaths', 'team']
 
-	If $iListNum = -1 Or $iTab > 3 Then
+			;If StringInStr($serverVars, "player_0") Then
+			Local $sXX[4], $sInfo[5], $tmp, $sArray, $aPData, $idx
+			$aPData = StringSplit($sPlayers, "\", $STR_NOCOUNT)
+			if not @error Then
+				For $pIdx = 0 to $MAX_PLAYERS - 1
+					$sInfo[0] = parseInfoString($aPData, StringFormat("%s_%i", $aKey[0], $pIdx)) ;name
+					if $sInfo[0] <> "" Then
+						ConsoleWrite("+found"&@CRLF)
+						$sInfo[1] = parseInfoString($aPData, StringFormat("%s_%i", $aKey[1], $pIdx)) ;frags
+						$sInfo[2] = parseInfoString($aPData, StringFormat("%s_%i", $aKey[2], $pIdx)) ;ping
+						$sInfo[3] = parseInfoString($aPData, StringFormat("%s_%i", $aKey[3], $pIdx)) ;deaths
+						$sInfo[4] = parseInfoString($aPData, StringFormat("%s_%i", $aKey[4], $pIdx)) ;team
+					Else
+						ExitLoop ;no players found
+					EndIf
+
+					;Opt("GUIDataSeparatorChar","\")
+					;GUICtrlCreateListViewItem($sInfo[0], $ListViewB) ;hypo spliting string if name has "|" in it
+					_GUICtrlListView_AddItem($ListViewB,           $sInfo[0],    -1, 0)  ;Name
+					_GUICtrlListView_AddSubItem($ListViewB, $pIdx, $sInfo[1] ,1, -1) ;Frags
+					_GUICtrlListView_AddSubItem($ListViewB, $pIdx, $sInfo[2] ,2, -1) ;Ping
+					_GUICtrlListView_AddSubItem($ListViewB, $pIdx, $sInfo[3] ,3, -1) ;deaths
+					_GUICtrlListView_AddSubItem($ListViewB, $pIdx, $sInfo[4] ,4, -1) ;team
+				Next
+			EndIf
+		Else ;kpq3 and q2. game port. uses seperate line for players
+			Local $aTmp = StringSplit($sPlayers, Chr(10)) ;@lf
+			;If Not ($tmpstr[2] ="") Then
+			Local $sTmp, $aPDetails, $playerName, $iPIdx = 0
+
+			For $i = 1 To $aTmp[0]
+				$sTmp = StringStripWS($aTmp[$i], $STR_STRIPLEADING + $STR_STRIPTRAILING)
+				If $sTmp <> "" Then ;catch end line @LF, EOT
+					$playerName = _StringBetween($sTmp, '"', '"' ) ;get server name[0]
+					If @error Then ContinueLoop
+					$aPDetails = StringSplit($sTmp, " ") ;setup server strings
+					if @error Or $aPDetails[0] < 2 Then ContinueLoop
+					;GUICtrlCreateListViewItem($playerName[0], $ListViewB) ; not used as name may have "|"
+					_GUICtrlListView_AddItem($ListViewB,            $playerName[0],   -1, 0) ;Name
+					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $aPDetails[1] ,1, -1)    ;Frags
+					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $aPDetails[2] ,2, -1)    ;Ping
+					$iPIdx += 1 ;increase 1
+				EndIf
+			Next
+			;EndIf
+		EndIf
+		_GUICtrlListView_EndUpdate($ListViewB)
+	EndIf
+EndFunc
+
+Func FillListView_C(ByRef $serStrArray, $ListViewC)
+	;update server varables in listview
+	If IsArray($serStrArray) Then
+		_GUICtrlListView_BeginUpdate($ListViewC)
+		Local $iLen = UBound($serStrArray) -2
+		Local $idx = 0, $sTmp
+		For $i = 0 To $iLen Step 2
+			;todo cleanup string before it gets here..
+			If StringCompare($serStrArray[$i], "player_0") = 0 Then ExitLoop ;should not happen
+			If StringCompare($serStrArray[$i], "final") = 0 Then ExitLoop ;todo check this
+			If StringCompare($serStrArray[$i], "queryid") = 0 Then ExitLoop ;todo check this
+			If StringInStr($serStrArray[$i], @LF) Then ExitLoop ;should not happen
+
+			;used because string can contain "|"
+			_GUICtrlListView_AddItem($ListViewC,          $serStrArray[$i],      -1, 0) ;rules
+			_GUICtrlListView_AddSubItem($ListViewC, $idx, $serStrArray[$i+1], 1, -1)    ;value
+			$idx +=1
+		Next
+		_GUICtrlListView_EndUpdate($ListViewC)
+	EndIf
+
+	if $g_ilastColumn_C > -1 Then
+		local $iCol = GUICtrlGetState($ListViewC)
+		$g_vSortSense_C[0] = false
+		$g_vSortSense_C[1] = false
+		_GUICtrlListView_SimpleSort($ListViewC, $g_vSortSense_C, $g_ilastColumn_C, True) ;resort to user pref
+	EndIf
+
+EndFunc
+
+;--> FILL ARRAY 2&3 STRINGS
+;========================================================
+; --> FillListView_BC_Selected
+Func FillListView_BC_Selected($iTab, $iListNum)
+	Local $serStrArray, $serSelNum, $i, $sPlayers
+	Local $ListViewA = getListView_A_CID()
+	Local $ListViewB = getListView_B_CID()
+	Local $ListViewC = getListView_C_CID()
+	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+
+	If $iListNum = -1 Or $iTab >= $COUNT_GAME Then
 		ConsoleWrite("nothing selected" &@CRLF)
 		Return
 	EndIf
 
-	;$serSelNum = GetTabSelectedStringNumber()
-	$serSelNum = _GUICtrlListView_GetItemText($ListViewA,$iListNum,0)
-
+	;$serSelNum = GetServerListA_SelectedData()
+	$serSelNum = Number(_GUICtrlListView_GetItemText($ListViewA, $iListNum, 0))
 
 	;delet b4 it gets a chance to exit
 	_GUICtrlListView_DeleteAllItems($ListViewB)
 	_GUICtrlListView_DeleteAllItems($ListViewC)
 
-	If $iTab = 1 Then
-		$iLastRulesSortStatus = GUICtrlGetState($ListView3); set global sort for reset
-		$serStrArray = $sServerStringArray[$serSelNum][0]
-		$iOldSelectNumKp = $iListNum
-	ElseIf $iTab = 2 Then
-		$iLastRulesSortStatusKPQ3 = GUICtrlGetState($ListView3KPQ3); set global sort for reset
-		$serStrArray = $sServerStringArrayKPQ3[$serSelNum][0]
-		$iOldSelectNumKPQ3 = $iListNum
-	ElseIf $iTab = 3 Then
-		$iLastRulesSortStatusQ2 = GUICtrlGetState($ListView3Q2); set global sort for reset
-		$serStrArray = $sServerStringArrayQ2[$serSelNum][0]
-		$iOldSelectNumQ2 = $iListNum
+	;$g_iLastSort_C[$iGameIdx] = GUICtrlGetState($ListViewC); set global sort for reset
+
+	ConsoleWrite("ListNum= '"  &$iListNum&"'  ServerNum= '" &$serSelNum&"'"& @CRLF)
+	FillListView_C($g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOSTR], $ListViewC)
+
+	if $iGameIdx = $ID_Q1 Or $iGameIdx = $ID_HEX Then
+		HEXGetPlayerInfo( _
+			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_IP], _
+			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_PORT], _
+			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOSTR], _
+			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOPLYR])
 	EndIf
+	FillListView_B($g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOPLYR], $ListViewB, $iGameIdx)
 
-	ConsoleWrite("ListNum= '"  & $iListNum &"'  ServerNum= '" &$serSelNum &"'"& @CRLF)
-
-	If Not ($serStrArray = "") Then
-		Local $tmpstr = StringSplit($serStrArray, Chr(10)) ;, $STR_ENTIRESPLIT)
-		If @error Then
-			MsgBox($MB_SYSTEMMODAL, "","Error in packet, no Return" )
-			ResetRefreshTimmers() ;reset timers if msg box used
-			Return
-		EndIf
-
-		Local $numLines = $tmpstr[0] ;3 lines standard > =players
-		Local $serverVars = $tmpstr[1]
-
-;-------; set server string varables
-		local $servrVarArray = StringSplit($serverVars, "\" ) ;setup server strings
-		if Not @error Then
-			Local $iLineNum=0, $i2
-
-			For $i2 = 1 To $servrVarArray[0]-1 Step 2
-			If StringInStr($servrVarArray[$i2], "player_0") Then ExitLoop
-			If StringInStr($servrVarArray[$i2], "final\\") Then ExitLoop
-			If StringInStr($servrVarArray[$i2], Chr(13)) Then ExitLoop ;shouldent happen
-
-
-			; hypo todo: remove duplicate strings
-			;GUICtrlCreateListViewItem($servrVarArray[$i2], $ListViewC)	;rules
-			_GUICtrlListView_AddItem($ListViewC, $servrVarArray[$i2],-1, 0)							;rules
-			_GUICtrlListView_AddSubItem($ListViewC,$iLineNum, $servrVarArray[Int($i2+1)]	 ,1)	;value
-			$iLineNum += 1
-			Next
-		EndIf
-
-		RulesResetSortOrder() ;apply a sort
-
-;-------; add players info, max 31 char for player name
-		Local $iply
-		If $iTab = 1 Then
-			;If StringInStr($serverVars, "player_0") Then
-				For $i5 = 0 to 64
-					Local $sXX[4]
-					Local $sInfo[4]
-					Local $tmp
-					Local $sArray
-					$sXX[0] = String("player_" & $i5 &"\") ;name player_0
-					$sXX[1] = String("frags_" & $i5 &"\")	;frags_0
-					$sXX[2] = String("ping_" & $i5 &"\")	;ping_0
-					$sXX[3] = String("deaths_" & $i5 &"\")	;deaths_0
-
-					If StringInStr($serverVars, $sXX[0]) = 0 Then Return
-					For $i6 = 0 To 3 Step 1
-						$sArray = StringSplit($serverVars, $sXX[$i6], $STR_ENTIRESPLIT + $STR_NOCOUNT)
-
-						if @error Then Return ;no more players
-						;ConsoleWrite("!str1.." & $sArray[0]&@CRLF &"str2.." & $sArray[1]&@CRLF)
-						$tmp = StringLeft($sArray[1], Int(StringInStr($sArray[1],"\")-1) )
-						$sInfo[$i6] = $tmp
-
-					Next
-					;Opt("GUIDataSeparatorChar","\")
-					;GUICtrlCreateListViewItem($sInfo[0], $ListViewB) ;hypo spliting string if name has "|" in it
-					_GUICtrlListView_AddItem($ListViewB, $sInfo[0],-1, 0)		;Name
-					_GUICtrlListView_AddSubItem($ListViewB,$i5, $sInfo[1] ,1)	;Frags
-					_GUICtrlListView_AddSubItem($ListViewB,$i5, $sInfo[2] ,2)	;Ping
-				Next
-			;EndIf
-		Else ;kpq3 and q2. game port. uses seperate line for players
-			If Not ($tmpstr[2] ="") Then
-				local $plyr = 0
-				Local $playerName =""
-				local $plyrStatus
-				Local $plyrStatusArray
-
-
-				For $iply = 2 To $numLines Step 1
-					If Not ($tmpstr[$iply] ="") Then ;catch end line @LF, EOT
-
-						$playerName = _StringBetween($tmpstr[$iply], '"', '"' ) ;get server name[0]
-						If @error Then ContinueLoop
-						$plyrStatus = StringReplace($tmpstr[$iply], '"' & $playerName[0] & '"', "") ;
-						$plyrStatusArray = StringSplit($plyrStatus, " " ) ;setup server strings
-
-						;GUICtrlCreateListViewItem($playerName[0], $ListViewB)
-						_GUICtrlListView_AddItem($ListViewB, $playerName[0],-1, 0)					;Name
-						_GUICtrlListView_AddSubItem($ListViewB,$plyr, $plyrStatusArray[1] ,1, -1)	;Frags
-						_GUICtrlListView_AddSubItem($ListViewB,$plyr, $plyrStatusArray[2] ,2, -1)	;Ping
-
-						$plyr += 1 ;increase 1
-					EndIf
-				Next
-			EndIf
-		EndIf
-	EndIf
-EndFunc; --> FillSelectedServerStrings
+EndFunc; --> FillListView_BC_Selected
 ;========================================================
-#EndRegion --> FILL ARRAY 2&3 STRINGS
+;--> FILL ARRAY 2&3 STRINGS
 
-#Region --> GUI STATE enable/disble
-Func DisableUIButtons()
 
-	GUICtrlSetState($tabGroupGames, $GUI_DISABLE) ;distable tab change on refresh
-	GUICtrlSetState($TabSheet1, 	$GUI_DISABLE)
-	GUICtrlSetState($TabSheet2, 	$GUI_DISABLE)
-	GUICtrlSetState($TabSheet3, 	$GUI_DISABLE)
-	GUICtrlSetState($TabSheet4, 	$GUI_DISABLE)
-	GUICtrlSetState($TabSheet6, 	$GUI_DISABLE)
-
-	GUICtrlSetState($GetServersBtn, 	$GUI_DISABLE) ;disable get.. button
-	GUICtrlSetState($RefServerBtn, 		$GUI_DISABLE)  ;disable Ref.. button
-	GUICtrlSetState($FavServerBtn, 		$GUI_DISABLE)
-	GUICtrlSetState($SettingsBtn, 		$GUI_DISABLE)
-	GUICtrlSetState($OffLineServeBtn, 	$GUI_DISABLE)
-	GUICtrlSetState($ListView1KP,		 	$GUI_DISABLE)
-	GUICtrlSetState($ListView1KPQ3,	 	$GUI_DISABLE)
-	GUICtrlSetState($ListView1Q2, 	 	$GUI_DISABLE)
-		GUICtrlSetState($ListView1M, 	$GUI_DISABLE)
-		GUICtrlSetState($ListView2M, 	$GUI_DISABLE)
-		GUICtrlSetState($ListView3M, 	$GUI_DISABLE)
-	If $tabNum = 5 Then
-		_GUICtrlTab_SetCurSel($tabGroupGames, 4)
-		_GUICtrlTab_ActivateTab($tabGroupGames, 4)
+Func MSG_ReadByte(ByRef $aData, ByRef $i, $iMax)
+	local $iRet = 0
+	if $i < $iMax Then
+		$iRet = $aData[$i]
+		$i += 1
 	EndIf
-
+	Return $iRet
 EndFunc
 
-Func EnableUIButtons() ;$OffLineServeBtn
-	;enable gui after loading
-	GUICtrlSetState($tabGroupGames,		$GUI_ENABLE) ;distable tab change on refresh
-	GUICtrlSetState($GetServersBtn, 	$GUI_ENABLE) ;disable get.. button
-	GUICtrlSetState($RefServerBtn, 		$GUI_ENABLE)  ;disable Ref.. button
-	GUICtrlSetState($FavServerBtn, 		$GUI_ENABLE)
-	GUICtrlSetState($SettingsBtn, 		$GUI_ENABLE)
-	GUICtrlSetState($OffLineServeBtn, 	$GUI_ENABLE)
-	GUICtrlSetState($ListView1KP, 		$GUI_ENABLE)
-	GUICtrlSetState($ListView1KPQ3, 	$GUI_ENABLE)
-	GUICtrlSetState($ListView1Q2, 		$GUI_ENABLE)
-		GUICtrlSetState($ListView1M, 	$GUI_ENABLE)
-		GUICtrlSetState($ListView2M, 	$GUI_ENABLE)
-		GUICtrlSetState($ListView3M, 	$GUI_ENABLE)
-
-	If $tabNum = 5 Then
-		_GUICtrlTab_SetCurSel($tabGroupGames, 4)
-		_GUICtrlTab_ActivateTab($tabGroupGames, 4)
-	EndIf
-EndFunc
-#EndRegion
-
-#Region --> OFFLNE LIST
-
-;========================================================
-; --> set offline list
-Func offLineKpList()
-	DisableUIButtons()
-	local const $svNum = 45
-	Local $idx=0
-
-	Local $sIP_Port, $tmpArray, $i
-	Local $sIP =""
-	Local $iPort =0
-	Local $arrayOffline[$svNum]
-
-	$arrayOffline[0] = "kp.hambloch.com:31510|Luschen Botmatch"
-	$arrayOffline[1] = "kp.hambloch.com:31511|Luschen Hookmatch"
-	$arrayOffline[2] = "kp.hambloch.com:31512|Luschen Deathmatch"
-	$arrayOffline[3] = "kp.hambloch.com:31515|Luschen COOP"
-	$arrayOffline[4] = "kp.hambloch.com:31516|Luschen Gunrace +Bots"
-	$arrayOffline[5] = "kp.hambloch.com:31519|Killa's KPZ/CTF"
-
-	$arrayOffline[6] = "130.185.249.124:31510|Newskool Classic Gangbang"
-	$arrayOffline[7] = "130.185.249.124:31511|Newskool Instagib"
-	$arrayOffline[8] = "130.185.249.124:31512|Newskool Bagman"
-	$arrayOffline[9] = "130.185.249.124:31513|Newskool Fragfest"
-	$arrayOffline[10] = "130.185.249.124:31514|Newskool CTF"
-	$arrayOffline[11] = "130.185.249.124:31515|Newskool Crash Squad"
-	$arrayOffline[12] = "130.185.249.124:31516|Newskool Power2"
-	$arrayOffline[13] = "130.185.249.124:31517|Newskool Gunrace"
-
-	$arrayOffline[14] = "130.185.249.124:31518|Newskool Killapin"
-	$arrayOffline[15] = "130.185.249.124:31531|Newskool Kill Confirmed"
-	$arrayOffline[16] = "130.185.249.124:31532|Newskool Hitmen"
-	$arrayOffline[17] = "130.185.249.124:31533|Newskool Chicken Chase"
-	$arrayOffline[18] = "130.185.249.124:31534|Newskool Rocketfest"
-	$arrayOffline[19] = "130.185.249.124:31537|Newskool Easter/Summer/Halloween/Xmas"
-	$arrayOffline[20] = "130.185.249.124:31538|Newskool Halloween/Xmas CTF"
-
-	$arrayOffline[21] = "202.169.104.136:31211|macanah.mooo.com Street wars MoD"
-	$arrayOffline[22] = "202.169.104.136:31355|macanah.mooo.com BOTMATCH"
-	$arrayOffline[23] = "202.169.104.136:31510|macanah.mooo.com ffa"
-	$arrayOffline[24] = "202.169.104.136:31513|macanah.mooo.com riotz mod"
-	$arrayOffline[25] = "202.169.104.136:31515|macanah.mooo.com Jedi Force Mod"
-	$arrayOffline[26] = "202.169.104.136:31516|macanah.mooo.com COOP"
-	$arrayOffline[27] = "202.169.104.136:31517|macanah.mooo.com BaGmaN"
-	$arrayOffline[28] = "202.169.104.136:31518|macanah.mooo.com Assault"
-	$arrayOffline[29] = "202.169.104.136:31519|macanah.mooo.com CTF"
-	$arrayOffline[30] = "202.169.104.136:31556|macanah.mooo.com Crash Squad"
-
-	$arrayOffline[31] = "168.235.68.219:31512|East Coast Snitch Slappa (Bagman)"
-	$arrayOffline[32] = "168.235.68.219:31513|East Coast Deathmatch"
-	$arrayOffline[33] = "71.93.144.165:31510|California Carnage"
-	$arrayOffline[34] = "208.77.22.94:31510|Dark Fiber FFA Chicago"
-	$arrayOffline[35] = "5.1.74.153:31510|Dark Fiber FFA EU"
-	$arrayOffline[36] = "148.251.10.210:31510|qw.servegame.org Kingpin server"
-
-	; temp servers
-	$arrayOffline[37] = "82.15.31.92:31511|AoM's UK Riotz Server"
-	$arrayOffline[38] = "73.64.19.177:31510|DrBrain's Gangbang Server"
-	$arrayOffline[39] = "82.169.45.137:31510|Fredz's server"
-	$arrayOffline[40] = "84.87.109.134:31510|G()AT's server"
-	$arrayOffline[41] = "84.87.109.134:31512|G()AT's test server"
-	$arrayOffline[42] = "hypo.hambloch.com:31510|hypo_v8's server"
-	$arrayOffline[43] = "93.41.146.9:31510|ITA KP Server"
-	$arrayOffline[44] = "82.69.95.83:31510|Killa's Home server"
-
-
-	resetArray()
-	$bOffline 		= True
-	_GUICtrlListView_DeleteAllItems($ListView1KP)
-
-	For $i = 0 To ($svNum -1)
-		$tmpArray = StringSplit($arrayOffline[$i],"|", $STR_NOCOUNT)
-		$sIP_Port = StringSplit($tmpArray[0], ":", $STR_NOCOUNT)
-
-		$sIP = TCPNameToIP($sIP_Port[0])
-		$iPort = $sIP_Port[1]
-		Local $sNewAdress = String($sIP &":" & $iPort)
-
-		;GUICtrlCreateListViewItem($i, $ListView1KP) ;fill array with index num
-		_GUICtrlListView_AddItem($ListView1KP, $i, -1)
-		_GUICtrlListView_AddSubItem($ListView1KP, $i, $sNewAdress,	1) ;ip_port
-		_GUICtrlListView_AddSubItem($ListView1KP, $i, $tmpArray[1],	2) ;name
-		_GUICtrlListView_AddSubItem($ListView1KP, $i, "999",		3) ;ping
-		_GUICtrlListView_AddSubItem($ListView1KP, $i, "0/0",		4) ; players
-
-		;fill globbal server array in memory
-		$sServerStringArray[$i][0] = String("hostname\"& $tmpArray[1] &"\" & @LF) ;hostname\host_xxx\@lf
-		$sServerStringArray[$i][1] = $sIP
-		$sServerStringArray[$i][2] = int($iPort)-10 ;store kp listen port in memory array but display game port
-		$sServerStringArray[$i][4] = int($iPort) ;set gamespy reported game port
-	Next
-	$iServerCountTotal = $svNum
-EndFunc ; -->offline kp list
-
-;=====================
-; --> set offline KPQ3 list
-Func offLineKpQ3List()
-	Local $sIP_Port, $tmpArray, $i
-	Local $sIP =""
-	Local $iPort =0
-	Local $arrayOfflineKPQ3[8]
-
-	$arrayOfflineKPQ3[0] = string('www.kingpinq3.com:31610|KingpinQ3 Server 4')
-	$arrayOfflineKPQ3[1] = string('www.kingpinq3.com:31611|Bagman development server')
-	$arrayOfflineKPQ3[2] = string('www.kingpinq3.com:31640|KingpinQ3 Server 5')
-	$arrayOfflineKPQ3[3] = string('www.kingpinq3.com:31670|KingpinQ3 hitmen Server')
-	$arrayOfflineKPQ3[4] = string('202.169.104.136:24910|KPQ3 FFA AUS')
-	;;;;temp servers
-	$arrayOfflineKPQ3[5] = string('0.0.0.127:31510|  --== TEMPORARY SERVERS ==--  ')
-	$arrayOfflineKPQ3[6] = string('110.175.51.202:31600|KingpinQ3 hypo_v8')
-	$arrayOfflineKPQ3[7] = string('110.175.51.202:31610|KingpinQ3 hypo_v8')
-
-	resetArray()
-	$bOfflineKPQ3 	= True
-
-	_GUICtrlListView_DeleteAllItems($ListView1KPQ3)
-
-	For $i = 0 To 7
-		$tmpArray = StringSplit($arrayOfflineKPQ3[$i],"|", $STR_NOCOUNT)
-		$sIP_Port = StringSplit($tmpArray[0], ":", $STR_NOCOUNT)
-
-		$sIP = TCPNameToIP($sIP_Port[0])
-		$iPort = Int($sIP_Port[1])
-		Local $sNewAdress = String($sIP &":" & $iPort)
-
-		;$iListVewIDKPQ3[$i] = GUICtrlCreateListViewItem($i, $ListView1KPQ3) ;fill array with index num
-		_GUICtrlListView_AddItem($ListView1KPQ3, $i, -1)
-		_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, $sNewAdress,	1)
-		_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, $tmpArray[1],	2)
-		_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, "999",			3)
-		_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, "0/0",			4)
-
-		;fill globbal server array in memory
-		$sServerStringArrayKPQ3[$i][0] = String("hostname\"& $tmpArray[1] &"\" & @LF) ;hostname\host_xxx\@lf
-		$sServerStringArrayKPQ3[$i][1] = $sIP
-		$sServerStringArrayKPQ3[$i][2] = $iPort
-	Next
-	$iServerCountTotal = 8
-EndFunc
-
-;=====================
-; --> set offline KPQ3 list
-Func offLineQ2List()
-	Local $sIP_Port, $tmpArray, $i
-	Local $sIP =""
-	Local $iPort =0
-	Local $arrayOfflineQ2[14]
-
-	$arrayOfflineQ2[0] = string('kp.servegame.com:27910|Luschen Quakematch')
-	$arrayOfflineQ2[1] = string('202.169.104.136:56342|macanah-lurker.2fh.co CTF q2')
-	$arrayOfflineQ2[2] = string('202.169.104.136:27712|macanah-lurker.2fh.co Ddayq2')
-	$arrayOfflineQ2[3] = string('202.169.104.136:27916|macanah-lurker.2fh.co q2 ActioN')
-	$arrayOfflineQ2[3] = string('202.169.104.136:27988|macanah-lurker.2fh.co q2 awaken2 assault')
-	$arrayOfflineQ2[4] = string('202.169.104.136:27933|macanah-lurker.2fh.co q2 awaken2 ctf')
-	$arrayOfflineQ2[5] = string('202.169.104.136:27934|macanah-lurker.2fh.co q2 Brazen CooP http')
-	$arrayOfflineQ2[6] = string('202.169.104.136:27935|macanah-lurker.2fh.co q2 COOP')
-	$arrayOfflineQ2[7] = string('202.169.104.136:27913|macanah-lurker.2fh.co q2 coop-gibrack-mod')
-	$arrayOfflineQ2[8] = string('202.169.104.136:27910|macanah-lurker.2fh.co q2 FFA tourney')
-	$arrayOfflineQ2[9] = string('202.169.104.136:32888|macanah-lurker.2fh.co q2 Holy Wars')
-	$arrayOfflineQ2[10] = string('202.169.104.136:27915|macanah-lurker.2fh.co q2 JumP')
-	$arrayOfflineQ2[11] = string('202.169.104.136:44444|macanah-lurker.2fh.co q2 MatriX')
-	$arrayOfflineQ2[12] = string('202.169.104.136:27911|macanah-lurker.2fh.co q2 rocket arena')
-	$arrayOfflineQ2[13] = string('202.169.104.136:27990|macanah-lurker.2fh.co q2OPENTDM')
-
-	resetArray()
-	$bOfflineQ2 	= True
-	_GUICtrlListView_DeleteAllItems($ListView1Q2)
-
-	For $i = 0 To 13
-		$tmpArray = StringSplit($arrayOfflineQ2[$i],"|", $STR_NOCOUNT)
-		$sIP_Port = StringSplit($tmpArray[0], ":", $STR_NOCOUNT)
-
-		$sIP = TCPNameToIP($sIP_Port[0])
-		$iPort = Int($sIP_Port[1])
-		Local $sNewAdress = String($sIP &":" & $iPort)
-
-		;GUICtrlCreateListViewItem($i, $ListView1Q2) ;fill array with index num
-		_GUICtrlListView_AddItem($ListView1Q2, $i, -1)
-		_GUICtrlListView_AddSubItem($ListView1Q2, $i, $sNewAdress,	1)
-		_GUICtrlListView_AddSubItem($ListView1Q2, $i, $tmpArray[1],	2)
-		_GUICtrlListView_AddSubItem($ListView1Q2, $i, "999",		3)
-		_GUICtrlListView_AddSubItem($ListView1Q2, $i, "0/0",			4)
-
-		;fill globbal server array in memory
-		$sServerStringArrayQ2[$i][0] = String("hostname\"& $tmpArray[1] &"\" & @LF) ;hostname\host_xxx\@lf
-		$sServerStringArrayQ2[$i][1] = $sIP
-		$sServerStringArrayQ2[$i][2] = $iPort
-	Next
-	$iServerCountTotal = 14
-	EnableUIButtons()
-EndFunc
-
-
-; -->offline kp list
-;========================================================
-
-#EndRegion --> END OFFLINE LIST
-
-#Region --> BUTTON STATUS
-;========================================================
-; --> serverRefreshButtonState
-Func serverRefreshButtonState()
-	Local $finish = 0
-
-	if $isGettingServers = 0 Then Return 1 ;finished
-	If $iServerCountTotal = $iServerCountAdd Then	$finish = 1
-	If $iServerCountTotal = 0 Then $finish = 0
-	if $isGettingServers = -1 Then $finish = 1 ; if getting master list failed or no list at all
-	If TimerDiff($serverRefreshTimer) > 3000 Then $finish = 1 ; hypo moved to last check
-		;goto end
-	If $finish = 0 Then Return 0 ;not finished
-
-	$iServerCountTotal = 0
-	$iServerCountAdd = 0
-	$isGettingServers = 0
-	ListviewResetSortOrder()
-	GUICtrlSetData($ProgressBar, 0)
-	_GUICtrlListView_Arrange($ListView1KP,0)
-	EnableUIButtons()
-	Return 1 ;finished
-EndFunc; -->
-;========================================================
-#EndRegion END REFRESH BUTTON
-
-#Region --> BUTTON OFFLINE
-GUICtrlSetOnEvent($OffLineServeBtn, "LoadOffline")
-	Func LoadOffline()
-		DisableUIButtons()
-		If $tabNum = 1 Or $tabNum >3  Then
-			offLineKpList()
-		ElseIf $tabNum = 2 Then
-			offLineKpQ3List()
-		ElseIf $tabNum = 3	Then
-			offLineQ2List()
-		EndIf
-		EnableUIButtons()
-	EndFunc
-#EndRegion
-
-#Region --> BUTTON PING LIST  ( also used in SERVER/OFFLINE LIST)
-
-;refresh server in listview. dont talk to master
-GUICtrlSetOnEvent($RefServerBtn, "RefreshServers")
-	Func RefreshServers() ;allready in listview from master/offline
-		SelectedTabNum()
-
-		If $tabNum = 6 Then
-			MRefresh() ;refresh mbrowser
-			Return
-		EndIf
-
-		Local $i
-		Local $aIPArrayRef[0] ;Dim
-		Local $sIP =""
-		Local $iPort =0
-		Local $bSort = False
-		Local $iState = -1 ;old sort state
-		Local $jState ;1=tmp, 2=old
-
-		DisableUIButtons()
-		_BIND_SERVER_SOCKET()
-		If $hSocketServerUDP > 0 Then _SetPacketBufferSize($hSocketServerUDP, 25600)
-
-		$GS_countPlayers =0
-
-		$isGettingServers = 1
-		$iServerCountTotal = 0 ;get # servers to use later to stop refresh
-
-
-		If $tabNum = 1 Or $tabNum >3 Then
-			$iLastListviewSortStatus = GUICtrlGetState($ListView1KP); set global sort for reset
-			_GUICtrlListView_DeleteAllItems($ListView1KP)
-			For $i = 0 To $iMaxSer -1
-				If $sServerStringArray[$i][2] > 0 Then
-					$sServerStringArray[$i][0] = "" ;hypo reset server strings. effects GS
-					$sIP = $sServerStringArray[$i][1]
-					$iPort = $sServerStringArray[$i][2]
-					ReDim $aIPArrayRef[$i+1]
-					$aIPArrayRef[$i] = String($sIP & ":" & $iPort) ;add ip/port to array
-					$iServerCountTotal += 1
-
-					$iPort = Int($iPort)+10
-
-					_GUICtrlListView_AddItem($ListView1KP, $i, -1)
-					_GUICtrlListView_AddSubItem($ListView1KP, $i, String($sIP&":"& $iPort),	1,-1)
-					_GUICtrlListView_AddSubItem($ListView1KP, $i, "???",					2,-1)
-					_GUICtrlListView_AddSubItem($ListView1KP, $i, "999",					3,-1)
-					_GUICtrlListView_AddSubItem($ListView1KP, $i, "0/0",					4,-1)
-				Else
-					ExitLoop(1)
-				EndIf
-			Next
-		ElseIf $tabNum = 2 Then
-				$iLastListviewSortStatusKPQ3 = GUICtrlGetState($ListView1KPQ3); set global sort for reset
-				_GUICtrlListView_DeleteAllItems($ListView1KPQ3)
-			For $i = 0 To $iMaxSer -1
-				If $sServerStringArrayKPQ3[$i][2] >0 Then
-					$sServerStringArrayKPQ3[$i][0] = "" ;hypo reset server strings. effects GS
-					$sIP = $sServerStringArrayKPQ3[$i][1]
-					$iPort = $sServerStringArrayKPQ3[$i][2]
-					ReDim $aIPArrayRef[$i+1]
-					$aIPArrayRef[$i]= String($sIP & ":" & $iPort) ;add ip/port to array
-					$iServerCountTotal += 1
-
-					_GUICtrlListView_AddItem($ListView1KPQ3, $i, -1)
-					_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, String($sIP&":"& $iPort),	1,-1)
-					_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, "???",						2,-1)
-					_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, "999",						3,-1)
-					_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, "0/0",						4,-1)
-				Else
-					ExitLoop(1)
-				EndIf
-			Next
-		ElseIf	$tabNum = 3 Then
-			$iLastListviewSortStatusQ2 = GUICtrlGetState($ListView1Q2); set global sort for reset
-			_GUICtrlListView_DeleteAllItems($ListView1Q2)
-			For $i = 0 To $iMaxSer -1
-				If $sServerStringArrayQ2[$i][2] >0 Then
-					$sServerStringArrayQ2[$i][0] = "" ;hypo reset server strings. effects GS
-					$sIP = $sServerStringArrayQ2[$i][1]
-					$iPort = $sServerStringArrayQ2[$i][2]
-					ReDim $aIPArrayRef[$i+1]
-					$aIPArrayRef[$i]= String($sIP & ":" & $iPort) ;add ip/port to array
-					$iServerCountTotal += 1
-
-					_GUICtrlListView_AddItem($ListView1Q2, $i, -1)
-					_GUICtrlListView_AddSubItem($ListView1Q2, $i, String($sIP&":"& $iPort),	1,-1)
-					_GUICtrlListView_AddSubItem($ListView1Q2, $i, "???",					2,-1)
-					_GUICtrlListView_AddSubItem($ListView1Q2, $i, "999",					3,-1)
-					_GUICtrlListView_AddSubItem($ListView1Q2, $i, "0/0",					4,-1)
-				Else
-					ExitLoop(1)
-				EndIf
-			Next
-		EndIf
-
-		Local $j =0
-
-;button refresh. NOT using master
-
-		;not array
-		If UBound($aIPArrayRef) = 0 Then
-			$isGettingServers = -1
-			serverRefreshButtonState()
+Func MSG_ReadLong(ByRef $aData, ByRef $i, $iMax, $littleEnd = False)
+	Local $iRet = 0
+	if ($i + 4) < $iMax Then
+		if $littleEnd Then
+			$iRet = BitShift($aData[$i+0], -24) + BitShift($aData[$i+1], -16) + BitShift($aData[$i+2], -8) + BitShift($aData[$i+3], 0)
 		Else
-			For $i = 0 To UBound($aIPArrayRef)-1
+			$iRet = BitShift($aData[$i+0], 0) + BitShift($aData[$i+1], -8) + BitShift($aData[$i+2], -16) + BitShift($aData[$i+3], -24)
+		EndIf
+		$i += 4
+		return $iRet
+	EndIf
+	return $iRet
+EndFunc
 
-				If $i = $j+Int($iMaxIP-1) Then ;0 to 24
-					ConsoleWrite("!servers inital1= "& $i-Int($iMaxIP-1) &"to" &$i & " total= "&$iServerCountTotal&@CRLF)
-					If SendSTATUStoServers($aIPArrayRef, $i-Int($iMaxIP-1), $i ) Then ;get each server details
-						listenIncommingServers(0) ;now listen for responce
-						$j = Int($i+1)
-					EndIf
+Func MSG_ReadString(byref $aASC, ByRef $i, $iMax)
+	Local $sRet = ""
+	while $i < $iMax
+		if $aASC[$i] = 0 then
+			$i += 1
+			ExitLoop
+		EndIf
+		$sRet &= Chr($aASC[$i])
+		$i += 1
+	WEnd
+	Return StringReplace($sRet, "\", "/") ;fix invalid char...
+EndFunc
+
+Func MSG_ReadShort(ByRef $aData, ByRef $i, $iMax, $littleEnd = False)
+	Local $iRet = 0
+	if ($i + 2) < $iMax Then
+		If $littleEnd then
+			$iRet = BitShift($aData[$i+0], -8) + BitShift($aData[$i+1], 0)
+		else
+			$iRet = BitShift($aData[$i+0], 0) + BitShift($aData[$i+1], -8)
+		EndIf
+		$i += 2
+		return $iRet
+	EndIf
+	return $iRet
+EndFunc
+
+Func HEXSendGetPlayer($sIPAddress, $iPort, $g_hSocketServerUDP, $sRequest)
+	;ConsoleWrite("-sending:" & StringToBinary($sRequest, 4)&@CRLF)
+	local $iErrorX = _UDPSendTo($sIPAddress, $iPort, $sRequest, $g_hSocketServerUDP)
+EndFunc
+
+Func HEXProcessPlayerResponce($data)
+	;local const $hex2_CCREP_SERVER_INFO = 131 ;0x83
+	local const $hex2_CCREP_PLAYER_INFO = 132 ;0x84
+	local const $hex2_NETFLAG_CTL = 0x80000000 ; 32768
+	;ConsoleWrite("-data:"& StringToBinary($data, 1)&@CRLF)
+	Local $ret = "", $i = 0, $pIdx, $name, $teamColor, $frags, $time, $address;, $header, $iMsgType
+	local $aASC = StringToASCIIArray($data, 0, Default, $SE_ANSI)
+	local $iLen = UBound($aASC)
+
+	If not IsArray($aASC) or $iLen < 4 Then return ""
+	if not (BitAND(MSG_ReadLong($aASC, $i, $iLen, True), 0xffff0000) = $hex2_NETFLAG_CTL) Then return ""
+	if not (MSG_ReadByte($aASC, $i, $iLen) = $hex2_CCREP_PLAYER_INFO) Then return ""
+
+	$pIdx      = MSG_ReadByte($aASC, $i, $iLen)
+	$name      = MSG_ReadString($aASC, $i, $iLen) ;name
+	$teamColor = MSG_ReadLong($aASC, $i, $iLen)   ;color
+	$frags     = MSG_ReadLong($aASC, $i, $iLen)   ;frags
+	$time      = MSG_ReadLong($aASC, $i, $iLen)   ;time
+	$address   = MSG_ReadString($aASC, $i, $iLen) ;address
+
+	Return StringFormat( "player_%i\\%s\\frags_%i\\%i\\ping_%i\\id:%s\\deaths_%i\\time:%i\\team_%i\\color:%i\\", _
+		$pIdx, $name, _     ;name
+		$pIdx, $frags, _    ;frags
+		$pIdx, $address, _  ;ping
+		$pIdx, $time, _     ;deaths
+		$pIdx, $teamColor _ ;team
+	)
+EndFunc
+
+Func HEXGetPlayerInfo(ByRef $sIPAddress, ByRef $iPort, ByRef $aData, ByRef $aPlayerData)
+	local $iCount = 0, $dataRecv, $iPlyrCount
+
+	if $aPlayerData <> "" then return ;$COL_INFOPLYR
+	$iPlyrCount = Number(parseInfoString($aData, "numplayers"));check info string first
+	if $iPlyrCount = 0 Then return
+	;ConsoleWrite("+ping server for players"&@CRLF)
+
+	;BinaryToString('0x8000000A02')&'QUAKE'
+	_BIND_UDP_SOCKET($g_hSocketServerUDP)
+	If $g_hSocketServerUDP > 0 Then
+		_SetPacketBufferSize($g_hSocketServerUDP, 512) ; 25600
+		;SendSTATUStoServers_Split
+		for $i = 0 to $iPlyrCount-1
+			HEXSendGetPlayer($sIPAddress, $iPort, $g_hSocketServerUDP, BinaryToString('0x80000007'&'03'&hex($i, 2)&"00"))
+		Next
+
+		Local $iTimeOut = TimerInit()
+		While 1 ;loop until all players recieved or timout hit
+			While 1
+				$dataRecv = _UDPRecvFrom($g_hSocketServerUDP, 512, 0)
+				if IsArray($dataRecv) Then
+					ExitLoop(1)
+				ElseIf TimerDiff($iTimeOut) > 990 Then
+					ConsoleWrite(">TIMEOUT.. 1 seconds"&@CRLF)
+					ExitLoop(2) ;stop do and stop while
 				EndIf
-			Next
+				Sleep(20)
+			WEnd
 
-			;get last of servers
-			If $j < $iServerCountTotal Then
-				ConsoleWrite("!servers final1= "& $j& "to"&$iServerCountTotal&" int= "& $i&@CRLF)
-				If SendSTATUStoServers($aIPArrayRef, $j, $i) Then ;get each server details
-					listenIncommingServers(0) ;now listen for responce
+			ConsoleWrite(StringFormat("Rec Player: %s\n", StringStripWS($dataRecv[$PACKET_DATA], 7)) &@CRLF)
+			$aPlayerData &= HEXProcessPlayerResponce($dataRecv[$PACKET_DATA])
+			$iCount += 1
 
-				EndIf
+			if $iCount >= $iPlyrCount Then
+				ExitLoop(1)
 			EndIf
+		WEnd
+	Else
+		ConsoleWrite("Error: Cant get port")
+		Return False
+	EndIf
+	_UDPCloseSocket($g_hSocketServerUDP)
+EndFunc
 
-			;check global recieved servers. if some failed. try recieve again
-			;for x2? hypo todo: & change time?
-			Local $iLoop
-			for $iLoop =0 To 3
-				If $isGettingServers And $iServerCountAdd < $iServerCountTotal Then
-					ConsoleWrite("!Some servers failed to respond. Sending status again"&@CRLF)
-					;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-					;hypo send ping to list 4 more times
-					Local $countServ1 = GetServerCountInArray() ;count servers in array
-					Local $count =0
-					For $int = 0 To $countServ1-1
-						If	($tabNum = 1) Or ($tabNum > 3) Then
-							If $sServerStringArray[$int][0] = "" Then
-								;todo reset ping
-								SendSTATUStoServers($aIPArrayRef, $int, $int)
-								$count += 1
-							EndIf
-						ElseIf $tabNum =2 Then
-							If $sServerStringArrayKPQ3[$int][0] = "" Then
-								SendSTATUStoServers($aIPArrayRef, $int, $int)
-								$count += 1
-							EndIf
-						ElseIf	$tabNum = 3 Then
-							If $sServerStringArrayQ2[$int][0] = "" Then
-								SendSTATUStoServers($aIPArrayRef, $int, $int)
-								$count += 1
-							EndIf
-						EndIf
 
-					Next
-					ConsoleWrite("!count= "&$count&@CRLF)
-					If 	$count >0 Then
-						listenIncommingServers(1)
-					EndIf
-					;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-				EndIf
-			Next
-
-		EndIf
-
-		_UDPCloseSocket($hSocketServerUDP)
-		$isGettingServers = -1
-		serverRefreshButtonState()
-
-		If _IsChecked($GB_Players_sound) Then	selectAudoToPlay(1)
-
-	EndFunc
 #EndRegion
 
-#Region --> BUTTON FAV
-;load fave per game tab, refresh them to
-GUICtrlSetOnEvent($FavServerBtn, "FavArrayLoad")
-	Func FavArrayLoad()
-		Local $ListViewA, $sIP_Port, $sIP, $iPort
-		SelectedTabNum()
-		resetArray()
 
-		If $tabNum = 1 Or $tabNum >3 And Not ($tabNum =6) Then
-			_GUICtrlListView_DeleteAllItems($ListView1KP)
-			Local $j = 0
-			For $i = 0 to UBound($aFavKP)-1
-				ConsoleWrite("fav num = " &$i& " tab num " & $tabNum & @CRLF)
-				If Not ($aFavKP[$i] = "") Then
-					GUICtrlCreateListViewItem($i, $ListView1KP) ;fill array with index num
-					_GUICtrlListView_AddSubItem($ListView1KP, $i, $aFavKP[$i],	1)
-					_GUICtrlListView_AddSubItem($ListView1KP, $i, "???",	2)
 
-					;fill globbal server array in memory
-					$sIP_Port = StringSplit($aFavKP[$i], ":", $STR_NOCOUNT)
-					If Not @error Then
-						$sIP = TCPNameToIP($sIP_Port[0])
-						$iPort = Int($sIP_Port[1]) ; Int($sIP_Port[1]) - 10
-						$sServerStringArray[$j][0] = String("hostname\FavKP# "& $i+1 &"\" & @LF) ;hostname\fav#xx\@lf
-						$sServerStringArray[$j][1] = $sIP
-						$sServerStringArray[$j][2] = $iPort -10 ;todo: game/gamespy port. store in ini?
-						$sServerStringArray[$j][4] = $iPort ;game port
-						$j += 1 ;used incase fav has error
-					EndIf
-				Else
-					ConsoleWrite("error in Fav"&@CRLF)
-				EndIf
-			Next
-			If $j > 0 Then RefreshServers()
-		ElseIf $tabNum = 2 Then
-			_GUICtrlListView_DeleteAllItems($ListView1KPQ3)
-			Local $j = 0
-			For $i = 0 to UBound($aFavKPQ3)-1
-				ConsoleWrite("fav num = " &$i& " tab num " & $tabNum & @CRLF)
-				If Not ($aFavKPQ3[$i] = "") Then
-					GUICtrlCreateListViewItem($i, $ListView1KPQ3) ;fill array with index num
-					_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, $aFavKPQ3[$i],	1)
-					_GUICtrlListView_AddSubItem($ListView1KPQ3, $i, "???",	2)
+#Region --> EVENT MOUSE, WM_NOTIFY
 
-					;fill globbal server array in memory
-					$sIP_Port = StringSplit($aFavKPQ3[$i], ":", $STR_NOCOUNT)
-					If Not @error Then
-						$sIP = TCPNameToIP($sIP_Port[0])
-						$iPort = Int($sIP_Port[1]) ; Int($sIP_Port[1]) - 10
-						$sServerStringArrayKPQ3[$j][0] = String("hostname\FavKPQ3# "& $i+1 &"\" & @LF) ;hostname\fav#xx\@lf
-						$sServerStringArrayKPQ3[$j][1] = $sIP
-						$sServerStringArrayKPQ3[$j][2] = $iPort
-						$j += 1 ;used incase fav has error
-					EndIf
-				Else
-					ConsoleWrite("error in string???"&@CRLF)
-				EndIf
-			Next
-			If $j > 0 Then RefreshServers()
-		ElseIf $tabNum = 3 Then
-			_GUICtrlListView_DeleteAllItems($ListView1Q2)
-			Local $j = 0
-			For $i = 0 to UBound($aFavQ2)-1
-				ConsoleWrite("fav num = " &$i& " tab num " & $tabNum & @CRLF)
-				If not ($aFavQ2[$i] = "") Then
-					GUICtrlCreateListViewItem($i, $ListView1Q2) ;fill array with index num
-					_GUICtrlListView_AddSubItem($ListView1Q2, $i, $aFavQ2[$i],	1)
-					_GUICtrlListView_AddSubItem($ListView1Q2, $i, "???",	2)
-
-					;fill globbal server array in memory
-					$sIP_Port = StringSplit($aFavQ2[$i], ":", $STR_NOCOUNT)
-					If Not @error Then
-						$sIP = TCPNameToIP($sIP_Port[0])
-						$iPort = Int($sIP_Port[1]) ; Int($sIP_Port[1]) - 10
-						$sServerStringArrayQ2[$j][0] = String("hostname\FavQ2# "& $i+1 &"\" & @LF) ;hostname\fav#xx\@lf
-						$sServerStringArrayQ2[$j][1] = $sIP
-						$sServerStringArrayQ2[$j][2] = $iPort
-						$j += 1 ;used incase fav has error
-					EndIf
-				Else
-					ConsoleWrite("error in string???"&@CRLF)
-				EndIf
-			Next
-			If $j > 0 Then RefreshServers()
-		EndIf
-	EndFunc
-#EndRegion
-
-#Region --> EVENT MOUSE
-
-Global  enum $ContextKP_Connect = 2800, $ContexKP_Refresh, $ContexKP_AddFav, $ContexKP_RemFav, _
-			$ContexKP_RefreshM, $ContextKP_ConnectM, $ContexKP_AddFavM, $ContexKP_RemFavM, _
-			$ContextKP_CopyIP, $ContexKP_GetInfoM  ; these are used in menu definition to link to WM_COMMAND
-
-Global $bEventStartKingpin = False 	;while loop call for $WM_NOTIFY
-Global $bEventRightClick = False 	;while loop call for $WM_NOTIFY
-Global $bEventRightClickM = False 	;while loop call for $WM_NOTIFY
 
 
 Func RighttClickMenuKP()
-	Local $ListViewA = ServerArray1ToFill()
+	Local $ListViewA = getListView_A_CID()
 	Local $hMenu
 
 	ConsoleWrite("right click" &@CRLF)
@@ -4899,320 +4433,254 @@ Func RighttClickMenuKP()
 	_GUICtrlMenu_AddMenuItem($hMenu, "", 0)
 	_GUICtrlMenu_AddMenuItem($hMenu, "Connect", $ContextKP_Connect)
 	_GUICtrlMenu_AddMenuItem($hMenu, "", 0)
-		_GUICtrlMenu_AddMenuItem($hMenu, "Copy IP", $ContextKP_CopyIP)
+	_GUICtrlMenu_AddMenuItem($hMenu, "Copy IP", $ContextKP_CopyIP)
 	_GUICtrlMenu_AddMenuItem($hMenu, "", 0)
 	_GUICtrlMenu_AddMenuItem($hMenu, "Add Fav", $ContexKP_AddFav)
 	_GUICtrlMenu_AddMenuItem($hMenu, "Remove Fav", $ContexKP_RemFav)
-		Switch _GUICtrlMenu_TrackPopupMenu($hMenu, $HypoGameBrowser, -1, -1, 1, 1, 2)
-			Case $ContexKP_Refresh
-				RefreshSingle()
-			Case $ContextKP_Connect
-				Start_Kingpin()
-			Case $ContexKP_AddFav
-				FavArrayAdd()
-			Case $ContexKP_RemFav
-				FavArrayRemove()
-			Case $ContextKP_CopyIP
-				CopyIPToClipKP()
-
-		EndSwitch
+	Switch _GUICtrlMenu_TrackPopupMenu($hMenu, $HypoGameBrowser, -1, -1, 1, 1, 2)
+		Case $ContexKP_Refresh
+			RefreshSingle()
+		Case $ContextKP_Connect
+			Start_Kingpin()
+		Case $ContextKP_CopyIP
+			CopyIPToClip()
+		Case $ContexKP_AddFav
+			FavArrayAdd()
+		Case $ContexKP_RemFav
+			FavArrayRemove()
+	EndSwitch
 	_GUICtrlMenu_DestroyMenu($hMenu)
 EndFunc
 
 Func RighttClickMenuM()
-	Local $ListViewA = ServerArray1ToFill()
-	Local $hMenuMBr
-	$hMenuMBr = _GUICtrlMenu_CreatePopup()
+	Local $ListViewA = getListView_A_CID()
+	Local $hMenuMBr = _GUICtrlMenu_CreatePopup()
+
 	_GUICtrlMenu_AddMenuItem($hMenuMBr, "M-Refresh", $ContexKP_RefreshM)
 	_GUICtrlMenu_AddMenuItem($hMenuMBr, "", 0)
 	_GUICtrlMenu_AddMenuItem($hMenuMBr, "M-Connect", $ContextKP_ConnectM)
 	_GUICtrlMenu_AddMenuItem($hMenuMBr, "", 0)
+	_GUICtrlMenu_AddMenuItem($hMenuMBr, "M-Copy IP", $ContextKP_CopyIP)
+	_GUICtrlMenu_AddMenuItem($hMenuMBr, "", 0)
 	_GUICtrlMenu_AddMenuItem($hMenuMBr, "M-Add Fav", $ContexKP_AddFavM)
-	_GUICtrlMenu_AddMenuItem($hMenuMBr, "M-Remove Fav", $ContexKP_RemFavM)
+	;_GUICtrlMenu_AddMenuItem($hMenuMBr, "M-Remove Fav", $ContexKP_RemFavM) ;disabled
 	_GUICtrlMenu_AddMenuItem($hMenuMBr, "", 0)
 	_GUICtrlMenu_AddMenuItem($hMenuMBr, "M-Get Server Info", $ContexKP_GetInfoM)
-
-        Switch _GUICtrlMenu_TrackPopupMenu($hMenuMBr, $HypoGameBrowser, -1, -1, 1, 1, 2)
-			Case $ContexKP_RefreshM
-				MRefresh()
-		    Case $ContextKP_ConnectM
-				Start_Kingpin()
-			Case $ContexKP_AddFavM
-				FavArrayAdd()
-			Case $ContexKP_RemFavM
-				FavArrayRemove()
-			Case $ContexKP_GetInfoM
-				GetServerDetailsPopup()
-		EndSwitch
+	Switch _GUICtrlMenu_TrackPopupMenu($hMenuMBr, $HypoGameBrowser, -1, -1, 1, 1, 2)
+		Case $ContexKP_RefreshM
+			MRefresh()
+		Case $ContextKP_ConnectM
+			Start_Kingpin()
+		Case $ContextKP_CopyIP
+			CopyIPToClip()
+		Case $ContexKP_AddFavM
+			FavArrayAdd()
+		;Case $ContexKP_RemFavM
+		;	FavArrayRemove()
+		Case $ContexKP_GetInfoM
+			M_GetServerDetailsPopup()
+	EndSwitch
 	_GUICtrlMenu_DestroyMenu($hMenuMBr)
 
 EndFunc
 
-;$tabGroupGames
+
+
+
+GUIRegisterMsg($WM_COMMAND, "WM_COMMAND")
+Func WM_COMMAND($hWnd, $iMsg, $wParam, $lParam)
+    #forceref $hWnd, $iMsg
+	local static $hListBox = GUICtrlGetHandle($UI_Combo_gameSelector)
+    Local $hWndFrom, $iIDFrom, $iCode, $hWndListBox
+
+	If Not IsHWnd($UI_Combo_gameSelector) Then $hWndListBox = GUICtrlGetHandle($UI_Combo_gameSelector)
+    $hWndFrom = $lParam
+    $iIDFrom = BitAND($wParam, 0xFFFF) ; Low Word
+    $iCode = BitShift($wParam, 16) ; Hi Word
+    Switch $hWndFrom
+        Case $UI_Combo_gameSelector, $hWndListBox
+            Switch $iCode
+                Case $LBN_SELCHANGE ; changed
+					UI_Combo_gameSelectorChange()
+                    ;ConsoleWrite("!ch"&@CRLF)
+            EndSwitch
+    EndSwitch
+    Return $GUI_RUNDEFMSG
+EndFunc   ;==>WM_COMMAND
 
 GUIRegisterMsg($WM_EXITSIZEMOVE, "WM_NOTIFY")
 GUIRegisterMsg($WM_NOTIFY, "WM_NOTIFY")
 ;GUIRegisterMsg($WM_COMMAND, "WM_NOTIFY")
-
 Func WM_NOTIFY($hWnd, $iMsg, $wParam, $lParam)
 	Local $iIDFrom, $iCode, $tNMHDR, $tInfo, $listIndexNum
+	#forceref $wParam
+
 	If ($hWnd = $HypoGameBrowser) Then
 		Switch $iMsg
 			Case $WM_EXITSIZEMOVE
 				ConsoleWrite("$WM_EXITSIZEMOVE"&@CRLF)
-				$guiResized = True
-				$wasMaximized = False
-				Return $GUI_RUNDEFMSG
+				$g_bGuiResized = True
+				$g_bWasMaximized = False
+				Return 0 ;$GUI_RUNDEFMSG ;todo
 
 			Case $WM_NOTIFY
-				$tNMHDR = DllStructCreate($tagNMHDR, $lParam)
-				$iIDFrom = DllStructGetData($tNMHDR, "IDFrom")
-				$iCode = DllStructGetData($tNMHDR, "Code")
-				If $isGettingServers = 0 Then
+				If $g_isGettingServers = 0 Then
+					$tNMHDR =  DllStructCreate($tagNMHDR, $lParam)
+					$iIDFrom = DllStructGetData($tNMHDR, "IDFrom")
+					$iCode =   DllStructGetData($tNMHDR, "Code")
+
+					;===================
+					;check listview ID's
+					;For $i=0 to $COUNT_GAME-1
+						If $UI_ListV_svData_A = $iIDFrom Then
+							Switch $iCode
+								Case $NM_RCLICK, $NM_RDBLCLK 	;mouse2 $NM_DBLCLK
+									$g_iListview_changed = 999
+									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam) ;$tagNMLISTVIEW
+									If DllStructGetData($tInfo, "Index") > -1 Then
+										$bEventRightClick = 1
+									EndIf
+								Case $NM_CLICK	;mouse1/arrow
+									$g_iListview_changed = 999
+								Case $LVN_KEYDOWN ;mouse1/arrow //$LVN_ITEMCHANGED
+									$tInfo = DllStructCreate($tagNMLVKEYDOWN, $lParam)
+									$g_iListview_changed = DllStructGetData($tInfo, "Flags") ;2621440=down arrow 2490368=up arrow
+								Case $NM_DBLCLK, -114
+									$bEventStartKingpin = 1
+							EndSwitch
+							;if not ($i = $g_iTabNum) Then ConsoleWrite("!Tab and list dont match i:"&$i&" t:"&$g_iTabNum&@CRLF)
+							;Return 0 ;$GUI_RUNDEFMSG
+						EndIf
+					;Next
+					;=================
+					; check M ID's
+					For $i=0 to 2
+						If $UI_ListV_mb_ABC[$i] = $iIDFrom Then
+							Switch $iCode
+								Case $NM_RCLICK
+									$iMGameType = $i
+									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam) ;$tagNMLISTVIEW
+									If DllStructGetData($tInfo, "Index") > -1 Then
+										$bEventRightClickM = 1
+									EndIf
+								Case $NM_CLICK
+									$iMGameType = $i
+								;~ Case $NM_RETURN
+								;~ 	$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
+								Case $NM_DBLCLK, -114
+									$iMGameType = $i
+									$bEventStartKingpin = 1
+							EndSwitch
+							;Return 0 ;$GUI_RUNDEFMSG
+						EndIf
+					Next
+					;=================
+					; check other ID's
 					Switch $iIDFrom
 						Case $HypoGameBrowser
 							ConsoleWrite("hypobrowser"&@CRLF)
-
-						Case $ListView1KP 			;tab 1 kingpin
-							Switch $iCode
-								Case $NM_RCLICK, $NM_RDBLCLK 	;mouse2 $NM_DBLCLK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam) ;$tagNMLISTVIEW
-									FillSelectedServerStrings(1, DllStructGetData($tInfo, "Index") ) ;false?, tabNum, ListNum
-									If DllStructGetData($tInfo, "Index") > -1 Then
-										$bEventRightClick = 1
-									EndIf
-									ConsoleWrite("+-> $NM_RCLICK"&@CRLF)
-								Case $NM_CLICK	;mouse1/arrow
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-									$listIndexNum = DllStructGetData($tInfo, "Index")
-									;If Not $iOldSelectNumKp = $listIndexNum Then
-										FillSelectedServerStrings(1, DllStructGetData($tInfo, "Index") ) ;false?, tabNum, ListNum
-									;EndIf
-									ConsoleWrite("+-> $NM_CLICK"&@CRLF)
-								Case $LVN_KEYDOWN;mouse1/arrow //$LVN_ITEMCHANGED
-									$tInfo = DllStructCreate($tagNMLVKEYDOWN, $lParam)
-									$changedListview = DllStructGetData($tInfo, "Flags") ;2621440=down arrow 2490368=up arrow
-									ConsoleWrite("$changedListview= "&$changedListview&@CRLF)
-									ConsoleWrite("+-> $LVN_KEYDOWN"&@CRLF)
-								Case $NM_DBLCLK, -114
-									$bEventStartKingpin = 1
-									ConsoleWrite("+-> $NM_DBLCLK"&@CRLF)
-							endswitch
-						Case $ListView1KPQ3
-							Switch $iCode
-								Case $NM_RCLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-									FillSelectedServerStrings(2, DllStructGetData($tInfo, "Index") ) ;false?, tabNum, ListNum
-									If DllStructGetData($tInfo, "Index") > -1 Then
-										$bEventRightClick = 1
-									EndIf
-								Case $NM_CLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-									FillSelectedServerStrings(2, DllStructGetData($tInfo, "Index") ) ;false?, tabNum, ListNum
-								Case $LVN_KEYDOWN
-									$tInfo = DllStructCreate($tagNMLVKEYDOWN, $lParam)
-									$changedListview = DllStructGetData($tInfo, "Flags")
-								Case $NM_DBLCLK, -114
-									$bEventStartKingpin = 1
-							endswitch
-						Case $ListView1Q2
-							Switch $iCode
-								Case $NM_RCLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-									FillSelectedServerStrings(3, DllStructGetData($tInfo, "Index") ) ;false?, tabNum, ListNum
-									If DllStructGetData($tInfo, "Index") > -1 Then
-										$bEventRightClick = 1
-									EndIf
-								Case $NM_CLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-									FillSelectedServerStrings(3, DllStructGetData($tInfo, "Index") ) ;false?, tabNum, ListNum
-								Case $LVN_KEYDOWN
-									$tInfo = DllStructCreate($tagNMLVKEYDOWN, $lParam)
-									$changedListview = DllStructGetData($tInfo, "Flags")
-								Case $NM_DBLCLK, -114
-									$bEventStartKingpin = 1
-							endswitch
-
-						;;--> m-browser -----------------------
-						Case $ListView1M
-							$iMGameType = 1
-							Switch $iCode
-								Case $NM_RCLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam) ;$tagNMLISTVIEW
-									If DllStructGetData($tInfo, "Index") > -1 Then
-										$bEventRightClickM = 1
-									EndIf
-								Case $NM_CLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-								Case $NM_RETURN
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-								Case $NM_DBLCLK, -114
-									$bEventStartKingpin = 1
-							endswitch
-						Case $ListView2M
-							$iMGameType = 2
-							Switch $iCode
-								Case $NM_RCLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-									If DllStructGetData($tInfo, "Index") > -1 Then
-										$bEventRightClickM = 1
-									EndIf
-								Case $NM_CLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-								Case $NM_RETURN
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-								Case $NM_DBLCLK, -114
-									$bEventStartKingpin = 1
-							endswitch
-						Case $ListView3M
-							$iMGameType = 3
-							Switch $iCode
-								Case $NM_RCLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-									If DllStructGetData($tInfo, "Index") > -1 Then
-										$bEventRightClickM = 1
-									EndIf
-								Case $NM_CLICK
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-								Case $NM_RETURN
-									$tInfo = DllStructCreate($tagNMITEMACTIVATE, $lParam)
-								Case $NM_DBLCLK, -114
-									$bEventStartKingpin = 1
-							endswitch
+							Return 0; $GUI_RUNDEFMSG
 					EndSwitch
-				EndIf
+				EndIf ; end if getting servers
+			;end case $WM_NOTIFY
 		EndSwitch
-		Return $GUI_RUNDEFMSG
+		;Return $GUI_RUNDEFMSG
 	EndIf
+	Return $GUI_RUNDEFMSG
+	;ConsoleWrite("!WM_NOTIFY: not self"&@CRLF)
 EndFunc   ;==>WM_NOTIFY
 
-
 Func FavArrayRemove()
-	SelectedTabNum()
-	Local $ipPort = GetTabSelectedArrayStringIP()
-	If $ipPort ="" Then Return
+	SetSelectedGameID()
+	Local $iGameIdx = $g_iCurGameID ; GetActiveGameIndex()
+	Local $listIdx = GetServerListA_SelectedData($LV_A_IDX)
+	Local $ipPort = GetServerListA_SelectedData($LV_A_IP)
 
-	If $tabNum = 1 Then
-		For $i = 0 To UBound($aFavKP)-1
-			If StringCompare($ipPort,$aFavKP[$i])=0 Then
-				_ArrayDelete($aFavKP, $i)
-				ConsoleWrite("fav length= " & UBound($aFavKP)& @CRLF)
-				Return ;dont add an existing fav
-			EndIf
+	If $ipPort = "" Then
+		Return
+	EndIf
+
+	;fav is stored using -10 port for kingpin
+	if $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] then
+		$ipPort = String($g_aServerStrings[$iGameIdx][$listIdx][$COL_IP] &":"& _
+		                 $g_aServerStrings[$iGameIdx][$listIdx][$COL_PORT])
+	EndIf
+
+	Local $aTmp = StringSplit($g_aFavList[$iGameIdx], "|")
+	Local $iFoundIdx = 0
+
+	;_ArrayDisplay($aTmp)
+	For $i = 1 to $aTmp[0]
+		If StringCompare($ipPort, $aTmp[$i]) = 0 Then
+			$iFoundIdx = $i
+			ExitLoop
+		EndIf
+	Next
+
+	If $iFoundIdx Then
+		$g_aFavList[$iGameIdx] = ""
+		For $i = 1 to $aTmp[0]
+			If $i = $iFoundIdx Then ContinueLoop
+			$g_aFavList[$iGameIdx] &= $aTmp[$i] & "|"
 		Next
-	ElseIf	$tabNum = 2 Then
-		For $i = 0 To UBound($aFavKPQ3)-1
-			If StringCompare($ipPort,$aFavKPQ3[$i])=0 Then
-				_ArrayDelete($aFavKPQ3, $i)
-				ConsoleWrite("fav length= " & UBound($aFavKPQ3)& @CRLF)
-				Return ;dont add an existing fav
-			EndIf
-		Next
-	ElseIf $tabNum = 3 Then
-		For $i = 0 To UBound($aFavQ2)-1
-			If StringCompare($ipPort, $aFavQ2[$i])=0 Then
-				_ArrayDelete($aFavQ2, $i)
-				ConsoleWrite("fav length= " & UBound($aFavQ2)& @CRLF)
-				Return ;dont add an existing fav
-			EndIf
-		Next
-	ElseIf $tabNum = 6 Then		;--m browser
-		If $iMGameType = 1 Then
-			For $i = 0 To UBound($aFavKP)-1
-				If StringCompare($ipPort,$aFavKP[$i])=0 Then
-					_ArrayDelete($aFavKP, $i)
-					ConsoleWrite("fav length= " & UBound($aFavKP)& @CRLF)
-					Return ;dont add an existing fav
-				EndIf
-			Next
-		ElseIf	$iMGameType = 2 Then
-			For $i = 0 To UBound($aFavKPQ3)-1
-				If StringCompare($ipPort,$aFavKPQ3[$i])=0 Then
-					_ArrayDelete($aFavKPQ3, $i)
-					ConsoleWrite("fav length= " & UBound($aFavKPQ3)& @CRLF)
-					Return ;dont add an existing fav
-				EndIf
-			Next
-		ElseIf $iMGameType = 3 Then
-			For $i = 0 To UBound($aFavQ2)-1
-				If StringCompare($ipPort, $aFavQ2[$i])=0 Then
-					_ArrayDelete($aFavQ2, $i)
-					ConsoleWrite("fav length= " & UBound($aFavQ2)& @CRLF)
-					Return ;dont add an existing fav
-				EndIf
-			Next
-		EndIf ;--end M
-	EndIf ;--end tabnum
+		If $g_aFavList[$iGameIdx] <> "" Then $g_aFavList[$iGameIdx] = StringTrimRight($g_aFavList[$iGameIdx], 1)
+	EndIf
+	ConsoleWrite("fav:"&$g_aFavList[$iGameIdx]&@CRLF)
 EndFunc
-
 
 Func FavArrayAdd()
-	SelectedTabNum()
-	Local $ipPort = GetTabSelectedArrayStringIP()
-	Local $i, $tmp
-	If $ipPort = "" Then Return ;wont be needed?
+	SetSelectedGameID()
+	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	Local $listIdx = GetServerListA_SelectedData($LV_A_IDX)
+	Local $ipPort = GetServerListA_SelectedData($LV_A_IP)
+	Local $i, $tmp, $sTmp
+	If $ipPort = "" Then
+		ConsoleWrite("fav selection error"&@CRLF)
+		Return ;wont be needed?
+	EndIf
 
-	$tmp = StringSplit($ipPort, ":", $STR_NOCOUNT)
-	$ipPort = String(TCPNameToIP($tmp[0])&":"& $tmp[1])
+	;fav is stored using -10 port for kingpin
+	Switch $g_iTabNum
+		Case $TAB_GB
+			if $g_aNetMsg_UDP_Server[$iGameIdx][$NET_GS_P] then ;-10
+				$ipPort = String( _
+					$g_aServerStrings[$iGameIdx][$listIdx][$COL_IP] &":"& _
+					$g_aServerStrings[$iGameIdx][$listIdx][$COL_PORT])
+			EndIf
+		Case $TAB_MB
+			If $iMGameType = $ID_KP1 Then
+				$sTmp = StringSplit($ipPort, ":")
+				If Not @error Then
+					$ipPort = StringFormat("%s:%i", $sTmp[1], Number($sTmp[2]) -10); subtract -10 for gamespy
+				EndIf
+			EndIf
+	EndSwitch
 
-	If $tabNum = 1 Then
-		For $i = 0 To UBound($aFavKP)-1
-			If StringCompare($ipPort, $aFavKP[$i])=0 Then Return ;dont add an existing fav
-		Next
-		$i = UBound($aFavKP)
-		ConsoleWrite("xfav size kp= " &$i+1& " ip= "& $ipPort& @CRLF)
-		ReDim $aFavKP[$i+1]
-		$aFavKP[$i] = $ipPort
-	ElseIf	$tabNum = 2 Then
-		For $i = 0 To UBound($aFavKPQ3)-1
-			If StringCompare($ipPort,$aFavKPQ3[$i])=0 Then Return ;dont add an existing fav
-		Next
-		$i = UBound($aFavKPQ3)
-		ConsoleWrite("xfav sizekpq3= " &$i+1& " ip= "& $ipPort& @CRLF)
-		ReDim $aFavKPQ3[$i+1]
-		$aFavKPQ3[$i] = $ipPort
-	ElseIf $tabNum = 3 Then
-		For $i = 0 To UBound($aFavQ2)-1
-			If StringCompare($ipPort ,$aFavQ2[$i])=0 Then Return ;dont add an existing fav
-		Next
-		$i = UBound($aFavQ2)
-		ConsoleWrite("xfav size q2= " &$i+1& " ip= "& $ipPort& @CRLF)
-		ReDim $aFavQ2[$i+1]
-		$aFavQ2[$i] = $ipPort
-	ElseIf 	$tabNum = 6 Then
-		If $iMGameType = 1 Then
-			For $i = 0 To UBound($aFavKP)-1
-				If StringCompare($ipPort,$aFavKP[$i])=0 Then Return ;dont add an existing fav
-			Next
-			$i = UBound($aFavKP)
-			ConsoleWrite("xfav size kp= " &$i+1& " ip= "& $ipPort& @CRLF)
-			ReDim $aFavKP[$i+1]
-			$aFavKP[$i] = $ipPort
-		ElseIf	$iMGameType = 2 Then
-			For $i = 0 To UBound($aFavKPQ3)-1
-				If StringCompare($ipPort,$aFavKPQ3[$i])=0 Then Return ;dont add an existing fav
-			Next
-			$i = UBound($aFavKPQ3)
-			ConsoleWrite("xfav sizekpq3= " &$i+1& " ip= "& $ipPort& @CRLF)
-			ReDim $aFavKPQ3[$i+1]
-			$aFavKPQ3[$i] = $ipPort
-		ElseIf $iMGameType = 3 Then
-			For $i = 0 To UBound($aFavQ2)-1
-				If StringCompare($ipPort, $aFavQ2[$i])=0 Then Return ;dont add an existing fav
-			Next
-			$i = UBound($aFavQ2)
-			ConsoleWrite("xfav size q2= " &$i+1& " ip= "& $ipPort& @CRLF)
-			ReDim $aFavQ2[$i+1]
-			$aFavQ2[$i] = $ipPort
-		EndIf ;--end M
-	EndIf ;--end tabnum
+
+	;_ArrayDisplay($g_aFavList)
+	Local $aTmp = StringSplit($g_aFavList[$iGameIdx], "|")
+	For $i = 1 to $aTmp[0]
+		ConsoleWrite(">"&$aTmp[$i]&@CRLF)
+		If StringCompare($ipPort, $aTmp[$i]) = 0 Then
+			ConsoleWrite("existing fav"&@CRLF)
+			Return ;existing
+		EndIf
+	Next
+
+	if $g_aFavList[$iGameIdx] <> "" Then
+		$g_aFavList[$iGameIdx] &= "|" & $ipPort
+	Else
+		$g_aFavList[$iGameIdx] = $ipPort
+	EndIf
 EndFunc
 
-Func CopyIPToClipKP()
-	SelectedTabNum()
-	Local $string = GetTabSelectedArrayStringIP()
-	If $string = "" Then Return
-	ClipPut($string)
+Func CopyIPToClip()
+	;compatable with both GB/MB
+	SetSelectedGameID()
+	Local $string = GetServerListA_SelectedData($LV_A_IP)
+	If $string <> "" Then
+		ClipPut($string)
+	EndIf
 EndFunc
 
 #EndRegion --> END RIGHT CLICK EVENT
@@ -5221,236 +4689,594 @@ EndFunc
 ;========================================================
 ; --> EVENTS
 
+;--> BUTTON PING LIST  ( also used in SERVER/OFFLINE LIST)
+;refresh server in listview. dont talk to master
+GUICtrlSetOnEvent($UI_Btn_pingList, "UI_Btn_pingListClicked")
+	Func UI_Btn_pingListClicked() ;allready in listview from master/offline
+		SetSelectedGameID()
+		BeginGettinServers()
+		RefreshServersInListview($g_iCurGameID)
+		FinishedGettinServers()
+	EndFunc
+
+;allready in listview from master/offline
+Func RefreshServersInListview($iGameIdx)
+	Local $i, $sIP, $iPort, $sName, $ipPort, $aIPArray, $sTmp = "" ;Dim
+	;Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	Local $ListViewA = getListView_A_CID()
+	Local $iServerCount = GetServerCountInArray($iGameIdx)
+
+	If $g_iTabNum = $TAB_MB then ; ID_M Then
+		MRefresh() ;refresh mbrowser
+		Return
+	EndIf
+
+	;EnableUIButtons(False)
+	;BeginGettinServers()
+	$g_iPlayerCount_GS = 0
+	$g_iServerCountTotal = 0 ;get # servers to use later to stop refresh
+
+	For $i = 0 To $g_iMaxSer -1
+		If $g_aServerStrings[$iGameIdx][$i][$COL_PING] > 0 Then
+			$sIP = $g_aServerStrings[$iGameIdx][$i][$COL_IP]
+			$iPort = $g_aServerStrings[$iGameIdx][$i][$COL_PORT] ;gsPort
+			;ReDim $aIPArray[$i+1]
+			;$aIPArray[$i] = String($sIP & ":" & $iPort) ;add ip/port to array
+			$sTmp &= String($sIP & ":" & $iPort) &"|"
+			$g_iServerCountTotal += 1
+		Else
+			ExitLoop(1)
+		EndIf
+	Next
+	$sTmp = StringTrimRight($sTmp, 1)
+
+	;update listview with invalid values
+	FillServerStringArrayPing($iGameIdx, 999, $g_iServerCountTotal)
+	FillServerListView_popData($iGameIdx, $ListViewA) ;$g_iServerCountTotal)
+
+	$aIPArray = StringSplit($sTmp, "|", $STR_NOCOUNT)
+	If IsArray($aIPArray) and UBound($aIPArray) > 0 Then
+		SendStatustoServers_Init($iGameIdx, $aIPArray, -1)
+	EndIf
+
+EndFunc
+
+;===== FavArrayLoad() =====
+;load fave per game tab, refresh them to
+GUICtrlSetOnEvent($UI_Btn_loadFav, "UI_Btn_loadFavClicked")
+	Func UI_Btn_loadFavClicked()
+		Local $ListViewA = getListView_A_CID()
+		Local $sIP_Port, $sIP, $iPort, $iGameIdx, $ipArray
+
+		SetSelectedGameID()
+		$iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+		ResetServerListArrays(BitShift(1, -($iGameIdx))) ; bit
+
+		_GUICtrlListView_DeleteAllItems($ListViewA)
+		If $g_aFavList[$iGameIdx] <> "" Then
+			$ipArray = StringSplit($g_aFavList[$iGameIdx], "|", $STR_NOCOUNT)
+			$g_iServerCountTotal = UBound($ipArray)
+			If $g_iServerCountTotal > 0 Then
+				;update internal arrays
+				FillServerStringArrayIP($iGameIdx, $ipArray)
+				FillServerStringArrayPing($iGameIdx, 999, $g_iServerCountTotal)
+				;update listview
+				FillServerListView_popData($iGameIdx, $ListViewA)
+				RefreshServersInListview($iGameIdx)
+				FinishedGettinServers()
+			EndIf
+		EndIf
+	EndFunc
+;===== END =====
+
+;=====  RefreshSingle() =====
+Func RefreshSingle()
+	ConsoleWrite("RefreshSingle Server"&@CRLF)
+	SetSelectedGameID()
+	;EnableUIButtons(False)
+	BeginGettinServers()
+	$g_iServerCountTotal = 1 ;get # servers to use later to stop refresh
+
+	Local $tmpArray[1] ;only update 1 server
+	Local $oldTime, $compTime, $iPing, $data1, $data2
+	Local $ListViewA = getListView_A_CID()
+	Local $listSelNum = _GUICtrlListView_GetSelectionMark($ListViewA) ;mouse selected num.
+	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	Local $serSelNum = GetServerListA_SelectedData($LV_A_IDX) ;server index num (internal array ID)
+
+	if $g_aNetMsg_UDP_Server[$g_iCurGameID][$NET_GS_P] Then
+		$tmpArray[0] = String($g_aServerStrings[$g_iCurGameID][$serSelNum][$COL_IP] &":"& _
+		                      $g_aServerStrings[$g_iCurGameID][$serSelNum][$COL_PORT]) ; get game port (-10)
+	Else
+		$tmpArray[0] = GetServerListA_SelectedData($LV_A_IP)
+	EndIf
+
+	If $tmpArray[0] = "" Then
+		;invalid ip
+		Return
+	EndIf
+
+	;reset internal array
+	$g_aServerStrings[$g_iCurGameID][$serSelNum][$COL_PLAYERS] = 0
+	$g_aServerStrings[$g_iCurGameID][$serSelNum][$COL_PING] = 999
+	$g_aServerStrings[$g_iCurGameID][$serSelNum][$COL_INFOSTR] = ""
+	$g_aServerStrings[$g_iCurGameID][$serSelNum][$COL_INFOPLYR] = ""
+
+	ConsoleWrite("ListNum= '" & $listSelNum &"'  ServerNum= '" &$serSelNum&"'"& @CRLF)
+	ConsoleWrite("address= " & $tmpArray[0]&@CRLF)
+
+	GUICtrlSetData($UI_Prog_getServer, 50)
+	;reset array incase server does not reply, keep name
+	_GUICtrlListView_SetItem($ListViewA, "999", $listSelNum, 3, -1)	;ping
+	_GUICtrlListView_SetItem($ListViewA, "0/0", $listSelNum, 4, -1)	;players
+	_GUICtrlListView_SetItem($ListViewA, "",    $listSelNum, 5, -1)	;map
+	_GUICtrlListView_SetItem($ListViewA, "",    $listSelNum, 6, -1)	;mod
+
+	SendStatustoServers_Init($g_iCurGameID, $tmpArray, $serSelNum)
+
+	;update server players/rules
+	FillListView_BC_Selected($g_iCurGameID, $listSelNum);  $iGameID
+
+	FinishedGettinServers();/
+	;$isPlayersInServer = False ;refresh selected sets this but never uses it
+	$g_iPlayerCount_GS = 0 ;reset player count for audio
+EndFunc
+;===== END RefreshSingle =====
+
+;0 = inital shift. maximize server list
+;1 = maximize server list
+;2 = maximize server detail windows
+Func SetFocusSize()
+	Local $w1, $w2, $w3
+	Local Const $offset[2] = [136, -136] ;init, min, max; 68,
+	Local Static $lastPos = 0 ; g_ResizeListView
+	;todo set in preferences?
+	$lastPos = ($lastPos=1)? (0) : (1)
+
+	$w1 = ControlGetPos($HypoGameBrowser, "", $UI_ListV_svData_A)
+	$w2 = ControlGetPos($HypoGameBrowser, "", $UI_ListV_svData_B)
+	$w3 = ControlGetPos($HypoGameBrowser, "", $UI_ListV_svData_C)
+	GUICtrlSetPos($UI_ListV_svData_A, $w1[0], $w1[1]                  , $w1[2], $w1[3]+$offset[$lastPos])
+	GUICtrlSetPos($UI_ListV_svData_B, $w2[0], $w2[1]+$offset[$lastPos], $w2[2], $w2[3]-$offset[$lastPos])
+	GUICtrlSetPos($UI_ListV_svData_C, $w3[0], $w3[1]+$offset[$lastPos], $w3[2], $w3[3]-$offset[$lastPos])
+EndFunc
+
+
 GUISetOnEvent($GUI_EVENT_CLOSE, "ExitScript", $HypoGameBrowser)
 	Func ExitScript()
-		Local $hTimer = TimerInit()
-
-		_GUICtrlListView_UnRegisterSortCallBack($ListView1KP)
-		_GUICtrlListView_UnRegisterSortCallBack($ListView1KPQ3)
-		_GUICtrlListView_UnRegisterSortCallBack($ListView1Q2)
-
-		_GUICtrlListView_UnRegisterSortCallBack($ListView3)
-		_GUICtrlListView_UnRegisterSortCallBack($ListView3KPQ3)
-		_GUICtrlListView_UnRegisterSortCallBack($ListView3Q2)
 		TCPShutdown()
 		UDPShutdown()
-		FileDelete($isTmpFilePath_KP)
-		FileDelete($isTmpFilePath_KPQ3)
-		FileDelete($isTmpFilePath_Q2Web)
-		FileDelete($mLinkFilePathDel)
-		FileDelete($mLinkFilePathEnable)
-		iniFileSave()
+
+		For $i=0 to 2
+			FileDelete($g_sM_tmpFile[$i])
+		Next
+		FileDelete($g_sM_tmpFile_reg)
+		iniFile_Save()
+
+		;_GUICtrlListView_UnRegisterSortCallBack($UI_ListV_svData_A)
+		;_GUICtrlListView_UnRegisterSortCallBack($UI_ListV_svData_C)
+		_GUICtrlComboBoxEx_Destroy($UI_Combo_gameSelector)
 		GUIDelete($MPopupInfo)
 		GUIDelete($HypoGameBrowser)
 		Exit
 	EndFunc   ;==>CLOSEButton
 
-;using refresh button
-GUICtrlSetOnEvent ($GetServersBtn, "EventGetMasterServerList")
-	Func EventGetMasterServerList()
-
-		SelectedTabNum()
-		If $tabNum = 6 Then
-			MRefresh() ;refresh mbrowser
-			Return
-		EndIf
-		GetMasterServerList(False, 0)
-	EndFunc
-
-;using setup button
-GUICtrlSetOnEvent($SettingsBtn, "UseSettingsBtn")
-	Func UseSettingsBtn()
-		$tabNum = 4
-		_GUICtrlTab_ActivateTab($tabGroupGames, 3)
-	EndFunc
-
-;using connect chat button
-GUICtrlSetOnEvent($ConnectChatBtn,"load_gui")
-	Func load_gui()
-		GUICtrlSetColor($webObj, $COLOR_YELLOW)
-		GUICtrlSetBkColor($webObj, $COLOR_BLACK)
-		_IENavigate($webObj,"http://forum.hambloch.com/chat.php?room=kingpin&wio=hypo")
-	EndFunc
-
-
-Func _GDIPlus_GraphicsGetDPIRatio($iDPIDef = 96)
-    _GDIPlus_Startup()
-    Local $hGfx = _GDIPlus_GraphicsCreateFromHWND(0)
-    If @error Then Return SetError(1, @extended, 0)
-    Local $aResult
-    #forcedef $__g_hGDIPDll, $ghGDIPDll
-
-    $aResult = DllCall($__g_hGDIPDll, "int", "GdipGetDpiX", "handle", $hGfx, "float*", 0)
-
-    If @error Then Return SetError(2, @extended, 0)
-    Local $iDPI = $aResult[2]
-    Local $aresults[2] = [$iDPIDef / $iDPI, $iDPI / $iDPIDef]
-    _GDIPlus_GraphicsDispose($hGfx)
-    _GDIPlus_Shutdown()
-    Return $aresults
-EndFunc   ;==>_GDIPlus_GraphicsGetDPIRatio
-
-
-;using tabs
-GUICtrlSetOnEvent($tabGroupGames, "tab1")
-	Func tab1()
-		ConsoleWrite("event tabGroup."&@CRLF)
-
-		GUICtrlSetState($GetServersBtn, $GUI_SHOW )
-		GUICtrlSetState($FavServerBtn, $GUI_SHOW)
-		GUICtrlSetState($OffLineServeBtn, $GUI_SHOW)
-		GUICtrlSetState($RefServerBtn, $GUI_SHOW)
-		;Local $tabX =
-		Switch GUICtrlRead($tabGroupGames)
-			Case 0
-				$tabNum =1
-			Case 1
-				$tabNum =2
-			Case 2
-				$tabNum =3
-			Case 3
-				$tabNum =4
-			Case 4
-				$tabNum =5
-			Case 5
-				$tabNum =6
-				;GUICtrlSetState($ListView1Q2, $GUI_DISABLE)
-				GUICtrlSetState($RefServerBtn, $GUI_HIDE)
-				GUICtrlSetState($FavServerBtn, $GUI_HIDE)
-				GUICtrlSetState($OffLineServeBtn, $GUI_HIDE)
+	Func GetActiveGameIndex()
+		Switch $g_iTabNum
+			Case $TAB_GB ;0 to $COUNT_GAME-1
+				Switch $g_iCurGameID
+					Case 0 to $COUNT_GAME-1
+						return $g_iCurGameID
+					Case Else
+						return $ID_KP1 ;default
+				EndSwitch
+				Return $g_iCurGameID; $g_iTabNum
+			case $TAB_MB
+				Switch $iMGameType
+					Case 0 to $ID_Q2
+						Return $iMGameType
+					Case Else
+						Return $ID_KP1 ;default
+				EndSwitch
 			Case Else
-				$tabNum =1
-				ConsoleWrite("no tab. using tab=1"&@CRLF)
+				Return $ID_KP1 ;default
 		EndSwitch
 	EndFunc
 
-;sort servers kp
-GUICtrlSetOnEvent($ListView1KP,"SortList1")
-	Func	SortList1()
-		_GUICtrlListView_SortItems($ListView1KP, GUICtrlGetState($ListView1KP))
-	EndFunc
-;sort servers kpq3
-GUICtrlSetOnEvent($ListView1KPQ3,"SortList1KPQ3")
-	Func	SortList1KPQ3()
-		_GUICtrlListView_SortItems($ListView1KPQ3, GUICtrlGetState($ListView1KPQ3))
-	EndFunc
-;sort servers quake2
-GUICtrlSetOnEvent($ListView1Q2,"SortList1Q2")
-	Func	SortList1Q2()
-			_GUICtrlListView_SortItems($ListView1Q2, GUICtrlGetState($ListView1Q2))
-	EndFunc
-;sort server rules kp
-GUICtrlSetOnEvent($ListView3,"SortList3")
-	Func	SortList3()
-		_GUICtrlListView_SortItems($ListView3, GUICtrlGetState($ListView3))
-	EndFunc
-;sort server rules kpq3
-GUICtrlSetOnEvent($ListView3KPQ3,"SortList3KPQ3")
-	Func	SortList3KPQ3()
-		_GUICtrlListView_SortItems($ListView3KPQ3, GUICtrlGetState($ListView3KPQ3))
-	EndFunc
-;sort server rules quake2
-GUICtrlSetOnEvent($ListView3Q2,"SortList3Q2")
-	Func	SortList3Q2()
-			_GUICtrlListView_SortItems($ListView3Q2, GUICtrlGetState($ListView3Q2))
+Func SetTabActiveGame()
+	if ($g_iTabNum = $TAB_CFG) Or ($g_iTabNum = $TAB_CHAT) Then
+		Switch ComboBoxEx_GetCurSel()
+			Case $ID_M
+				ConsoleWrite("-MB"&@CRLF)
+				$g_iTabNum = $TAB_MB
+				SetActiveTab($TAB_MB)
+			Case Else
+				ConsoleWrite("-GB"&@CRLF)
+				$g_iTabNum = $TAB_GB
+				SetActiveTab($TAB_GB)
+		EndSwitch
+	EndIf
+EndFunc
+
+
+
+;using refresh button
+GUICtrlSetOnEvent ($UI_Btn_refreshMaster, "UI_Btn_refreshMasterClicked")
+	Func UI_Btn_refreshMasterClicked()
+		SetSelectedGameID()
+
+		SetTabActiveGame() ;switch if in settings
+		If $g_iTabNum = $TAB_MB Then
+			ConsoleWrite("-m"&@CRLF)
+			MRefresh() ;refresh mbrowser
+			Return
+		Else
+			ConsoleWrite("-g"&@CRLF)
+			GetServerListFromMaster($g_iCurGameID)
+		EndIf
 	EndFunc
 
-;game path button kp
-GUICtrlSetOnEvent($Button_kp, "EventButton_kp")
-	Func EventButton_kp()
-		Local $sFile = _WinAPI_OpenFileDlg('', @WorkingDir, 'Kingpin.exe (*.exe)|All Files (*.*)', 1, '', '', _
-											BitOR($OFN_PATHMUSTEXIST, $OFN_FILEMUSTEXIST, $OFN_HIDEREADONLY))
-		If Not @error Then
-			GUICtrlSetData( $path_Kingpin,$sFile)
-		EndIf
+;using setup button
+GUICtrlSetOnEvent($UI_Btn_settings, "UI_Btn_settingsClicked")
+	Func UI_Btn_settingsClicked()
+		$g_iTabNum = $TAB_CFG
+		SetActiveTab($TAB_CFG)
 	EndFunc
-;game path button kpq3
-GUICtrlSetOnEvent($Button_kpq3, "EventButton_kpq3")
-	Func EventButton_kpq3()
-		Local $sFile = _WinAPI_OpenFileDlg('', @WorkingDir, 'KingpinQ3-32.exe (*.exe)|All Files (*.*)', 1, '', '', _
-											BitOR($OFN_PATHMUSTEXIST, $OFN_FILEMUSTEXIST, $OFN_HIDEREADONLY))
-		If Not @error Then
-			GUICtrlSetData( $path_KPQ3 ,$sFile)
-		EndIf
+
+;using expand button
+GUICtrlSetOnEvent($UI_Btn_expand, "ExpandBtnClicked")
+	Func ExpandBtnClicked()
+		;$g_ResizeListView = 1
+		SetFocusSize()
 	EndFunc
-;game path button quake2
-GUICtrlSetOnEvent($Button_q2,"EventButton_q2")
-	Func EventButton_q2()
-		Local $sFile = _WinAPI_OpenFileDlg('', @WorkingDir, 'Quake2.exe (*.exe)|All Files (*.*)', 1, '', '', _
-											BitOR($OFN_PATHMUSTEXIST, $OFN_FILEMUSTEXIST, $OFN_HIDEREADONLY))
-		;Local $quakeEXEName = _WinAPI_GetExtended()
-		If Not @error Then
-			GUICtrlSetData( $path_Quake2,$sFile)
+
+;using connect chat button
+GUICtrlSetOnEvent($UI_Btn_chatConnect,"load_gui")
+	Func load_gui()
+		If _IsChecked($UI_CBox_theme) Then
+			GUICtrlSetColor($UI_Obj_webPage, $COLOR_YELLOW)
+			GUICtrlSetBkColor($UI_Obj_webPage, $COLOR_HYPO_BLACK)
 		EndIf
+		_IENavigate($UI_Obj_webPage, "https://forum.hambloch.com/c.php?r=kingpin")
+	EndFunc ;_IECreateEmbedded
+
+
+Func SetButtoShowState($iTab)
+	Local Const $aButtons = [$UI_Btn_pingList, $UI_Btn_loadFav, $UI_Btn_offlineList]
+
+	;main buttons
+	Switch $iTab
+		Case $TAB_GB ;gamespy
+			GUICtrlSetState($UI_Btn_expand, $GUI_SHOW); expand button
+			For $i = 0 to UBound($aButtons) - 1
+				GUICtrlSetState($aButtons[$i], $GUI_SHOW)
+			Next
+		Case  $TAB_MB ;mbrowser
+			GUICtrlSetState($UI_Btn_expand, $GUI_HIDE); expand button
+			For $i = 0 to UBound($aButtons) - 1
+				GUICtrlSetState($aButtons[$i], $GUI_HIDE)
+			Next
+		Case Else ;$TAB_CHAT, $TAB_CFG
+			GUICtrlSetState($UI_Btn_expand, $GUI_HIDE); expand button
+			For $i = 0 to UBound($aButtons) - 1
+				GUICtrlSetState($aButtons[$i], $GUI_HIDE)
+			Next
+	EndSwitch
+EndFunc
+
+
+;using tabs
+GUICtrlSetOnEvent($tabGroupGames, "TabClicked")
+	Func TabClicked()
+		ConsoleWrite("event tab Clicked. oldTab:"&$g_iTabNum&@CRLF)
+
+		;check if user is in settings
+		If $g_iTabNum = $TAB_CFG Then ;update user settings on exit 'setup' tab
+			GameSetup_Store() ;UI_Combo_masterChange
+		EndIf
+
+		TabClicked_SyncGameCombo()
+
+		SetSelectedGameID() ;$g_iTabNum
+
+		UpdateMasterDisplay() ;ui master text
+
+		ConsoleWrite("event tab Clicked. newTab:"&$g_iTabNum&@CRLF)
+		SetButtoShowState($g_iTabNum)
+	EndFunc
+
+;sync tab/gameSelector
+Func TabClicked_SyncGameCombo()
+	; ComboChanged_SyncTab()
+	; note -=| endless loop if not handeled correctly. |=-
+	Local $iTab = GUICtrlRead($tabGroupGames)
+	Local $iGameID = ComboBoxEx_GetCurSel()
+	ConsoleWrite("-tab:"&$iTab& " game:"&$iGameID&@CRLF)
+
+	Switch $iTab
+		Case $TAB_GB
+			;GB Tab clicked, make sure dropdown is not M
+			if $iGameID = $ID_M Then
+				;GameSetup_Store()
+				ConsoleWrite("!gid:"&$g_iGSGameLast&@CRLF)
+				$g_iCurGameID = $g_iGSGameLast
+				ComboBoxEx_SetCurSel($g_iGSGameLast)
+				GameSetup_UpdateUI()
+			EndIf
+		Case $TAB_MB
+			ConsoleWrite("-tab:"&$iTab&" m:"&$ID_M&@CRLF)
+			;M Tab clicked. set dropdown to M
+			ConsoleWrite("test:"&($iGameID = $ID_M)&@CRLF)
+			if Not ($iGameID = $ID_M) Then
+				ComboBoxEx_SetCurSel($ID_M)
+				GameSetup_UpdateUI() ;unused
+			EndIf
+	EndSwitch
+EndFunc
+
+
+;============
+;sort servers
+;~ GUICtrlSetOnEvent($UI_ListV_svData_A,"SortListA")
+;~ Func SortListA()
+;~ 	local $iColClicked = GUICtrlGetState($UI_ListV_svData_A) ;updateLV
+;~ 	local $bSwitch = True
+
+;~ 	If Not ($g_ilastColumn_A = $iColClicked) Then
+;~ 		;use default sort order. dont
+;~ 		$bSwitch = False
+;~ 		for $i = 0 to UBound($g_vSortSense_A)-1
+;~ 			$g_vSortSense_A[$i] = $g_vSortSense_A_default[$i]
+;~ 		next
+;~ 	EndIf
+
+;~ 	_GUICtrlListView_SimpleSort($UI_ListV_svData_A, $g_vSortSense_A, $iColClicked, $bSwitch)
+;~ 	$g_ilastColumn_A = $iColClicked
+
+;~ 	ListviewStoreIndexToArray($g_iCurGameID, $UI_ListV_svData_A) ;build array to index listview to internal data ;updateLV
+;~ EndFunc
+
+;GUIRegisterMsg()
+;~ Func SortListA()
+;~ 	;updateLV
+;~ 	ConsoleWrite('!lv1'&@CRLF)
+;~ 	ConsoleWrite('!lv1 Set:'& _
+;~ 		GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, GUICtrlGetState($UI_ListV_svData_A), 0) _
+;~ 		&@CRLF)
+;~ EndFunc
+; Our sorting callback funtion
+
+
+GUICtrlSetOnEvent($UI_ListV_svData_A,"UI_ListV_svData_A_start")
+Func UI_ListV_svData_A_start()
+	If $g_isGettingServers Then Return
+	$g_bLV_A_startUpdate = True
+	;hilight column
+	GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, GUICtrlGetState($UI_ListV_svData_A), 0) ;updateLV
+	ConsoleWrite(">lv start sort"&@CRLF)
+EndFunc
+
+Func ListViewSort_A($hWnd, $nItem1, $nItem2, $iColumn)
+	Local $data1, $data2
+	Local $iRet = 0
+	Local static $bSwitch = False
+	If $g_isGettingServers Then Return
+
+	$nItem1 -= $g_listID_offset
+	$nItem2 -= $g_listID_offset
+
+	If $g_bLV_A_startUpdate Then
+		$g_bLV_A_startUpdate = False
+		ConsoleWrite("-lv sorting"&@CRLF)
+		;swap sort order
+		If $g_ilastColumn_A = $iColumn Then
+			$bSwitch = ($bSwitch)? (False):(True)
+			;use default sort order. dont
+			ConsoleWrite("-lv1 switch:"&$bSwitch&@CRLF)
+		Else
+			$bSwitch = False
+			$g_ilastColumn_A = $iColumn
+			ConsoleWrite("-lv2 switch:"&$bSwitch&@CRLF)
+		EndIf
+	EndIf
+
+	Switch $iColumn
+		case 0 ;index. a>z sort
+			$data1 = $nItem1
+			$data2 = $nItem2
+			$iRet = ($data1 < $data2)? (-1):(1)
+		Case 1 ;ip:port. a>z sort
+			$data1 = ConvertIPtoInt($g_aServerStrings[$g_iCurGameID][$nItem1][$COL_IP])
+			$data2 = ConvertIPtoInt($g_aServerStrings[$g_iCurGameID][$nItem2][$COL_IP])
+			if $data1 = $data2 Then
+				$data1 = $data1 + 65536 + $g_aServerStrings[$g_iCurGameID][$nItem1][$COL_PORT]
+				$data2 = $data2 + 65536 + $g_aServerStrings[$g_iCurGameID][$nItem2][$COL_PORT]
+			endif
+			$iRet = ($data1 < $data2)? (-1):(1)
+		Case 2 ;sv name. a>z sort
+			$data1 = $g_aServerStrings[$g_iCurGameID][$nItem1][$COL_NAME]
+			$data2 = $g_aServerStrings[$g_iCurGameID][$nItem2][$COL_NAME]
+			$iRet = ($data1 < $data2)? (-1):(1)
+		Case 3 ;ping. a>z sort
+			$data1 = $g_aServerStrings[$g_iCurGameID][$nItem1][$COL_PING]
+			$data2 = $g_aServerStrings[$g_iCurGameID][$nItem2][$COL_PING]
+			$iRet = ($data1 < $data2)? (-1):(1)
+		Case 4 ;player count. z>a sort(high first)
+			$data1 = $g_aServerStrings[$g_iCurGameID][$nItem1][$COL_PLAYERS]
+			$data2 = $g_aServerStrings[$g_iCurGameID][$nItem2][$COL_PLAYERS]
+			if $data1 = $data2 Then
+				$data2 = $g_aServerStrings[$g_iCurGameID][$nItem1][$COL_IDX]
+				$data1 = $g_aServerStrings[$g_iCurGameID][$nItem2][$COL_IDX]
+			EndIf
+			$iRet = ($data1 > $data2)? (-1):(1)
+		Case 5 ;map.  a>z sort
+			$data1 = $g_aServerStrings[$g_iCurGameID][$nItem1][$COL_MAP]
+			$data2 = $g_aServerStrings[$g_iCurGameID][$nItem2][$COL_MAP]
+			$iRet = ($data1 < $data2)? (-1):(1)
+		Case 6 ;map.  a>z sort
+			$data1 = $g_aServerStrings[$g_iCurGameID][$nItem1][$COL_MOD]
+			$data2 = $g_aServerStrings[$g_iCurGameID][$nItem2][$COL_MOD]
+			$iRet = ($data1 < $data2)? (-1):(1)
+	EndSwitch
+
+	If $bSwitch Then
+		$iRet = -1 * $iRet
+	EndIf
+
+	return $iRet
+EndFunc
+
+Func ConvertIPtoInt($ip)
+	$ip = StringSplit($ip, ".")
+	if $ip[0] > 3  then
+		return BitShift($ip[0], -24) + BitShift($ip[1], -16) + BitShift($ip[2], -8) + $ip[3]
+	EndIf
+	Return 0
+EndFunc
+
+	;~ Func SortListA()
+	;~ 	Local $ListViewA = getListView_A_CID()
+	;~ 	SetSelectedGameID()
+	;~ 	ConsoleWrite("-list clicked:"&$ListViewA &@CRLF)
+	;~ 	_GUICtrlListView_BeginUpdate($ListViewA)
+	;~ 	_GUICtrlListView_SortItems($ListViewA, GUICtrlGetState($ListViewA))
+	;~ 	ListviewStoreIndexToArray($g_iCurGameID, $ListViewA) ;build array to index listview to internal data
+	;~ 	_GUICtrlListView_EndUpdate($ListViewA)
+	;~ EndFunc
+
+;=================
+;sort server rules
+GUICtrlSetOnEvent($UI_ListV_svData_C,"SortListC")
+	Func SortListC()
+		local $iColClicked = GUICtrlGetState($UI_ListV_svData_C) ;updateLV C
+
+		If Not ($g_ilastColumn_C = $iColClicked) Then
+			;use default sort order.
+			ConsoleWrite("reset sort"&@CRLF)
+			$g_vSortSense_C[0] = False
+			$g_vSortSense_C[1] = False
+		EndIf
+
+		ConsoleWrite(">s1:"&$g_vSortSense_C[0] &" c1:"&$g_vSortSense_C[1]&@CRLF)
+		_GUICtrlListView_SimpleSort($UI_ListV_svData_C, $g_vSortSense_C, $iColClicked, true)
+		$g_ilastColumn_C = $iColClicked
+		ConsoleWrite("<s1:"&$g_vSortSense_C[0] &" c1:"&$g_vSortSense_C[1]&@CRLF)
+		;hilight column
+		GUICtrlSendMsg($UI_ListV_svData_C, $LVM_SETSELECTEDCOLUMN, $iColClicked, 0) ;updateLV
+	EndFunc
+	;~ Func SortListC()
+	;~ 	Local $ListViewC = getListView_C_CID()
+	;~ 	_GUICtrlListView_SortItems($ListViewC, GUICtrlGetState($ListViewC))
+	;~ EndFunc
+
+Func ButtonGamePath($refIdx)
+	Local $idx, $idx2, $sFolderPath = @WorkingDir
+
+	if $refIdx = Null Then
+		$idx = ComboBoxEx_GetCurSel()
+	Else
+		$idx = $refIdx
+	EndIf
+
+	If $idx >=0 And $idx < $COUNT_GAME Then
+		$idx2 = StringInStr($g_aGameSetup_EXE[$idx], "\", $STR_CASESENSE, -1)
+		if $idx2 Then
+			$sFolderPath = StringMid($g_aGameSetup_EXE[$idx], 1, $idx2)
+			if Not FileExists($sFolderPath) Then $sFolderPath = @WorkingDir
+		else
+
+		EndIf
+		ConsoleWrite("-folder"&$sFolderPath&@CRLF)
+		Local $sFilename = _WinAPI_OpenFileDlg('', $sFolderPath, 'Executables (*.exe)|All Files (*.*)', 1, _
+			$g_sGameNames[$idx][$GNAME_MENU]&'.exe', '', BitOR($OFN_PATHMUSTEXIST, $OFN_FILEMUSTEXIST, $OFN_HIDEREADONLY), 0, Default, Default, $HypoGameBrowser)
+		If Not @error Then
+			$g_aGameSetup_EXE[$idx] = $sFilename ;save now?
+			if $refIdx = Null Then ;only update if gui used
+				GUICtrlSetData($UI_In_gamePath, $sFilename)
+			EndIf
+		EndIf
+	EndIf
+EndFunc
+GUICtrlSetOnEvent($UI_Btn_gamePath, "UI_Btn_gamePathClicked")
+	Func UI_Btn_gamePathClicked()
+		ButtonGamePath(Null)
 	EndFunc
 
 ;web links
-GUICtrlSetOnEvent($Link_KP_info, "Link_KP_infoTXT")
-	Func Link_KP_infoTXT()
-		ShellExecute("http://www.kingpin.info", 1)	;LinkClick_kpinfo()
+GUICtrlSetOnEvent($UI_Text_linkKPInfo, "UI_Text_linkKPInfo")	;kingpin.info
+	Func UI_Text_linkKPInfo()
+		ShellExecute("https://www.kingpin.info", 1)
 	EndFunc
-GUICtrlSetOnEvent($Link_ham_chat, "Link_ham_chatTXT")
-Func Link_ham_chatTXT()
-	ShellExecute("http://forum.hambloch.com/chat.php?room=kingpin", 1)
-EndFunc
-GUICtrlSetOnEvent($Link_Ham_feedback, "Link_Ham_feedbackTXT")
-	Func Link_Ham_feedbackTXT()
-		ShellExecute("http://forum.hambloch.com/email.php?u=kingpin&email=@", 1)
+GUICtrlSetOnEvent($UI_Text_linkMServers, "UI_Text_linkMServers"); m server list
+	Func UI_Text_linkMServers()
+		ShellExecute("https://hambloch.com/kingpin/?ref=mbrowser", 1)
 	EndFunc
-GUICtrlSetOnEvent($Link_Ham_web, "Link_Ham_webTXT")
-	Func Link_Ham_webTXT()
-				ShellExecute("http://kingpin.hambloch.com/?ref=mbrowser", 1)
+GUICtrlSetOnEvent($UI_Text_linkContactM, "UI_Text_linkContactM") ;contact M
+	Func UI_Text_linkContactM()
+		ShellExecute("https://forum.hambloch.com/email.php?u=kingpin", 1)
 	EndFunc
-GUICtrlSetOnEvent($Link_kpq3, "Link_kpq3TXT")
-	Func Link_kpq3TXT()
-		ShellExecute("http://www.kingpinq3.com", 1)
+GUICtrlSetOnEvent($UI_Text_linkKPQ3, "UI_Text_linkKPQ3") ; kpq3
+	Func UI_Text_linkKPQ3()
+		ShellExecute("https://www.kingpinq3.com", 1)
 	EndFunc
-GUICtrlSetOnEvent($link_hypo_email, "Link_hypoTXT")
-	Func Link_hypoTXT()
+GUICtrlSetOnEvent($UI_Text_linkDiscord, "UI_Text_linkDiscord") ;discord
+	Func UI_Text_linkDiscord()
+		ShellExecute("https://discord.gg/mQseVd7Vd7", 1)
+	EndFunc
+GUICtrlSetOnEvent($UI_Text_linkHypoEmail, "UI_Text_linkHypoEmail") ; hypov8 email
+	Func UI_Text_linkHypoEmail()
 		ShellExecute("mailto:hypov8@hotmail.com?subject=kingpin", 1)
 	EndFunc
+GUICtrlSetOnEvent($UI_Text_linkSupport, "UI_Text_linkSupport") ;m chat
+	Func UI_Text_linkSupport()
+		ShellExecute("https://buymeacoffee.com/hypov8", 1)
+	EndFunc
 
+GUICtrlSetOnEvent ($UI_Icon_hypoLogo, "UI_Icon_hypoLogoClicked")
+	Func UI_Icon_hypoLogoClicked()
+		ShellExecute("https://buymeacoffee.com/hypov8", 1)
+	EndFunc
 
 ; events GUI
 GUISetOnEvent($GUI_EVENT_RESIZED, "GuiResized")
 	Func GuiResized()
 		ConsoleWrite("GuiResized"& @CRLF)
-		$guiResized=True
-		$wasMaximized = False
+		$g_bGuiResized=True
+		$g_bWasMaximized = False
 	EndFunc
 
 GUISetOnEvent($GUI_EVENT_RESTORE, "GuiEventRestore_use")
 	Func GuiEventRestore_use()
 		ConsoleWrite("GuiEventRestore_use"&@CRLF)
-
-		if $wasMinimized Then
-			if $wasMaximized Then
+		;todo check this, buggy
+		if $g_bWasMinimized Then
+			if $g_bWasMaximized Then
 				GuiSetState(@SW_MAXIMIZE, $HypoGameBrowser)
-				$wasMaximized = True
+				$g_bWasMaximized = True
 			Else
 				GuiSetState(@SW_RESTORE, $HypoGameBrowser)
-				$wasMaximized = False
+				$g_bWasMaximized = False
 			EndIf
 		Else
-			if $wasMaximized Then
+			if $g_bWasMaximized Then
 				GuiSetState(@SW_RESTORE, $HypoGameBrowser)
-				$wasMaximized = False
+				$g_bWasMaximized = False
 			Else
 				GuiSetState(@SW_MAXIMIZE, $HypoGameBrowser)
-				$wasMaximized = True
+				$g_bWasMaximized = True
 			EndIf
 		EndIf
-		$wasMinimized = False
-		$guiResized = True
+		$g_bWasMinimized = False
+		$g_bGuiResized = True
 	EndFunc
 
 GUISetOnEvent($GUI_EVENT_MAXIMIZE, "GuiEventMaximize_use")
 	Func GuiEventMaximize_use()
 		ConsoleWrite("GuiEventMaximize_use"&@CRLF)
-		$wasMaximized = True
-		$wasMinimized = False
+		$g_bWasMaximized = True
+		$g_bWasMinimized = False
 		GuiSetState(@SW_MAXIMIZE, $HypoGameBrowser)
-		$guiResized = False ;True //hypo stop storing resize info on maximize
+		$g_bGuiResized = False ;True //hypo stop storing resize info on maximize
 		;ConsoleWrite("GuiEventMaximize_use setSize"&@CRLF)
 	EndFunc
 
@@ -5458,605 +5284,309 @@ GUISetOnEvent($GUI_EVENT_MINIMIZE, "GuiEventMinimize_use")
 	Func GuiEventMinimize_use()
 		ConsoleWrite("GuiEventMinimize_use " &@CRLF)
 		GuiSetState(@SW_MINIMIZE,  $HypoGameBrowser)
-		$wasMinimized = True
+		$g_bWasMinimized = True
 	EndFunc
 
 
-	Func SetWinSizeForMinimize()
-		Local $getWinState = WinGetState($HypoGameBrowser)
-		Local $posi[4]
+Func SetWinSizeForMinimize()
+	Local $getWinState = WinGetState($HypoGameBrowser)
+	Local $posi[4]
 
-		if Not BitAND($getWinState,16) Then
-			$posi = WinGetPos($HypoGameBrowser)
-			If ($posi[0] >= -4) And ($posi[1] >= -4) Then
-				$StoredWinSize = $posi
-				ConsoleWrite("Store gui size"&@CRLF)
+	if Not BitAND($getWinState,16) Then
+		$posi = WinGetPos($HypoGameBrowser)
+		If ($posi[0] >= -4) And ($posi[1] >= -4) Then
+			$g_aStoredWinSize = $posi
+			;ConsoleWrite("Store gui size"&@CRLF)
+		EndIf
+	EndIf
+EndFunc
+
+Func GetMasterProtocol($sMasterIP)
+	Local $aIPPort = StringSplit($sMasterIP, ':')
+	If not @error And $aIPPort >=2 Then
+		If StringCompare($aIPPort[1], "https") = 0  then
+			;https://www.qtracker.com/server_list_details.php?game=kingpin
+			Return $NET_PROTOCOL_HTTPS
+		ElseIf StringCompare($aIPPort[1], "http") = 0 then
+			;http://q2servers.com/
+			Return $NET_PROTOCOL_HTTP
+		else
+			Local $iPort = Number($aIPPort[2])
+			If $iPort = 28900 Then
+				Return $NET_PROTOCOL_TCP ;gamespy
+			ElseIf $iPort = 80 Or $iPort = 81 Then
+				Return $NET_PROTOCOL_WEB
+			Else
+				Return $NET_PROTOCOL_UDP ; ALL OTHER PORTS
 			EndIf
-		EndIf
-	EndFunc
+		endif
+	EndIf
+	Return $NET_PROTOCOL_NONE ;failed.
+EndFunc
 
-;==> settings
-;startup M browser checkbox
-GUICtrlSetOnEvent($StartupMChkBox, "StartupMChkBoxToggle")
-	Func StartupMChkBoxToggle()
-			If _IsChecked($StartupMChkBox) Then
-			$useMStartup = 1
-		Else
-			$useMStartup = 0
-		EndIf
-	EndFunc
+Func getMaterExtraInfo($gameIDx)
+	Return $g_aGameSetup_Master_Proto[$gameIDx] ;todo check this
+EndFunc
 
-;gamespy auto refresh checkbox
-GUICtrlSetOnEvent($GB_RB_Kingpin, "Select_game_KP")
-	Func Select_game_KP()
-		ConsoleWrite("!Select_game_KP" &@CRLF)
-		If _IsChecked( $GB_RB_Kingpin) Then
-			GUICtrlSetState( $GB_RB_Kingpin, $GUI_CHECKED)
-			GUICtrlSetState( $GB_RB_KingpinQ3, $GUI_UNCHECKED)
-			GUICtrlSetState( $GB_RB_Quake2, $GUI_UNCHECKED)
-			$GS_lastRefreshTime = TimerInit() ;restart refresh time
-		Else
-			GUICtrlSetState( $GB_RB_Kingpin, $GUI_UNCHECKED)
-		EndIf
-	EndFunc
-;gamespy auto refresh checkbox
-GUICtrlSetOnEvent($GB_RB_KingpinQ3, "Select_game_KPQ3")
-	Func Select_game_KPQ3()
-		If _IsChecked( $GB_RB_KingpinQ3) Then
-			GUICtrlSetState( $GB_RB_KingpinQ3, $GUI_CHECKED)
-			GUICtrlSetState( $GB_RB_Kingpin, $GUI_UNCHECKED)
-			GUICtrlSetState( $GB_RB_Quake2, $GUI_UNCHECKED)
-			$GS_lastRefreshTime = TimerInit()
-		Else
-			GUICtrlSetState( $GB_RB_Kingpin, $GUI_UNCHECKED)
-		EndIf
-	EndFunc
-;gamespy auto refresh checkbox
-GUICtrlSetOnEvent($GB_RB_Quake2, "Select_game_Q2")
-	Func Select_game_Q2()
-		If _IsChecked($GB_RB_Quake2) Then
-			GUICtrlSetState( $GB_RB_Quake2, $GUI_CHECKED)
-			GUICtrlSetState( $GB_RB_Kingpin, $GUI_UNCHECKED)
-			GUICtrlSetState( $GB_RB_KingpinQ3, $GUI_UNCHECKED)
-			$GS_lastRefreshTime = TimerInit()
-		Else
-			GUICtrlSetState( $GB_RB_Quake2, $GUI_UNCHECKED)
-		EndIf
-	EndFunc
 
-;gamespy auto refresh sounds checkbox
-GUICtrlSetOnEvent($GB_Players_sound, "GB_PlaySounds")
-	Func GB_PlaySounds()	;--> SoundChkBoxToggle
-				If _IsChecked($GB_Players_sound) Then
-					GUICtrlSetState($GB_Players_sound, $GUI_CHECKED)
-				Else
-					GUICtrlSetState($GB_Players_sound, $GUI_UNCHECKED)
-				EndIf
-	EndFunc
-
-;master protocol
-GUICtrlSetOnEvent($RadioMasterTCP_KPQ3,"RadioMasterTCP_KPQ3")
-	Func RadioMasterTCP_KPQ3()
-		If _IsChecked($RadioMasterTCP_KPQ3) Then
-			GUICtrlSetState($InputKPQ3_proto, $GUI_DISABLE)
-			GUICtrlSetState($RadioMasterUDP_KPQ3, $GUI_UNCHECKED)
-		else
-			GUICtrlSetState($InputKPQ3_proto, $GUI_ENABLE) ;allow protocol change
-			GUICtrlSetState($RadioMasterUDP_KPQ3, $GUI_CHECKED)
-		EndIf
-	EndFunc
-;master protocol
-GUICtrlSetOnEvent($RadioMasterUDP_KPQ3, "RadioMasterUDP_KPQ3")
-	Func RadioMasterUDP_KPQ3()
-		If _IsChecked($RadioMasterUDP_KPQ3) Then
-			GUICtrlSetState($InputKPQ3_proto, $GUI_ENABLE) ;allow protocol change
-			GUICtrlSetState($RadioMasterTCP_KPQ3, $GUI_UNCHECKED)
-		else
-			GUICtrlSetState($InputKPQ3_proto, $GUI_DISABLE)
-			GUICtrlSetState($RadioMasterTCP_KPQ3, $GUI_CHECKED)
-		EndIf
-	EndFunc
-
-;master to use
-GUICtrlSetOnEvent($RadioMaster1KPQ3, "Master1KPQ3")
-	Func Master1KPQ3()
-		AutoSelectKPQ3_TCP_UDP(1)
-		DisableKPQ3_TCP_UDP(1)
-	EndFunc
-GUICtrlSetOnEvent($RadioMaster2KPQ3, "Master2KPQ3")
-	Func Master2KPQ3()
-		AutoSelectKPQ3_TCP_UDP(2)
-		DisableKPQ3_TCP_UDP(2)
-	EndFunc
-GUICtrlSetOnEvent($RadioMaster3KPQ3, "Master3KPQ3")
-	Func Master3KPQ3()
-		AutoSelectKPQ3_TCP_UDP(3)
-		DisableKPQ3_TCP_UDP(3)
-	EndFunc
-GUICtrlSetOnEvent($RadioMaster4KPQ3, "Master4KPQ3")
-	Func Master4KPQ3()
-		AutoSelectKPQ3_TCP_UDP(4)
-		DisableKPQ3_TCP_UDP(4)
-	EndFunc
-
-;==> kpq3 udp/tcp selector
-	Func DisableKPQ3_TCP_UDP($kpq3MasterNumX)
-		if $kpq3MasterNumx=4 Then
-			GUICtrlSetState($RadioMasterUDP_KPQ3, 	$GUI_ENABLE)
-			GUICtrlSetState($RadioMasterTCP_KPQ3, 	$GUI_ENABLE)
-		Else
-			GUICtrlSetState($RadioMasterUDP_KPQ3, 	$GUI_DISABLE)
-			GUICtrlSetState($RadioMasterTCP_KPQ3, 	$GUI_DISABLE)
-		EndIf
-
-		if $kpq3MasterNumx=1 Or $kpq3MasterNumx=3 Or $kpq3MasterNumx=4 Then
-			AllowUDP_Input(1)
-		Else
-			AllowUDP_Input(0)
-		EndIf
-
+GUICtrlSetOnEvent($UI_CBox_autoRefresh, "UI_CBox_autoRefreshChanged")
+	Func UI_CBox_autoRefreshChanged()
+		$g_bAutoRefresh = _IsChecked($UI_CBox_autoRefresh)
+		ConsoleWrite("autorefresh changed"&@CRLF)
+		ResetRefreshTimmers()
 	EndFunc
 
 
-	Func AllowUDP_Input($isTrue)
-		If $isTrue = 1 Then
-			GUICtrlSetState($InputKPQ3_proto, $GUI_ENABLE) ;allow protocol change
-		Else
-			GUICtrlSetState($InputKPQ3_proto, $GUI_DISABLE)
-		EndIf
-
-	EndFunc
-
-
-	Func AutoSelectKPQ3_TCP_UDP($kpq3MasterNum)
-		if $kpq3MasterNum=1 Or $kpq3MasterNum=3 Or $kpq3MasterNum=4 Then
-			GUICtrlSetState($RadioMasterUDP_KPQ3, $GUI_CHECKED) ; auto use UDP
-			GUICtrlSetState($RadioMasterTCP_KPQ3, $GUI_UNCHECKED)
-		else
-			GUICtrlSetState($RadioMasterTCP_KPQ3, $GUI_CHECKED) ; auto use TCP
-			GUICtrlSetState($RadioMasterUDP_KPQ3, $GUI_UNCHECKED)
-		EndIf
-	EndFunc
-	;==> end q3 udp/tcp selector
-
-
-
-
-GUICtrlSetOnEvent($RadioMasterTCP_Q2,"RadioMasterTCP_Q2")
-	Func RadioMasterTCP_Q2()
-		If _IsChecked($RadioMasterTCP_Q2) Then
-			GUICtrlSetState($RadioMasterUDP_Q2, $GUI_UNCHECKED)
-		else
-			GUICtrlSetState($RadioMasterUDP_Q2, $GUI_CHECKED)
-		EndIf
-	EndFunc
-
-GUICtrlSetOnEvent($RadioMasterUDP_Q2, "RadioMasterUDP_Q2")
-	Func RadioMasterUDP_Q2()
-		If _IsChecked($RadioMasterUDP_Q2) Then
-			GUICtrlSetState($RadioMasterTCP_Q2, $GUI_UNCHECKED)
-		else
-			GUICtrlSetState($RadioMasterTCP_KPQ3, $GUI_CHECKED)
-		EndIf
-	EndFunc
-
-GUICtrlSetOnEvent($RadioMaster1Q2, "Master1Q2")
-	Func Master1Q2()
-		AutoSelectQ2_TCP_UDP(1)
-		DisableQ2_TCP_UDP(1)
-	EndFunc
-GUICtrlSetOnEvent($RadioMaster2Q2, "Master2Q2")
-	Func Master2Q2()
-		AutoSelectQ2_TCP_UDP(2)
-		DisableQ2_TCP_UDP(2)
-	EndFunc
-GUICtrlSetOnEvent($RadioMaster3Q2, "Master3Q2")
-	Func Master3Q2()
-		AutoSelectQ2_TCP_UDP(3)
-		DisableQ2_TCP_UDP(3)
-	EndFunc
-GUICtrlSetOnEvent($RadioMaster4Q2, "Master4Q2")
-	Func Master4Q2()
-		AutoSelectQ2_TCP_UDP(4)
-		DisableQ2_TCP_UDP(4)
-	EndFunc
-
-;==> q2 udp/tcp selector
-	Func DisableQ2_TCP_UDP($Q2MasterNumX)
-		if $q2MasterNumx=4 Then
-			GUICtrlSetState($RadioMasterUDP_Q2,	$GUI_ENABLE)
-			GUICtrlSetState($RadioMasterTCP_Q2,	$GUI_ENABLE)
-		Else
-			GUICtrlSetState($RadioMasterUDP_Q2,	$GUI_DISABLE)
-			GUICtrlSetState($RadioMasterTCP_Q2,	$GUI_DISABLE)
-		EndIf
-	EndFunc
-
-	Func AutoSelectQ2_TCP_UDP($Q2MasterNum)
-		if $Q2MasterNum=1 Then
-			GUICtrlSetState($RadioMasterHTTP_Q2, $GUI_CHECKED)
-			GUICtrlSetState($RadioMasterTCP_Q2, $GUI_UNCHECKED)
-			GUICtrlSetState($RadioMasterUDP_Q2, $GUI_UNCHECKED)
-		else
-			GUICtrlSetState($RadioMasterUDP_Q2, $GUI_CHECKED)
-			GUICtrlSetState($RadioMasterTCP_Q2, $GUI_UNCHECKED)
-			GUICtrlSetState($RadioMasterHTTP_Q2, $GUI_UNCHECKED)
-		EndIf
-	EndFunc
-
-;==> end q3 udp/tcp selector
-
-;linked else where
-GUICtrlSetOnEvent($add_Server, "ServerAddPortKP")
-GUICtrlSetOnEvent($remove_Server, "ServerRemovePortKP")
-GUICtrlSetOnEvent($ExcludeSrever, "ServerExcludePortKP")
-GUICtrlSetOnEvent($addKPQ3, "TickedGamePortKPQ3")
-GUICtrlSetOnEvent($addQuake2, "TickedGamePortQuake")
+;linked above
+GUICtrlSetOnEvent($UI_MHost_addServer, "M_ServerAddPortKP")
+GUICtrlSetOnEvent($UI_MHost_removeServer, "M_ServerRemovePortKP")
+GUICtrlSetOnEvent($UI_MHost_excludeSrever, "M_ServerExcludePortKP")
 
 ; --> END EVENTS
 ;========================================================
 #EndRegion --> END MOUSE EVENTS
 
-#Region --> WindowHotkeys
 
-GUICtrlSetOnEvent($opt_minToTray, "MinToTray")
-Func MinToTray()
-	if _IsChecked($opt_minToTray) Then
-		$minToTray = 1
-	Else
-		$minToTray = 0
+#Region --> use auto refresh
+;========================================================
+; --> use auto refresh
+Func AutoRefreshTimer()
+	Local $intTimeStringBox, $oldGameID
+	Local $timeCounted
+	local $stateMinimized = WinGetState($HypoGameBrowser)
+	Local $getWinState = WinGetState($MPopupInfo)
+
+	;disable autor efresh if not ready
+	If BitAND($stateMinimized,16) Or  BitAND($getWinState,2) Or $g_isGettingServers > 0 Then
+		Return ;$WIN_STATE_MINIMIZED. $WIN_STATE_VISIBLE. if M-popup showing, disable refresh
 	EndIf
 
+	;gameSpy
+	If $g_bAutoRefresh > 0 Then
+		$intTimeStringBox = Number(GUICtrlRead($UI_In_refreshTime)) ; get time. todo onEvent changed
+		$intTimeStringBox = ($intTimeStringBox < 1)? (1):($intTimeStringBox) ;1minute minimum
+		$intTimeStringBox *= 1000 * 60 ;convert to min
+		;check last refresh time
+		If TimerDiff($g_iLastRefreshTime) > $intTimeStringBox Then
+			;SetSelectedGameID()
+			ResetRefreshTimmers() ; $g_iLastRefreshTime = TimerInit()
+			Local $idx = ComboBoxEx_GetCurSel()
+			if $idx = $ID_M Then
+				MRefresh()
+			else
+				;todo set gameSelector and tab?
+				$oldGameID = $g_iCurGameID
+				$g_iCurGameID = $idx ; $g_bAutoRefresh -1
+				GetServerListFromMaster($g_iCurGameID)
+				$g_iCurGameID = $oldGameID
+			EndIf
+		EndIf
+	EndIf
 EndFunc
 
 
+#EndRegion
 
-GUICtrlSetOnEvent($hotKey_btn, "ApplyhotKeyBtn")
+Func ComboBoxEx_GetCurSel()
+	Return _GUICtrlComboBoxEx_GetCurSel($UI_Combo_gameSelector)
+EndFunc
 
+
+Func ComboBoxEx_SetCurSel($idx)
+	Return _GUICtrlComboBoxEx_SetCurSel($UI_Combo_gameSelector, $idx)
+EndFunc
+
+
+#Region --> WindowHotkeys
+
+GUICtrlSetOnEvent($UI_Btn_setHotKey, "ApplyhotKeyBtn")
 Func ApplyhotKeyBtn()
-	ApplyhotKey(1)
+	 if ApplyhotKey() = False Then
+		hotKeyWarning()
+	EndIf
+EndFunc
+
+Func getHotKeyFlag()
+	Local $idx = _GUICtrlComboBox_GetCurSel($UI_Combo_hkey)
+	ConsoleWrite("hkey idx:"&$idx&@CRLF)
+	Switch $idx
+		Case 0
+			Return "!" ; ALT
+		Case 1
+			Return "^" ; CTRL
+		Case 2
+			Return "!^" ; CTRL+ALT
+		Case Else
+			Return "" ;
+	EndSwitch
+EndFunc
+
+Func hotKeyWarning()
+	GUICtrlSetData($UI_In_hotKey, "")
+	MsgBox($MB_SYSTEMMODAL,"ERROR: HOT KEY","Invalid Hot Key entered."&@CRLF& "Only a-z accepted.",0, $HypoGameBrowser)
 EndFunc
 
 ;0= startup ini
 ;1= apply button
-Func ApplyhotKey($button = 0)
-	If $button = 1 Then
-		If StringLen($sHkeyKey)>=1 And StringLen($sHkeyKey)>=1 Then
-			HotKeySet($sHkeyPlus & $sHkeyKey);reset
-			ConsoleWrite("!HotKey clear '"& $sHkeyKey&"'"&@CRLF)
-		EndIf
+Func ApplyhotKey()
+	Local $sHkeyKey ;a-z inputbox
+	Local Static $sLastKey = ""
+
+	;Reset
+	If $sLastKey <> "" Then
+		HotKeySet($sLastKey) ;reset
+		ConsoleWrite("!HotKey cleared: '"& $sLastKey&"'"&@CRLF)
 	EndIf
 
-	$sHkeyKey = GUICtrlRead($hotKey_Input)
-	If $sHkeyKey = "" Then Return ;no hotkey. unbound
-	$sHkeyKey = StringLower($sHkeyKey)
-	$sHkeyKey = StringMid($sHkeyKey, 1, 1)
-	GUICtrlSetData($hotKey_Input, $sHkeyKey)
+	$sHkeyKey = GUICtrlRead($UI_In_hotKey)
+	If $sHkeyKey = "" Then
+		Return False ;no hotkey. unbind
+	EndIf
 
+	;clean string. get only 1 char
+	$sHkeyKey = StringMid(StringLower($sHkeyKey), 1, 1)
+	GUICtrlSetData($UI_In_hotKey, $sHkeyKey)
 
-	If StringLen($sHkeyKey)>=2 Or Asc($sHkeyKey) < 97 Or Asc($sHkeyKey) > 122  Then
-		GUICtrlSetData($hotKey_Input, "")
-		$sHkeyKey=""
-		MsgBox($MB_SYSTEMMODAL,"ERROR: HOT KEY","Invalid Hot Key entered."&@CRLF& "Only accepts a-z",0,$HypoGameBrowser)
+	If Asc($sHkeyKey) < Asc("a") Or Asc($sHkeyKey) > Asc("z")  Then
+		hotKeyWarning()
 	Else
-		If StringLen($sHkeyKey) = 1 Then
-			If _IsChecked($hotKey_alt) Then
-				$sHkeyPlus = "!"
-			Else
-				$sHkeyPlus = "^"
-			EndIf
-			ConsoleWrite("!HotKey set '"& $sHkeyKey&"'"&@CRLF)
-			HotKeySet($sHkeyPlus & $sHkeyKey , "RestoreWindowHotKey")
-		EndIf
+		$sLastKey = String(getHotKeyFlag() & $sHkeyKey)
+		HotKeySet($sLastKey , "RestoreWindowHotKey") ; set hotkey
+		ConsoleWrite("!HotKey set '"& $sHkeyKey&"'"&@CRLF)
+		setTempStatusBarMessage("Hotkey Set")
 	EndIf
+	Return True
 EndFunc
+
 
 Func RestoreWindowHotKey()
 	ResetRefreshTimmers()
 
-	If $wasMinimized Then
-		If $wasMaximized Then
+	If $g_bWasMinimized Then
+		If $g_bWasMaximized Then
 			GuiSetState(@SW_SHOW,  $HypoGameBrowser)
 			GuiSetState(@SW_MAXIMIZE,  $HypoGameBrowser)
-			$wasMaximized = True
+			$g_bWasMaximized = True
 		Else
 			GuiSetState(@SW_SHOW,  $HypoGameBrowser)
 			GuiSetState(@SW_RESTORE,  $HypoGameBrowser)
-			;WinMove($HypoGameBrowser, $HypoGameBrowser, $StoredWinSize[0], $StoredWinSize[1], $StoredWinSize[2], $StoredWinSize[3])
-			$wasMaximized = False
+			;WinMove($HypoGameBrowser, $HypoGameBrowser, $g_aStoredWinSize[0], $g_aStoredWinSize[1], $g_aStoredWinSize[2], $g_aStoredWinSize[3])
+			$g_bWasMaximized = False
 		EndIf
 
 		ConsoleWrite("Was minimized " & @CRLF)
 		ConsoleWrite("get posi= " & WinGetPos($HypoGameBrowser)[0] &@CRLF)
-		ConsoleWrite("posi= " & $StoredWinSize[0]&" "& $StoredWinSize[1] &@CRLF)
+		ConsoleWrite("posi= " & $g_aStoredWinSize[0]&" "& $g_aStoredWinSize[1] &@CRLF)
 
 	Else ;-->displayed
-		If $wasMaximized Then
+		If $g_bWasMaximized Then
 			GuiSetState(@SW_MAXIMIZE, $HypoGameBrowser)
 			ConsoleWrite("Window Maximized " & @CRLF)
-			$wasMaximized = True
+			$g_bWasMaximized = True
 		Else
 			ConsoleWrite("Window Restored " & @CRLF)
 			GuiSetState(@SW_RESTORE,  $HypoGameBrowser)
 			ConsoleWrite("Window Restored2"& @CRLF)
-			$wasMaximized = False
+			$g_bWasMaximized = False
 		EndIf
 
 	EndIf
-	$wasMinimized = False
+	$g_bWasMinimized = False
 EndFunc
-
-;GUICtrlSetOnEvent($hotKey_alt, "")
-;GUICtrlSetOnEvent($hotKey_ctrl, "")
-
-
 
 #EndRegion --> WindowHotkeys
 
-#Region --> REFRESH SELECTED
-Func RefreshSingle()
-	ConsoleWrite("RefreshSingle Server"&@CRLF)
-	SelectedTabNum()
-	DisableUIButtons()
-	_BIND_SERVER_SOCKET()
+#Region --> RUN GAME EXE
 
-	$isGettingServers = 1
-	$iServerCountTotal = 1 ;get # servers to use later to stop refresh
-	Local $tmpArray[1]
-	Local $oldTime, $compTime, $iPing
-	Local $data1,$data2
-	Local $ListViewA = ServerArray1ToFill()
-	Local $listSelNum = _GUICtrlListView_GetSelectionMark($ListViewA)	;mouse selected num. sort make this change compared to actual server index
-	Local $serSelNum = GetTabSelectedStringNumber() 					;server index num
-	$iServerCountAdd = 0
+Func Start_Kingpin_failed($iGameIdx, $aEXEPath)
+	Local $msgBoxKeyID
+	;failed
+	;If $iGameIdx = $ID_KP1 Then
+	;$g_aGameSetup_EXE
 
-
-	If $tabNum = 1 Or $tabNum > 3 And Not ( $tabNum =6) Then
-		$tmpArray[0] =	String($sServerStringArray[$serSelNum][1] &":"& $sServerStringArray[$serSelNum][2])
-	Else
-		$tmpArray[0] = GetTabSelectedArrayStringIP()
+	$msgBoxKeyID = MsgBox(BitOR($MB_SYSTEMMODAL,$MB_OKCANCEL), _
+		"Kingpin Game Path",  "ERROR: Game .exe NOT found in" &@CRLF & $aEXEPath& @CRLF& @CRLF&  _
+		"Press OK to setup your 'Kingpin' Game Path", 0, $HypoGameBrowser )
+	if $msgBoxKeyID = 1 Then
+		ButtonGamePath($iGameIdx)	 ;file search dialog
 	EndIf
 
-	If $tmpArray[0] ="" Then Return
-
-	ConsoleWrite("ListNum= '"  & $listSelNum &"'  ServerNum= '" &$serSelNum &"'"& @CRLF)
-	ConsoleWrite("address= " &$tmpArray[0]&@CRLF)
-
-
-	$iLastListviewSortStatus = GUICtrlGetState($ListViewA); set global sort for reset. hypo re'sort??
-
-	If SendSTATUStoServers($tmpArray, 0, 0) Then
-		GUICtrlSetData($ProgressBar, 50)
-		;reset array incase server does not reply, keep name
-		_GUICtrlListView_AddSubItem($ListViewA, $listSelNum, "999",			3,-1)	;ping
-		_GUICtrlListView_AddSubItem($ListViewA, $listSelNum, "0/0",			4,-1)	;players
-		_GUICtrlListView_AddSubItem($ListViewA, $listSelNum, "",			5,-1)	;map
-		_GUICtrlListView_AddSubItem($ListViewA, $listSelNum, "",			6,-1) 	;mod
-
-		$oldTime = TimerInit()
-		Do
-			$data1 = _UDPRecvFrom($hSocketServerUDP,2048,0)
-			;$serverRefreshTimer
-			If serverRefreshButtonState() Then ;hypo todo: not use button? like ping all
-				ConsoleWrite("Net TimeOut. Button state up"&@CRLF)
-				ExitLoop ;stop do
-			EndIf
-		Until IsArray($data1)
-
-		If IsArray($data1) Then
-			if StringInStr($data1[0],"Info string length exceeded") Then ;todo: gs port neded?
-				$data1[0] = StringReplace($data1[0], "Info string length exceeded" & Chr(10), "",0 )
-				ConsoleWrite("trimed = Info string length exceeded"&@CRLF)
-			EndIf
-
-
-			If StringInStr($data1[0], "ÿÿÿÿprint") Then
-				$data1[0]=	StringTrimLeft($data1[0],11) ;trim to first "\"
-			ElseIf StringInStr($data1[0], "ÿÿÿÿstatusResponse") Then
-				$data1[0]=	StringTrimLeft($data1[0], 20) ;trin to first "\"
-			ElseIf StringInStr($data1[0], "\gamename\kingpin\") Then
-				Local $tmpStrCnt
-				$data1[0]=	StringTrimLeft($data1[0], 18) ; the first "\"
-				;kingpin gsport. another get if string is to long
-				If Not StringInStr($data1[0], "\final\") Then
-					$tmpStrCnt = StringInStr($data1[0], "\queryid\")
-					If $tmpStrCnt > 0 Then
-						$data1[0] = StringLeft($data1[0], $tmpStrCnt-1)
-					EndIf
-					ConsoleWrite(">ServerStringArray3.0= " & $data1[0] & @CRLF)
-
-					Do
-						$data2 = _UDPRecvFrom($hSocketServerUDP,2048,0)
-						If serverRefreshButtonState() Then ;hypo todo: not use button? like ping all
-							ConsoleWrite("Net TimeOut. Button state up"&@CRLF)
-							ExitLoop ;stop do
-						EndIf
-					Until IsArray($data2)
-					;join string
-					$data1[0]=String($data1[0]&$data2[0])
-
-				EndIf
-
-				$tmpStrCnt = StringInStr($data1[0], "\final\") ;remove \final\
-				If $tmpStrCnt > 0 Then
-					$data1[0] = StringLeft($data1[0], $tmpStrCnt-1)
-				EndIf
-			EndIf
-			ConsoleWrite(">ServerStringArray3.2= " & $data1[0] & @CRLF)
-
-			$data1[0] = string( $data1[0]& Chr(10))	;add @LF to end
-
-			If $tabNum = 1 Or $tabNum > 3 Then
-				$sServerStringArray[$serSelNum][0] = $data1[0]
-			ElseIf $tabNum = 2 Then
-				$sServerStringArrayKPQ3[$serSelNum][0] = $data1[0]
-			ElseIf $tabNum = 3 Then
-				$sServerStringArrayQ2[$serSelNum][0] = $data1[0]
-			EndIf
-
-
-			$iServerCountAdd += 1
-			$iPing = Int(TimerDiff($oldTime))
-
-			;fill selected server name etc in list 1
-			FillServerListArray($data1, $iPing, $listSelNum );data[0]=string   ;data[1]=ip   ;data[2]=port 11
-
-			;fill player and server var into list 2 and list 3
-			If $tabNum =1 Then FillSelectedServerStrings(1, $listSelNum) ;<tabnum> | <selected array num>
-			If $tabNum =2 Then FillSelectedServerStrings(2, $listSelNum)
-			If $tabNum =3 Then FillSelectedServerStrings(3, $listSelNum)
-		EndIf
-	EndIf
-
-	_UDPCloseSocket($hSocketServerUDP)
-	serverRefreshButtonState()
-	;$isPlayersInServer = False ;refresh selected ssets this but never uses it
-	$GS_countPlayers = 0 ;reset player count for audio
+	ResetRefreshTimmers()
 EndFunc
 
-#EndRegion --> END REFRESH SELECTED
-
-#Region --> RUN GAME EXE
 ;========================================================
-; -->Start_Kingpin ;todo cleanup
+; -->Start_Kingpin
 Func Start_Kingpin()
-	SelectedTabNum()
-	Local $rungame, $runCommand, $aArrayPath, $tmpstr, $tmpLen, $trimEXE, $ipSplit, $runName, $iHasGSPort
+	SetSelectedGameID()
+	Local $runServerAddress = GetServerListA_SelectedData($LV_A_IP) ; will get M data to
+	If $runServerAddress = "" Then
+		 Return ;crashes with no server/ip
+	EndIf
+	LaunchGame($runServerAddress, GetActiveGameIndex()) ;get both GS and M id
+EndFunc
 
+Func LaunchGame($runServerAddress, $iGameIdx)
+	Local $sInputPath, $sInputName, $sInputCommand, $idx
+	Local $runEXE = "", $runEXEName = "", $runCMDString = "", $runWorkingPath = ""
 
-	Local $ipPort = GetTabSelectedArrayStringIP()
-	If $ipPort = "" Then Return ;crashes with no server/ip
-	$iHasGSPort = 0
-
-	Local $iGameExe = 0 ;link mbrowser n tab1
-
-	If ($tabNum =1) Then
-		Local $serSelNum = GetTabSelectedStringNumber() ;server index num
-		If $sServerStringArray[$serSelNum][4] > 0 Then ;gs port num
-			$ipPort = String($sServerStringArray[$serSelNum][1] &":"& $sServerStringArray[$serSelNum][4])  ;set gamespy reported game port
-			$iHasGSPort = 1
-			ConsoleWrite("kingpin, using gamespy port " &$ipPort& @CRLF)
-		EndIf
-		$iGameExe = 1
-	ElseIf ($tabNum =2) Then
-		$iGameExe = 2
-	ElseIf ($tabNum = 3) Then
-		$iGameExe = 3
-	ElseIf ($tabNum > 3) And ($tabNum < 6) Then
-		$iGameExe = 3
-	ElseIf ($tabNum = 6) Then
-		ConsoleWrite("tab6"&@CRLF)
-		If ($iMGameType = 1) Then
-			ConsoleWrite("game1"&@CRLF)
-			$iGameExe = 1
-		ElseIf ($iMGameType = 2) Then
-			ConsoleWrite("game2"&@CRLF)
-			$iGameExe = 2
-		ElseIf ($iMGameType = 3) Then
-			ConsoleWrite("game3"&@CRLF)
-			$iGameExe = 3
+	;exe path
+	$sInputPath = $g_aGameSetup_EXE[$iGameIdx] ;GUICtrlRead($aRun[$iGameIdx])
+	If $sInputPath <> "" Then
+		$runEXE = StringStripWS($sInputPath, $STR_STRIPTRAILING +$STR_STRIPSPACES)
+		$runEXE = StringReplace($runEXE, "/", "\", 0, 1)
+		$idx = StringInStr($runEXE, "\",1, -1)
+		If $idx Then
+			$runEXEName = StringMid($runEXE, $idx)
+			$runWorkingPath = StringLeft($runEXE, $idx)
+			ConsoleWrite(">exe="&$runEXEName&" path="&$runWorkingPath&@CRLF)
 		EndIf
 	EndIf
-
-	ConsoleWrite("iGame= " &$iGameExe &" m-game=" & $iMGameType& " Tabnum="& $tabNum&@CRLF)
-
-	If $iGameExe = 1 Then
-		$rungame = GUICtrlRead($path_Kingpin)
-		$runCommand = GUICtrlRead($RunKingpinCMD)
-		$aArrayPath =StringReverse($rungame)
-		$tmpstr = string(StringSplit( $aArrayPath, "\" )[1])
-		$tmpLen = StringLen($tmpstr )
-		$trimEXE = StringTrimRight($rungame,$tmpLen) ;kingpin.exe ;trim exe to seet active path (stop missing color map issue)
-		$ipSplit =	StringSplit($ipPort,":", $STR_NOCOUNT)
-		If Not (($iMGameType = 1) And ($iHasGSPort = 1)) Then	$ipSplit[1] +=10 ;add 10 to port for kp ;todo test not??
-		$ipPort= String($ipSplit[0]&":" & $ipSplit[1])
-		If GUICtrlRead($InputNameKP) Then
-			$runName = String(" +set name "&GUICtrlRead($InputNameKP))
-		Else
-			$runName =""
-		EndIf
-	ElseIf $iGameExe = 2  Then
-		$rungame = GUICtrlRead($path_KPQ3)
-		$runCommand = GUICtrlRead($RunKingpinQ3CMD)
-		$aArrayPath =StringReverse($rungame)
-		$tmpstr = string(StringSplit( $aArrayPath, "\" )[1])
-		$tmpLen = StringLen($tmpstr )
-		$trimEXE = StringTrimRight($rungame,$tmpLen) ;kingpinq3-x86.exe
-		If GUICtrlRead($InputNameKPQ3) Then
-			$runName = String(" +set name "&GUICtrlRead($InputNameKPQ3))
-		Else
-			$runName =""
-		EndIf
-	ElseIf $iGameExe = 3  Then
-		$rungame = GUICtrlRead($path_Quake2)
-		$runCommand = GUICtrlRead($RunQuake2CMD)
-		$aArrayPath =StringReverse($rungame)
-		$tmpstr = string(StringSplit( $aArrayPath, "\" )[1])
-		$tmpLen = StringLen($tmpstr )
-		$trimEXE = StringTrimRight($rungame,$tmpLen) ;quake2.exe
-		If GUICtrlRead($InputNameQ2) Then
-			$runName = String(" +set name "&GUICtrlRead($InputNameQ2))
-		Else
-			$runName =""
-		EndIf
-	Else
-		MsgBox($MB_SYSTEMMODAL, "",  "Select the Game Tab you want to play",0, $HypoGameBrowser )
-		ResetRefreshTimmers()
-		return
+	;player name
+	$sInputName = $g_aGameSetup_Name[$iGameIdx];GUICtrlRead($aNAME[$iGameIdx])
+	if $sInputName <> "" Then
+		$runCMDString &= StringFormat("+set name %s ", StringStripWS($sInputName, $STR_STRIPTRAILING +$STR_STRIPSPACES))
 	EndIf
+	;lunch commands
+	$sInputCommand = $g_aGameSetup_RunCmd[$iGameIdx] ;GUICtrlRead($aCMD[$iGameIdx])
+	If $sInputCommand <> "" Then
+		$runCMDString &= StringFormat("%s " ,StringStripWS($sInputCommand, $STR_STRIPTRAILING +$STR_STRIPSPACES))
+	EndIf
+	;add server ip
+	$runCMDString &= StringFormat("+connect %s ", $runServerAddress)
 
-	Local $runpathReg = _WinAPI_RegOpenKey( $HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\kingpin.exe", $KEY_QUERY_VALUE)
-	Local $msgBoxKeyID, $failedEXE = False
-
-ConsoleWrite(">run= "&$rungame&" >"&$runCommand&" >"&$runName&@CRLF)
-	local $cmdString = string( $runCommand &" "& $runName&" +connect " & $ipPort )
-	ConsoleWrite ("commans tring=" &$cmdString&@CRLF)
+	ConsoleWrite(">run="&$runEXE&" >"&$runCMDString &@CRLF)
 
 	;==========================================================================
-	;run game. first search settings. 2nd search script dir. 3rd check regestry
-	If FileExists($rungame) Then
-		ConsoleWrite("run cmd any" & @CRLF)
-		MinimizeWindow()
-
-
-		ShellExecute( $rungame ,$cmdString , $trimEXE )
+	;run game. first search settings 'path'. 2nd search script dir. 3rd check registry
+	If $runEXE <> "" And FileExists($runEXE) Then
+		ConsoleWrite(">run .exe from settings." & @CRLF)
+		Tray_MinimizeWindow()
+		ShellExecute($runEXE, $runCMDString, $runWorkingPath)
 	;==> kingpin
-	ElseIf $iGameExe =1 Then
-		If $runpathReg Then ;$rungame = "Kingpin.exe" And
-			ConsoleWrite("run cmd reg" & @CRLF)
-			Local $tData = DllStructCreate('wchar[260]')
-			_WinAPI_RegQueryValue($runpathReg, 'Path',$tData)
-			MinimizeWindow()
-			local $cmdString = string( $runCommand &" "& $runName&" +connect " & $ipPort)
-
-			ShellExecute( 'kingpin.exe' , $cmdString, DllStructGetData($tData, 1))
-			_WinAPI_RegCloseKey($runpathReg)
-		Else
-			$failedEXE = True
-		EndIf
 	Else
-		$failedEXE = True
-	EndIf
-
-
-
-	If $failedEXE Then ;failed
-		If $iGameExe = 1 Then
-			$msgBoxKeyID = MsgBox(BitOR($MB_SYSTEMMODAL,$MB_OKCANCEL), "Kingpin Game Path",  "ERROR: Game .exe NOT found in" & _
-			@CRLF & $rungame& @CRLF& @CRLF& "Press OK to setup your 'Kingpin' Game Path",0, $HypoGameBrowser )
-			if $msgBoxKeyID = 1 Then EventButton_kp() ;file search dialog
-		ElseIf $iGameExe = 2 Then
-			$msgBoxKeyID = MsgBox(BitOR($MB_SYSTEMMODAL,$MB_OKCANCEL), "KingpinQ3 Game Path",  "ERROR: Game .exe NOT found in" & _
-			@CRLF & $rungame& @CRLF& @CRLF& "Press OK to setup your 'KingpinQ3' Game Path",0, $HypoGameBrowser )
-			if $msgBoxKeyID = 1 Then EventButton_kpq3() ;file search dialog
-		ElseIf $iGameExe = 3 Then
-			$msgBoxKeyID = MsgBox(BitOR($MB_SYSTEMMODAL,$MB_OKCANCEL), "Quake2 Game Path",  "ERROR Game .exe NOT found in" & _
-			@CRLF & $rungame& @CRLF& @CRLF& "Press OK to setup your 'Quake2' Game Path",0, $HypoGameBrowser )
-			if $msgBoxKeyID = 1 Then EventButton_q2() ;file search dialog
+		;script dir
+		$runWorkingPath = @ScriptDir & "\"
+		If $runEXEName <> "" And FileExists($runWorkingPath & $runEXEName) Then
+			ConsoleWrite(">run .exe from script dir." & @CRLF)
+			Tray_MinimizeWindow()
+			ShellExecute($runEXEName, $runCMDString, $runWorkingPath)
+		ElseIf $iGameIdx = $ID_KP1 Then
+			; try registry
+			Local $runpathReg = _WinAPI_RegOpenKey( $HKEY_LOCAL_MACHINE, "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\kingpin.exe", $KEY_QUERY_VALUE)
+			If @error Then
+				Start_Kingpin_failed($iGameIdx, $runEXE)
+			Else
+				ConsoleWrite("run cmd from reg" & @CRLF)
+				Local $tData = DllStructCreate('wchar[260]')
+				_WinAPI_RegQueryValue($runpathReg, 'Path', $tData)
+				Tray_MinimizeWindow()
+				ShellExecute('kingpin.exe' , $runCMDString, DllStructGetData($tData, 1))
+				_WinAPI_RegCloseKey($runpathReg)
+			EndIf
+		Else
+			Start_Kingpin_failed($iGameIdx, $runEXE)
 		EndIf
-		ResetRefreshTimmers()
 	EndIf
-
 EndFunc
 ; -->Start_Kingpin
 ;========================================================
@@ -6065,77 +5595,116 @@ EndFunc
 #Region --> TRAY EVENTS
 ;========================================================
 ;--> tray events
-TraySetOnEvent($TRAY_EVENT_PRIMARYUP, "TraySingle")  ;hypo todo: check focus?
-	Func TraySingle()
+TraySetOnEvent($TRAY_EVENT_PRIMARYUP, "Tray_Single") ;hypo todo: check focus?
+	Func Tray_Single()
 		local $stateMinimized = WinGetState($HypoGameBrowser)
 
 		If  BitAND($stateMinimized,16) Then ; Return ;$WIN_STATE_MINIMIZED
 			ConsoleWrite("traySingleClick " & $stateMinimized&@CRLF)
-			RestoreWindow()
+			Tray_RestoreWindow()
 		Else
 			ConsoleWrite("traySingleClick " & $stateMinimized&@CRLF)
-			MinimizeWindow()
+			Tray_MinimizeWindow()
 		EndIf
 	EndFunc
 
-
-TrayItemSetOnEvent($trayMax, "RestoreWindow")
-	Func RestoreWindow()
-		;DisableUIButtons()
+TrayItemSetOnEvent($UI_Tray_max, "Tray_RestoreWindow")
+	Func Tray_RestoreWindow()
+		;EnableUIButtons(False)
 		ResetRefreshTimmers()
 
-		If $wasMinimized Then
-			If $wasMaximized Then
+		If $g_bWasMinimized Then
+			If $g_bWasMaximized Then
 				GuiSetState(@SW_SHOW,  $HypoGameBrowser)
 				GuiSetState(@SW_MAXIMIZE,  $HypoGameBrowser)
-				$wasMaximized = True
+				$g_bWasMaximized = True
 			Else
 				GuiSetState(@SW_SHOW,  $HypoGameBrowser)
 				GuiSetState(@SW_RESTORE,  $HypoGameBrowser)
-				;WinMove($HypoGameBrowser, $HypoGameBrowser, $StoredWinSize[0], $StoredWinSize[1], $StoredWinSize[2], $StoredWinSize[3])
-				$wasMaximized = False
+				;WinMove($HypoGameBrowser, $HypoGameBrowser, $g_aStoredWinSize[0], $g_aStoredWinSize[1], $g_aStoredWinSize[2], $g_aStoredWinSize[3])
+				$g_bWasMaximized = False
 			EndIf
 
 			ConsoleWrite("Was minimized " & @CRLF)
 			ConsoleWrite("get posi= " & WinGetPos($HypoGameBrowser)[0] &@CRLF)
-			ConsoleWrite("posi= " & $StoredWinSize[0]&" "& $StoredWinSize[1] &@CRLF)
+			ConsoleWrite("posi= " & $g_aStoredWinSize[0]&" "& $g_aStoredWinSize[1] &@CRLF)
 
 		Else ;-->displayed
-			If $wasMaximized Then
+			If $g_bWasMaximized Then
 				ConsoleWrite("Window Restored " & @CRLF)
 				GuiSetState(@SW_RESTORE,  $HypoGameBrowser)
 				ConsoleWrite("Window Restored2"& @CRLF)
-				$wasMaximized = False
+				$g_bWasMaximized = False
 			Else
 				GuiSetState(@SW_MAXIMIZE, $HypoGameBrowser)
 				ConsoleWrite("Window Maximized " & @CRLF)
-				$wasMaximized = True
+				$g_bWasMaximized = True
 			EndIf
 
 		EndIf
-		$wasMinimized = False
-		;EnableUIButtons()
+		$g_bWasMinimized = False
+		;EnableUIButtons(True)
 	EndFunc ;--> tray events
 
-TrayItemSetOnEvent($tray_mini, "MinimizeWindow")
-	Func MinimizeWindow()
+TrayItemSetOnEvent($UI_Tray_minimize, "Tray_MinimizeWindow")
+	Func Tray_MinimizeWindow()
 		Local $getWinState = WinGetState($HypoGameBrowser)
-		if BitAND($getWinState,32) Then $wasMaximized = True
+		if BitAND($getWinState,32) Then $g_bWasMaximized = True
 
-		ConsoleWrite("Tray Minimize wasMax= "&$wasMaximized & @CRLF)
+		ConsoleWrite("Tray Minimize wasMax= "&$g_bWasMaximized & @CRLF)
 		GuiSetState(@SW_MINIMIZE,  $HypoGameBrowser)
-		If $minToTray = 1 Then	GuiSetState(@SW_HIDE,  $HypoGameBrowser)
-		$wasMinimized = True
+		If _IsChecked($UI_CBox_minToTray) Then
+			GuiSetState(@SW_HIDE, $HypoGameBrowser) ;
+		EndIf
+		$g_bWasMinimized = True
 	EndFunc
 
-
-TrayItemSetOnEvent($trayExit, "ExitScript")
+TrayItemSetOnEvent($UI_Tray_exit, "ExitScript")
 
 ;========================================================
 #EndRegion  --> TRAY EVENTS
 
-EnableUIButtons(); all loaded, should be ready now
-LoadMStartupOpt(); check M-Startup
+
+#Region --> AUDIO
+Func selectAudoToPlay($gameType)
+	Local $players
+	Local $aSoundPath = []
+
+	If $gameType = 1 Then
+		$players = $g_iPlayerCount_GS
+	Else
+		;mbrowser
+		$players = $g_aPlayerCount_M[0] + $g_aPlayerCount_M[1] +  $g_aPlayerCount_M[2]
+	EndIf
+	ConsoleWrite("players="&$players&@CRLF)
+
+	If $players = 0 Then Return
+	If $players > 11 Then $players = 11
+
+	SoundPlay($mp3path[$players-1] , 0)
+EndFunc
+#EndRegion
+
+Func RestoreStatusBarMessage()
+	GUICtrlSetData($MOTD_Input, $g_tmpStatusbarString)
+	GUICtrlSetColor($MOTD_Input, 0)
+EndFunc
+
+Func setTempStatusBarMessage($sTempMessage, $bSetRed = False)
+	$g_tmpStatusbarString = GUICtrlRead($MOTD_Input)
+	GUICtrlSetData($MOTD_Input , $sTempMessage)
+	$g_statusBarTime = TimerInit() ; restore prior message after get servers
+	;color text
+	If $bSetRed Then
+		GUICtrlSetColor($MOTD_Input, $COLOR_RED) ;todo check this against theme
+	EndIf
+EndFunc
+
+
+;all loaded, set atcive
+EnableUIButtons(True)
+LoadGameOnStartupOpt(); check M-Startup
+ApplyhotKey() ; apply hotkey
 
 While 1
 	If $bEventStartKingpin = 1 Then
@@ -6143,22 +5712,24 @@ While 1
 		Start_Kingpin()
 	EndIf
 
-	if $changedListview Then
-		if $changedListview = 336 Or $changedListview = 328 then ChangedListview_NowFillServerStrings()
-		$changedListview = 0
+	if $g_iListview_changed Then
+		if $g_iListview_changed = 336 Or $g_iListview_changed = 328 Or $g_iListview_changed = 999 Then
+			ChangedListview_NowFillServerStrings() ; update server info
+		EndIf
+		$g_iListview_changed = 0
 	EndIf
 
 	If $bEventRightClick = 1 Then
 		$bEventRightClick = 0
-		 RighttClickMenuKP()
+		RighttClickMenuKP()
 	EndIf
 
 	If $bEventRightClickM = 1 Then
 		$bEventRightClickM = 0
-		 RighttClickMenuM()
+		RighttClickMenuM()
 	EndIf
 
-	If ($guiResized = True) Then
+	If ($g_bGuiResized = True) Then
 		Local $hSize = WinGetPos($HypoGameBrowser)
 		ConsoleWrite($hSize[2]& " "& $hSize[3] &@CRLF)
 
@@ -6170,20 +5741,23 @@ While 1
 			WinMove($HypoGameBrowser, '', Default, Default, $hSize[2], $GUIMINHT)
 		EndIf
 
-
 		SetWinSizeForMinimize() ;store window size for later
-		$guiResized = False
+		$g_bGuiResized = False
 	EndIf
 
+	;event resize list
+	;~ If $g_ResizeListView Then
+	;~ 	SetFocusSize()
+	;~ 	$g_ResizeListView = 0
+	;~ EndIf
 
 	AutoRefreshTimer() ;check time for auto refresh
 	Sleep(200)
 
-	If $statusBarChanged Then
-		GUICtrlSetData($MOTD_Input , $tmpStatusbarString)
-		GUICtrlSetColor($MOTD_Input, 0)
-		$statusBarChanged = False
+	If Not ($g_statusBarTime = 0) Then
+		If TimerDiff($g_statusBarTime) > 10000 Then
+			$g_statusBarTime = 0
+			RestoreStatusBarMessage()
+		EndIf
 	EndIf
-
-
 WEnd
