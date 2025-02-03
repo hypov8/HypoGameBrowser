@@ -1111,30 +1111,28 @@ Func GameSetup_UpdateUI()
 	Local $idx = ComboBoxEx_GetCurSel()
 	$g_iGameSetupLastIdx = $idx
 	ConsoleWrite("+gameChanged update UI="&$idx&@CRLF)
-	if $idx > -1 Then
-		if $idx < $COUNT_GAME Then
-			GUICtrlSetData($UI_Text_setupTitle, $g_sGameNames[$idx][$GNAME_MENU])            ;title
-			GUICtrlSetData($UI_Combo_master, "|Custom Master|" & $g_aMasterAddresses[$idx ]) ;master list. rebuild
-			_GUICtrlComboBox_SetCurSel($UI_Combo_master, $g_aGameSetup_Master_Combo[$idx])   ;selection id
-			GUICtrlSetData($UI_In_master_Cust, $g_aGameSetup_Master_Cust[$idx])
-			GUICtrlSetData($UI_In_master_proto, $g_aGameSetup_Master_Proto[$idx])
-			GUICtrlSetData($UI_In_gamePath, $g_aGameSetup_EXE[$idx])
-			GUICtrlSetData($UI_In_playerName, $g_aGameSetup_Name[$idx])
-			GUICtrlSetData($UI_In_runCmd, $g_aGameSetup_RunCmd[$idx])
-		ElseIf $idx = $ID_M Then
-			;$g_iTabNum = $TAB_GB
-			GUICtrlSetData($UI_Text_setupTitle, "M-Browser")
-			GUICtrlSetData($UI_Combo_master, "|") ;master list. rebuild
-			_GUICtrlComboBox_SetCurSel($UI_Combo_master, 0)   ;selection id
-			GUICtrlSetData($UI_In_master_Cust, "")
-			GUICtrlSetData($UI_In_master_proto, "")
-			GUICtrlSetData($UI_In_gamePath, "")
-			GUICtrlSetData($UI_In_playerName, "")
-			GUICtrlSetData($UI_In_runCmd, "")
-			;_GUICtrlTab_ActivateTab($tabGroupGames, $TAB_MB)
-		EndIf
-		UpdateMasterDisplay()
+	if $idx < $COUNT_GAME Then
+		GUICtrlSetData($UI_Text_setupTitle, $g_sGameNames[$idx][$GNAME_MENU])            ;title
+		GUICtrlSetData($UI_Combo_master, "|Custom Master|" & $g_aMasterAddresses[$idx ]) ;master list. rebuild
+		_GUICtrlComboBox_SetCurSel($UI_Combo_master, $g_aGameSetup_Master_Combo[$idx])   ;selection id
+		GUICtrlSetData($UI_In_master_Cust, $g_aGameSetup_Master_Cust[$idx])
+		GUICtrlSetData($UI_In_master_proto, $g_aGameSetup_Master_Proto[$idx])
+		GUICtrlSetData($UI_In_gamePath, $g_aGameSetup_EXE[$idx])
+		GUICtrlSetData($UI_In_playerName, $g_aGameSetup_Name[$idx])
+		GUICtrlSetData($UI_In_runCmd, $g_aGameSetup_RunCmd[$idx])
+	ElseIf $idx = $ID_M Then
+		;$g_iTabNum = $TAB_GB
+		GUICtrlSetData($UI_Text_setupTitle, "M-Browser")
+		GUICtrlSetData($UI_Combo_master, "|") ;master list. rebuild
+		_GUICtrlComboBox_SetCurSel($UI_Combo_master, 0)   ;selection id
+		GUICtrlSetData($UI_In_master_Cust, "")
+		GUICtrlSetData($UI_In_master_proto, "")
+		GUICtrlSetData($UI_In_gamePath, "")
+		GUICtrlSetData($UI_In_playerName, "")
+		GUICtrlSetData($UI_In_runCmd, "")
+		;_GUICtrlTab_ActivateTab($tabGroupGames, $TAB_MB)
 	EndIf
+	UpdateMasterDisplay()
 	;update disabled state
 	UI_Combo_masterChange()
 EndFunc
@@ -1144,11 +1142,6 @@ EndFunc
 ;LoadGameOnStartupOpt()
 Func LoadGameOnStartupOpt()
 	Local $idx = ComboBoxEx_GetCurSel()
-	If $idx = -1 Then
-		$idx = $ID_KP1
-	ElseIf $idx >= $COUNT_GAME Then
-		$idx = $ID_M
-	EndIf
 
 	If $idx = $ID_M Then
 		$g_iTabNum = $TAB_MB
@@ -1251,6 +1244,11 @@ Func iniFile_Load()
 		Next
 		Return
 	EndIf
+
+	;set default master selection. incase ini outdated
+	For $i = 0 to $COUNT_GAME -1
+		$g_aGameSetup_Master_Combo[$i] = 1 ;idx
+	Next
 
 	ConsoleWrite("-----========= loading ini =========-----" & @CRLF)
 	Local $aArray, $aTmp
@@ -2081,6 +2079,7 @@ Func SelectedGameMasterAddress($iGameIdx, $retryCount)
 	If $iMasterIdx = 0 Then ; custom master address
 		If $retryCount > 0 Then Return -1 ; fail
 		$sMaster = $g_aGameSetup_Master_Cust[$iGameIdx]
+		If $retryCount = "" Then Return -1 ; fail
 	Else
 		Local $aDropdownText = StringSplit($g_aMasterAddresses[$iGameIdx], "|")
 		Local $iCount = $aDropdownText[0]
@@ -2157,12 +2156,6 @@ EndFunc
 Func SetSelectedGameID()
 	$g_iTabNum = GUICtrlRead($tabGroupGames)
 	$g_iCurGameID = ComboBoxEx_GetCurSel()
-
-	If $g_iCurGameID < 0 Then
-		$g_iCurGameID = 0
-	ElseIf $g_iCurGameID >= $COUNT_GAME Then
-		$g_iCurGameID = $ID_KP1
-	EndIf
 EndFunc
 
 
@@ -4875,8 +4868,8 @@ EndFunc
 
 
 ;using refresh button
-GUICtrlSetOnEvent ($UI_Btn_refreshMaster, "UI_Btn_refreshMasterClicked")
-	Func UI_Btn_refreshMasterClicked()
+GUICtrlSetOnEvent ($UI_Btn_refreshMaster, "UI_Btn_refreshClicked")
+	Func UI_Btn_refreshClicked()
 		SetSelectedGameID()
 		SetTabActiveGame() ;switch if in settings
 		If $g_iTabNum = $TAB_MB Then
@@ -5314,7 +5307,13 @@ EndFunc
 #EndRegion
 
 Func ComboBoxEx_GetCurSel()
-	Return _GUICtrlComboBoxEx_GetCurSel($UI_Combo_gameSelector)
+	local $ret = _GUICtrlComboBoxEx_GetCurSel($UI_Combo_gameSelector)
+	if $ret < 0 Then
+		Return 0
+	elseif $ret > $COUNT_GAME Then
+		Return $COUNT_GAME
+	EndIf
+	Return $ret
 EndFunc
 
 
