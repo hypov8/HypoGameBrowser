@@ -62,6 +62,8 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      option to combine all masters lists into 1 big list.
 ;      option to set max servers to ping per 1000ms
 ;      handel GameSpy port with master protocol
+;      keep listview sort after refresh
+;      1/4 and 3/4 full icon
 ;      ...
 #EndRegion
 
@@ -363,10 +365,19 @@ Global $g_statusBarTime = 0
 
 Global $g_bAutoRefresh = False ; = _GUICtrlComboBox_GetCurSel($UI_CBox_autoRefresh)
 
+Global $g_UseTheme = False
+
 ;==> color for visual theme
 Global Const $COLOR_HYPO_GREY = 0x373737 	;grey (0x7a7a7a)
 Global Const $COLOR_HYPO_BLACK = 0x272727	;dark grey. button color (0xe58816)
 Global Const $COLOR_HYPO_ORANGE = 0xff8c00 	;orange
+
+;input enabled
+Global Const $COLOR_IN1_TEXT = 0xe58816 ;orange
+Global Const $COLOR_IN1_BG = 0x202020   ;black
+;input disabled
+Global Const $COLOR_IN2_TEXT = 0xbbbbbb ;GREY disabled
+Global Const $COLOR_IN2_BG = 0x373737   ;orange disabled
 
 ;====================
 ;--> M BROWER Globals
@@ -416,25 +427,6 @@ Global $g_ilastColumn_A = -1
 Global $g_ilastColumn_C = -1
 Global $g_vSortSense_C[2] = [False, False]
 Global $g_bLV_A_startUpdate = False
-
-;~ Global $g_vSortSense_A[7] = [ _  ;updateLV
-;~ 	False, _ ;id
-;~ 	False, _ ;ip
-;~ 	False, _ ;name
-;~ 	False, _ ;ping
-;~ 	True, _  ;player count
-;~ 	False, _ ;map
-;~ 	False _  ;mod
-;~ ]
-;~ global const $g_vSortSense_A_default[7] = [ _
-;~ 	$g_vSortSense_A[0], _
-;~ 	$g_vSortSense_A[1], _
-;~ 	$g_vSortSense_A[2], _
-;~ 	$g_vSortSense_A[3], _
-;~ 	$g_vSortSense_A[4], _
-;~ 	$g_vSortSense_A[5], _
-;~ 	$g_vSortSense_A[6] _
-;~ ]
 
 #EndRegion
 
@@ -798,9 +790,7 @@ Func BulidMainGui_Finish()
 	_GUICtrlComboBoxEx_AddString($UI_Combo_gameSelector, 'M-Browser (Tab)', $COUNT_GAME, $COUNT_GAME)
 	_GUICtrlComboBoxEx_EndUpdate($UI_Combo_gameSelector)
 
-
 	;;;;;;$sNames &= "|M-Browser (Tab)"
-
 	;;;;;;;;;;GUICtrlSetData($UI_Combo_gameSelector, $sNames , $g_sGameNames[$ID_KP1][$GNAME_MENU])
 EndFunc
 
@@ -844,12 +834,13 @@ Func startupMainUI()
 
 	;load dark theme
 	if _IsChecked($UI_CBox_theme) Then
+		$g_UseTheme = True
 		GUISetColor()
+		SetUI_masterCust_State()
 	EndIf
 
 	$g_bAutoRefresh = _IsChecked($UI_CBox_autoRefresh)
 	ConsoleWrite("!startup refresh id:"&$g_bAutoRefresh&@CRLF)
-
 
 	_ResourceSetImageToCtrl($UI_Icon_hypoLogo, "logo_1") ;todo use icon
 
@@ -867,17 +858,11 @@ Func startupMainUI()
 
 	GUISetState(@SW_SHOW, $HypoGameBrowser) ;ready to be shown
 
-
 	_GUICtrlListView_SetImageList($UI_ListV_svData_A, $ImageList1, 1)
-
 	GUICtrlRegisterListViewSort($UI_ListV_svData_A, "ListViewSort_A")	;updateLV
-
-
 	;_GUICtrlListView_SimpleSort($UI_ListV_svData_A, $g_vSortSense_A, 0, False)
-
 	;_GUICtrlListView_RegisterSortCallBack($UI_ListV_svData_A, 1, True)
 	;_GUICtrlListView_RegisterSortCallBack($UI_ListV_svData_C, 0, True)
-
 
 	$HypoGameBrowser_AccelTable[0][0] = "{F5}"
 	$HypoGameBrowser_AccelTable[0][1] = $UI_Btn_refreshMaster
@@ -896,16 +881,10 @@ Func UpdateRegForMBrowserLinks()
 EndFunc
 ;=============
 
+
 ;=====================
 ;--> THEME COLORS
 Func GUISetColor()
-	;input enabled
-	Local Const $COLOR_IN1_TEXT = 0xe58816 ;orange
-	Local Const $COLOR_IN1_BG = 0x202020   ;black
-	;input disabled
-	Local Const $COLOR_IN2_TEXT = 0xbbbbbb ;GREY disabled
-	Local Const $COLOR_IN2_BG = 0x373737   ;orange disabled
-
 	;gui parts to color
 	Local Const $hwNames1 = [$UI_Text_setupBG, $UI_Text_chatBG, _
 		$UI_ListV_svData_A, $UI_ListV_svData_B, $UI_ListV_svData_C, _
@@ -943,15 +922,15 @@ Func GUISetColor()
 	Next
 
 	;settings inputs
-	Local Const $hwNamesInput = [$UI_In_hotKey,$UI_In_gamePath, $UI_In_playerName, $UI_In_runCmd, _
-		$UI_In_master_Cust, $UI_In_master_proto, $UI_In_getPortM, $UI_In_refreshTime]
+	Local Const $hwNamesInput = [$UI_In_hotKey, $UI_In_playerName, $UI_In_runCmd, _
+		$UI_In_master_proto, $UI_In_getPortM, $UI_In_refreshTime] ;$UI_In_master_Cust,
 	For $iloop = 0 to UBound($hwNamesInput)-1
-		GUICtrlSetColor	 ($hwNamesInput[$iloop],$COLOR_IN1_TEXT)
+		GUICtrlSetColor	 ($hwNamesInput[$iloop], $COLOR_IN1_TEXT)
 		GUICtrlSetBkColor($hwNamesInput[$iloop], $COLOR_IN1_BG)
 	Next
 
 	;disabled input colors
-	Local Const $hwInputDis = [$UI_Combo_M_addServer, $UI_Combo_hkey, $UI_Combo_master, $UI_Combo_gameSelector]
+	Local Const $hwInputDis = [$UI_Combo_M_addServer, $UI_Combo_hkey, $UI_Combo_master, $UI_Combo_gameSelector, $UI_In_gamePath]
 	For $iloop = 0 to UBound($hwInputDis)-1
 		GUICtrlSetColor	 ($hwInputDis[$iloop], $COLOR_IN2_TEXT)
 		GUICtrlSetBkColor($hwInputDis[$iloop], $COLOR_IN2_BG)
@@ -990,20 +969,34 @@ Func ResetRefreshTimmers()
 EndFunc
 ;==============
 
-GUICtrlSetOnEvent($UI_Combo_master, 'UI_Combo_masterChange')
-Func UI_Combo_masterChange()
+Func SetUI_masterCust_State()
 	Local $idx = _GUICtrlComboBox_GetCurSel($UI_Combo_master)
 
 	ConsoleWrite(">master changed idx="&$idx&@CRLF)
 	If $idx <= 0 Then ;catch -1
-		GUICtrlSetState($UI_In_master_Cust, $GUI_ENABLE)
+		_GUICtrlEdit_SetReadOnly($UI_In_master_Cust, False)
+		if $g_UseTheme Then
+			GUICtrlSetColor($UI_In_master_Cust, $COLOR_IN1_TEXT)
+			GUICtrlSetBkColor($UI_In_master_Cust, $COLOR_IN1_BG)
+		EndIf
+		;GUICtrlSetState($UI_In_master_Cust, $GUI_ENABLE)
 	Else
-		GUICtrlSetState($UI_In_master_Cust, $GUI_DISABLE)
+		_GUICtrlEdit_SetReadOnly($UI_In_master_Cust, True)
+		if $g_UseTheme Then
+			GUICtrlSetColor($UI_In_master_Cust, $COLOR_IN2_TEXT)
+			GUICtrlSetBkColor($UI_In_master_Cust, $COLOR_IN2_BG)
+		EndIf
+		;GUICtrlSetState($UI_In_master_Cust, $GUI_DISABLE)
 	EndIf
-	GameSetup_Store() ; update master used
+EndFunc
 
+GUICtrlSetOnEvent($UI_Combo_master, 'UI_Combo_masterChange')
+Func UI_Combo_masterChange()
+	SetUI_masterCust_State()
+	GameSetup_Store() ; update master used
 	UpdateMasterDisplay()
 EndFunc
+
 
 GUICtrlSetOnEvent($UI_Combo_gameSelector, 'UI_Combo_gameSelectorChange')
 Func UI_Combo_gameSelectorChange()
@@ -1022,6 +1015,7 @@ Func UI_Combo_gameSelectorChange()
 
 	;EnableUIButtons(False)
 	BeginGettinServers()
+	ListviewStoreIndexToArray($g_iCurGameID, True)
 
 	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
 	local $end = GetServerCountInArray($iGameIdx) -1
@@ -2201,30 +2195,23 @@ Func GetServerCountInArray($iGameIdx) ;total displayed servers (in memory)
 	Return $countServ
 EndFunc
 
-;~ Func ListviewResetSortOrder() ;sort servers. using previous stored setting
-;~ 	Local $iHwd = $UI_ListV_svData_A
-;~ 	Local $iSort = GUICtrlGetState($iHwd)
-;~ 	;last sort
-;~ 	;$g_iLastSort_C[] ;updateLV
-
-;~ 	if $iSort > 0 Then
-;~ 		ConsoleWrite("++update++ id:"&$iSort&@CRLF)
-;~ 		_GUICtrlListView_BeginUpdate($iHwd)
-;~ 		_GUICtrlListView_SortItems($iHwd, $iSort) ;$g_iLastListviewSortStatus[0]
-;~ 		_GUICtrlListView_SortItems($iHwd, $iSort) ;$g_iLastListviewSortStatus[0]
-;~ 		_GUICtrlListView_EndUpdate($iHwd)
-;~ 		$g_iLastSort_C[$g_iCurGameID] = $iSort
-;~ 	EndIf
-;~ EndFunc
 
 ;store listview index to internal data
-Func ListviewStoreIndexToArray($iGameIDx, $ListViewA)
+Func ListviewStoreIndexToArray($iGameIDx, $reset = False)
 	Local $idx
 
-	For $i = 0 To _GUICtrlListView_GetItemCount($ListViewA)-1
-		$idx = Number(_GUICtrlListView_GetItemText($ListViewA, $i, 0))
-		$g_aServerStrings[$iGameIDx][$idx][$COL_IDX] = $i
-	Next
+	if $reset Then
+		$g_ilastColumn_A = -1
+		For $i = 0 To $g_iMaxSer-1
+			$g_aServerStrings[$iGameIDx][$i][$COL_IDX] = $i
+		Next
+	Else
+		If $g_ilastColumn_A = -1 Then return
+		For $i = 0 To _GUICtrlListView_GetItemCount($UI_ListV_svData_A)-1
+			$idx = Number(_GUICtrlListView_GetItemText($UI_ListV_svData_A, $i, 0))
+			$g_aServerStrings[$iGameIDx][$idx][$COL_IDX] = $i
+		Next
+	EndIf
 EndFunc
 
 Func ChangedListview_NowFillServerStrings() ;if list selection changed. fill server rules
@@ -2963,25 +2950,6 @@ Func FillListView_A_FullData($iGameIdx, $start, $end, $iOffset)
 			$g_aServerStrings[$iGameIdx][$iOff][$COL_MOD], _
 			$g_aServerStrings[$iGameIdx][$iOff][$COL_IDX])        ;sorted index
 	Next
-
-	;GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, GUICtrlGetState($UI_ListV_svData_A), 0) ;updateLV
-	;GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SORTITEMS, GUICtrlGetState($UI_ListV_svData_A), 'ListViewSort_A') ;updateLV
-	;GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, 3, 0)
-	;DllCall("user32.dll", "int", "InvalidateRect", "hwnd", GUICtrlGetHandle($UI_ListV_svData_A), "int", 0, "int", 1)
-	;GUICtrlSendMsg($UI_ListV_svData_A, $LVN_COLUMNCLICK, GUICtrlGetState($UI_ListV_svData_A), 'ListViewSort_A')
-	;ControlClick($HypoGameBrowser, "", _GUICtrlListView_GetHeader($UI_ListV_svData_A), "left", 40, 10, 1)
-	;~ Local $stLvi = DllStructCreate("uint;int;int;uint;uint;ptr;int;int;int;int")
-
-	;~ DllStructSetData($stLvi, 1, $LVIF_TEXT)
-	;~ DllStructSetData($stLvi, 2, $nIndex)
-	;~ DllStructSetData($stLvi, 3, $nColumn)
-	;~ DllStructSetData($stLvi, 6, DllStructGetPtr($stBuffer))
-	;~ DllStructSetData($stLvi, 7, 260)
-
-	;~ GUICtrlSendMsg($UI_ListV_svData_A, $LVM_GETITEM, 0, DllStructGetPtr($stLvi));
-
-	;;;;;;;;;;GUICtrlRegisterListViewSort($UI_ListV_svData_A, "ListViewSort_A")
-
 	_GUICtrlListView_EndUpdate($ListViewA)
 EndFunc
 
@@ -3924,6 +3892,8 @@ Func LoadOffLineServerList($iGameIdx)
 
 	ResetServerListArrays(BitShift(1, -($iGameIDx))) ;bit
 	_GUICtrlListView_DeleteAllItems($ListViewA)
+	;clear selected column. todo work out how to re-sort without mouse click
+	GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, -1, 0) ;updateLV
 
 	;split string
 	$arrayOffline = StringSplit($aTmpOffline[$iGameIdx], @CRLF, BitOR($STR_NOCOUNT, $STR_ENTIRESPLIT))
@@ -3991,12 +3961,9 @@ Func EnableUIButtons($bEnable)
 EndFunc
 
 Func BeginGettinServers()
-	;====================
 	$g_isGettingServers = 1
 	$g_iServerCountTotal_Responded = 0
 	EnableUIButtons(False)
-	;====================
-
 	$g_iServerCountTotal = 1 ;get # servers to use later to stop refresh
 	$g_iPlayerCount_GS = 0
 EndFunc; --> END REFRESH BUTTON
@@ -4695,6 +4662,7 @@ GUICtrlSetOnEvent($UI_Btn_pingList, "UI_Btn_pingListClicked")
 	Func UI_Btn_pingListClicked() ;allready in listview from master/offline
 		SetSelectedGameID()
 		BeginGettinServers()
+		ListviewStoreIndexToArray($g_iCurGameID, True)
 		RefreshServersInListview($g_iCurGameID)
 		FinishedGettinServers()
 	EndFunc
@@ -4713,6 +4681,7 @@ Func RefreshServersInListview($iGameIdx)
 
 	;EnableUIButtons(False)
 	;BeginGettinServers()
+	;ListviewStoreIndexToArray()
 	$g_iPlayerCount_GS = 0
 	$g_iServerCountTotal = 0 ;get # servers to use later to stop refresh
 
@@ -4729,6 +4698,9 @@ Func RefreshServersInListview($iGameIdx)
 		EndIf
 	Next
 	$sTmp = StringTrimRight($sTmp, 1)
+
+	;clear selected column.
+	GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, -1, 0) ;updateLV
 
 	;update listview with invalid values
 	FillServerStringArrayPing($iGameIdx, 999, $g_iServerCountTotal)
@@ -4753,6 +4725,8 @@ GUICtrlSetOnEvent($UI_Btn_loadFav, "UI_Btn_loadFavClicked")
 		ResetServerListArrays(BitShift(1, -($iGameIdx))) ; bit
 
 		_GUICtrlListView_DeleteAllItems($ListViewA)
+		;clear selected column. todo work out how to re-sort without mouse click
+		GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, -1, 0) ;updateLV
 		If $g_aFavList[$iGameIdx] <> "" Then
 			$ipArray = StringSplit($g_aFavList[$iGameIdx], "|", $STR_NOCOUNT)
 			$g_iServerCountTotal = UBound($ipArray)
@@ -4775,13 +4749,13 @@ Func RefreshSingle()
 	SetSelectedGameID()
 	;EnableUIButtons(False)
 	BeginGettinServers()
+	ListviewStoreIndexToArray($g_iCurGameID)
 	$g_iServerCountTotal = 1 ;get # servers to use later to stop refresh
 
 	Local $tmpArray[1] ;only update 1 server
 	Local $oldTime, $compTime, $iPing, $data1, $data2
 	Local $ListViewA = getListView_A_CID()
 	Local $listSelNum = _GUICtrlListView_GetSelectionMark($ListViewA) ;mouse selected num.
-	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
 	Local $serSelNum = GetServerListA_SelectedData($LV_A_IDX) ;server index num (internal array ID)
 
 	if $g_aNetMsg_UDP_Server[$g_iCurGameID][$NET_GS_P] Then
@@ -4904,7 +4878,6 @@ EndFunc
 GUICtrlSetOnEvent ($UI_Btn_refreshMaster, "UI_Btn_refreshMasterClicked")
 	Func UI_Btn_refreshMasterClicked()
 		SetSelectedGameID()
-
 		SetTabActiveGame() ;switch if in settings
 		If $g_iTabNum = $TAB_MB Then
 			ConsoleWrite("-m"&@CRLF)
@@ -4933,7 +4906,7 @@ GUICtrlSetOnEvent($UI_Btn_expand, "ExpandBtnClicked")
 ;using connect chat button
 GUICtrlSetOnEvent($UI_Btn_chatConnect,"load_gui")
 	Func load_gui()
-		If _IsChecked($UI_CBox_theme) Then
+		If $g_UseTheme Then
 			GUICtrlSetColor($UI_Obj_webPage, $COLOR_YELLOW)
 			GUICtrlSetBkColor($UI_Obj_webPage, $COLOR_HYPO_BLACK)
 		EndIf
@@ -5015,40 +4988,8 @@ Func TabClicked_SyncGameCombo()
 EndFunc
 
 
-;============
-;sort servers
-;~ GUICtrlSetOnEvent($UI_ListV_svData_A,"SortListA")
-;~ Func SortListA()
-;~ 	local $iColClicked = GUICtrlGetState($UI_ListV_svData_A) ;updateLV
-;~ 	local $bSwitch = True
-
-;~ 	If Not ($g_ilastColumn_A = $iColClicked) Then
-;~ 		;use default sort order. dont
-;~ 		$bSwitch = False
-;~ 		for $i = 0 to UBound($g_vSortSense_A)-1
-;~ 			$g_vSortSense_A[$i] = $g_vSortSense_A_default[$i]
-;~ 		next
-;~ 	EndIf
-
-;~ 	_GUICtrlListView_SimpleSort($UI_ListV_svData_A, $g_vSortSense_A, $iColClicked, $bSwitch)
-;~ 	$g_ilastColumn_A = $iColClicked
-
-;~ 	ListviewStoreIndexToArray($g_iCurGameID, $UI_ListV_svData_A) ;build array to index listview to internal data ;updateLV
-;~ EndFunc
-
-;GUIRegisterMsg()
-;~ Func SortListA()
-;~ 	;updateLV
-;~ 	ConsoleWrite('!lv1'&@CRLF)
-;~ 	ConsoleWrite('!lv1 Set:'& _
-;~ 		GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, GUICtrlGetState($UI_ListV_svData_A), 0) _
-;~ 		&@CRLF)
-;~ EndFunc
-; Our sorting callback funtion
-
-
-GUICtrlSetOnEvent($UI_ListV_svData_A,"UI_ListV_svData_A_start")
-Func UI_ListV_svData_A_start()
+GUICtrlSetOnEvent($UI_ListV_svData_A,"UI_ListV_sortA_Clicked")
+Func UI_ListV_sortA_Clicked()
 	If $g_isGettingServers Then Return
 	$g_bLV_A_startUpdate = True
 	;hilight column
@@ -5134,15 +5075,6 @@ Func ConvertIPtoInt($ip)
 	Return 0
 EndFunc
 
-	;~ Func SortListA()
-	;~ 	Local $ListViewA = getListView_A_CID()
-	;~ 	SetSelectedGameID()
-	;~ 	ConsoleWrite("-list clicked:"&$ListViewA &@CRLF)
-	;~ 	_GUICtrlListView_BeginUpdate($ListViewA)
-	;~ 	_GUICtrlListView_SortItems($ListViewA, GUICtrlGetState($ListViewA))
-	;~ 	ListviewStoreIndexToArray($g_iCurGameID, $ListViewA) ;build array to index listview to internal data
-	;~ 	_GUICtrlListView_EndUpdate($ListViewA)
-	;~ EndFunc
 
 ;=================
 ;sort server rules
@@ -5164,10 +5096,7 @@ GUICtrlSetOnEvent($UI_ListV_svData_C,"SortListC")
 		;hilight column
 		GUICtrlSendMsg($UI_ListV_svData_C, $LVM_SETSELECTEDCOLUMN, $iColClicked, 0) ;updateLV
 	EndFunc
-	;~ Func SortListC()
-	;~ 	Local $ListViewC = getListView_C_CID()
-	;~ 	_GUICtrlListView_SortItems($ListViewC, GUICtrlGetState($ListViewC))
-	;~ EndFunc
+
 
 Func ButtonGamePath($refIdx)
 	Local $idx, $idx2, $sFolderPath = @WorkingDir
@@ -5183,17 +5112,14 @@ Func ButtonGamePath($refIdx)
 		if $idx2 Then
 			$sFolderPath = StringMid($g_aGameSetup_EXE[$idx], 1, $idx2)
 			if Not FileExists($sFolderPath) Then $sFolderPath = @WorkingDir
-		else
-
 		EndIf
-		ConsoleWrite("-folder"&$sFolderPath&@CRLF)
+		ConsoleWrite("-folder:"&$sFolderPath&@CRLF)
 		Local $sFilename = _WinAPI_OpenFileDlg('', $sFolderPath, 'Executables (*.exe)|All Files (*.*)', 1, _
 			$g_sGameNames[$idx][$GNAME_MENU]&'.exe', '', BitOR($OFN_PATHMUSTEXIST, $OFN_FILEMUSTEXIST, $OFN_HIDEREADONLY), 0, Default, Default, $HypoGameBrowser)
 		If Not @error Then
 			$g_aGameSetup_EXE[$idx] = $sFilename ;save now?
-			if $refIdx = Null Then ;only update if gui used
-				GUICtrlSetData($UI_In_gamePath, $sFilename)
-			EndIf
+			ConsoleWrite("-ref:"&$refIdx&@CRLF)
+			GUICtrlSetData($UI_In_gamePath, $sFilename)
 		EndIf
 	EndIf
 EndFunc
@@ -5504,9 +5430,12 @@ Func Start_Kingpin_failed($iGameIdx, $aEXEPath)
 	;If $iGameIdx = $ID_KP1 Then
 	;$g_aGameSetup_EXE
 
+	local $sGameName = $g_sGameNames[$iGameIdx][$GNAME_MENU]
+
+
 	$msgBoxKeyID = MsgBox(BitOR($MB_SYSTEMMODAL,$MB_OKCANCEL), _
-		"Kingpin Game Path",  "ERROR: Game .exe NOT found in" &@CRLF & $aEXEPath& @CRLF& @CRLF&  _
-		"Press OK to setup your 'Kingpin' Game Path", 0, $HypoGameBrowser )
+		"Game Path",  "ERROR: '"&$sGameName&".exe' NOT found in" &@CRLF & $aEXEPath& @CRLF& @CRLF&  _
+		"Press OK to setup your '"&$sGameName&"' Game Path", 0, $HypoGameBrowser )
 	if $msgBoxKeyID = 1 Then
 		ButtonGamePath($iGameIdx)	 ;file search dialog
 	EndIf
@@ -5744,12 +5673,6 @@ While 1
 		SetWinSizeForMinimize() ;store window size for later
 		$g_bGuiResized = False
 	EndIf
-
-	;event resize list
-	;~ If $g_ResizeListView Then
-	;~ 	SetFocusSize()
-	;~ 	$g_ResizeListView = 0
-	;~ EndIf
 
 	AutoRefreshTimer() ;check time for auto refresh
 	Sleep(200)
