@@ -5,7 +5,7 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment='Kingpin Game Browser by hypo_v8'
 #AutoIt3Wrapper_Res_Description='Game browser for Kingpin, KingpinQ3 and Quake2'
-#AutoIt3Wrapper_Res_Fileversion=1.0.4.3
+#AutoIt3Wrapper_Res_Fileversion=1.0.4.4
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=p
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\1.ico
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\2.ico
@@ -23,7 +23,7 @@
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\hex.ico
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\hw.ico
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\hr2.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\hr2.ico
+#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\q1.ico
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\q1.ico
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\qw.ico
 #AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gameicons\sof.ico
@@ -165,8 +165,8 @@ Global Enum _
 	$ID_HEXFTE, _  ;hexen FTE
 	$ID_HW, _      ;hexenworld
 	$ID_HER2, _    ;Heretic
-	$ID_HER2FTE, _ ; Heretic FTE
 	$ID_Q1, _
+	$ID_Q1FTE, _ ; quake FTE
 	$ID_QW, _
 	$ID_SOF1, _
 	$ID_SOF2, _	 ;Soldier of Fortune II
@@ -349,20 +349,20 @@ Global Enum _
 	$NET_M2C_EOT, _   ;11 MASTER-> CLIENT (END OF DATA) (receive message from master. end of transmition string)
 	$MASTER_ADDY, _   ;12
 	$COUNT_CFG
-Global $g_gameConfig[$COUNT_GAME][$COUNT_CFG] = [ _
+Global $g_gameConfig[$COUNT_GAME][$COUNT_CFG] = [ _ ;FTE-Quake
  	['Kingpin',              'KP',     'kingpin',                 '', $C2S_GS,    $S2C_Q2, -10, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2, "master.kingpin.info:28900|master.maraakate.org:28900|master.hambloch.com:28900|master.333networks.com:28900"], _ ;kingpin
 	['KingpinQ3',            'KPQ3',   'kingpinQ3',    'KingpinQ3-1', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '75',    $M2C_Q3,     1, $EOT_DP,   "master.kingpinq3.com:27950|master.kingpin.info:28900|master.ioquake3.org:27950|gsm.qtracker.com:28900"], _ ;kpq3
 	['Quake2',               'Q2',     'Quake2',                  '', $C2S_Q2,    $S2C_Q2,   0, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   "http://q2servers.com/?mod=&raw=1|http://q2servers.com/?g=dday&raw=1|master.netdome.biz:27900|master.quakeservers.net:27900|master.333networks.com:28900"], _ ;quake2
 	['DDay: Normandy',       'DDAY',   'dday',                    '', $C2S_Q2,    $S2C_Q2,   0, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   "http://q2servers.com/?g=dday&raw=1"], _ ;dday
 	['Hexen2',               'HEX2',   'hexen2',                  '', $C2S_HEX2,  $S2C_HEX2, 0, $C2M_HEX2,  '',      $M2C_HEX2,   0, $EOT_Q2,   "https://hexenworld.org/hexen2|master.maraakate.org:28900|master.hexenworld.org:27900|master.frag-net.com:27900"], _ ;hexen2
-	['Hexen2 FTEQW',         'HEX2FTE','ftehexen2',      'FTE-Quake', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '3',     $M2C_Q3,     1, $EOT_NONE, "master.frag-net.com:27950|master.maraakate.org:27950|master.maraakate.org:28900"], _  ;hexen2 FTEQW	;todo check gamespy
+	['Hexen2 FTE',           'HEX2FTE','hexen2fte',     'FTE-Hexen2', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '3',     $M2C_Q3,     1, $EOT_NONE, "master.frag-net.com:27950|master.maraakate.org:27950|master.maraakate.org:28900"], _  ;hexen2 FTEQW	;todo check gamespy
 	['HexenWorld',           'HEXW',   'hexenworld',              '', $C2S_HW,    $S2C_HW,   0, $C2M_HW,    '',      $M2C_HEX2,   0, $EOT_NONE, "master.hexenworld.org:27900|master.maraakate.org:28900|https://www.qtracker.com/server_list_details.php?game=hexenworld|master.frag-net.com:27900"], _  ;hexenworld. ÿ prefix], _
 	['Heretic2',             'HER2',   'heretic2',                '', $C2S_GS,    $S2C_Q2,   1, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   "https://hexenworld.org/heretic2|master.openspy.net:28900|master.333networks.com:28900|master.maraakate.org:28900"], _  ;heretic2], _
-	['Heretic2 FTEQW',       'HER2FTE','fteheretic2',   'FTE-Hexen2', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '3',     $M2C_Q3,     1, $EOT_NONE, "master.frag-net.com:27950|master.maraakate.org:27950|master.maraakate.org:28900"], _  ;heretic2 FTEQW	;todo check gamespy
 	['Quake1',               'Q1',     'quake1',                  '', $C2S_Q1,    $S2C_Q1,   0, $C2M_Q1,    '',      $M2C_Q1,     0, $EOT_Q1,   "master.maraakate.org:28900|https://www.quakeservers.net/lists/servers/global.txt|gsm.qtracker.com:28900"], _  ;quake1 EOT(0xd192)], _
+	['Quake1 FTE',           'Q1FTE',  'quake1fte',      'FTE-Quake', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '3',     $M2C_Q3,     1, $EOT_NONE, "master.frag-net.com:27950|master.maraakate.org:27950|master.maraakate.org:28900"], _  ;quake1 FTEQW
 	['QuakeWorld',           'QW' ,    'quakeworld',              '', $C2S_Q2,    $S2C_Q1,   0, $C2M_Q1,    '',      $M2C_Q1,     0, $EOT_Q1,   "master.quakeworld.nu:27000|master.quakeservers.net:27000|qwmaster.fodquake.net:27000|qwmaster.ocrana.de:27000|master.maraakate.org:28900"], _  ;quakeworld EOT(0xd192)], _
 	['Soldier of Fortune',   'SOF1',   'sofretail',               '', $C2S_GS,    $S2C_Q2,   1, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   "sof1master.megalag.org:28900|gsm.qtracker.com:28900|https://www.qtracker.com/server_list_details.php?game=soldieroffortune|master.333networks.com:28900"], _  ;sof1], _
-	['Soldier of Fortune II','SOF2',   'sof2',                    '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '2004',  $M2C_Q3,     1, $EOT_DP,   "master.1fxmod.org:28900|master.sof2.ravensoft.com:20110|http://www.qtracker.com/server_list_details.php?game=soldieroffortune2|master.maraakate.org:28900"], _  ;Soldier of Fortune II], _ ; Soldier of Fortune II
+	['Soldier of Fortune II','SOF2',   'sof2',                    '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '2004',  $M2C_Q3,     1, $EOT_DP,   "master.1fxmod.org:20110|master.sof2.ravensoft.com:20110|http://www.qtracker.com/server_list_details.php?game=soldieroffortune2|master.maraakate.org:28900"], _  ;Soldier of Fortune II], _ ; Soldier of Fortune II
 	['Daikatana',            'DAIK',   'daikatana',               '', $C2S_GS,    $S2C_Q2, -10, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   "master.maraakate.org:28900|master.333networks.com:28900|master.openspy.net:28900|gsm.qtracker.com:28900"], _  ;daikatana], _
 	['AlienArena',           'ALIENA', 'alienarna',               '', $C2S_Q2,    $S2C_Q2,   0, $C2M_AA,    '',      $M2C_Q2,     0, $EOT_NONE, "master.alienarena.org:27900|master2.alienarena.org:27900|master.maraakate.org:28900|master.333networks.com:28900|master.openspy.net:28900"], _  ;AlienArena], _
 	['Warsow',               'WARSO',  'warsow',            'Warsow', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '12',    $M2C_Q3,     1, $EOT_DP,   "dpmaster.deathmask.net:27950|ghdigital.com:27950|excalibur.nvg.ntnu.no:27950|eu.master.warsow.gg:27950|master.maraakate.org:28900"], _  ;Warsow'], _ ; Qfusion
@@ -1208,6 +1208,7 @@ EndFunc
 
 Func GameSetup_Store() ;store values (tab-change or ini-save)
 	Local $idx = $g_iGameSetupLastIdx  ; _GUICtrlComboBox_GetCurSel($UI_Combo_gameSetup)
+	ConsoleWrite("+GameSetup_Store() id:"&$idx&@CRLF)
 	if $idx >= 0 And $idx < $COUNT_GAME Then
 		;ConsoleWrite("+Game Setup stored id:"&$idx& " g:" & $g_gameConfig[$idx][$GNAME_MENU]&@CRLF)
 		;ConsoleWrite("-path:"&$g_aGameSetup_EXE[$idx] &@CRLF&"-UI:"&GUICtrlRead($UI_In_gamePath)&@CRLF)
@@ -2567,7 +2568,7 @@ Func GetListFromMasterTCP($sIPAddressDNS, $iPort)
 			;ConsoleWrite("TCP recieve string idx:"& $i4+1 &" Data:"& $dataRecv &@CRLF)
 			$data &= $dataRecv
 			If StringInStr($data, "\final\", 0, -1) Then
-				ConsoleWrite("+tcp EOT"&@CRLF)
+				ConsoleWrite("+tcp found EOT"&@CRLF)
 				ExitLoop
 			EndIf
 		Next
@@ -5117,6 +5118,13 @@ GUISetOnEvent($GUI_EVENT_CLOSE, "ExitScript", $HypoGameBrowser)
 
 Func SetTabActiveGame()
 	if ($g_iTabNum = $TAB_CFG) Or ($g_iTabNum = $TAB_CHAT) Then
+		if ($g_iTabNum = $TAB_CFG) Then
+			;update just incase user changed anything
+			GameSetup_Store() ;save prev settings
+			;UpdateMasterDisplay()
+			;GameSetup_UpdateUI()
+		EndIf
+
 		Switch ComboBoxEx_GetCurSel()
 			Case $ID_M
 				ConsoleWrite("-MB"&@CRLF)
