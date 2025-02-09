@@ -1,7 +1,7 @@
 # HypoGameBrowser
 a multi game browser that was initaly designed for kingpin but has expanded into other games.
 - kingpin, kingpinQ3, Quake2 game browser
-- hexen2, hexenworld, heretic2, quake1, quakeworld, sof1, daikatana, unvanquished, sin. additional game support
+- hexen2, hexenworld, heretic2, quake1, quakeworld, sof1, daikatana, unvanquished, sin, alien arena, warsow, jedi outcast, jedi Academy, Star Trek: Elite Force, Soldier of Fortune II, hexen FTE, Heretic FTE, DDay:Normandy. additional game support
 
 - gamespy, udp, and web protocol support
 
