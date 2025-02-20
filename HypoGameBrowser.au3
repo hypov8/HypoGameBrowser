@@ -3966,7 +3966,7 @@ Func SendEchoToJediServer($iGameIdx, $aIPArray, $aServerIdx)
 	For $i = 0 To UBound($aIPArray) - 1
 		$sPData = $g_aServerStrings[$iGameIdx][$aServerIdx[$i]][$COL_INFOSTR] ; & $g_aServerStrings[$iGameIdx][$aServerIdx[$i]][$COL_INFOPLYR]
 		;ConsoleWrite("-dat:"&$sPData[0]&@CRLF)
-		if StringInStr($sPData[0], "ÿÿÿÿecho", $STR_CASESENSE, 1, 1, 8) Then
+		if IsArray($sPData) And StringInStr($sPData[0], "ÿÿÿÿecho", $STR_CASESENSE, 1, 1, 8) Then
 			$sBetween = _StringBetween($sPData[0], '"', '"')
 			if not @error Then
 				If $sIP = "" Then
