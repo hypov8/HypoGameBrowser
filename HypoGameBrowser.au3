@@ -80,6 +80,9 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      fixed TCP using incorrect gameID(auto refresh)
 ;      cleaned up unused vars
 ;      moved more msgbox alerts to statusbar
+;      allow combine protocols for q3 servers eg(2002|2003)
+;      fixed for q3 parsing. now checks for prefix '\'
+;      added jedi server challenge
 
 
 
@@ -336,7 +339,6 @@ Func GetData_M2C($idx)
 			Return 'ÿÿÿÿserverlist2response'
 	EndSwitch
 	Return ''
-
 EndFunc
 
 Global Enum _
@@ -371,11 +373,11 @@ Global $g_gameConfig[$COUNT_GAME][$COUNT_CFG] = [ _ ;FTE-Quake
 	['Daikatana',            'DAIK',   'daikatana',               '', $C2S_GS,    $S2C_Q2, -10, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   "master.maraakate.org:28900|master.333networks.com:28900|master.openspy.net:28900|gsm.qtracker.com:28900"], _  ;daikatana], _
 	['AlienArena',           'ALIENA', 'alienarna',               '', $C2S_Q2,    $S2C_Q2,   0, $C2M_AA,    '',      $M2C_Q2,     0, $EOT_NONE, "master.alienarena.org:27900|master2.alienarena.org:27900|master.maraakate.org:28900|master.333networks.com:28900|master.openspy.net:28900"], _  ;AlienArena], _
 	['Warsow',               'WARSO',  'warsow',            'Warsow', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '22',    $M2C_Q3,     1, $EOT_DP,   "dpmaster.deathmask.net:27950|ghdigital.com:27950|excalibur.nvg.ntnu.no:27950|eu.master.warsow.gg:27950|master.maraakate.org:28900"], _  ;Warsow'], _ ; Qfusion
-	['Jedi: Outcast',        'JK2',    'starwarsjediknight',      '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '16',    $M2C_Q3,     1, $EOT_DP,   "master.jkhub.org:28060|masterjk2.ravensoft.com:28060|master.jk2mv.org:28060|master.maraakate.org:28900"], _  ;Jedi Outcast], _ ; jedi outcast
-	['Jedi: Academy',        'JK3',    'jk3',                     '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '26',    $M2C_Q3,     1, $EOT_DP,   "master.jkhub.org:29060|masterjk3.ravensoft.com:29060|master.maraakate.org:28900"], _  ;jedi Academy], _ ; jedi Academy
-	['Star Trek: EF',        'STEF1',  'stef1',                   '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '24',    $M2C_STEF1,  1, $EOT_Q3,   "master.stvef.org:27953|master.stef1.daggolin.de:27953|master.stef1.ravensoft.com:27953|efmaster.tjps.eu:27953|master.maraakate.org:28900"], _  ;Star Trek: Elite Force], _ ; Star Trek: Elite Force
+	['Jedi: Outcast',        'JK2',    'starwarsjediknight',      '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '16',    $M2C_Q3,     1, $EOT_Q3,   "master.jk2mv.org:28060|master.jkhub.org:28060|masterjk2.ravensoft.com:28060|master.maraakate.org:28900"], _  ;Jedi Outcast],
+	['Jedi: Academy',        'JK3',    'jk3',                     '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '26',    $M2C_Q3,     1, $EOT_Q3,   "master.jk2mv.org:29060|master.jkhub.org:29060|masterjk3.ravensoft.com:29060|master.maraakate.org:28900"], _  ;jedi Academy],
+	['Star Trek: EF',        'STEF1',  'stef1',                   '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '24',    $M2C_STEF1,  1, $EOT_Q3,   "master.stvef.org:27953|master.stef1.daggolin.de:27953|master.stef1.ravensoft.com:27953|efmaster.tjps.eu:27953|master.maraakate.org:28900"], _  ;Star Trek: Elite Force],
 	['PaintBall 2',          'PAINT',  'paintball',               '', $C2S_Q2,    $S2C_Q2,   0, $C2M_PB2,   '',      $M2C_PB2,    0, $EOT_Q2,   "dplogin.com:27900|http://www.otb-server.de/serverlist.txt|http://dplogin.com/serverlist.php"], _  ;paintball], _
-	['Unvanquished',         'UNVAN',  'unvanquished',            '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '86',    $M2C_Q3,     1, $EOT_NONE, "master.unvanquished.net:27950|master2.unvanquished.net:27950|master.ioquake3.org:27950"], _  ;unvanquished], _ ;UNVANQUISHED ;master not using darkplace
+	['Unvanquished',         'UNVAN',  'unvanquished',            '', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '86',    $M2C_Q3,     1, $EOT_NONE, "master.unvanquished.net:27950|master2.unvanquished.net:27950|master.ioquake3.org:27950"], _  ;unvanquished],  ;master not using darkplace or Q3. no EOT
 	['Sin',                  'SIN',    'sin',                     '', $C2S_GS,    $S2C_Q2,   1, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   "master.maraakate.org:28900|master.gameranger.com|master.333networks.com:28900"] _   ;sin]
 ] ;  #0                      #1        #2                         #3   #4         #5         #6 #7          #8       #9          #10 #11
 ;todo ADD GAMES
@@ -671,7 +673,7 @@ Func BuildTabViewPage($iTab, $sName)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				$UI_Text_masterProto = GUICtrlCreateLabel("Q3 Protocol", 81, 154, 64, 21, $SS_CENTERIMAGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_In_master_proto = GUICtrlCreateInput("74", 153, 154, 48, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				$UI_In_master_proto = GUICtrlCreateInput("74", 153, 154, 84, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Game Protocol for IOQ3 masters"&@CRLF&"74=Beta, 75=Release")
 				$UI_CBox_gameRefresh = GUICtrlCreateCheckbox("AutoRefresh Game", 81, 178, 117, 21)
@@ -883,9 +885,6 @@ Func BulidMainGui()
 
 	GUISetState(@SW_HIDE , $HypoGameBrowser) ;;;GUISetState(@SW_SHOW, $HypoGameBrowser)
 	;#EndRegion ### END Koda GUI section ###
-
-
-
 EndFunc
 
 Func BulidMainGui_Finish()
@@ -895,12 +894,13 @@ Func BulidMainGui_Finish()
 	GUICtrlSetData($MOTD_Input , "Use Refresh to receive list from master. Use Ping to updates current servers in view. Offline loads internal servers")
 	GUICtrlSetTip($UI_In_master_proto, _
 		"Game Protocol for Q3 UDP masters"&@CRLF& _
+		"  Note: Use | to combine protocols."&@CRLF& _
 		"  KingpinQ3:  74=Beta1, 75=Beta2"&@CRLF& _
 		"  Quake3:  66=v1.30 67=1.31 68=1.32" &@CRLF& _
 		"  Unvanquished:  86=v0.55"&@CRLF& _
 		"  Warsow:  22=v2.10"&@CRLF& _
-		"  Jedi Out:  16=v1.04 15=v1.02"&@CRLF& _
-		"  Jedi Academy:  26=v1.01 25=v1.0"&@CRLF& _
+		"  Jedi Out:  15=v1.02 16=v1.04"&@CRLF& _
+		"  Jedi Academy:  25=v1.0 26=v1.01"&@CRLF& _
 		"  SOF 2:  2002=v1.0 2003=v1.01 2004=v1.04"&@CRLF& _
 		"  Star Trek EF:  24"&@CRLF& _
 		"  FTEQW: 3, (28)?"&@CRLF& _
@@ -2386,9 +2386,21 @@ EndFunc
 
 
 #Region --> PROTOCOL: Relted settings
+
+Func sendEchoMessage_UDP($iGameIdx, $idx)
+	Switch $iGameIdx
+		Case $ID_JK3
+			Return "ÿÿÿÿ" & $g_aServerStrings[$iGameIdx][$idx][$COL_INFOSTR]
+		;todo add games
+	EndSwitch
+
+	Return ""
+EndFunc
+
 Func sendStatusMessageType_UDP($iGameIdx, $isMBrowser) ;udp
 	if $isMBrowser Then
-		Switch $iGameIdx ;user right click-> get-info
+		;user right click-> get-info
+		Switch $iGameIdx
 			Case 2
 				Return GetData_C2S($C2S_Q2)
 			Case 1
@@ -2726,29 +2738,61 @@ Func GetMessage_toSendMasterUDP($iGameIdx, $iProtocol)
 	EndIf
 EndFunc
 
+Func CleanupResponce_fromMasterUDP_EOT($iGameIdx, $sEOT, ByRef $inData, ByRef $inLen, ByRef $retData)
+	$retData = ""
+	Local $sTail = StringMid($inData, $inLen - StringLen($sEOT)+1)
+	If StringCompare($sTail, $sEOT, $STR_CASESENSE) = 0 Then
+		$retData = StringMid($inData, 1, $inLen - StringLen($sEOT)) ; trim EOT
+		return True
+	ElseIf $g_gameConfig[$iGameIdx][$NET_M2C_EOT] = $EOT_Q3 Then
+		If  StringCompare(StringRight($inData,3), Chr(0)&Chr(0)&Chr(0), $STR_CASESENSE) = 0 Then
+			;FIX: DarkPlace master used for q3..
+			ConsoleWrite("!Checking DP master used for Q3" &@CRLF)
+			Local $tmpData = StringTrimRight($inData, 3)
+			Local $tmpLen = $inLen - 3
+			$sEOT = GetData_EOT($EOT_Q3)
+			$sTail = StringMid($tmpData, $tmpLen - StringLen($sEOT)+1)
+			If StringCompare($sTail, $sEOT, $STR_CASESENSE) = 0 Then
+				$retData = StringMid($tmpData, 1, $tmpLen - StringLen($sEOT)) ; trim EOT
+				return True
+			EndIf
+		EndIf
+	EndIf
+
+	Return False
+EndFunc
+
 Func CleanupResponce_fromMasterUDP($iGameIdx, ByRef $data)
-	Local $idx1, $iLen, $sHeader
+	Local $idx, $iLen, $sHeader
 
 	;ConsoleWrite("PacketData003=" &String($data)&@CRLF)
 	if $data <> "" Then
 		$sHeader = GetData_M2C($g_gameConfig[$iGameIdx][$NET_M2C])
 		$iLen = StringLen($sHeader)
-		$idx1 = StringInStr($data, $sHeader, 1, 1, 1, $iLen)
-		If $idx1 Then
-			$data = StringTrimLeft($data, $idx1+$iLen) ; trim ÿÿÿÿservers\n... +1char(catch \0 \\)
+		$idx = StringInStr($data, $sHeader, 1, 1, 1, $iLen)
+		If $idx Then
+			$data = StringTrimLeft($data, $idx+$iLen) ; trim ÿÿÿÿservers\n... +1char(catch \0 \\)
 
-			;extra message cleanup... paintball2
-			Switch $iGameIdx
-				Case $ID_PAINT
+			;extra message cleanup... paintball2 and jedi(jkhub.org)
+			Switch $g_gameConfig[$iGameIdx][$NET_M2C]
+				Case $M2C_Q3
+					;trim to first '\'
+					$idx = StringInStr($data, "\",$STR_CASESENSE, 1, 1, 3)
+					if $idx Then
+						ConsoleWrite("!master has invalid space after header"&@CRLF)
+						$data = StringTrimLeft($data, $idx)
+					EndIf
+				Case $M2C_PB2
 					local const $sPBExtra = 'serverlist2' ;todo move name out of here?
-					$idx1 = StringInStr($data, $sPBExtra, 0, 1, 1, 20) ;should be at start...
-					If $idx1 Then
-						$data = StringTrimLeft($data, $idx1+StringLen($sPBExtra)+4) ; trim name + int(length)
+					$idx = StringInStr($data, $sPBExtra, 0, 1, 1, 20) ;should be at start...
+					If $idx Then
+						$data = StringTrimLeft($data, $idx+StringLen($sPBExtra)+4) ; trim name + int(length)
 						;ConsoleWrite("pb cleanup:"&$data&@CRLF)
 					EndIf
 				;Case
 					;todo ADD GAMES
 			EndSwitch
+
 		EndIf
 		;ConsoleWrite("PacketData004:"&$data&@CRLF)
 		;ConsoleWrite("-cleaned master packet:"&@CRLF&"-0x"& Hex(StringToBinary($data))&@CRLF) ;todo cleanup debug
@@ -2787,7 +2831,7 @@ Func BuildIPList_fromMasterUDP($iGameIdx, ByRef $data, ByRef $retErr)
 				if $i+$iStep-1 <= $iCount Then
 					$sRet &= StringFormat("\ip\%u.%u.%u.%u:%u", _ ;uncompress byte to int
 						($aChars[$i+0]), ($aChars[$i+1]), ($aChars[$i+2]), ($aChars[$i+3]), _ ;ip address
-						BitShift(($aChars[$i+4]), -8) + ($aChars[$i+5])) ;port
+						BitShift(($aChars[$i+4]), -8) + ($aChars[$i+5])) ;port (Big-Endian)
 				EndIf
 			Next
 			;ConsoleWrite("-out1:"&$output&@CRLF)
@@ -2799,7 +2843,95 @@ Func BuildIPList_fromMasterUDP($iGameIdx, ByRef $data, ByRef $retErr)
 	Return $sRet
 EndFunc
 
-Func GetList_fromMasterUDP($iGameIdx, $sSendIPAddressDNS, $iSendPort, $iProtocol = "")
+Func GetList_fromMasterUDP($iGameIdx, $sSendIPAddressDNS, $iSendPort, $sProtocol = "")
+	;If @error Then ConsoleWrite("error startup")
+	Local $dataRecv, $data = "", $retErr = -1
+	Local $iErrorX, $output = "", $gameSpyString
+	Local $aProto = StringSplit($sProtocol, "|")
+	local $sEOT = GetData_EOT($g_gameConfig[$iGameIdx][$NET_M2C_EOT]) ;EOT
+	local $tmpData
+
+	_BIND_UDP_SOCKET($g_hSocketMasterUDP)
+	Local $sIP = TCPNameToIP($sSendIPAddressDNS)
+
+	;handle munlitple protocols eg(2002|20004)
+	For $iPIdx = 1 To $aProto[0]
+		ConsoleWrite("+protocol id:"&$iPIdx&@CRLF)
+		$gameSpyString = GetMessage_toSendMasterUDP($iGameIdx, $aProto[$iPIdx]);"ÿÿÿÿgetservers FTE-Quake 3 full empty"
+		ConsoleWrite("-send packet="&$gameSpyString&@CRLF)
+		ConsoleWrite("-send packet=0x"& Hex(StringToBinary($gameSpyString))&@CRLF)
+
+		If Not @error Then
+			ConsoleWrite("ip:"&$sIP&" port:"&$iSendPort&@CRLF)
+			$iErrorX = _UDPSendTo($sIP, $iSendPort, $gameSpyString, $g_hSocketMasterUDP)
+			if @error Then ConsoleWrite("!UDP Send 'status' sock error=" & $iErrorX & " error" & @CRLF)
+		EndIf
+
+		if Not @error Then
+			Local $iTimeOut = TimerInit(), $sTail, $dataLen
+			While 1
+				Do
+					$dataRecv = _UDPRecvFrom($g_hSocketMasterUDP, 10000, 0) ;2048
+					If TimerDiff($iTimeOut) > 2000 Then
+						ConsoleWrite("button state up, timeout 2seconds"&@CRLF)
+						ExitLoop(2) ;timedout. stop do+while
+					EndIf
+					Sleep(100)
+				Until IsArray($dataRecv)
+
+				$dataLen = $dataRecv[$PACKET_SIZE]
+				ConsoleWrite("-new packet=0x"& Hex(StringToBinary($dataRecv[$PACKET_DATA]))&@CRLF)
+
+				;check for EOT
+				$sTail = StringMid($dataRecv[$PACKET_DATA], $dataLen - StringLen($sEOT)+1, -1)
+				ConsoleWrite("+$sTail s:"&Hex(StringToBinary($sTail))&@CRLF) ;todo cleanup debug
+				If CleanupResponce_fromMasterUDP_EOT($iGameIdx, $sEOT, $dataRecv[$PACKET_DATA], $dataLen, $tmpData) Then
+					CleanupResponce_fromMasterUDP($iGameIdx, $tmpData);remove header data
+					$data &=$tmpData
+					;ConsoleWrite("-packet=0x"& Hex(StringToBinary($data))&@CRLF)
+					;ConsoleWrite(@CRLF&"+found 'EOT'"&@CRLF) ;todo cleanup debug
+					ExitLoop(1) ;recieved full packet
+				Else
+					;short message without EOT
+					If $sEOT = "" and $data = "" and $dataLen < 512 Then
+						$tmpData = $dataRecv[$PACKET_DATA]
+						CleanupResponce_fromMasterUDP($iGameIdx, $tmpData);remove header data
+						$data &= $tmpData
+						;ConsoleWrite("-packet=0x"& Hex(StringToBinary($data))&@CRLF)
+						ExitLoop(1) ;recieved full packet
+					EndIf
+				EndIf
+
+				$tmpData = $dataRecv[$PACKET_DATA]
+				CleanupResponce_fromMasterUDP($iGameIdx, $tmpData);remove header data
+				$data &= $tmpData ;add recieved data
+				; get multiple packets?
+			WEnd
+		EndIf
+	Next
+
+	_UDPCloseSocket($g_hSocketMasterUDP)
+	;Servers recieved string
+
+	ConsoleWrite("-final packet=0x"& Hex(StringToBinary($data))&@CRLF)
+
+	$output = BuildIPList_fromMasterUDP($iGameIdx, $data, $retErr)
+
+	If $output = "" Then
+		Return $retErr
+	Else
+		Local $countIP = StringSplit($output, "\ip\", 1)
+		if Not @error Then
+			ConsoleWrite("-num UDP servers recieved:" &$countIP[0]-1&@CRLF)
+		EndIf
+		;ConsoleWrite("-rec master data processed:"& @CRLF&"-0x"&$output&@CRLF)
+		Return $output
+	EndIf
+EndFunc
+;--> END: UDP GET LIST FROM MASTER
+
+
+Func GetList_fromMasterUDP_old($iGameIdx, $sSendIPAddressDNS, $iSendPort, $iProtocol = "")
 	If @error Then ConsoleWrite("error startup")
 	Local $dataRecv, $data = "", $retErr = -1
 	Local $iErrorX, $output = ""
@@ -3828,13 +3960,45 @@ EndFunc
 
 
 #Region --> UDP SEND
+Func SendEchoToJediServer($iGameIdx, $aIPArray, $aServerIdx)
+	Local $sIP = "", $sIdx = "", $svID, $sBetween, $sPData
+	;_ArrayDisplay($aServerIdx)
+	For $i = 0 To UBound($aIPArray) - 1
+		$sPData = $g_aServerStrings[$iGameIdx][$aServerIdx[$i]][$COL_INFOSTR] ; & $g_aServerStrings[$iGameIdx][$aServerIdx[$i]][$COL_INFOPLYR]
+		;ConsoleWrite("-dat:"&$sPData[0]&@CRLF)
+		if StringInStr($sPData[0], "ÿÿÿÿecho", $STR_CASESENSE, 1, 1, 8) Then
+			$sBetween = _StringBetween($sPData[0], '"', '"')
+			if not @error Then
+				If $sIP = "" Then
+					$sIP &=  $aIPArray[$i]
+					$sIdx &= $aServerIdx[$i]
+				Else
+					$sIP &=  "|"& $aIPArray[$i]
+					$sIdx &= "|"& $aServerIdx[$i]
+				EndIf
+				$g_aServerStrings[$iGameIdx][$aServerIdx[$i]][$COL_INFOSTR] = $sBetween[0]
+			EndIf
+		EndIf
+	Next
+
+	if $sIP <> "" Then
+		$aIPArray = StringSplit($sIP, "|", $STR_NOCOUNT)
+		$aServerIdx = StringSplit($sIdx, "|", $STR_NOCOUNT)
+		SendSTATUStoServers_Split($iGameIdx, $aIPArray, $aServerIdx, True)
+	EndIf
+
+	Return True
+EndFunc
 
 Func SendStatustoServers_Init($iGameIdx, $aIPArray, $aServerIdx, $bCheckDead = True) ; id
 	;
 	_BIND_UDP_SOCKET($g_hSocketServerUDP)
 	If $g_hSocketServerUDP > 0 Then
 		_SetPacketBufferSize($g_hSocketServerUDP, 25600)
-		SendSTATUStoServers_Split($iGameIdx, $aIPArray, $aServerIdx) ; send inital ping to all
+		SendSTATUStoServers_Split($iGameIdx, $aIPArray, $aServerIdx, False) ; send inital ping to all
+		If $iGameIdx = $ID_JK3 Then ;todo add games
+			SendEchoToJediServer($iGameIdx, $aIPArray, $aServerIdx)
+		EndIf
 		if $bCheckDead Then
 			SendSTATUStoServers_CheckDead($iGameIdx, $aIPArray, $aServerIdx) ; check dead servers ;todo
 		EndIf
@@ -3852,7 +4016,7 @@ Func SendStatustoServers_Init($iGameIdx, $aIPArray, $aServerIdx, $bCheckDead = T
 EndFunc
 
 
-Func SendSTATUStoServers_Split($iGameIdx, $aIPArrayRef, $aServerIdx)
+Func SendSTATUStoServers_Split($iGameIdx, $aIPArrayRef, $aServerIdx, $echo)
 	Local $end, $iLast = UBound($aIPArrayRef)-1
 	ConsoleWrite("!server count:"&$iLast+1&@CRLF)
 
@@ -3866,7 +4030,7 @@ Func SendSTATUStoServers_Split($iGameIdx, $aIPArrayRef, $aServerIdx)
 		endif
 		ConsoleWrite("!split count:"& $end + 1 &@CRLF)
 
-		If SendSTATUStoServers($iGameIdx, $aIPArrayRef, $aServerIdx, $start, $end) Then ;get each server details
+		If SendSTATUStoServers($iGameIdx, $aIPArrayRef, $aServerIdx, $start, $end, $echo) Then ;get each server details
 			listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;now listen for responce
 			FillListView_A_FullData($iGameIdx, $aServerIdx, $start, $end)
 		EndIf
@@ -3896,12 +4060,12 @@ Func SendSTATUStoServers_CheckDead($iGameIdx, $aIPArrayRef, $aServerIdx)
 
 		if $sIPArrayRef_tmp <> "" Then
 			$aIPArrayRef_tmp = StringSplit($sIPArrayRef_tmp, "|", $STR_NOCOUNT)
-			SendSTATUStoServers_Split($iGameIdx, $aIPArrayRef_tmp, $aServerIdx_tmp)
+			SendSTATUStoServers_Split($iGameIdx, $aIPArrayRef_tmp, $aServerIdx_tmp, False)
 		EndIf
 	Next
 EndFunc
 
-Func SendSTATUStoServers($iGameIdx, $arrayServerX, $aServerIdx, $startNum, $endNum) ;, $iOffset = 0)
+Func SendSTATUStoServers($iGameIdx, $arrayServerX, $aServerIdx, $startNum, $endNum, $isEcho) ;, $iOffset = 0)
 	Local $iIP, $iErrorX, $iRetCount = 0
 	Local $sIPAddress, $iPort, $aIP_Port, $sSTATUS_msg
 	Local $iSVCount = UBound($arrayServerX)
@@ -3913,7 +4077,9 @@ Func SendSTATUStoServers($iGameIdx, $arrayServerX, $aServerIdx, $startNum, $endN
 		Return False
 	EndIf
 
-	$sSTATUS_msg = sendStatusMessageType_UDP($iGameIdx, False) ;todo port...
+	if Not $isEcho Then
+		$sSTATUS_msg = sendStatusMessageType_UDP($iGameIdx, False) ;todo port...
+	EndIf
 	;ConsoleWrite(">Send STATUS to Servers. start:"&$startNum&" end:" &$endNum&" total:"&$iSVCount &@CRLF& "-message:"&$sSTATUS_msg& @CRLF)
 	;ConsoleWrite("-sendto:"& Hex(StringToBinary($sSTATUS_msg))&@CRLF) ;todo cleanup
 
@@ -3934,13 +4100,18 @@ Func SendSTATUStoServers($iGameIdx, $arrayServerX, $aServerIdx, $startNum, $endN
 			Return False; end??
 		EndIf
 
+		If $isEcho Then
+			$sSTATUS_msg = sendEchoMessage_UDP($iGameIdx, $aServerIdx[$iIP]) ;todo add games
+		EndIf
+
+
 		$sIPAddress = TCPNameToIP( $aIP_Port[1]) ;todo move this
 		$iPort      = Number($aIP_Port[2])
 		;ConsoleWrite("-UDP Send to:" &$sIPAddress&":"&$iPort & " msg:" &$sSTATUS_msg&@CRLF) ;todo
 
 		$iErrorX = _UDPSendTo($sIPAddress, $iPort, $sSTATUS_msg, $g_hSocketServerUDP)
 		if @error Then
-			ConsoleWrite("!UDP Send \status\ sock error =  " & $iErrorX & " error" & @CRLF)
+			ConsoleWrite("!UDP Send \status\ sock error =  " & $iErrorX & " error" &"ip:"&$sIPAddress&":"& $iPort & @CRLF)
 		Else
 			$iRetCount += 1
 		EndIf
@@ -4627,14 +4798,18 @@ Func FillListView_BC_Selected($iGameIdx, $iListNum)
 	FillListView_C($g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOSTR], $ListViewC)
 
 	;deal with quake1 type server data
-	if $iGameIdx = $ID_Q1 Or $iGameIdx = $ID_HEX Then
-		HEXGetPlayerInfo( _
-			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_IP], _
-			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_PORT], _
-			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOSTR], _
-			$g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOPLYR])
-	EndIf
-	;todo ADD GAMES
+	Switch $iGameIdx
+		Case $ID_Q1, $ID_HEX
+			HEXGetPlayerInfo( _
+				$g_aServerStrings[$iGameIdx][$serSelNum][$COL_IP], _
+				$g_aServerStrings[$iGameIdx][$serSelNum][$COL_PORT], _
+				$g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOSTR], _
+				$g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOPLYR])
+		Case $ID_JK3
+
+		;todo ADD GAMES
+	EndSwitch
+
 	FillListView_B($g_aServerStrings[$iGameIdx][$serSelNum][$COL_INFOPLYR], $ListViewB, $iGameIdx)
 
 EndFunc; --> FillListView_BC_Selected
