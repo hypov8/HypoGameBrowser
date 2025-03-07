@@ -5,23 +5,15 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment='Kingpin Game Browser by hypo_v8'
 #AutoIt3Wrapper_Res_Description='Game browser for Kingpin, KingpinQ3 and Quake2'
-#AutoIt3Wrapper_Res_Fileversion=1.0.4.8
+#AutoIt3Wrapper_Res_Fileversion=1.0.4.9
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=p
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\1.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\2.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\3.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\4.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\5.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\6.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\7.ico
-#AutoIt3Wrapper_Res_Icon_Add=D:\_code_\hypoBrowser\gspyicons\8.ico
 #AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\logo_5.bmp,rt_bitmap,logo_1
 #AutoIt3Wrapper_AU3Check_Parameters=-d
 #Au3Stripper_Parameters=/so /rm
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
 ;======= hypo do not delet above ====================
-;icons from https://github.com/XQF/xqf/tree/master/src/xpm
-;todo ADD GAMES
+
+;game icons from https://github.com/XQF/xqf/tree/master/src/xpm
 
 Global Const $versionName = "HypoGameBrowser"
 Global Const $versionNum = "1.0.4" ;1.0.0
@@ -76,6 +68,13 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      split setting packet size up/down
 ;      increased receive packet size, newer games are large single packets.
 ;      updated gamespy packet reader. handle queryid better for split packets.
+;1.0.4.9
+;      fixed bug getting quakeworld/hexen servers
+;      read extra player info from QW servers
+;      updated icons.
+;      moved player count icons to folder
+
+
 
 
 ;1.0.x todo
@@ -134,6 +133,18 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 AutoItSetOption("GUICloseOnESC", 0)
 
 #Region ;=> global Varables
+
+;internal icons. order to match names
+Global Enum _
+	$ICO_PING1, _
+	$ICO_PING2, _
+	$ICO_PING3, _
+	$ICO_PING4, _
+	$ICO_PLYR0, _
+	$ICO_PLYR1, _
+	$ICO_PLYR2, _
+	$ICO_PLYR3, _
+	$ICO_PLYR4
 
 ;$NET_PROTOCOL_
 Global Enum _
@@ -194,6 +205,7 @@ Global Enum _
 	$C2S_MOH, _
 	$C2S_HEX2, _
 	$C2S_HW, _
+	$C2S_QW, _
 	$C2S_GS
 Func GetData_C2S($idx)
 	Switch $idx
@@ -211,6 +223,15 @@ Func GetData_C2S($idx)
 			Return BinaryToString('0xFFFFFFFF02') &'getstatus'&@LF
 		Case $C2S_HW
 			Return 'ÿÿÿÿÿstatus'&@LF
+		Case $C2S_QW
+			;~ STATUS_OLDSTYLE              0 //hypov8 ÿÿÿÿstatus #
+			;~ STATUS_SERVERINFO            1
+			;~ STATUS_PLAYERS               2
+			;~ STATUS_SPECTATORS            4
+			;~ STATUS_SPECTATORS_AS_PLAYERS	8 //for ASE - change only frags: show as "S"
+			;~ STATUS_SHOWTEAMS	            16
+			;~ STATUS_QTVLIST               32
+			Return 'ÿÿÿÿstatus 31'&@LF ; (1+2+4+8+16)
 		Case $C2S_GS
 			Return '\status\'&@LF
 	EndSwitch
@@ -222,6 +243,7 @@ Global Enum _ ;S2C
 	$S2C_Q1, _
 	$S2C_HEX2, _
 	$S2C_HW, _
+	$S2C_QW, _
 	$S2C_Q2, _
 	$S2C_Q3, _
 	$S2C_GS
@@ -234,7 +256,7 @@ Func GetData_S2C($idx)
 			Return ''
 		Case $S2C_HEX2
 			Return ''
-		Case $S2C_HW
+		Case $S2C_HW, $S2C_QW
 			Return 'ÿÿÿÿn'
 		Case $S2C_Q2
 			Return 'ÿÿÿÿprint'
@@ -948,8 +970,11 @@ Func BulidMainGui_Finish()
 EndFunc
 
 Func BuildIconList()
-	for $i = 0 to $COUNT_GAME
-		_GUIImageList_AddIcon($ImageList1, @ScriptFullPath, $i+ 4, True)
+	;external icons
+	Local Const $sState[9] = ["\gspyicons\ping1.ico", "\gspyicons\ping2.ico", "\gspyicons\ping3.ico", "\gspyicons\ping4.ico", _
+		"\gspyicons\p0.ico", "\gspyicons\p1.ico", "\gspyicons\p2.ico", "\gspyicons\p3.ico", "\gspyicons\p4.ico"]
+	for $i = 0 to 8
+		_GUIImageList_AddIcon($ImageList1, @ScriptDir &$sState[$i], 0)
 	Next
 
 	for $i = 0 to $COUNT_GAME -1
@@ -1513,6 +1538,8 @@ Func gameCFG_C2S_type($sData)
 			Return $C2S_HEX2
 		Case StringCompare($sData,'HW') = 0
 			Return $C2S_HW
+		Case StringCompare($sData,'QW') = 0
+			Return $C2S_QW
 		Case StringCompare($sData,'GS') = 0
 			Return $C2S_GS
 		Case Else
@@ -1532,6 +1559,8 @@ Func gameCFG_S2C_type($sData)
 			Return $S2C_HEX2
 		Case StringCompare($sData,'HW') = 0
 			Return $S2C_HW
+		Case StringCompare($sData,'QW') = 0
+			Return $S2C_QW
 		Case StringCompare($sData,'GS') = 0
 			Return $S2C_GS
 		Case Else
@@ -1935,7 +1964,6 @@ EndFunc ;--> end ini file setup
 
 			Local $numLines = $tmpstr[0] ;3 lines standard >= players
 			If Not StringInStr($tmpstr[1], GetData_S2C($S2C_Q2), 1, 1, 1, 10) And Not StringInStr($tmpstr[1],GetData_S2C($S2C_Q3), 1, 1, 1, 20) Then
-				;MsgBox($MB_SYSTEMMODAL, "","error in packet header (no 'yyyy')" )
 				setTempStatusBarMessage("ERROR: Unknown header in responce.", True)
 				Return
 			EndIf
@@ -1963,7 +1991,7 @@ EndFunc ;--> end ini file setup
 		;;;; add players info, max 31 char for player name
 			Local $iply = 3
 			If Not ($tmpstr[3] = "") Then
-				local $plyr = 0, $playerName ="", $plyrStatus, $plyrStatusArray
+				local $plyr = 0, $playerName, $plyrStatus, $plyrStatusArray
 
 				_GUICtrlListView_BeginUpdate($ListView1POP)
 				_GUICtrlListView_DeleteAllItems($ListView1POP)
@@ -1971,10 +1999,15 @@ EndFunc ;--> end ini file setup
 					If Not ($tmpstr[$iply] = "") Then ;catch end line @LF, EOT
 
 						$playerName = _StringBetween($tmpstr[$iply], '"', '"' ) ;get server name[0]
-						$plyrStatus = StringReplace($tmpstr[$iply], '"' & $playerName[0] & '"', "") ;
+						if @error Then
+							$playerName = ""
+						else
+							$playerName = $playerName[0]
+						EndIf
+						$plyrStatus = StringReplace($tmpstr[$iply], '"' & $playerName & '"', "") ;
 						$plyrStatusArray = StringSplit($plyrStatus, " " ) ;setup server strings
 
-						_GUICtrlListView_AddItem($ListView1POP, $playerName[0],-1, 0)				;Name
+						_GUICtrlListView_AddItem($ListView1POP, $playerName,-1, 0)				;Name
 						_GUICtrlListView_AddSubItem($ListView1POP,$plyr, $plyrStatusArray[1] ,1)	;Frags
 						_GUICtrlListView_AddSubItem($ListView1POP,$plyr, $plyrStatusArray[2] ,2)	;Ping
 						$plyr += 1 ;increase 1
@@ -2062,12 +2095,12 @@ Func GUI_GameSetup_Build()
 	$UI3_Text_c2sMSG = GUICtrlCreateLabel("Send MSG", 284, 28, 80, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Message type sent to server.")
 	$UI3_Combo_c2sMSG = GUICtrlCreateCombo("", 372, 28, 117, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
-	GUICtrlSetData(-1, "NONE|Q1|Q2|Q3|MOH|HEX2|HW|GS", "NONE")
+	GUICtrlSetData(-1, "NONE|Q1|Q2|Q3|MOH|HEX2|HW|QW|GS", "NONE")
 	GUICtrlSetTip(-1, "Message type sent to server.")
 	$UI3_Text_s2cMSG = GUICtrlCreateLabel("Responce", 284, 52, 80, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Message type recieved from server.")
 	$UI3_Combo_s2cMSG = GUICtrlCreateCombo("", 372, 52, 117, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
-	GUICtrlSetData(-1, "NONE|Q1|HEX2|HW|Q2|Q3|GS", "NONE")
+	GUICtrlSetData(-1, "NONE|Q1|HEX2|HW|QW|Q2|Q3|GS", "NONE")
 	GUICtrlSetTip(-1, "Message type recieved from server.")
 	$UI3_Text_gsPort = GUICtrlCreateLabel("GameSpy Port", 284, 76, 80, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Gamespy query port, offset. Kingpin  uses -10(31500) for browser communication.")
@@ -3106,7 +3139,6 @@ Func CleanupMasterResponceUDP_Header($iGameIdx, ByRef $data, $trimLen)
 		$idx = StringInStr($data, $sHeader, 1, 1, 1, $iLen)
 		If $idx Then
 			$data = StringTrimLeft($data, $idx+$iLen - $trimLen) ; trim ÿÿÿÿservers\n... +1char(catch \0 \\)
-
 			;extra message cleanup... paintball2 and jedi(jkhub.org)
 			Switch $g_gameConfig[$iGameIdx][$NET_M2C]
 				Case $M2C_STEF1, $M2C_JEDI, $M2C_Q3, $M2C_Q3ET ;todo use count?
@@ -3176,14 +3208,14 @@ Func BuildIPList_fromMasterUDP($iGameIdx, ByRef $data, ByRef $retErr, $isQ3IPLis
 			ConsoleWrite(">count:" &$iCount&@CRLF)
 			If $isQ3IPList Then
 				Local $j = 0
-				While $j < ($iCount -1)
+				While $j < $iCount
 					If $aChars[$j] = Asc('\') Then ;ipv4
-						if ($j+7) < $iCount Then
+						if ($j+7) <= $iCount Then
 							$sRet &= buildIPV4_fromAscArray($aChars, $j+1)
 						EndIf
 						$j +=7 ;4+2+1
 					ElseIf $aChars[$j] = Asc('/') Then ;ipv6
-						if ($j+19) < $iCount Then
+						if ($j+19) <= $iCount Then
 							$sRet &= buildIPV6_fromAscArray($aChars, $j+1)
 						EndIf
 						$j +=19 ;16+2+1
@@ -3704,7 +3736,7 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 
 
 		Select
-			Case $isGamespy ; $g_gameConfig[$iGameIdx][$NET_GS_P] ;gamespy protocol
+			Case $isGamespy
 				if IsArray($aResponce[$i][$PACKET_DATA]) Then
 					local $aData = _ArrayToString($aResponce[$i][$PACKET_DATA], "", 1) ;
 					;ConsoleWrite('>'&$aData&@CRLF&@CRLF)
@@ -3716,12 +3748,12 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 						$data = StringMid($data, 1, $idx)
 					EndIf
 				EndIf
-			Case ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_HEX2) Or ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_Q1) ;Case $ID_HEX, $ID_Q1
+			Case IsQ1Hexen_ServerResponce($g_gameConfig[$iGameIdx][$NET_S2C])
 				$data = Hexen2ServerResponce($aResponce[$i][$PACKET_DATA]) ;special case
 			Case Else
 				$data = StringTrimLeft($aResponce[$i][$PACKET_DATA], StringInStr($aResponce[$i][$PACKET_DATA], "\")) ;remove prefix, upto "\"
 				;player data
-				$idx = StringInStr($data, Chr(10), 1)  ;= StringSplit($string, Chr(10), $STR_ENTIRESPLIT)
+				$idx = StringInStr($data, Chr(10), 1)
 				if $idx Then
 					$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOPLYR] = StringTrimLeft($data, $idx)
 					$data = StringMid($data, 1, $idx)
@@ -3737,6 +3769,15 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 
 EndFunc; --> listen Incomming Servers
 ;========================================================
+
+Func IsQ1Hexen_ServerResponce(ByRef $s2cType)
+	Switch $s2cType
+		Case $S2C_Q1, $S2C_HEX2 ;, $S2C_QW
+			Return True
+		Case Else
+			Return False
+	EndSwitch
+EndFunc
 
 Func ReadStringInArray(ByRef $aChars, ByRef $idx, $numChars)
 	Local $sRet = ""
@@ -4423,6 +4464,7 @@ Func SendSTATUStoServers_CheckDead($iGameIdx, $aIPArrayRef, $aServerIdx)
 		ConsoleWrite("!dead count: "&$count&@CRLF)
 
 		if $sIPArrayRef_tmp <> "" Then
+			$g_iServerCountTotal = $count ;update progressbar
 			SendSTATUStoServers_Split($iGameIdx, _
 				StringSplit($sIPArrayRef_tmp, "|", $STR_NOCOUNT), _
 				$aSVID, False)
@@ -4502,7 +4544,7 @@ EndFunc
 
 ;===========================
 Func InfoStr_GetPlayerCount(ByRef $aData, ByRef $sPData, $iGameIdx)
-	Local $player = 0, $sRet, $name, $frags, $ping, $aTmp
+	Local $player = 0, $sRet, $name, $frags, $ping, $aTmp, $team, $death
 
 	;check info string first
 	$sRet = parseInfoString($aData, "numplayers")
@@ -4529,10 +4571,11 @@ Func InfoStr_GetPlayerCount(ByRef $aData, ByRef $sPData, $iGameIdx)
 			ConsoleWrite("player error no @LF" & $sPData&@CRLF)
 			Return 0
 		EndIf
+		local $isQW = ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_QW)
 		;3 lines standard >= players
 		For $iply = 1 To $aTmp[0]
 			If $aTmp[$iply] <> "" Then ;catch end line @LF, EOT
-				If Not parsePlayerString($aTmp[$iply], $name, $frags, $ping) Then ContinueLoop
+				If Not parsePlayerString($aTmp[$iply], $name, $frags, $ping, $death, $team, $isQW) Then ContinueLoop
 				;remove bots from player counts
 				Switch $g_gameConfig[$iGameIdx][$BOT_TYPE]
 					Case $BOT_Q2 ; $ID_Q2, $ID_DDAY
@@ -4578,7 +4621,7 @@ Func InfoStr_GetMapName(ByRef $aData)
 EndFunc
 ;=======================
 Func InfoStr_GetModName(ByRef $aData)
-	Return parseInfoString($aData, "gametype|gamename|game|*gamedir")
+	Return parseInfoString($aData, "gametype|gamename|game|*gamedir|*version")
 EndFunc ; --> fill array kp server
 ;=======================
 Func InfoStr_GetGamePort(ByRef $aData)
@@ -4633,17 +4676,35 @@ Func getListView_C_CID()
 EndFunc
 
 Func IconPingX($iPingX)
-	If $iPingX <150 Then Return 1 ;green
-	if $iPingX >= 150 And $iPingX < 500 Then Return 2 ;yellow
-	If $iPingX >=500 Then Return 3 ;red
+	Select
+		Case $iPingX < 150
+			Return $ICO_PING1
+		Case $iPingX < 300
+			Return $ICO_PING2
+		Case $iPingX < 500
+			Return $ICO_PING3
+		Case Else
+			Return $ICO_PING4
+	EndSelect
 EndFunc
 
 Func IconPlayerX($iPlayersX, $iPlayerMax)
 	If $iPlayersX = 0 Then
-		Return 0 ;empty
+		Return $ICO_PLYR0 ;empty
 	ElseIf $iPlayersX = $iPlayerMax Then
-		Return 6 ;full icon
+		Return $ICO_PLYR4 ;full icon
 	EndIf
+
+	Switch Round($iPlayersX / $iPlayerMax *2.8 - 0.4) ; -0.4 to 2.4
+		Case 0
+			Return $ICO_PLYR1
+		Case 1
+			Return $ICO_PLYR2
+		Case 2
+			Return $ICO_PLYR3
+		Case Else
+			Return $ICO_PLYR1
+	EndSwitch
 	Return 7 ;half full icon
 EndFunc
 
@@ -5110,17 +5171,32 @@ EndFunc ; --> FillServerListView_SV_Responce
 ;========================================================
 ;--> END FILL ARRAY1
 
-Func parsePlayerString($sData, ByRef $name, ByRef $frags, ByRef $ping)
+Func parsePlayerString($sData, ByRef $name, ByRef $frags, ByRef $ping, ByRef $death, ByRef $team, $isQW)
 	Local $sTmp = StringStripWS($sData, $STR_STRIPLEADING + $STR_STRIPTRAILING)
 	If $sTmp <> "" Then ;catch end line @LF, EOT
-		Local $playerName = _StringBetween($sTmp, '"', '"' ) ;get player name[0]
+		Local $playerName = _StringBetween($sTmp, '"', '"', $STR_ENDNOTSTART) ;get player name[0]
 		If @error Then Return False
 		Local $aPDetails = StringSplit($sTmp, " ") ;setup server strings
-		if @error Or $aPDetails[0] < 2 Then Return False
-		$name  = $playerName[0]
-		$frags = $aPDetails[1]
-		$ping  = $aPDetails[2]
-		Return True
+		If $isQW Then
+			if @error Or $aPDetails[0] < 4 Then Return False
+			$name  = $playerName[0]
+			$frags = $aPDetails[2]
+			$ping  = $aPDetails[3]
+			$death  = StringFormat("time:%s", $aPDetails[4])
+			;team
+			if UBound($playerName) > 2 And $playerName[2] <> "" Then
+				$team = StringFormat("team:%s skin:%s", $playerName[2], $playerName[1])
+			ElseIf UBound($playerName) > 1 Then
+				$team = StringFormat("skin:%s", $playerName[1])
+			EndIf
+			Return True
+		Else
+			if @error Or $aPDetails[0] < 2 Then Return False
+			$name  = $playerName[0]
+			$frags = $aPDetails[1]
+			$ping  = $aPDetails[2]
+			Return True
+		EndIf
 	EndIf
 	Return False
 EndFunc
@@ -5131,14 +5207,12 @@ Func FillListView_B(ByRef $sPlayers, $ListViewB, $iGameIdx)
 		;_ArrayDisplay($sPlayers)
 		_GUICtrlListView_BeginUpdate($ListViewB)
 		;-------; add players info, max 31 char for player name
-		if $g_gameConfig[$iGameIdx][$NET_GS_P] _ ;$iGameIdx = $ID_Q1 Or $iGameIdx = $ID_HEX
-		Or ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_HEX2) _
-		Or ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_Q1) Then ;hexen/q1 decompressed
-		;todo ADD GAMES
+		if $g_gameConfig[$iGameIdx][$NET_GS_P] _                             ;gamespy
+		Or IsQ1Hexen_ServerResponce($g_gameConfig[$iGameIdx][$NET_S2C]) Then ;hexen/q1
+			;todo ADD GAMES
 			local const $aKey = ['player', 'frags', 'ping', 'deaths', 'team']
-
-			;If StringInStr($serverVars, "player_0") Then
 			Local $sInfo[5], $aPData
+
 			$aPData = StringSplit($sPlayers, "\", $STR_NOCOUNT)
 			if not @error Then
 				For $pIdx = 0 to $MAX_PLAYERS - 1
@@ -5168,18 +5242,20 @@ Func FillListView_B(ByRef $sPlayers, $ListViewB, $iGameIdx)
 		Else ;kpq3 and q2. game port. uses seperate line for players
 			Local $aTmp = StringSplit($sPlayers, Chr(10)) ;@lf
 			;If Not ($tmpstr[2] ="") Then
-			Local $name, $frags, $ping, $iPIdx = 0
+			Local $name, $frags, $ping, $iPIdx = 0, $team = "", $death = ""
+			local $isQW = ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_QW)? (True):(False)
 
 			For $i = 1 To $aTmp[0]
-				if parsePlayerString($aTmp[$i], $name, $frags, $ping) Then
+				if parsePlayerString($aTmp[$i], $name, $frags, $ping, $death, $team, $isQW) Then
 					;GUICtrlCreateListViewItem($playerName[0], $ListViewB) ; not used as name may have "|"
 					_GUICtrlListView_AddItem($ListViewB,            $name, -1,  0) ;Name
-					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $frags ,1, -1) ;Frags
-					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $ping  ,2, -1) ;Ping
+					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $frags, 1, -1) ;Frags
+					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $ping,  2, -1) ;Ping
+					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $death, 4, -1) ;team
+					_GUICtrlListView_AddSubItem($ListViewB, $iPIdx, $team,  4, -1) ;team
 					$iPIdx += 1 ;increase 1
 				EndIf
 			Next
-			;EndIf
 		EndIf
 		_GUICtrlListView_EndUpdate($ListViewB)
 	EndIf
@@ -5243,7 +5319,7 @@ Func FillListView_BC_Selected($iGameIdx, $iListNum)
 
 	;deal with quake1 type server data
 	Select
-		Case ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_HEX2) Or ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_Q1) ; $ID_Q1, $ID_HEX ;todo q1?
+		Case IsQ1Hexen_ServerResponce($g_gameConfig[$iGameIdx][$NET_S2C]) ;$S2C_HEX2, $S2C_Q1
 			HEXGetPlayerInfo( _
 				$g_aServerStrings[$iGameIdx][$serSelNum][$COL_IP], _
 				$g_aServerStrings[$iGameIdx][$serSelNum][$COL_PORT], _
@@ -5660,6 +5736,8 @@ GUICtrlSetOnEvent($UI_Btn_pingList, "UI_Btn_pingListClicked")
 	Func UI_Btn_pingListClicked() ;allready in listview from master/offline
 		SetSelectedGameID()
 		BeginGettinServers()
+		CheckStatusbarMessage(True)
+
 		ListviewStoreIndexToArray($g_iCurGameID, True)
 		RefreshServersInListview($g_iCurGameID, True)
 		FinishedGettinServers()
@@ -5768,6 +5846,7 @@ Func RefreshSingle()
 	Local $iGameIdx = $g_iCurGameID
 	;EnableUIButtons(False)
 	BeginGettinServers()
+	CheckStatusbarMessage(True)
 	ListviewStoreIndexToArray($iGameIdx)
 	$g_iServerCountTotal = 1 ;get # servers to use later to stop refresh
 
@@ -5844,8 +5923,6 @@ GUISetOnEvent($GUI_EVENT_CLOSE, "ExitScript", $HypoGameBrowser)
 		FileDelete($g_sM_tmpFile_reg)
 		iniFile_Save()
 
-		;_GUICtrlListView_UnRegisterSortCallBack($UI_ListV_svData_A)
-		;_GUICtrlListView_UnRegisterSortCallBack($UI_ListV_svData_C)
 		_GUICtrlComboBoxEx_Destroy($UI_Combo_gameSelector)
 		GUIDelete($MPopupInfo)
 		GUIDelete($HypoGameBrowser)
@@ -5902,6 +5979,8 @@ GUICtrlSetOnEvent ($UI_Btn_refreshMaster, "UI_Btn_refreshClicked")
 	Func UI_Btn_refreshClicked()
 		SetSelectedGameID()
 		SetTabActiveGame() ;switch if in settings
+		CheckStatusbarMessage(True)
+
 		If $g_iTabNum = $TAB_MB Then
 			ConsoleWrite("-m"&@CRLF)
 			MRefresh() ;refresh mbrowser
@@ -6726,6 +6805,17 @@ Func setTempStatusBarMessage($sMessage, $bSetRed = False)
 	EndIf
 EndFunc
 
+Func CheckStatusbarMessage($force = False)
+	If $force Then
+		$g_statusBarTime = 0
+		RestoreStatusBarMessage()
+	ElseIf Not ($g_statusBarTime = 0) Then
+		If TimerDiff($g_statusBarTime) > $g_statusBar_timeOut Then
+			$g_statusBarTime = 0
+			RestoreStatusBarMessage()
+		EndIf
+	EndIf
+EndFunc
 
 ;all loaded, set atcive
 EnableUIButtons(True)
@@ -6774,12 +6864,7 @@ While 1
 	EndIf
 
 	AutoRefreshTimer() ;check time for auto refresh
-	Sleep(200)
+	CheckStatusbarMessage()
 
-	If Not ($g_statusBarTime = 0) Then
-		If TimerDiff($g_statusBarTime) > $g_statusBar_timeOut Then
-			$g_statusBarTime = 0
-			RestoreStatusBarMessage()
-		EndIf
-	EndIf
+	Sleep(200)
 WEnd
