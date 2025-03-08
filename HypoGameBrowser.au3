@@ -5,7 +5,7 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment='Kingpin Game Browser by hypo_v8'
 #AutoIt3Wrapper_Res_Description='Game browser for Kingpin, KingpinQ3 and Quake2'
-#AutoIt3Wrapper_Res_Fileversion=1.0.4.9
+#AutoIt3Wrapper_Res_Fileversion=1.0.4.10
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=p
 #AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\logo_5.bmp,rt_bitmap,logo_1
 #AutoIt3Wrapper_AU3Check_Parameters=-d
@@ -73,7 +73,10 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      read extra player info from QW servers
 ;      updated icons.
 ;      moved player count icons to folder
-
+;1.0.4.10
+;      moved offline list to .ini file
+;      added context menu to add/delete to offline server/s
+;      fixed forward slash typo in folder path
 
 
 
@@ -89,6 +92,7 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      ipv6
 ;      run query master on separate socket.
 ;          so it can check for response after getting some servers
+;      move kp1, kpq3, quake2 from internal list to .ini(currently used by M-Browser)
 ;      ...
 #EndRegion
 
@@ -365,17 +369,16 @@ Global Enum _
 	$NET_C2M, _       ;7: CLIENT-> MASTER (send message to master)
 	$NET_C2M_Q3PRO, _ ;8: CLIENT-> MASTER (USE PROTOCOL) (send message to master using Q3 protocol 0/1)
 	$NET_M2C, _       ;9: MASTER-> CLIENT (receive message from master) note: 1 additional char is trimed
-	$NET_M2C_SEP, _   ;10: MASTER-> CLIENT (IP SEPERATOR) (receive message from master. ip seperator <length>)
-	$NET_M2C_EOT, _   ;11: MASTER-> CLIENT (END OF DATA) (receive message from master. end of transmition string)
-	$SV_CLEAN, _      ;12: CLEANUP SV NAMES (^5...)
-	$BOT_TYPE, _      ;13: remove bot from counts
-	$ICON_PATH, _     ;14:
-	$MASTER_ADDY, _   ;15:
+	$NET_M2C_EOT, _   ;10: MASTER-> CLIENT (END OF DATA) (receive message from master. end of transmition string)
+	$SV_CLEAN, _      ;11: CLEANUP SV NAMES (^5...)
+	$BOT_TYPE, _      ;12: remove bot from counts
+	$ICON_PATH, _     ;13:
+	$MASTER_ADDY, _   ;14:
 	$COUNT_CFG
 Global $g_gameConfig[$COUNT_GAME][$COUNT_CFG] = [ _
- 	['Kingpin',              'KP',     'kingpin',                 '', $C2S_GS,    $S2C_Q2, -10, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   $CLEAN_NONE, $BOT_NONE, 'gameicons\kp1.ico',  "master.kingpin.info:28900|master.maraakate.org:28900|master.hambloch.com:28900|master.333networks.com:28900"], _ ;kingpin
-	['KingpinQ3',            'KPQ3',   'kingpinQ3',    'KingpinQ3-1', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '75',    $M2C_Q3,     1, $EOT_DP,   $CLEAN_Q3,   $BOT_Q3,   'gameicons\kpq3.ico', "master.kingpinq3.com:27950|master.kingpin.info:27950|master.ioquake3.org:27950|gsm.qtracker.com:28900"], _ ;kpq3
-	['Quake2',               'Q2',     'Quake2',                  '', $C2S_Q2,    $S2C_Q2,   0, $C2M_Q2,    '',      $M2C_Q2,     0, $EOT_Q2,   $CLEAN_NONE, $BOT_NONE, 'gameicons\q2.ico',   "http://q2servers.com/?mod=&raw=1|http://q2servers.com/?g=dday&raw=1|master.netdome.biz:27900|master.quakeservers.net:27900|master.333networks.com:28900"] _ ;quake2
+ 	['Kingpin',              'KP',     'kingpin',                 '', $C2S_GS,    $S2C_Q2, -10, $C2M_Q2,    '',      $M2C_Q2, $EOT_Q2,   $CLEAN_NONE, $BOT_NONE, 'gameicons\kp1.ico',  "master.kingpin.info:28900|master.maraakate.org:28900|master.hambloch.com:28900|master.333networks.com:28900"], _ ;kingpin
+	['KingpinQ3',            'KPQ3',   'kingpinQ3',    'KingpinQ3-1', $C2S_Q3,    $S2C_Q3,   0, $C2M_Q3,    '75',    $M2C_Q3, $EOT_DP,   $CLEAN_Q3,   $BOT_Q3,   'gameicons\kpq3.ico', "master.kingpinq3.com:27950|master.kingpin.info:27950|master.ioquake3.org:27950|gsm.qtracker.com:28900"], _ ;kpq3
+	['Quake2',               'Q2',     'Quake2',                  '', $C2S_Q2,    $S2C_Q2,   0, $C2M_Q2,    '',      $M2C_Q2, $EOT_Q2,   $CLEAN_NONE, $BOT_NONE, 'gameicons\q2.ico',   "http://q2servers.com/?mod=&raw=1|http://q2servers.com/?g=dday&raw=1|master.netdome.biz:27900|master.quakeservers.net:27900|master.333networks.com:28900"] _ ;quake2
 ]
 ;todo ADD GAMES
 
@@ -493,7 +496,10 @@ Global $g_iAutoRefreshGame = 0 ; last game refreshed(either active or setup enab
 Global $g_iTimeInputBox = 1;
 
 Global $g_UseTheme = 0
-Global $g_sGameCfgPath = @ScriptDir & "/gameConfig.ini"
+Global $g_sGameCfgPath = @ScriptDir & "\gameConfig.ini"
+Global $g_sOfflineCfgPath = @ScriptDir & "\offline.ini"
+Global $g_sUserCfgPath = StringTrimRight(@ScriptFullPath, 4) & ".ini"
+
 
 ;==> color for visual theme
 Global Enum _
@@ -562,6 +568,7 @@ Global $bEventStartKingpin = False 	;while loop call for $WM_NOTIFY
 ;popup menu
 Global  Enum $ContextKP_Connect = 2800, $ContexKP_Refresh, $ContexKP_AddFav, $ContexKP_RemFav, _
 			$ContexKP_RefreshM, $ContextKP_ConnectM, $ContexKP_AddFavM, $ContexKP_RemFavM, _
+			$ContexKP_AddOff, $ContexKP_AddOffAll, $ContexKP_DelOff, _
 			$ContextKP_CopyIP, $ContexKP_GetInfoM  ; these are used in menu definition to link to WM_COMMAND
 
 Global Const $g_listID_offset = 3000
@@ -1639,6 +1646,29 @@ Func gameCFG_BOT_type($sData)
 EndFunc
 
 
+Func iniFile_CFG_readGame($sGameName)
+	Local $ret[$COUNT_CFG]
+	local $sFileName = $g_sGameCfgPath
+
+	$ret[$GNAME_MENU]    = $sGameName
+	$ret[$GNAME_SAVE]    =                    IniRead($sFileName, $sGameName, 'savename',          'NULL')
+	$ret[$GNAME_GS]      =                    IniRead($sFileName, $sGameName, 'gamespyname',       'NULL')
+	$ret[$GNAME_DP]      =                    IniRead($sFileName, $sGameName, 'darkplacename',     '')
+	$ret[$NET_C2S]       = gameCFG_C2S_type(  IniRead($sFileName, $sGameName, 'c2s_msg_type',      'Q2'))
+	$ret[$NET_S2C]       = gameCFG_S2C_type(  IniRead($sFileName, $sGameName, 's2c_msg_type',      'Q2'))
+	$ret[$NET_GS_P]      = Number(            IniRead($sFileName, $sGameName, 'gs_qport',          '0'))
+	$ret[$NET_C2M]       = gameCFG_C2M_type(  IniRead($sFileName, $sGameName, 'c2m_msg_type',      'Q2'))
+	$ret[$NET_C2M_Q3PRO] =                    IniRead($sFileName, $sGameName, 'c2m_q3protocol',    '')
+	$ret[$NET_M2C]       = gameCFG_M2C_type(  IniRead($sFileName, $sGameName, 'm2c_msg_type',      'Q2'))
+	$ret[$NET_M2C_EOT]   = gameCFG_EOT_type(  IniRead($sFileName, $sGameName, 'm2c_msg_eot',       ''))
+	$ret[$SV_CLEAN]      = gameCFG_CLEAN_type(IniRead($sFileName, $sGameName, 'sv_name_type',      ''))
+	$ret[$BOT_TYPE]      = gameCFG_BOT_type(  IniRead($sFileName, $sGameName, 'sv_bot_type',       ''))
+	$ret[$ICON_PATH]     =                    IniRead($sFileName, $sGameName, 'icon',              '')
+	$ret[$MASTER_ADDY]   =                    IniRead($sFileName, $sGameName, 'masters',           '')
+
+	Return $ret
+EndFunc
+
 Func iniFile_CFG_Load()
 	local $aSection, $g_off, $sSecName
 	local $sFileName = $g_sGameCfgPath
@@ -1648,7 +1678,7 @@ Func iniFile_CFG_Load()
 		ExitScript()
 	Else
 		;remove disabled games (reduce gui game list)
-		local $ret
+		local $ret, $aData
 		For $i = $aSecNames[0] To 1 Step -1
 			If IniRead($sFileName, $aSecNames[$i], 'enabled_in_ui', '1') = '0' Then
 				ConsoleWrite("!Inactive game idx:"&$i&" name:"&$aSecNames[$i] &@CRLF)
@@ -1670,30 +1700,29 @@ Func iniFile_CFG_Load()
 		Redim $g_aIconIdx[$COUNT_GAME+1]
 
 		For $i = 1 to $aSecNames[0]
+			$aData = iniFile_CFG_readGame($aSecNames[$i])
 			$g_off = $i + $COUNT_GAME_INIT - 1
-			$sSecName = $aSecNames[$i]
-			$g_gameConfig[$g_off][$GNAME_MENU]    = $sSecName
-			$g_gameConfig[$g_off][$GNAME_SAVE]    =                    IniRead($sFileName, $sSecName, 'savename',          'NULL')
-			$g_gameConfig[$g_off][$GNAME_GS]      =                    IniRead($sFileName, $sSecName, 'gamespyname',       'NULL')
-			$g_gameConfig[$g_off][$GNAME_DP]      =                    IniRead($sFileName, $sSecName, 'darkplacename',     '')
-			$g_gameConfig[$g_off][$NET_C2S]       = gameCFG_C2S_type(  IniRead($sFileName, $sSecName, 'c2s_msg_type',      'Q2'))
-			$g_gameConfig[$g_off][$NET_S2C]       = gameCFG_S2C_type(  IniRead($sFileName, $sSecName, 's2c_msg_type',      'Q2'))
-			$g_gameConfig[$g_off][$NET_GS_P]      = Number(            IniRead($sFileName, $sSecName, 'gs_qport',          '0'))
-			$g_gameConfig[$g_off][$NET_C2M]       = gameCFG_C2M_type(  IniRead($sFileName, $sSecName, 'c2m_msg_type',      'Q2'))
-			$g_gameConfig[$g_off][$NET_C2M_Q3PRO] =                    IniRead($sFileName, $sSecName, 'c2m_q3protocol',    '')
-			$g_gameConfig[$g_off][$NET_M2C]       = gameCFG_M2C_type(  IniRead($sFileName, $sSecName, 'm2c_msg_type',      'Q2'))
-			$g_gameConfig[$g_off][$NET_M2C_SEP]   = Number(            IniRead($sFileName, $sSecName, 'm2c_msg_sep_count', '0'))
-			$g_gameConfig[$g_off][$NET_M2C_EOT]   = gameCFG_EOT_type(  IniRead($sFileName, $sSecName, 'm2c_msg_eot',       ''))
-			$g_gameConfig[$g_off][$SV_CLEAN]      = gameCFG_CLEAN_type(IniRead($sFileName, $sSecName, 'sv_name_type',      ''))
-			$g_gameConfig[$g_off][$BOT_TYPE]      = gameCFG_BOT_type(  IniRead($sFileName, $sSecName, 'sv_bot_type',       ''))
-			$g_gameConfig[$g_off][$ICON_PATH]     =                    IniRead($sFileName, $sSecName, 'icon',              '')
-			$g_gameConfig[$g_off][$MASTER_ADDY]   =                    IniRead($sFileName, $sSecName, 'masters',           '')
+			$g_gameConfig[$g_off][$GNAME_MENU]    = $aData[$GNAME_MENU]
+			$g_gameConfig[$g_off][$GNAME_SAVE]    = $aData[$GNAME_SAVE]
+			$g_gameConfig[$g_off][$GNAME_GS]      = $aData[$GNAME_GS]
+			$g_gameConfig[$g_off][$GNAME_DP]      = $aData[$GNAME_DP]
+			$g_gameConfig[$g_off][$NET_C2S]       = $aData[$NET_C2S]
+			$g_gameConfig[$g_off][$NET_S2C]       = $aData[$NET_S2C]
+			$g_gameConfig[$g_off][$NET_GS_P]      = $aData[$NET_GS_P]
+			$g_gameConfig[$g_off][$NET_C2M]       = $aData[$NET_C2M]
+			$g_gameConfig[$g_off][$NET_C2M_Q3PRO] = $aData[$NET_C2M_Q3PRO]
+			$g_gameConfig[$g_off][$NET_M2C]       = $aData[$NET_M2C]
+			$g_gameConfig[$g_off][$NET_M2C_EOT]   = $aData[$NET_M2C_EOT]
+			$g_gameConfig[$g_off][$SV_CLEAN]      = $aData[$SV_CLEAN]
+			$g_gameConfig[$g_off][$BOT_TYPE]      = $aData[$BOT_TYPE]
+			$g_gameConfig[$g_off][$ICON_PATH]     = $aData[$ICON_PATH]
+			$g_gameConfig[$g_off][$MASTER_ADDY]   = $aData[$MASTER_ADDY]
 		Next
 	EndIf
 EndFunc
 
 Func iniFile_Load()
-	local $sFileName = StringTrimRight(@ScriptFullPath, 4) & ".ini"
+	local $sFileName = $g_sUserCfgPath
 	Local $cfg_Pos, $_null = Null; unused, for byref
 
 	;set default master selection. incase ini outdated
@@ -1814,7 +1843,7 @@ EndFunc
 
 Func iniFile_Save()
 	ConsoleWrite("-----========= saving=========-----" & @CRLF)
-	local $iniFileCFG = string(StringTrimRight(@ScriptFullPath, 4) & ".ini")
+	local $iniFileCFG = $g_sUserCfgPath
 	local $stateMinimized = WinGetState($HypoGameBrowser)
 	Local $v = WinGetPos($HypoGameBrowser), $sSaveStr
 
@@ -2221,26 +2250,28 @@ Func UI3_Btn_saveClick()
 	GUI_gameSetupClose()
 EndFunc
 
+
 Func UI3_AddCurrentGame()
 	SetSelectedGameID()
 	Local $iGameIdx = $g_iCurGameID
 	Local $sGameName = $g_gameConfig[$iGameIdx][$GNAME_MENU]
+	Local $aData = iniFile_CFG_readGame($sGameName)
 
-	GUICtrlSetData($UI3_In_nameGame,     $sGameName)
-	GUICtrlSetData($UI3_In_nameSave,     IniRead($g_sGameCfgPath, $sGameName, 'savename', '' ))
-	GUICtrlSetData($UI3_In_nameGSpy,     IniRead($g_sGameCfgPath, $sGameName, 'gamespyname', '' ))
-	GUICtrlSetData($UI3_In_nameDP,       IniRead($g_sGameCfgPath, $sGameName, 'darkplacename', '' ))
-	_GUICtrlComboBox_SetCurSel($UI3_Combo_c2sMSG,   gameCFG_C2S_type(IniRead($g_sGameCfgPath, $sGameName, 'c2s_msg_type', '')))
-	_GUICtrlComboBox_SetCurSel($UI3_Combo_s2cMSG,   gameCFG_S2C_type(IniRead($g_sGameCfgPath, $sGameName, 's2c_msg_type', '')))
-	GUICtrlSetData($UI3_In_gsPort,       IniRead($g_sGameCfgPath, $sGameName, 'gs_qport', '0' ))
-	_GUICtrlComboBox_SetCurSel($UI3_Combo_c2mMSG,   gameCFG_C2M_type(IniRead($g_sGameCfgPath, $sGameName, 'c2m_msg_type', '')))
-	GUICtrlSetData($UI3_In_q3Protocol,   IniRead($g_sGameCfgPath, $sGameName, 'c2m_q3protocol', '' ))
-	_GUICtrlComboBox_SetCurSel($UI3_Combo_m2cMSG,   gameCFG_M2C_type(IniRead($g_sGameCfgPath, $sGameName, 'm2c_msg_type', '')))
-	_GUICtrlComboBox_SetCurSel($UI3_Combo_m2cEOT,   gameCFG_EOT_type(IniRead($g_sGameCfgPath, $sGameName, 'm2c_msg_eot', '')))
-	_GUICtrlComboBox_SetCurSel($UI3_Combo_svClean,  gameCFG_CLEAN_type(IniRead($g_sGameCfgPath, $sGameName, 'sv_name_type', '')))
-	_GUICtrlComboBox_SetCurSel($UI3_Combo_svBot,    gameCFG_BOT_type(IniRead($g_sGameCfgPath, $sGameName, 'sv_bot_type', '')))
-	GUICtrlSetData($UI3_In_icon,         IniRead($g_sGameCfgPath, $sGameName, 'icon', '' ))
-	GUICtrlSetData($UI3_In_masters,      IniRead($g_sGameCfgPath, $sGameName, 'masters', '' ))
+	GUICtrlSetData($UI3_In_nameGame,                $aData[$GNAME_MENU])
+	GUICtrlSetData($UI3_In_nameSave,                $aData[$GNAME_SAVE])
+	GUICtrlSetData($UI3_In_nameGSpy,                $aData[$GNAME_GS] )
+	GUICtrlSetData($UI3_In_nameDP,                  $aData[$GNAME_DP] )
+	_GUICtrlComboBox_SetCurSel($UI3_Combo_c2sMSG,   $aData[$NET_C2S])
+	_GUICtrlComboBox_SetCurSel($UI3_Combo_s2cMSG,   $aData[$NET_S2C])
+	GUICtrlSetData($UI3_In_gsPort,                  $aData[$NET_GS_P])
+	_GUICtrlComboBox_SetCurSel($UI3_Combo_c2mMSG,   $aData[$NET_C2M])
+	GUICtrlSetData($UI3_In_q3Protocol,              $aData[$NET_C2M_Q3PRO])
+	_GUICtrlComboBox_SetCurSel($UI3_Combo_m2cMSG,   $aData[$NET_M2C])
+	_GUICtrlComboBox_SetCurSel($UI3_Combo_m2cEOT,   $aData[$NET_M2C_EOT])
+	_GUICtrlComboBox_SetCurSel($UI3_Combo_svClean,  $aData[$SV_CLEAN] )
+	_GUICtrlComboBox_SetCurSel($UI3_Combo_svBot,    $aData[$BOT_TYPE] )
+	GUICtrlSetData($UI3_In_icon,                    $aData[$ICON_PATH] )
+	GUICtrlSetData($UI3_In_masters,                 $aData[$MASTER_ADDY])
 EndFunc
 
 GUICtrlSetOnEvent($UI_Btn_gameNew, "UI_Btn_gameNewClick")
@@ -4737,167 +4768,51 @@ Func FindGameID($sGame)
 	Return 0
 EndFunc
 
+
+
 ;--> OFFLNE LIST
 ;========================================================
 ; --> set offline list
 Func LoadOffLineServerList($iGameIdx)
 	EnableUIButtons(False)
-	Local $sIP_Port, $tmpArray, $i, $sIP, $iPort, $iPortGS, $arrayOffline, $svNum = 0
+	Local $sIP_Port, $tmpArray, $i, $sIP, $iPort, $iPortGS, $aOffline, $svNum = 0, $svName, $sPort
 	Local $ListViewA = getListView_A_CID()
-	Local $aTmpOffline[]
+	Local $tmpCount = 6
+	Local $aTmpOffline[$tmpCount][2]
 
-	$aTmpOffline['KP'] = "" & _
-		"kp.hambloch.com:31510|Luschen Botmatch"      &@CRLF& _
-		"kp.hambloch.com:31511|Luschen Hookmatch"     &@CRLF& _
-		"kp.hambloch.com:31512|Luschen Deathmatch"    &@CRLF& _
-		"kp.hambloch.com:31515|Luschen COOP"          &@CRLF& _
-		"kp.hambloch.com:31516|Luschen Gunrace +Bots" &@CRLF& _
-		"kp.hambloch.com:31519|---Battys kit---"	  &@CRLF& _
-		"" & _
-		"150.107.201.184:31510|Newskool Classic Gangbang" &@CRLF& _
-		"150.107.201.184:31511|Newskool Instagib"         &@CRLF& _
-		"150.107.201.184:31512|Newskool Bagman"           &@CRLF& _
-		"150.107.201.184:31513|Newskool Fragfest"         &@CRLF& _
-		"150.107.201.184:31514|Newskool CTF"              &@CRLF& _
-		"150.107.201.184:31515|Newskool Crash Squad"      &@CRLF& _
-		"150.107.201.184:31516|Newskool Power2"           &@CRLF& _
-		"150.107.201.184:31517|Newskool Gunrace"          &@CRLF& _
-		"" & _
-		"150.107.201.184:31518|Newskool Killapin"                     &@CRLF& _
-		"150.107.201.184:31531|Newskool Kill Confirmed"               &@CRLF& _
-		"150.107.201.184:31532|Newskool Hitmen"                       &@CRLF& _
-		"150.107.201.184:31533|Newskool Chicken Chase"                &@CRLF& _
-		"150.107.201.184:31534|Newskool Rocketfest"                   &@CRLF& _
-		"150.107.201.184:31537|Newskool Easter/Summer/Halloween/Xmas" &@CRLF& _
-		"" & _
-		"202.169.104.136:31355|macanah.mooo.com BOTMATCH"         &@CRLF& _
-		"202.169.104.136:31399|macanah.mooo.com Kingpin Speedway" &@CRLF& _
-		"202.169.104.136:31510|macanah.mooo.com ffa"              &@CRLF& _
-		"202.169.104.136:31513|macanah.mooo.com riotz mod"        &@CRLF& _
-		"202.169.104.136:31515|macanah.mooo.com Jedi Force Mod"   &@CRLF& _
-		"202.169.104.136:31516|macanah.mooo.com Kpz COOP"         &@CRLF& _
-		"202.169.104.136:31517|macanah.mooo.com BaGmaN"           &@CRLF& _
-		"202.169.104.136:31518|macanah.mooo.com Assault"          &@CRLF& _
-		"202.169.104.136:31519|macanah.mooo.com CTF"              &@CRLF& _
-		"202.169.104.136:31556|macanah.mooo.com Crash Squad"      &@CRLF& _
-		"" & _
-		"109.205.61.174:31512|East Coast Snitch Slappa (Bagman)" &@CRLF& _
-		"109.205.61.174:31513|East Coast Deathmatch"             &@CRLF& _
-		"109.205.61.174:31514|East Coast CTF"                    &@CRLF& _
-		"109.205.61.174:31515|East Coast Crash Squad"            &@CRLF& _
-		"109.205.61.174:31517|East Coast Gunrace"                &@CRLF& _
-		"109.205.61.174:31536|East Coast Xmas Crash"             &@CRLF& _
-		"109.205.61.174:31537|East Coast Xmas"                   &@CRLF& _
-		"109.205.61.174:31538|East Coast Xmas CTF"		         &@CRLF& _
-		"" & _
-		"208.77.22.94:31510|Dark Fiber FFA Chicago"             &@CRLF& _
-		"45.89.125.89:31510|Dark Fiber FFA EU"                  &@CRLF& _
-		"" & _
-		"71.254.216.136:31510|Cent's Enhanced Bagman Server"    &@CRLF& _
-		"71.254.216.136:31512|Cent's KPQ2 Deathmatch Server"    &@CRLF& _
-		"71.254.216.136:31514|Cent's Blood Money Bagman Server" &@CRLF& _
-		"71.254.216.136:31515|Cent's Crash TDM Server"          &@CRLF& _
-		"" & _
-		"188.74.83.135:19266|KeeF's Badass Server"     &@CRLF& _
-		"188.74.83.135:19421|KeeF's Kit Mod Server"    &@CRLF& _
-		"" & _; temp servers
-		"82.15.31.92:31511|AoM's UK Riotz Server"      &@CRLF& _
-		"73.64.19.177:31510|DrBrain's Gangbang Server" &@CRLF& _
-		"82.169.45.137:31510|Fredz's server"           &@CRLF& _
-		"84.87.109.134:31510|G()AT's server"           &@CRLF& _
-		"84.87.109.134:31512|G()AT's test server"      &@CRLF& _
-		"hypo.hambloch.com:31510|hypo_v8's server"     &@CRLF& _
-		"93.41.146.9:31510|ITA KP Server"              &@CRLF& _
-		"82.69.95.83:31510|Killa's Home server"
-
-	$aTmpOffline['KPQ3'] = "" & _
-		"www.kingpinq3.com:31600|KingpinQ3 DM Server"                          &@CRLF& _
-		"www.kingpinq3.com:31610|KingpinQ3 CTF Server"                         &@CRLF& _
-		"www.kingpinq3.com:31630|KingpinQ3 Realmode Deathmatch Server"         &@CRLF& _
-		"www.kingpinq3.com:31640|KingpinQ3 One Flag CTF Server"                &@CRLF& _
-		"www.kingpinq3.com:31650|KingpinQ3 Team Deathmatch Development Server" &@CRLF& _
-		"www.kingpinq3.com:31660|Bagman development server"                    &@CRLF& _
-		"www.kingpinq3.com:31670|KingpinQ3 Hitmen Server"                      &@CRLF& _
-		"" & _ ;temp servers
-		"hypo.hambloch.com:31600|KingpinQ3 hypo_v8" &@CRLF& _
-		"hypo.hambloch.com:31610|KingpinQ3 hypo_v8"
-
-	$aTmpOffline['Q2'] = "" & _
-		"kp.servegame.com:27910|Luschen Quakematch"                       &@CRLF& _
-		"202.169.104.136:56342|macanah-lurker.2fh.co CTF q2"              &@CRLF& _
-		"202.169.104.136:27916|macanah-lurker.2fh.co q2 ActioN"           &@CRLF& _
-		"202.169.104.136:27988|macanah-lurker.2fh.co q2 awaken2 assault"  &@CRLF& _
-		"202.169.104.136:27933|macanah-lurker.2fh.co q2 awaken2 ctf"      &@CRLF& _
-		"202.169.104.136:27934|macanah-lurker.2fh.co q2 Brazen CooP http" &@CRLF& _
-		"202.169.104.136:27913|macanah-lurker.2fh.co q2 coop-gibrack-mod" &@CRLF& _
-		"202.169.104.136:27915|macanah-lurker.2fh.co q2 JumP"             &@CRLF& _
-		"202.169.104.136:44444|macanah-lurker.2fh.co q2 MatriX"           &@CRLF& _
-		"202.169.104.136:27911|macanah-lurker.2fh.co q2 rocket arena"     &@CRLF& _
-		"202.169.104.136:27990|macanah-lurker.2fh.co q2OPENTDM"
-
-	$aTmpOffline['HEX2'] = "" & _
-		"blackmarsh.hexenworld.org:26900|Hexen II DM w/ bots" &@CRLF& _
-		"darkravager.ddns.net:26900|DarkRavagerH2Coop"        &@CRLF& _
-		"blackmarsh.hexenworld.org:26901|"                    &@CRLF& _
-		"blackmarsh.hexenworld.org:26902|"                    &@CRLF& _
-		"blackmarsh.hexenworld.org:26903|"                    &@CRLF& _
-		"clovr.xyz:26900|"                                    &@CRLF& _
-		"romagnarines.mooo.com:26900|"                        &@CRLF& _
-		"thebleeding.strangled.net:26900|"
-	$aTmpOffline['HEXW'] = "" & _
-		"68.83.198.53:26950|HexenWorld DM"                          &@CRLF& _
-		"168.138.68.8:26956|DarkRavager Rival Kingdoms v.90 (beta)" &@CRLF& _
-		"168.138.68.8:26955|DarkRavager DM Server"                  &@CRLF& _
-		"68.83.198.53:26951|HexenWorld CTF"                         &@CRLF& _
-		"168.138.68.8:26950|DarkRavagerSiege"                       &@CRLF& _
-		"108.61.178.207:26950|de.quake.world:26950 Siege"           &@CRLF& _
-		"51.195.189.61:26950|JakubM's Server"                       &@CRLF& _
-		"108.61.178.207:26951|de.quake.world:26951 DM"
-	$aTmpOffline['HER2'] = "" & _
-		"71.84.56.38:28910|MyDedServer DM"             &@CRLF& _
-		"45.235.98.10:27112|OldServers.com.ar - Coop"  &@CRLF& _
-		"blackmarsh.hexenworld.org:28910|"             &@CRLF& _
-		"clovr.xyz:28910|clovr - coop"                 &@CRLF& _
-		"66.108.83.111:27910|"
-
-
-	;$aTmpOffline[$ID_] = "" & _
-	;todo ADD GAMES
 	;NOTE: use actual game port. (gamespy port fixed below)
 
-	ResetServerListArrays(BitShift(1, -($iGameIDx))) ;bit
+	ResetServerListArrays(BitShift(1, -($iGameIdx))) ;bit
 	_GUICtrlListView_DeleteAllItems($ListViewA)
 	;clear selected column. todo work out how to re-sort without mouse click
 	GUICtrlSendMsg($UI_ListV_svData_A, $LVM_SETSELECTEDCOLUMN, -1, 0) ;updateLV
 
-
-	;split string
-	;$arrayOffline = StringSplit($aTmpOffline[$iGameIdx], @CRLF, BitOR($STR_NOCOUNT, $STR_ENTIRESPLIT))
-	$arrayOffline = StringSplit($aTmpOffline[GetGameIDString($iGameIDx)], @CRLF, BitOR($STR_NOCOUNT, $STR_ENTIRESPLIT))
+	$aOffline = IniReadSection($g_sOfflineCfgPath, $g_gameConfig[$iGameIdx][$GNAME_SAVE])
 	if Not @error Then
-		For $i = 0 To UBound($arrayOffline) -1
-			if $arrayOffline[$i] <> "" then
-				$tmpArray = StringSplit($arrayOffline[$i],"|", $STR_NOCOUNT)
-				$sIP_Port = StringSplit($tmpArray[0],     ":", $STR_NOCOUNT)
+		For $i = 1 To $aOffline[0][0]
+			$svName = $aOffline[$i][1]
+			$sIP_Port = StringSplit($aOffline[$i][0], ":", $STR_NOCOUNT) ;split <ip:port>
+			if @error Then ContinueLoop ;port. error check
 
-				$sIP = TCPNameToIP($sIP_Port[0])
-				If $g_gameConfig[$iGameIdx][$NET_GS_P] Then ;using gamespy protocol
-					; NOTE: this could fail, if server is not compliant
-					$iPort   = Number($sIP_Port[1]) + $g_gameConfig[$iGameIdx][$NET_GS_P] ;browser communication port.
-					$iPortGS = Number($sIP_Port[1]) ; server port.
-				else
-					$iPort   = Number($sIP_Port[1])
-					$iPortGS = 0
-				endif
+			$sIP = TCPNameToIP($sIP_Port[0])
+			$sPort = Number($sIP_Port[1])
 
-				;fill globbal server array in memory
-				$g_aServerStrings[$iGameIdx][$i][$COL_NAME]   = $tmpArray[1] ; server name
-				$g_aServerStrings[$iGameIdx][$i][$COL_IP]     = $sIP
-				$g_aServerStrings[$iGameIdx][$i][$COL_PORT]   = $iPort
-				$g_aServerStrings[$iGameIdx][$i][$COL_PING]   = 999;"999"
-				$g_aServerStrings[$iGameIdx][$i][$COL_PORTGS] = $iPortGS ;set gamespy reported game port
-				$svNum += 1
-			EndIf
+			If $g_gameConfig[$iGameIdx][$NET_GS_P] Then ;using gamespy protocol
+				; NOTE: this could fail, if server is not compliant
+				$iPort   = $sPort + $g_gameConfig[$iGameIdx][$NET_GS_P] ;browser communication port.
+				$iPortGS = $sPort ; server port.
+			else
+				$iPort   = $sPort
+				$iPortGS = 0
+			endif
+
+			;fill globbal server array in memory
+			$g_aServerStrings[$iGameIdx][$svNum][$COL_NAME]   = $svName ; server name
+			$g_aServerStrings[$iGameIdx][$svNum][$COL_IP]     = $sIP
+			$g_aServerStrings[$iGameIdx][$svNum][$COL_PORT]   = $iPort
+			$g_aServerStrings[$iGameIdx][$svNum][$COL_PING]   = 999;"999"
+			$g_aServerStrings[$iGameIdx][$svNum][$COL_PORTGS] = $iPortGS ;set gamespy reported game port
+			$svNum += 1
 		Next
 		$g_iServerCountTotal = $svNum
 		FillServerListView_popData($iGameIdx, $ListViewA)
@@ -5478,8 +5393,13 @@ Func RighttClickMenuKP()
 	_GUICtrlMenu_AddMenuItem($hMenu, "", 0)
 	_GUICtrlMenu_AddMenuItem($hMenu, "Copy IP", $ContextKP_CopyIP)
 	_GUICtrlMenu_AddMenuItem($hMenu, "", 0)
-	_GUICtrlMenu_AddMenuItem($hMenu, "Add Fav", $ContexKP_AddFav)
-	_GUICtrlMenu_AddMenuItem($hMenu, "Remove Fav", $ContexKP_RemFav)
+	_GUICtrlMenu_AddMenuItem($hMenu, "Add to Fav", $ContexKP_AddFav)
+	_GUICtrlMenu_AddMenuItem($hMenu, "Add to Offline", $ContexKP_AddOff)
+	_GUICtrlMenu_AddMenuItem($hMenu, "Add to Offline (All)", $ContexKP_AddOffAll)
+	_GUICtrlMenu_AddMenuItem($hMenu, "", 0)
+	_GUICtrlMenu_AddMenuItem($hMenu, "Delete Fav!", $ContexKP_RemFav)
+	_GUICtrlMenu_AddMenuItem($hMenu, "Delete Offline!", $ContexKP_DelOff)
+
 	Switch _GUICtrlMenu_TrackPopupMenu($hMenu, $HypoGameBrowser, -1, -1, 1, 1, 2)
 		Case $ContexKP_Refresh
 			RefreshSingle()
@@ -5491,9 +5411,103 @@ Func RighttClickMenuKP()
 			FavArrayAdd()
 		Case $ContexKP_RemFav
 			FavArrayRemove()
+		Case $ContexKP_AddOff
+			OfflineAdd()
+		Case $ContexKP_AddOffAll
+			OfflineAddAll()
+		Case $ContexKP_DelOff
+			OfflineRemove()
 	EndSwitch
 	_GUICtrlMenu_DestroyMenu($hMenu)
 EndFunc
+
+Func OfflineArray_mergeDupes(ByRef $aData, ByRef $aNewData)
+	;remove dupes.
+	For $i = UBound($aNewData)-1 To 0 Step -1
+		For $j = 1 To $aData[0][0]
+			if StringCompare($aNewData[$i][0], $aData[$j][0]) = 0 Then
+				$aData[$j][1] = $aNewData[$i][1] ; update name only
+				_ArrayDelete($aNewData, $i)
+				ExitLoop
+			EndIf
+		Next
+	Next
+
+	;join array.
+	if UBound($aNewData)  >0 Then
+		Local $idx = _ArrayConcatenate($aData, $aNewData, 0)
+		if $idx > -1 Then $aData[0][0] = $idx
+	EndIf
+EndFunc
+
+
+Func OfflineAdd()
+	SetSelectedGameID()
+	local $iGameIdx = $g_iCurGameID, $bFound = False, $aData, $idx
+	local $ipPort = getSelectedGameIP_comPort($iGameIdx)
+	Local $sName =  GetServerListA_SelectedData($LV_A_NAME)
+	local $sGameName = $g_gameConfig[$iGameIdx][$GNAME_SAVE]
+	Local $aNewData[1][2] = [[$ipPort, $sName]]
+
+	ConsoleWrite('+gamename='&$sGameName&@CRLF)
+	$aData = IniReadSection($g_sOfflineCfgPath, $sGameName)
+	if not @error Then
+		OfflineArray_mergeDupes($aData, $aNewData)
+		IniWriteSection($g_sOfflineCfgPath, $sGameName, $aData, 1)
+	Else
+		;missing game section
+		IniWriteSection($g_sOfflineCfgPath, $sGameName, $aNewData, 0)
+	EndIf
+EndFunc
+
+Func OfflineAddAll()
+	SetSelectedGameID()
+	local $iGameIdx = $g_iCurGameID, $bFound = False, $aData, $idx
+	Local $ListViewA = getListView_A_CID()
+	;local $ipPort = getSelectedGameIP_comPort($iGameIdx)
+	;Local $sName =  GetServerListA_SelectedData($LV_A_NAME)
+	local $sGameName = $g_gameConfig[$iGameIdx][$GNAME_SAVE]
+	Local $itemCount = _GUICtrlListView_GetItemCount($ListViewA)
+	local $aNewData[$itemCount][2]
+
+	;build new ip array
+	For $i = 0 To $itemCount -1
+		$idx = Number(_GUICtrlListView_GetItemText($ListViewA, $i, 0))
+		$aNewData[$i][0] = $g_aServerStrings[$iGameIdx][$idx][$COL_IP] &":"& $g_aServerStrings[$iGameIdx][$idx][$COL_PORT] ;store query Port
+		$aNewData[$i][1] = $g_aServerStrings[$iGameIdx][$idx][$COL_NAME]
+	Next
+
+	$aData = IniReadSection($g_sOfflineCfgPath, $sGameName)
+	if not @error Then
+		OfflineArray_mergeDupes($aData, $aNewData)
+		IniWriteSection($g_sOfflineCfgPath, $sGameName, $aData, 1)
+	Else
+		IniWriteSection($g_sOfflineCfgPath, $sGameName, $aNewData, 0)
+	EndIf
+EndFunc
+Func OfflineRemove()
+	SetSelectedGameID()
+	local $iGameIdx = $g_iCurGameID, $aData, $idx
+	local $ipPort = getSelectedGameIP_comPort($iGameIdx)
+	local $sGameName = $g_gameConfig[$iGameIdx][$GNAME_SAVE]
+
+	$aData = IniReadSection($g_sOfflineCfgPath, $sGameName)
+	if not @error Then
+		For $i = 1 To $aData[0][0]
+			if StringCompare($aData[$i][0], $ipPort) = 0 Then
+				ConsoleWrite("remove offline ip:"&$ipPort&@CRLF)
+				$idx = _ArrayDelete($aData, $i) ;remove
+				if $idx > -1 Then $aData[0][0] = $idx
+				IniWriteSection($g_sOfflineCfgPath, $sGameName, $aData, 1) ;write
+				ExitLoop
+			EndIf
+		Next
+	Else
+		;missing game section
+		ConsoleWrite("!ERROR: no offline data"&@CRLF)
+	EndIf
+EndFunc
+
 
 Func RighttClickMenuM()
 	Local $hMenuMBr = _GUICtrlMenu_CreatePopup()
@@ -5634,16 +5648,10 @@ Func FavArrayRemove()
 	SetSelectedGameID()
 	Local $iGameIdx = $g_iCurGameID ; GetActiveGameIndex()
 	Local $listIdx = GetServerListA_SelectedData($LV_A_IDX)
-	Local $ipPort = GetServerListA_SelectedData($LV_A_IP)
+	Local $ipPort = getSelectedGameIP_comPort($iGameIdx)
 
 	If $ipPort = "" Then
 		Return
-	EndIf
-
-	;fav is stored using -10 port for kingpin
-	if $g_gameConfig[$iGameIdx][$NET_GS_P] then
-		$ipPort = String($g_aServerStrings[$iGameIdx][$listIdx][$COL_IP] &":"& _
-		                 $g_aServerStrings[$iGameIdx][$listIdx][$COL_PORT])
 	EndIf
 
 	Local $aTmp = StringSplit($g_aFavList[$iGameIdx], "|")
@@ -5668,34 +5676,48 @@ Func FavArrayRemove()
 	ConsoleWrite("fav:"&$g_aFavList[$iGameIdx]&@CRLF)
 EndFunc
 
+;get listview selected game ip/port. using gamespy communication port if used
+Func getSelectedGameIP_comPort($iGameIdx)
+	SetSelectedGameID()
+	;Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
+	Local $listIdx = GetServerListA_SelectedData($LV_A_IDX)
+	Local $i, $sTmp, $ipPort = ""
+
+	If $listIdx < 0 Then
+		ConsoleWrite("!ERROR: Cant get list index"&@CRLF)
+		Return "" ;error
+	EndIf
+
+	;offline is stored using -10 port for kingpin/gamespy (server querry port)
+	Switch $g_iTabNum
+		Case $TAB_GB
+			$ipPort = String( _
+				$g_aServerStrings[$iGameIdx][$listIdx][$COL_IP] &":"& _
+				$g_aServerStrings[$iGameIdx][$listIdx][$COL_PORT])
+		Case $TAB_MB
+			If $iMGameType = 0 Then
+				$ipPort = GetServerListA_SelectedData($LV_A_IP)
+				$sTmp = StringSplit($ipPort, ":")
+				If Not @error Then
+					$ipPort = StringFormat("%s:%i", $sTmp[1], Number($sTmp[2]) -10); subtract -10 for gamespy/kingpin
+				EndIf
+			EndIf
+	EndSwitch
+
+	Return $ipPort
+EndFunc
+
+
 Func FavArrayAdd()
 	SetSelectedGameID()
 	Local $iGameIdx = $g_iCurGameID ;GetActiveGameIndex()
-	Local $listIdx = GetServerListA_SelectedData($LV_A_IDX)
-	Local $ipPort = GetServerListA_SelectedData($LV_A_IP)
+	;~ Local $listIdx = GetServerListA_SelectedData($LV_A_IDX)
+	Local $ipPort = getSelectedGameIP_comPort($iGameIdx)
 	Local $i, $sTmp
 	If $ipPort = "" Then
 		ConsoleWrite("fav selection error"&@CRLF)
 		Return ;wont be needed?
 	EndIf
-
-	;fav is stored using -10 port for kingpin/gamespy (server querry port)
-	Switch $g_iTabNum
-		Case $TAB_GB
-			if $g_gameConfig[$iGameIdx][$NET_GS_P] then ;-10
-				$ipPort = String( _
-					$g_aServerStrings[$iGameIdx][$listIdx][$COL_IP] &":"& _
-					$g_aServerStrings[$iGameIdx][$listIdx][$COL_PORT])
-			EndIf
-		Case $TAB_MB
-			If $iMGameType = 0 Then
-				$sTmp = StringSplit($ipPort, ":")
-				If Not @error Then
-					$ipPort = StringFormat("%s:%i", $sTmp[1], Number($sTmp[2]) -10); subtract -10 for gamespy
-				EndIf
-			EndIf
-	EndSwitch
-
 
 	;_ArrayDisplay($g_aFavList)
 	Local $aTmp = StringSplit($g_aFavList[$iGameIdx], "|")
@@ -5850,20 +5872,14 @@ Func RefreshSingle()
 	ListviewStoreIndexToArray($iGameIdx)
 	$g_iServerCountTotal = 1 ;get # servers to use later to stop refresh
 
-	Local $aServerIP[1] ;only update 1 server
-	Local $aServerIdx[1] ;only update 1 server
+	Local $aServerIP[1] = [getSelectedGameIP_comPort($iGameIdx)]
+	Local $aServerIdx[1] = [GetServerListA_SelectedData($LV_A_IDX)]
 	Local $ListViewA = getListView_A_CID()
 	Local $listSelNum = _GUICtrlListView_GetSelectionMark($ListViewA) ;mouse selected num.
-	Local $serSelNum = GetServerListA_SelectedData($LV_A_IDX) ;server index num (internal array ID)
-
-	;~ if $g_gameConfig[$iGameIdx][$NET_GS_P] Then
-		$aServerIP[0] = String($g_aServerStrings[$iGameIdx][$serSelNum][$COL_IP] &":"& _
-		                      $g_aServerStrings[$iGameIdx][$serSelNum][$COL_PORT]) ; get game port (-10)
-		$aServerIdx[0] = $serSelNum
+	Local $serSelNum = $aServerIdx[0] ;server index num (internal array ID)
 
 	If $aServerIP[0] = "" Then
-		;invalid ip
-		Return
+		Return ;invalid ip
 	EndIf
 
 	;reset internal array
