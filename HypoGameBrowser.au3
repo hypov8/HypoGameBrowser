@@ -4,7 +4,7 @@
 #AutoIt3Wrapper_Compression=4
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment='Kingpin Game Browser by hypo_v8'
-#AutoIt3Wrapper_Res_Description='Game browser for Kingpin, KingpinQ3 and Quake2'
+#AutoIt3Wrapper_Res_Description='HypoGameBrowser for Kingpin, KingpinQ3, Quake2 etc.'
 #AutoIt3Wrapper_Res_Fileversion=1.0.4.10
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=p
 #AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\logo_5.bmp,rt_bitmap,logo_1
@@ -81,6 +81,8 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      added game option to include fav/offline in ping's
 ;      updated offline.ini to use game query port
 ;      added paintball EOT. 0A
+;      updated weblinks to be a dropdown list. multiple game support
+;      hex/heretic masters set to master.maraakate.org as first selection
 
 
 ;1.0.x todo
@@ -95,6 +97,7 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      run query master on separate socket.
 ;          so it can check for response after getting some servers
 ;      mark setting dirty. prevent endless .ini update
+;      implement additional weblink support eg quake2://123.12... (move to user config?)
 ;      ...
 #EndRegion
 
@@ -137,6 +140,7 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 #EndRegion
 
 AutoItSetOption("GUICloseOnESC", 0)
+Opt("MouseClickDownDelay",50)
 
 #Region ;=> global Varables
 
@@ -413,22 +417,22 @@ Global $g_aIconIdx[$COUNT_GAME+1] ;+mbrowser
 
 ;========
 ;main UI
-Global $HypoGameBrowser, $tabGroupGames, $UI_Combo_gameSelector, $UI_TabSheet[$COUNT_TABS]
-Global $UI_Btn_pingList, $UI_Btn_loadFav, $UI_Btn_offlineList, $UI_Btn_settings, $UI_Btn_expand, $UI_Btn_refreshMaster
-Global $UI_Text_filter, $UI_Btn_filterOffline, $UI_Btn_filterEmpty, $UI_Btn_filterFull
-Global $UI_Icon_hypoLogo, $UI_Tray_exit, $UI_Tray_max, $UI_Tray_minimize
+Global $HypoGameBrowser, $tabGroupGames, $UI_Combo_gameSelector, $UI_TabSheet[$COUNT_TABS], _
+	$UI_Btn_pingList, $UI_Btn_loadFav, $UI_Btn_offlineList, $UI_Btn_settings, $UI_Btn_expand, $UI_Btn_refreshMaster, _
+	$UI_Text_filter, $UI_Btn_filterOffline, $UI_Btn_filterEmpty, $UI_Btn_filterFull, _
+	$UI_Icon_hypoLogo, $UI_Tray_exit, $UI_Tray_max, $UI_Tray_minimize, $UI_Btn_refreshMaster_dummy
 ;games TAB
 Global $UI_ListV_svData_A, $UI_ListV_svData_B, $UI_ListV_svData_C
 ;settings TAB
-Global $UI_Combo_master, $UI_Text_setupTitle, $UI_In_master_Cust, $UI_In_gamePath, $UI_In_playerName, $UI_In_runCmd, $UI_In_master_proto
-Global $UI_Text_masterAddress, $UI_Text_playerName, $UI_Text_runCmd, $UI_Btn_gamePath, $UI_Text_setupBG, $UI_CBox_gameRefresh, $UI_CBox_gamePingAll
-Global $UI_CBox_autoRefresh, $UI_Combo_M_addServer, $UI_Combo_hkey, $UI_Label_hotkey, $UI_TextAbout, $UI_Grp_hosted, $UI_Combo_theme
-Global $UI_Grp_gameConfig, $UI_CBox_tryNextMaster, $UI_CBox_useMLink, $UI_In_refreshTime, $UI_Tex_refreshTime, $GUI_gameSetup
-Global $UI_Grp_mBrowser, $UI_In_getPortM, $UI_MHost_removeServer, $UI_MHost_addServer, $UI_MHost_excludeSrever
-Global $UI_Grp_webLinks, $UI_Text_linkKPInfo, $UI_Text_linkMServers, $UI_Text_linkSupport, $UI_Text_linkContactM
-Global $UI_CBox_sound, $UI_Grp_gameSetup, $UI_Text_linkKPQ3, $UI_Text_linkHypoEmail, $UI_Text_linkDiscord, $UI_Btn_gameNew
-Global $UI_Grp_browserOpt, $UI_CBox_minToTray, $UI_In_hotKey, $UI_Btn_setHotKey, $UI_Text_masterUser, $UI_Text_masterProto, _
-	$UI_CBox_gamePingOff, $UI_CBox_gamePingFav
+Global $UI_Combo_master, $UI_Text_setupTitle, $UI_In_master_Cust, $UI_In_gamePath, $UI_In_playerName, $UI_In_runCmd, $UI_In_master_proto, _
+	$UI_Text_masterAddress, $UI_Text_playerName, $UI_Text_runCmd, $UI_Btn_gamePath, $UI_Text_setupBG, $UI_CBox_gameRefresh, $UI_CBox_gamePingAll, _
+	$UI_CBox_autoRefresh, $UI_Combo_M_addServer, $UI_Combo_hkey, $UI_Label_hotkey, $UI_TextAbout, $UI_Grp_hosted, $UI_Combo_theme, _
+	$UI_Grp_gameConfig, $UI_CBox_tryNextMaster, $UI_In_refreshTime, $UI_Tex_refreshTime, $GUI_gameSetup, _
+	$UI_Grp_mBrowser, $UI_In_getPortM, $UI_MHost_removeServer, $UI_MHost_addServer, $UI_MHost_excludeSrever, _
+	$UI_Grp_webLinks, $UI_Text_linkKPInfo, $UI_Text_linkMServers, $UI_Text_linkSupport, $UI_Text_linkContactM, _
+	$UI_CBox_sound, $UI_Grp_gameSetup, $UI_Text_linkKPQ3, $UI_Text_linkHypoEmail, $UI_Text_linkDiscord, $UI_Btn_gameNew, _
+	$UI_Grp_browserOpt, $UI_CBox_minToTray, $UI_In_hotKey, $UI_Btn_setHotKey, $UI_Text_masterUser, $UI_Text_masterProto, _
+	$UI_CBox_gamePingOff, $UI_CBox_gamePingFav, $UI_Btn_runWebLinks, $UI_Combo_runWebLinks
 
 ;m-browser TAB
 Global $UI_ListV_mb_ABC[3], $UI_Text_countMPlayers
@@ -498,6 +502,11 @@ Global $g_UseTheme = 0
 Global $g_sGameCfgPath = @ScriptDir & "\gameConfig.ini"
 Global $g_sOfflineCfgPath = @ScriptDir & "\offline.ini"
 Global $g_sUserCfgPath = StringTrimRight(@ScriptFullPath, 4) & ".ini"
+
+Global Const $g_aWebLinks[3][2] = [ _ ;["kingpin",    "KP"   ], _ ;enable? not sure if anyone uses
+	["M-Browser",  "KP"   ], _
+	["M-Browser2", "KPQ3" ], _
+	["quake2",     "Q2"   ]]
 
 
 ;==> color for visual theme
@@ -595,18 +604,17 @@ Opt("GUIDataSeparatorChar", "|") ;"|" is the default
 
 
 #Region --> STARTUP
+CheckSingleState(True) ;close if multiple are open
 _GDIPlus_GraphicsGetDPIRatio($aDPI) ;windows font scale
 iniFile_CFG_Load()
 BuildIconList()
-
 BulidMainGui()
 BulidMainGui_Finish()
 iniFile_Load() ;load ini first for game path?
 iniFile_Load_Fix() ;fix any missing data
 M_RunGameFrom_MLInk() ;check if a command lunched the exe, then exit
-CheckSingleState() ;close if multiple are open
 startupMainUI()
-UpdateRegForMBrowserLinks()
+
 
 Func BuildTabViewPage($iTab, $sName)
 	$UI_TabSheet[$iTab] = GUICtrlCreateTabItem($sName)
@@ -636,7 +644,7 @@ Func BuildTabViewPage($iTab, $sName)
 			GUICtrlSendMsg(-1, $LVM_SETCOLUMNWIDTH, 1, 120)
 			GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 
-			$UI_Btn_expand = GUICtrlCreateButton("^", 65, 424, 51, 25, $BS_BITMAP) ; 65
+			$UI_Btn_expand = GUICtrlCreateButton("^", 65, 424, 51, 25) ;, $BS_BITMAP) ; 65
 			GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 			GUICtrlSetTip(-1, "Expand")
 
@@ -694,7 +702,7 @@ Func BuildTabViewPage($iTab, $sName)
 
 			;================
 			; master settings
-			$UI_Grp_gameSetup = GUICtrlCreateGroup("Game Setup", 73, 38, 256, 292, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+			$UI_Grp_gameSetup = GUICtrlCreateGroup("Game Setup", 73, 38, 256, 304, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
 				GUICtrlSetFont(-1, 9, 400, 0, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				$UI_Text_setupTitle = GUICtrlCreateLabel("Kingpin", 85, 62, 232, 24, BitOR($SS_CENTER,$SS_CENTERIMAGE), $WS_EX_STATICEDGE)
@@ -714,33 +722,33 @@ Func BuildTabViewPage($iTab, $sName)
 				$UI_In_master_proto = GUICtrlCreateInput("74", 153, 154, 84, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Game Protocol for IOQ3 masters"&@CRLF&"74=Beta, 75=Release")
-				$UI_CBox_gamePingAll = GUICtrlCreateCheckbox("Ping All Masters", 81, 178, 101, 21)
+				$UI_CBox_gamePingAll = GUICtrlCreateCheckbox("Ping All Masters", 81, 182, 101, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Combine Master Server IP lists.")
-				$UI_CBox_gamePingOff = GUICtrlCreateCheckbox("Ping Offline", 81, 198, 101, 21)
+				$UI_CBox_gamePingOff = GUICtrlCreateCheckbox("Ping Offline", 81, 202, 101, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Add Offline servers to list.")
-				$UI_CBox_gamePingFav = GUICtrlCreateCheckbox("Ping Fav", 81, 218, 101, 21)
+				$UI_CBox_gamePingFav = GUICtrlCreateCheckbox("Ping Fav", 81, 222, 101, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Add Fav servers to list.")
-				$UI_CBox_gameRefresh = GUICtrlCreateCheckbox("AutoRefresh Game", 201, 182, 117, 21)
+				$UI_CBox_gameRefresh = GUICtrlCreateCheckbox("AutoRefresh Game", 201, 186, 117, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Add current game to the AutoRefresh list.")
-				$UI_Btn_gameNew = GUICtrlCreateButton("Add/Update cfg.ini", 200, 212, 121, 33)
+				$UI_Btn_gameNew = GUICtrlCreateButton("Add/Update cfg.ini", 200, 216, 121, 33)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Update gameConfig.ini. Add new or edit existing game.")
-				$UI_Btn_gamePath = GUICtrlCreateButton("Game Path", 81, 250, 65, 21)
+				$UI_Btn_gamePath = GUICtrlCreateButton("Game Path", 81, 266, 65, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_In_gamePath = GUICtrlCreateInput("Game.exe", 153, 250, 168, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_READONLY,$WS_BORDER), $WS_EX_STATICEDGE)
+				$UI_In_gamePath = GUICtrlCreateInput("Game.exe", 153, 266, 168, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_READONLY,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_Text_playerName = GUICtrlCreateLabel("Player Name", 81, 274, 64, 21, $SS_CENTERIMAGE)
+				$UI_Text_playerName = GUICtrlCreateLabel("Player Name", 81, 290, 64, 21, $SS_CENTERIMAGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_In_playerName = GUICtrlCreateInput("", 153, 274, 168, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				$UI_In_playerName = GUICtrlCreateInput("", 153, 290, 168, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_Text_runCmd = GUICtrlCreateLabel("Commands", 81, 298, 60, 21, $SS_CENTERIMAGE)
+				$UI_Text_runCmd = GUICtrlCreateLabel("Commands", 81, 314, 60, 21, $SS_CENTERIMAGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Addition commandline arguments to add when running game")
-				$UI_In_runCmd = GUICtrlCreateInput("+set developer 1", 153, 298, 168, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				$UI_In_runCmd = GUICtrlCreateInput("+set developer 1", 153, 314, 168, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 			GUICtrlCreateGroup("", -99, -99, 1, 1)
 			;end master settings
@@ -748,44 +756,48 @@ Func BuildTabViewPage($iTab, $sName)
 
 			;===============
 			;browser options
-			$UI_grp_browserOpt = GUICtrlCreateGroup("Browser Options", 337, 38, 128, 292, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+			$UI_grp_browserOpt = GUICtrlCreateGroup("Browser Options", 341, 38, 128, 304, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetFont(-1, 9, 400, 0, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_CBox_sound = GUICtrlCreateCheckbox("Play Sounds", 349, 62, 105, 21)
+				$UI_CBox_sound = GUICtrlCreateCheckbox("Play Sounds", 353, 62, 105, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Play a sound if there is a player in a server")
-				$UI_CBox_minToTray = GUICtrlCreateCheckbox("Minimize to Tray", 349, 86, 105, 21)
+				$UI_CBox_minToTray = GUICtrlCreateCheckbox("Minimize to Tray", 353, 82, 105, 21)
 				GUICtrlSetState(-1, $GUI_CHECKED)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "This is used in tray menu(Minimize) and on game lunch")
-				$UI_CBox_useMLink = GUICtrlCreateCheckbox("Use M Web Link", 349, 110, 105, 21)
-				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				GUICtrlSetTip(-1, "Enable web links to connect to 'servers' listed on M's Website."& @CRLF&"Make sure to set Kingpin Game Path first. Then enable option.")
-				$UI_CBox_tryNextMaster = GUICtrlCreateCheckbox("Ping Next Master", 349, 134, 105, 21)
+				$UI_CBox_tryNextMaster = GUICtrlCreateCheckbox("Ping Next Master", 353, 102, 105, 21)
 				GUICtrlSetState(-1, $GUI_CHECKED)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "If master fails to respond, ping the next one in list. Not used for Custom Master")
-				$UI_Combo_theme = GUICtrlCreateCombo("", 349, 162, 104, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
-				GUICtrlSetData(-1, "Theme None|Theme Orange|Theme Green|Theme Light|Theme Blue", "Theme Orange")
+				$UI_Combo_theme = GUICtrlCreateCombo("", 353, 130, 104, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+				GUICtrlSetData(-1, "Theme None|Theme Orange|Theme Green|Theme Light|Theme Blue", "Theme None")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Enable custom colors on GUI."&@CRLF&"Requires restart.")
-				$UI_CBox_autoRefresh = GUICtrlCreateCheckbox("Auto Refresh", 349, 202, 97, 17)
+				$UI_Combo_runWebLinks = GUICtrlCreateCombo("", 353, 162, 104, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+				;~ GUICtrlSetData(-1, "M-Browser[KP]|M-Browser2[KPQ3]|quake2[Q2]", "M-Browser[KP]")
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				$UI_Btn_runWebLinks = GUICtrlCreateButton("Toggle WebLink", 353, 186, 104, 25)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "hyperlink[CFG name]. Enable weblinks to lunch game.exe.")
+				$UI_CBox_autoRefresh = GUICtrlCreateCheckbox("Auto Refresh", 353, 222, 101, 17)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Auto refresh active game.")
-				$UI_In_refreshTime = GUICtrlCreateInput("3", 349, 222, 29, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				$UI_In_refreshTime = GUICtrlCreateInput("3", 353, 242, 29, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
-				$UI_Tex_refreshTime = GUICtrlCreateLabel("Refresh Time", 381, 222, 67, 17, $SS_CENTERIMAGE)
+				$UI_Tex_refreshTime = GUICtrlCreateLabel("Refresh Time", 385, 242, 67, 17, $SS_CENTERIMAGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Time in Minutes between auto refresh")
-				$UI_Label_hotkey = GUICtrlCreateLabel("Hotkey (Restore)", 349, 258, 102, 13)
+				$UI_Label_hotkey = GUICtrlCreateLabel("Hotkey (Restore)", 353, 274, 102, 13)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_Combo_hKey = GUICtrlCreateCombo("", 349, 274, 104, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+				$UI_Combo_hKey = GUICtrlCreateCombo("", 353, 290, 104, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
 				GUICtrlSetData(-1, "ALT +|CTRL +|CTRL + ALT +", "ALT +")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_In_hotKey = GUICtrlCreateInput("", 349, 298, 33, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_LOWERCASE,$WS_BORDER), $WS_EX_STATICEDGE)
+				$UI_In_hotKey = GUICtrlCreateInput("", 353, 314, 33, 21, BitOR($GUI_SS_DEFAULT_INPUT,$ES_LOWERCASE,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "HotKey. Accepts a-z")
-				$UI_Btn_setHotKey = GUICtrlCreateButton("Apply", 389, 298, 64, 21)
+				$UI_Btn_setHotKey = GUICtrlCreateButton("Apply", 393, 314, 64, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Apply a Windows global hotkey")
 			GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -794,21 +806,22 @@ Func BuildTabViewPage($iTab, $sName)
 
 			;=============
 			;hosted server
-			$UI_Grp_hosted = GUICtrlCreateGroup("Hosted Server", 473, 38, 109, 172, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+			$UI_Grp_hosted = GUICtrlCreateGroup("Hosted Server", 481, 38, 109, 172, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetFont(-1, 9, 400, 0, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_MHost_addServer = GUICtrlCreateButton("Add Server", 481, 62, 93, 25)
+				$UI_MHost_addServer = GUICtrlCreateButton("Add Server", 489, 62, 93, 25)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Add a server to 'M' Website listing so game can be seen in M-Browser")
-				$UI_MHost_removeServer = GUICtrlCreateButton("Remove Server", 481, 90, 93, 25)
+				$UI_MHost_removeServer = GUICtrlCreateButton("Remove Server", 489, 90, 93, 25)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Remove a server to 'M' Website listing so game can not be seen in M-Browser")
-				$UI_MHost_excludeSrever = GUICtrlCreateButton("Exclude Server", 481, 118, 93, 25)
+				$UI_MHost_excludeSrever = GUICtrlCreateButton("Exclude Server", 489, 118, 93, 25)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Exclude a server from 'M' Website listing so game can not be seen in M-Browser. Even if listed at Qtracker")
-				$UI_Combo_M_addServer = GUICtrlCreateCombo("", 481, 150, 93, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
+				$UI_Combo_M_addServer = GUICtrlCreateCombo("", 489, 150, 93, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
 				GUICtrlSetData(-1, "kingpin|kingpinq3|quake2", "kingpin")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_In_getPortM = GUICtrlCreateInput("31510", 481, 178, 93, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
+				$UI_In_getPortM = GUICtrlCreateInput("31510", 489, 178, 93, 21, BitOR($GUI_SS_DEFAULT_INPUT,$WS_BORDER), $WS_EX_STATICEDGE)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Set Server port" & @CRLF & "Default Game Kingpin")
 			GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -817,33 +830,41 @@ Func BuildTabViewPage($iTab, $sName)
 
 			;=============
 			;weblinks
-			$UI_Grp_webLinks = GUICtrlCreateGroup("Web Links", 589, 38, 124, 172, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+			$UI_Grp_webLinks = GUICtrlCreateGroup("Web Links", 601, 38, 124, 172, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetFont(-1, 9, 400, 0, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_Text_linkKPInfo = GUICtrlCreateLabel("Kingpin.info", 597, 58, 99, 17, $SS_CENTERIMAGE)
+				$UI_Text_linkKPInfo = GUICtrlCreateLabel("Kingpin.info", 609, 58, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetFont(-1, 9, 400, 4, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Kingpin.info Website")
 				GUICtrlSetCursor (-1, 0)
-				$UI_Text_linkMServers = GUICtrlCreateLabel("M's Server List", 597, 78, 99, 17, $SS_CENTERIMAGE)
+				$UI_Text_linkMServers = GUICtrlCreateLabel("M's Server List", 609, 78, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetFont(-1, 9, 400, 4, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Server List Website (hambloch.com)")
 				GUICtrlSetCursor (-1, 0)
-				$UI_Text_linkContactM = GUICtrlCreateLabel("Contact M", 597, 98, 99, 17, $SS_CENTERIMAGE)
+				$UI_Text_linkContactM = GUICtrlCreateLabel("Contact M", 609, 98, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetFont(-1, 9, 400, 4, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Contact M Via His Website (hambloch.com)")
 				GUICtrlSetCursor (-1, 0)
-				$UI_Text_linkKPQ3 = GUICtrlCreateLabel("KingpinQ3", 597, 118, 99, 17, $SS_CENTERIMAGE)
+				$UI_Text_linkKPQ3 = GUICtrlCreateLabel("KingpinQ3", 609, 118, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetFont(-1, 9, 400, 4, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "KingpinQ3 Website")
 				GUICtrlSetCursor (-1, 0)
-				$UI_Text_linkDiscord = GUICtrlCreateLabel("Kingpin Discord", 597, 138, 99, 17, $SS_CENTERIMAGE)
+				$UI_Text_linkDiscord = GUICtrlCreateLabel("Kingpin Discord", 609, 138, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetFont(-1, 9, 400, 4, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Kingpin Discord")
 				GUICtrlSetCursor (-1, 0)
-				$UI_Text_linkHypoEmail = GUICtrlCreateLabel("Contact Hypov8", 597, 158, 99, 17, $SS_CENTERIMAGE)
+				$UI_Text_linkHypoEmail = GUICtrlCreateLabel("Contact Hypov8", 609, 158, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetFont(-1, 9, 400, 4, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Email Me")
 				GUICtrlSetCursor (-1, 0)
-				$UI_Text_linkSupport = GUICtrlCreateLabel("Support Me", 597, 178, 99, 17, $SS_CENTERIMAGE)
+				$UI_Text_linkSupport = GUICtrlCreateLabel("Support Me", 609, 178, 99, 17, $SS_CENTERIMAGE)
+				GUICtrlSetFont(-1, 9, 400, 4, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Buy Me a Coffee")
 				GUICtrlSetCursor (-1, 0)
@@ -853,9 +874,10 @@ Func BuildTabViewPage($iTab, $sName)
 
 			;=============
 			;mbrowser
-			$UI_Grp_mBrowser = GUICtrlCreateGroup("M Browser Info", 473, 214, 240, 116, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+			$UI_Grp_mBrowser = GUICtrlCreateGroup("M Browser Info", 481, 214, 244, 128, BitOR($GUI_SS_DEFAULT_GROUP,$BS_CENTER))
+				GUICtrlSetFont(-1, 9, 400, 0, "MS Sans Serif")
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				$UI_TextAbout = GUICtrlCreateEdit("", 481, 234, 225, 89, BitOR($ES_NOHIDESEL,$ES_READONLY))
+				$UI_TextAbout = GUICtrlCreateEdit("", 489, 234, 229, 101, BitOR($ES_NOHIDESEL,$ES_READONLY))
 				GUICtrlSetData(-1, StringFormat("M-Browser GUI Version\r\nBy David Smyth (hypo_v8)\r\n\r\nThe original M-Browser is a command line \r\ninterface that Michael Hambloch(M) released.\r\nUsing M"&Chr(39)&"s Website to Source Kingpin Servers."))
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 			GUICtrlCreateGroup("", -99, -99, 1, 1)
@@ -885,19 +907,19 @@ Func BulidMainGui()
 	$UI_Combo_gameSelector = _GUICtrlComboBoxEx_Create($HypoGameBrowser, "", 652, 8, 149, 582, $CBS_DROPDOWNLIST )
 
 	;==> buttons
-	$UI_Btn_refreshMaster = GUICtrlCreateButton("Refresh", 3, 56+8, 56, 41, $BS_BITMAP)
+	$UI_Btn_refreshMaster = GUICtrlCreateButton("Refresh", 3, 56+8, 56, 41) ;, $BS_BITMAP)
 	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 	GUICtrlSetTip(-1, "Get servers from the master and refresh them" & @CRLF &" Shortcut F5")
-	$UI_Btn_pingList = GUICtrlCreateButton("Ping List", 3, 104+4, 56, 41, $BS_BITMAP)
+	$UI_Btn_pingList = GUICtrlCreateButton("Ping List", 3, 104+4, 56, 41) ;, $BS_BITMAP)
 	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 	GUICtrlSetTip(-1, "Refresh game servers in current list, without talking to the master.")
-	$UI_Btn_loadFav = GUICtrlCreateButton("Favorite", 3, 152, 56, 41, $BS_BITMAP)
+	$UI_Btn_loadFav = GUICtrlCreateButton("Favorite", 3, 152, 56, 41) ;, $BS_BITMAP)
 	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 	GUICtrlSetTip(-1, "View favorite server list."&@CRLF&" PingList will run once they are loaded")
-	$UI_Btn_offlineList = GUICtrlCreateButton("OffLine", 3, 212, 56, 41, $BS_BITMAP)
+	$UI_Btn_offlineList = GUICtrlCreateButton("OffLine", 3, 212, 56, 41) ;, $BS_BITMAP)
 	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 	GUICtrlSetTip(-1, "Load offline server list for the selected game."&@CRLF&" You will need to refresh list with PingList..")
-	$UI_Btn_settings = GUICtrlCreateButton("Setup", 3, 310, 56, 41, $BS_BITMAP)
+	$UI_Btn_settings = GUICtrlCreateButton("Setup", 3, 310, 56, 41) ;, $BS_BITMAP)
 	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 	GUICtrlSetTip(-1, "Settings")
 
@@ -927,7 +949,7 @@ Func BulidMainGui()
 	$UI_Tray_max = TrayCreateItem("Restore/Maximize")
 	$UI_Tray_minimize = TrayCreateItem("Minimize")
 
-	GUISetState(@SW_HIDE , $HypoGameBrowser) ;;;GUISetState(@SW_SHOW, $HypoGameBrowser)
+	GUISetState(@SW_HIDE, $HypoGameBrowser) ;;;GUISetState(@SW_SHOW, $HypoGameBrowser)
 	;#EndRegion ### END Koda GUI section ###
 EndFunc
 
@@ -949,6 +971,17 @@ Func BulidMainGui_Finish()
 		"  FTEQW: 3, (28)?"&@CRLF& _
 		""&@CRLF _ ;todo ADD GAMES
 	)
+
+	Local $sTmp = ""
+	For $i = 0 To UBound($g_aWebLinks) -1
+		If $i = 0 Then
+			$sTmp = StringFormat("%s[%s]",  $g_aWebLinks[$i][0], $g_aWebLinks[$i][1])
+		Else
+			$sTmp &= StringFormat("|%s[%s]", $g_aWebLinks[$i][0], $g_aWebLinks[$i][1])
+		EndIf
+	Next
+	GUICtrlSetData($UI_Combo_runWebLinks, $sTmp) ; "M-Browser[KP]")
+	_GUICtrlComboBox_SetCurSel($UI_Combo_runWebLinks, 0)
 
 
 	;update listview
@@ -982,7 +1015,7 @@ EndFunc
 Func BuildIconList()
 	;external icons
 	Local Const $sState[9] = ["\gspyicons\ping1.ico", "\gspyicons\ping2.ico", "\gspyicons\ping3.ico", "\gspyicons\ping4.ico", _
-		"\gspyicons\p0.ico", "\gspyicons\p1.ico", "\gspyicons\p2.ico", "\gspyicons\p3.ico", "\gspyicons\p4.ico"]
+		"\gspyicons\p0.ico", "\gspyicons\p1.ico",     "\gspyicons\p2.ico",    "\gspyicons\p3.ico",    "\gspyicons\p4.ico"]
 	for $i = 0 to 8
 		_GUIImageList_AddIcon($ImageList1, @ScriptDir &$sState[$i], 0)
 	Next
@@ -1018,7 +1051,6 @@ EndFunc   ;==>_GDIPlus_GraphicsGetDPIRatio
 Func startupMainUI()
 	;add this to let everything load
 	EnableUIButtons(False)
-
 	GameSetup_UpdateUI()
 
 	;load dark theme
@@ -1054,20 +1086,24 @@ Func startupMainUI()
 	_GUICtrlListView_SetImageList($UI_ListV_svData_A, $ImageList1, 1)
 	GUICtrlRegisterListViewSort($UI_ListV_svData_A, "ListViewSort_A")	;updateLV
 
+	$UI_Btn_refreshMaster_dummy = GUICtrlCreateDummy() ;remove from button
 	$HypoGameBrowser_AccelTable[0][0] = "{F5}"
-	$HypoGameBrowser_AccelTable[0][1] = $UI_Btn_refreshMaster
-	GUISetAccelerators($HypoGameBrowser_AccelTable)
+	$HypoGameBrowser_AccelTable[0][1] = $UI_Btn_refreshMaster_dummy
+	GUISetAccelerators($HypoGameBrowser_AccelTable, $HypoGameBrowser)
+
 EndFunc
 ;=================
 
 ;=================
 ;--> CHECK M-LINKS
-Func UpdateRegForMBrowserLinks()
-	Local $regKeyMBrowser = _WinAPI_RegOpenKey($HKEY_CLASSES_ROOT, 'M-Browser', $KEY_QUERY_VALUE)
+Func CheckRegForGameLink($sName)
+	Local $ret = False
+	Local $regKeyMBrowser = _WinAPI_RegOpenKey($HKEY_CLASSES_ROOT, $sName, $KEY_QUERY_VALUE)
 	If Not ($regKeyMBrowser = 0) Then
-		GUICtrlSetState( $UI_CBox_useMLink, $GUI_CHECKED )
+		$ret = True
 	EndIf
 	_WinAPI_RegCloseKey($regKeyMBrowser)
+	Return $ret
 EndFunc
 ;=============
 
@@ -1079,7 +1115,7 @@ Func GUISetColor()
 	Local Const $hwNames1 = [$UI_Text_setupBG, $UI_Text_chatBG, _
 		$UI_ListV_svData_A, $UI_ListV_svData_B, $UI_ListV_svData_C, _
 		$UI_ListV_mb_ABC[0], $UI_ListV_mb_ABC[1], $UI_ListV_mb_ABC[2], _
-		$UI_Grp_gameConfig, $UI_Grp_webLinks, $UI_Grp_mBrowser, $UI_CBox_useMLink, _ ;M config
+		$UI_Grp_gameConfig, $UI_Grp_webLinks, $UI_Grp_mBrowser, _ ;M config
 		$UI_Text_linkKPInfo, $UI_Text_linkMServers, $UI_Text_linkSupport, $UI_Text_linkContactM, _ ;web links
 		$UI_Text_linkKPQ3, $UI_Text_linkHypoEmail, $UI_Text_linkDiscord, _ ;web links
 		$UI_CBox_sound, $UI_Tex_refreshTime, $UI_Grp_gameSetup, $UI_CBox_autoRefresh, _
@@ -1101,7 +1137,7 @@ Func GUISetColor()
 	GUICtrlSetBkColor($UI_Text_masterDisplay, $hColor_btn)
 
 	;button colors
-	Local Const $hwNamesBtn = [$UI_Btn_refreshMaster, $UI_Btn_pingList, $UI_Btn_loadFav, _
+	Local Const $hwNamesBtn = [$UI_Btn_refreshMaster, $UI_Btn_pingList, $UI_Btn_loadFav, $UI_Btn_runWebLinks, _
 		$UI_Btn_offlineList,  $UI_MHost_addServer, $UI_MHost_removeServer, $UI_Btn_gameNew, _
 		$UI_Btn_settings, $UI_MHost_excludeSrever, $UI_Btn_gamePath, $UI_Btn_setHotKey, $UI_Btn_chatConnect] ;$UI_Btn_expand,
 	For $iloop = 0 to UBound($hwNamesBtn)-1
@@ -1116,7 +1152,7 @@ Func GUISetColor()
 	Next
 
 	;disabled input colors
-	Local Const $hwInputDis = [$UI_Combo_M_addServer, $UI_Combo_hkey, _
+	Local Const $hwInputDis = [$UI_Combo_M_addServer, $UI_Combo_hkey, $UI_Combo_runWebLinks, _
 		$UI_Combo_master, $UI_Combo_gameSelector, $UI_In_gamePath, $UI_Combo_theme]
 	For $iloop = 0 to UBound($hwInputDis)-1
 		SetUITheme_inputBox($hwInputDis[$iloop], $g_UseTheme, False)
@@ -1130,7 +1166,12 @@ EndFunc
 
 ;=====================
 ;--> ONLY ONE INSTANCE
-func CheckSingleState()
+func CheckSingleState($checkCmd)
+	ConsoleWrite('-cmd='&$checkCmd&' cmd' &$CmdLine[0]&@CRLF)
+	If $CmdLine[0] > 0 Then
+		Return ;must be game lunch cmd
+	EndIf
+
 	If _Singleton("HypoGameBrowser", 1) = 0 Then
 		MsgBox($MB_SYSTEMMODAL, "Warning", "HypoGameBrowser is already running")
 		Exit
@@ -1154,7 +1195,6 @@ EndFunc
 ;==============
 
 Func SetUITheme($hw, $themeID)
-	; UI_Combo_theme g_UseTheme
 	Switch $themeID
 		Case 1 To $COUNT_THEME
 			GUICtrlSetColor($hw,   $g_aTheme[$themeID-1][$THEME_TEXT] )
@@ -1226,7 +1266,7 @@ EndFunc
 
 GUICtrlSetOnEvent($UI_Combo_gameSelector, 'UI_Combo_gameSelectorChange')
 Func UI_Combo_gameSelectorChange()
-	ConsoleWrite("!channn"&@CRLF)
+	ConsoleWrite("!UI_Combo_gameSelectorChange"&@CRLF)
 	GameSetup_Store() ;save prev settings
 	ComboChanged_SyncTab() ;switch tab if
 	GameSetup_UpdateUI()
@@ -1352,7 +1392,7 @@ EndFunc
 Func GameSetup_UpdateUI()
 	Local $idx = ComboBoxEx_GetCurSel()
 	$g_iGameSetupLastIdx = $idx
-	ConsoleWrite("+gameChanged update UI="&$idx&@CRLF)
+	ConsoleWrite("+GameSetup_UpdateUI() Idx="&$idx&@CRLF)
 	if $idx < $COUNT_GAME Then
 		GUICtrlSetData($UI_Text_setupTitle, $g_gameConfig[$idx][$GNAME_MENU])            ;title
 		GUICtrlSetData($UI_Combo_master, "|Custom Master|" & $g_gameConfig[$idx][$MASTER_ADDY]) ;master list. rebuild
@@ -1410,6 +1450,7 @@ EndFunc
 ;LoadGameOnStartupOpt()
 Func LoadGameOnStartupOpt()
 	Local $idx = ComboBoxEx_GetCurSel()
+	ConsoleWrite("LoadGameOnStartupOpt() idx:"&$idx &@CRLF)
 
 	If $idx = $COUNT_GAME Then ; $ID_M Then
 		$g_iTabNum = $TAB_MB
@@ -1477,7 +1518,6 @@ Func iniFileSetDropdownEx(Const $sValue, ByRef $hw)
 	EndIf
 
 	if $iVal >= 0 Then
-		;ComboBoxEx_SetCurSel($idx)
 		_GUICtrlComboBoxEx_SetCurSel($hw, $iVal)
 	EndIf
 EndFunc
@@ -2254,7 +2294,7 @@ Func UI3_Btn_saveClick()
 	)
 
 	if $ret Then
-		MsgBox(0, 'Save Game', 'Game saved to .ini file OK. Restart Browser to load updated config.', 0, $GUI_gameSetup)
+		MsgBox(0, 'Save Game', 'Game saved to .ini file OK.' &@CRLF&@CRLF& 'Restart Browser to load updated config.', 0, $GUI_gameSetup)
 	Else
 		MsgBox(0, 'Save Game', 'ERROR: Game not saved to .ini', 0, $GUI_gameSetup)
 	EndIf
@@ -2397,26 +2437,43 @@ EndFunc
 	#Region --> M_RunGameFrom_MLInk
 	;========================================================
 	Func M_RunGameFrom_MLInk() ;If FileExists("kingpin.exe") OR ($CmdLine[0]<>"" AND
-		Local $idx
-		Local Const $cmdString[2][3] = [ _
-			["m-browser://", 12, 1], _     ;kp
-			["m-browser2://", 13, 2]]      ;kpq3
+		Local $idx, $sAddress
+		;quake2://192.168.0.1:27910
 
-		If Not $CmdLine[0] Then
+		If $CmdLine[0] = 0 Then
 			;no commands to process
 			return
 		EndIf
 
-		For $i = 0 To 1
-			$idx = StringInStr($CmdLine[1], $cmdString[$i][0])
-			If $idx Then
-				Local $runServerAddress = StringTrimLeft($CmdLine[1], $idx + $cmdString[$i][1] -1)
-				$runServerAddress = StringRegExpReplace($runServerAddress, "[^0-9]*$", "") ;trim any chars at end
-				MsgBox("", "", "$CmdLine:"&$runServerAddress)
-				LaunchGame($runServerAddress, $cmdString[$i][2])
-				Exit
+		For $i = 0 To UBound($g_aWebLinks) -1
+			If StringInStr($CmdLine[1], $g_aWebLinks[$i][0]) Then; kingpin://
+				$idx = StringInStr($CmdLine[1], "://")
+				If $idx Then
+					$sAddress = StringTrimLeft($CmdLine[1], $idx + 2)
+					$sAddress = StringRegExpReplace($sAddress, "[^0-9]*$", "") ;trim any chars at end
+					;MsgBox("", "", "CmdLine: "&$sAddress, 0, $HypoGameBrowser)
+					For $j = 0 To $COUNT_GAME -1
+						if StringCompare($g_aWebLinks[$i][1], $g_gameConfig[$j][$GNAME_SAVE]) = 0 Then
+							LaunchGame($sAddress, $j)
+							ExitLoop(2)
+						EndIf
+					Next
+					local $msg = _
+						'No game found for weblink.'      &@CRLF&@CRLF& _
+						'Game ID: ' & $g_aWebLinks[$i][1] &@CRLF& _
+						'Command: ' & $CmdLine[1]         &@CRLF& _
+						'Address: ' & $sAddress
+					MsgBox(0, 'WebLink', $msg, 0, $HypoGameBrowser)
+				Else
+					;invalid webstring
+					MsgBox(0, 'WebLink', 'invalid1', 0, $HypoGameBrowser)
+				EndIf
 			EndIf
 		Next
+		_GUICtrlComboBoxEx_Destroy($UI_Combo_gameSelector)
+		If $MPopupInfo Then GUIDelete($MPopupInfo)
+		If $GUI_gameSetup Then GUIDelete($GUI_gameSetup)
+		If $HypoGameBrowser Then GUIDelete($HypoGameBrowser)
 		Exit
 	EndFunc
 	;========================================================
@@ -2597,64 +2654,97 @@ EndFunc
 
 	;=============================================================================
 	;--> Regedit m-links
-	GUICtrlSetOnEvent($UI_CBox_useMLink,"M_Regedit_Mlinks")
-	Func M_Regedit_Mlinks()
-		local $exePath = StringReplace(@AutoItExe, "\", "\\")
-		local $arrayRegEdit, $hFile
+	GUICtrlSetOnEvent($UI_Btn_runWebLinks,"UI_Btn_runWebLinksClicked")
+	Func UI_Btn_runWebLinksClicked()
+		Local $sData, $sGameName, $sSaveName, $idx
+		local $arrayRegEdit, $hFile, $sTmp, $iGameIdx
 
-		If _IsChecked($UI_CBox_useMLink) Then
-			If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "M-Links", "Enable M-Browser Web Link Support", 0, $HypoGameBrowser ) = $IDOK Then
-				Local Const $aMBLink[2] = ["M-Browser", "M-Browser2"]
-
-				$arrayRegEdit = "Windows Registry Editor Version 5.00"      &@CRLF&@CRLF
-				For $i =0 to 1
-				 	$arrayRegEdit &= "" & _
-						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&']'             &@CRLF& _
-						'@="URL:'&$aMBLink[$i]&' Protocol"'                &@CRLF& _
-						'"URL Protocol"=""'                                &@CRLF&@CRLF& _
-						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\DefaultIcon]' &@CRLF& _         ;@AutoItExe ;@WorkingDir
-						'@="' &$exePath& ',0"'                             &@CRLF&@CRLF& _   ;('@="D:\\Kingpin\\Kingpin_M_Browser.exe,0"')
-						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\shell]'       &@CRLF&@CRLF& _
-						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\shell\open]'  &@CRLF& _
-						'@=""'                                                    &@CRLF&@CRLF& _
-						'[HKEY_CLASSES_ROOT\'&$aMBLink[$i]&'\shell\open\command]' &@CRLF& _
-						'@="\"' &$exePath& '\" \"%1\""'                           &@CRLF&@CRLF     ;('@="\"D:\\Kingpin\\Kingpin_M_Browser.exe\" \"%1\""')
-				Next
-
-				$hFile = FileOpen($g_sM_tmpFile_reg, $FO_OVERWRITE + $FO_UTF8)
-				if $hFile = -1 Then
-					setTempStatusBarMessage("Could not Save Settings")
-				Else
-					FileWrite($hFile, $arrayRegEdit) ;_FileWriteFromArray($iniFileCFG, $iniFileArray, 0)
-					FileClose($hFile)
-					ShellExecute($g_sM_tmpFile_reg); Run the file.
-				EndIf
-			Else
-				GUICtrlSetState ( $UI_CBox_useMLink, $GUI_UNCHECKED ) ;disable offline radio box
-			EndIf
-		Else ;reset reg to disable mlinks
-			If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "M-Links", "Disable M-Browser Web Link Support", 0, $HypoGameBrowser ) = $IDOK Then
-				$arrayRegEdit = ""& _
-					"Windows Registry Editor Version 5.00" &@CRLF& _
-					""                                     &@CRLF& _
-					"[-HKEY_CLASSES_ROOT\M-Browser]"       &@CRLF& _
-					"[-HKEY_CLASSES_ROOT\M-Browser2]"       &@CRLF
-
-				$hFile = FileOpen($g_sM_tmpFile_reg, $FO_OVERWRITE + $FO_UTF8)
-				if $hFile = -1 Then
-					setTempStatusBarMessage("Could not Save Settings")
-				Else
-					FileWrite($hFile, $arrayRegEdit) ;_FileWriteFromArray($iniFileCFG, $iniFileArray, 0)
-					FileClose($hFile)
-					ShellExecute($g_sM_tmpFile_reg); Run the file.
-				EndIf
-			Else
-				GUICtrlSetState ( $UI_CBox_useMLink, $GUI_CHECKED ) ;enable offline radio box
-			EndIf
-
+		$idx = _GUICtrlComboBox_GetCurSel($UI_Combo_runWebLinks)
+		If $idx > -1 Then
+			$sGameName = $g_aWebLinks[$idx][0]
+			$sSaveName = $g_aWebLinks[$idx][1]
+		Else
+			ConsoleWrite("!ERROR: weblink id:"&$idx&@CRLF)
+			Return
 		EndIf
+
+		ConsoleWrite("!$sGameName:" &$sGameName&" $sSaveName:"&$sSaveName&@CRLF)
+
+		;find matching game
+		For $i = 0 To $COUNT_GAME-1
+			If StringCompare($g_gameConfig[$i][$GNAME_SAVE], $sSaveName) = 0 Then
+				If CheckRegForGameLink($sGameName) Then
+					ConsoleWrite("-found game"&@CRLF)
+					WebLink_removeGame($i, $sGameName)
+				Else
+					ConsoleWrite("-missing game"&@CRLF)
+					WebLink_addGame($i, $sGameName)
+				EndIf
+				ExitLoop
+			EndIf
+		Next
+		ConsoleWrite("-count:"&$i&@CRLF)
 	EndFunc
 	;--> Regedit m-links
+	;=============================================================================
+
+	Func WebLink_addGame($iGameIdx, $sName)
+		local $arrayRegEdit, $hFile
+		local $sHBPath = StringReplace(@AutoItExe, "\", "\\")
+
+		If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "Web-Links", "Enable "&$sName&" Web Link Support", 0, $HypoGameBrowser ) = $IDOK Then
+			;Local $sGamePath = $g_aGameSetup[$iGameIdx][$GCFG_EXE_PATH]
+
+			$arrayRegEdit = StringFormat( _
+				"Windows Registry Editor Version 5.00"      &@CRLF& _
+				''                                          &@CRLF& _
+				'[HKEY_CLASSES_ROOT\%s]'                    &@CRLF& _
+				'@="URL:%s Protocol"'                       &@CRLF& _
+				'"URL Protocol"=""'                         &@CRLF& _
+				''                                          &@CRLF& _
+				'[HKEY_CLASSES_ROOT\%s\DefaultIcon]'        &@CRLF& _         ;@AutoItExe ;@WorkingDir
+				'@="%s,0"'                                  &@CRLF& _   ;@="D:\\Kingpin\\Kingpin_M_Browser.exe,0"
+				''                                          &@CRLF& _
+				'[HKEY_CLASSES_ROOT\%s\shell]'              &@CRLF& _
+				'[HKEY_CLASSES_ROOT\%s\shell\open]'         &@CRLF& _
+				'@=""'                                      &@CRLF& _
+				''                                          &@CRLF& _
+				'[HKEY_CLASSES_ROOT\%s\shell\open\command]' &@CRLF& _
+				'@="\"%s\" \"%1\""'                         &@CRLF, _     ;@=""D:\\Kingpin\\Kingpin_M_Browser.exe" "%1""
+				$sName, $sName, $sName, $sHBPath, $sName, $sName, $sName, $sHBPath)
+
+
+			$hFile = FileOpen($g_sM_tmpFile_reg, $FO_OVERWRITE + $FO_ANSI) ;$FO_UTF8
+			if $hFile = -1 Then
+				setTempStatusBarMessage("Could not Save Settings")
+			Else
+				FileWrite($hFile, $arrayRegEdit)
+				FileClose($hFile)
+				ShellExecute($g_sM_tmpFile_reg); Run the file.
+			EndIf
+		EndIf
+	EndFunc
+
+	Func WebLink_removeGame($iGameIdx, $sName)
+		local $arrayRegEdit, $hFile
+		;reset reg to disable mlinks
+		If MsgBox(BitOR($MB_SYSTEMMODAL,  $MB_OKCANCEL), "Web-Links", "Disable " &$sName& " Web Link Support", 0, $HypoGameBrowser ) = $IDOK Then
+			$arrayRegEdit = StringFormat( _
+				"Windows Registry Editor Version 5.00" &@CRLF& _
+				""                                     &@CRLF& _
+				"[-HKEY_CLASSES_ROOT\%s]"              &@CRLF, _
+				$sName)
+
+			$hFile = FileOpen($g_sM_tmpFile_reg, $FO_OVERWRITE + $FO_ANSI) ; $FO_UTF8)
+			if $hFile = -1 Then
+				setTempStatusBarMessage("Could not Save Settings")
+			Else
+				FileWrite($hFile, $arrayRegEdit)
+				FileClose($hFile)
+				ShellExecute($g_sM_tmpFile_reg); Run the file.
+			EndIf
+		EndIf
+	EndFunc
 	;=============================================================================
 
 #EndRegion --> M-BROWSER
@@ -3034,7 +3124,7 @@ Func GetListFromMasterTCP($iGameIdx, $sIPAddressDNS, $iPort)
 		$gameSpyString = StringFormat("\\gamename\\gspylite\\location\\0\\validate\\%s\\final\\\\list\\\\gamename\\%s\\final\\", _
 			GameSpyChallenge($dataRecv, $sGameKey), $g_gameConfig[$iGameIdx][$GNAME_GS])
 		if not TcpSendDataToMaster($tcpSocket, $gameSpyString) Then
-			ConsoleWrite("error TCP send:" & $gameSpyString& @CRLF)
+			ConsoleWrite("!error TCP send:" & $gameSpyString& @CRLF)
 			Return -1
 		EndIf
 
@@ -3043,7 +3133,7 @@ Func GetListFromMasterTCP($iGameIdx, $sIPAddressDNS, $iPort)
 		;$dataRecv = ""
 		For $i4 = 0 To 5 ;recieve upto 5 more lists, if long
 			if Not TcpRecvDataFromMaster($tcpSocket, $dataRecv, 2500) Then
-				ConsoleWrite("error TCP 3"&@CRLF)
+				ConsoleWrite("!error TCP 3"&@CRLF)
 				Return -1 ;recieve= \ip\10.10.10:31510\ip\10.10.10:31520\final\
 			EndIf
 			;ConsoleWrite("TCP recieve string idx:"& $i4+1 &" Data:"& $dataRecv &@CRLF)
@@ -3054,7 +3144,7 @@ Func GetListFromMasterTCP($iGameIdx, $sIPAddressDNS, $iPort)
 			EndIf
 		Next
 	EndIf
-	;ConsoleWrite ("data recieved.."& $dataRecv& @CRLF)
+	ConsoleWrite("data recieved.."& $dataRecv& @CRLF)
 	TCPCloseSocket($tcpSocket)
 
 	If $data <> "" Then
@@ -3063,6 +3153,9 @@ Func GetListFromMasterTCP($iGameIdx, $sIPAddressDNS, $iPort)
 			;ConsoleWrite("num servers:" &$countIP[0]-1&@CRLF)
 			;ConsoleWrite("data recievedTCP1=" & $data&@CRLF)
 			Return $data
+		Else
+			ConsoleWrite("!warning TCP no servers"&@CRLF)
+			Return -2
 		EndIf
 	EndIf
 	Return -1
@@ -3156,14 +3249,13 @@ Func CleanupMasterResponceUDP_EOT($iGameIdx, $sEOT, ByRef $inData, ByRef $inLen,
 			If StringCompare($sTail, $sEOT, $STR_CASESENSE) = 0 Then
 				ConsoleWrite("!!"&@CRLF)
 				$retData = StringTrimRight($tmpData, StringLen($sEOT)) ; trim EOT
-				return True
+				Return True
 			EndIf
 		EndIf
 	EndIf
 
 	Return False
 EndFunc
-
 
 
 Func CleanupMasterResponceUDP_Header($iGameIdx, ByRef $data, $trimLen)
@@ -3176,7 +3268,6 @@ Func CleanupMasterResponceUDP_Header($iGameIdx, ByRef $data, $trimLen)
 		$idx = StringInStr($data, $sHeader, 1, 1, 1, $iLen)
 		If $idx Then
 			$data = StringTrimLeft($data, $idx+$iLen - $trimLen) ; trim ÿÿÿÿservers\n... +1char(catch \0 \\)
-
 			;extra message cleanup... paintball2 and jedi(jkhub.org)
 			Switch $g_gameConfig[$iGameIdx][$NET_M2C]
 				Case $M2C_STEF1, $M2C_JEDI, $M2C_Q3, $M2C_Q3ET ;todo use count?
@@ -3332,7 +3423,7 @@ Func GetList_fromMasterUDP($iGameIdx, $sSendIPAddressDNS, $iSendPort, $sProtocol
 				$sTail = StringMid($dataRecv[$PACKET_DATA], $dataLen - StringLen($sEOT)+1, -1)
 				;ConsoleWrite("+$sTail s:"&Hex(StringToBinary($sTail))&@CRLF) ;todo cleanup debug
 				If CleanupMasterResponceUDP_EOT($iGameIdx, $sEOT, $dataRecv[$PACKET_DATA], $dataLen, $tmpData) Then
-					CleanupMasterResponceUDP_Header($iGameIdx, $tmpData, $isQ3IPList);remove header data
+					CleanupMasterResponceUDP_Header($iGameIdx, $tmpData, $isQ3IPList) ;remove header data
 					$data &= $tmpData
 					;ConsoleWrite("-packet=0x"& Hex(StringToBinary($data))&@CRLF)
 					ConsoleWrite(@CRLF&"+found 'EOT'"&@CRLF) ;todo cleanup debug
@@ -3601,7 +3692,7 @@ Func GetServerListFromMaster($iGameIdx)
 		if Not $bCombine And $iIdx = 0 Then
 			ConsoleWrite('!continue6'&@CRLF)
 			If $serverMessage = -1 Then
-				setTempStatusBarMessage("SERVER NOT RESPONDING. Check custom master address.", True)
+				setTempStatusBarMessage("SERVER NOT RESPONDING. Check master address.", True)
 			ElseIf $serverMessage = -2 Then
 				setTempStatusBarMessage("0 SERVER. Try another master.", True)
 			EndIf
@@ -6013,8 +6104,9 @@ GUISetOnEvent($GUI_EVENT_CLOSE, "ExitScript", $HypoGameBrowser)
 		iniFile_Save()
 
 		_GUICtrlComboBoxEx_Destroy($UI_Combo_gameSelector)
-		GUIDelete($MPopupInfo)
-		GUIDelete($HypoGameBrowser)
+		If $MPopupInfo Then GUIDelete($MPopupInfo)
+		If $GUI_gameSetup Then GUIDelete($GUI_gameSetup)
+		If $HypoGameBrowser Then GUIDelete($HypoGameBrowser)
 		Exit
 	EndFunc   ;==>CLOSEButton
 
@@ -6061,11 +6153,11 @@ Func SetTabActiveGame()
 	EndIf
 EndFunc
 
-
-
 ;using refresh button
 GUICtrlSetOnEvent ($UI_Btn_refreshMaster, "UI_Btn_refreshClicked")
+GUICtrlSetOnEvent ($UI_Btn_refreshMaster_dummy, "UI_Btn_refreshClicked") ;use dummy for hotkey
 	Func UI_Btn_refreshClicked()
+		ConsoleWrite('+btn clicked'&@CRLF)
 		SetSelectedGameID()
 		SetTabActiveGame() ;switch if in settings
 		CheckStatusbarMessage(True)
@@ -6551,7 +6643,7 @@ Func AutoRefreshTimer()
 		;check last refresh time
 		If TimerDiff($g_iLastRefreshTime) > $g_iTimeInputBox Then
 			Local $iGameIdx = ComboBoxEx_GetCurSel()
-			Local $iOff ;
+			Local $iOff
 			$g_bAutoRefreshActive = True
 
 			ResetRefreshTimmers() ; $g_iLastRefreshTime = TimerInit()
@@ -6581,12 +6673,12 @@ Func AutoRefreshTimer()
 	EndIf
 EndFunc
 
-
 #EndRegion
 
 Func ComboBoxEx_GetCurSel()
 	local $ret = _GUICtrlComboBoxEx_GetCurSel($UI_Combo_gameSelector)
 	if $ret < 0 Then
+		ConsoleWrite("!!!error combobox:"&$ret&@CRLF)
 		Return 0
 	elseif $ret > $COUNT_GAME Then
 		Return $COUNT_GAME
@@ -6596,6 +6688,7 @@ EndFunc
 
 
 Func ComboBoxEx_SetCurSel($idx)
+	ConsoleWrite("ComboBoxEx_SetCurSel:"&@CRLF)
 	Return _GUICtrlComboBoxEx_SetCurSel($UI_Combo_gameSelector, $idx)
 EndFunc
 
@@ -6667,12 +6760,12 @@ Func RestoreWindowHotKey()
 
 	If $g_bWasMinimized Then
 		If $g_bWasMaximized Then
-			GuiSetState(@SW_SHOW,  $HypoGameBrowser)
-			GuiSetState(@SW_MAXIMIZE,  $HypoGameBrowser)
+			GuiSetState(@SW_SHOW, $HypoGameBrowser)
+			GuiSetState(@SW_MAXIMIZE, $HypoGameBrowser)
 			$g_bWasMaximized = True
 		Else
-			GuiSetState(@SW_SHOW,  $HypoGameBrowser)
-			GuiSetState(@SW_RESTORE,  $HypoGameBrowser)
+			GuiSetState(@SW_SHOW, $HypoGameBrowser)
+			GuiSetState(@SW_RESTORE, $HypoGameBrowser)
 			;WinMove($HypoGameBrowser, $HypoGameBrowser, $g_aStoredWinSize[0], $g_aStoredWinSize[1], $g_aStoredWinSize[2], $g_aStoredWinSize[3])
 			$g_bWasMaximized = False
 		EndIf
@@ -6834,12 +6927,12 @@ TrayItemSetOnEvent($UI_Tray_max, "Tray_RestoreWindow")
 
 		If $g_bWasMinimized Then
 			If $g_bWasMaximized Then
-				GuiSetState(@SW_SHOW,  $HypoGameBrowser)
-				GuiSetState(@SW_MAXIMIZE,  $HypoGameBrowser)
+				GuiSetState(@SW_SHOW, $HypoGameBrowser)
+				GuiSetState(@SW_MAXIMIZE, $HypoGameBrowser)
 				$g_bWasMaximized = True
 			Else
-				GuiSetState(@SW_SHOW,  $HypoGameBrowser)
-				GuiSetState(@SW_RESTORE,  $HypoGameBrowser)
+				GuiSetState(@SW_SHOW, $HypoGameBrowser)
+				GuiSetState(@SW_RESTORE, $HypoGameBrowser)
 				;WinMove($HypoGameBrowser, $HypoGameBrowser, $g_aStoredWinSize[0], $g_aStoredWinSize[1], $g_aStoredWinSize[2], $g_aStoredWinSize[3])
 				$g_bWasMaximized = False
 			EndIf
