@@ -3144,7 +3144,7 @@ Func GetListFromMasterTCP($iGameIdx, $sIPAddressDNS, $iPort)
 			EndIf
 		Next
 	EndIf
-	ConsoleWrite("data recieved.."& $dataRecv& @CRLF)
+	;ConsoleWrite("data recieved.."& $dataRecv& @CRLF)
 	TCPCloseSocket($tcpSocket)
 
 	If $data <> "" Then
@@ -3816,7 +3816,7 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 	;Local $countServ = GetServerCountInArray($iGameIdx) ;count servers in array
 	Local $aResponce[$iSVCount][$COUNT_PACKET]
 	;Local Const	$sSV_ErrorStr = "Info string length exceeded"
-	Local $isGamespy = ($g_gameConfig[$iGameIdx][$NET_GS_P])? ( True):(False)
+	Local $isGamespy = ($g_gameConfig[$iGameIdx][$NET_GS_P])? (True):(False)
 
 	;dupe list. fill global/internal later
 	For $i = 0 To $iSVCount-1
@@ -3860,7 +3860,6 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 						;has '\final\
 						$iSVResponded += 1
 						$g_iServerCountTotal_Responded +=1
-						$aResponce[$i][$PACKET_PING] = TimerDiff($g_aServerStrings[$iGameIdx][$iOff][$COL_TIME]) ;for ping
 					EndIf
 				Else
 					if $aResponce[$i][$PACKET_DATA] = "" Then
@@ -3868,8 +3867,8 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 						$g_iServerCountTotal_Responded +=1
 					EndIf
 					$aResponce[$i][$PACKET_DATA] &= $data
-					$aResponce[$i][$PACKET_PING] = TimerDiff($g_aServerStrings[$iGameIdx][$iOff][$COL_TIME]) ;for ping
 				EndIf
+				$aResponce[$i][$PACKET_PING] = TimerDiff($g_aServerStrings[$iGameIdx][$iOff][$COL_TIME]) ;for ping
 				;ConsoleWrite("+match id:" &$iOff&@CRLF)
 
 				GUICtrlSetData($UI_Prog_getServer, Int((($start + $iSVResponded ) * 100) / $g_iServerCountTotal))
@@ -4964,6 +4963,12 @@ Func EnableUIButtons($bEnable)
 	Local $iState  = ($bEnable)? ($GUI_ENABLE):($GUI_DISABLE)
 	Local $bActive = ($bEnable)? (False):(True)
 
+	;set listview readonly state
+	For $i = 0 to UBound($UI_ListV_mb_ABC) - 1
+		_GUICtrlEdit_SetReadOnly($UI_ListV_mb_ABC[$i], $bActive)
+	Next
+	_GUICtrlEdit_SetReadOnly($UI_ListV_svData_A, $bActive)
+
 	;set btn disabled state
 	For $i = 0 to UBound($list1) - 1
 		GUICtrlSetState($list1[$i], $iState)
@@ -4976,12 +4981,6 @@ Func EnableUIButtons($bEnable)
 		ControlDisable($HypoGameBrowser, "", $UI_Combo_gameSelector)
 		_GUICtrlComboBoxEx_ShowDropDown($UI_Combo_gameSelector, False)
 	EndIf
-
-	;set btn readonly state
-	For $i = 0 to UBound($UI_ListV_mb_ABC) - 1
-		_GUICtrlEdit_SetReadOnly($UI_ListV_mb_ABC[$i], $bActive)
-	Next
-	_GUICtrlEdit_SetReadOnly($UI_ListV_svData_A, $bActive)
 
 	;todo check why this was needed? auto refresh?
 	If $g_iTabNum = $TAB_CHAT Then
@@ -5057,11 +5056,7 @@ Func FillServerListView_popData($iGameIDx, $ListViewA, $bFilter = False)
 	Local $bEmpty = _IsChecked($UI_Btn_filterEmpty)
 	Local $bFull = _IsChecked($UI_Btn_filterFull)
 
-	if $g_gameConfig[$iGameIdx][$NET_GS_P] then
-		$portIdx = $COL_PORTGS
-	else
-		$portIdx = $COL_PORT
-	endif
+	$portIdx = ($g_gameConfig[$iGameIdx][$NET_GS_P])? ($COL_PORTGS):($COL_PORT)
 
 	_GUICtrlListView_BeginUpdate($ListViewA)
 	_GUICtrlListView_DeleteAllItems($ListViewA)
@@ -5200,7 +5195,7 @@ Func FillServerListView_SV_Responce($iGameIdx, ByRef $sIP, ByRef $sPort, ByRef $
 	$mod = $modName
 
 	;update gameport from server string
-	if $g_gameConfig[$iGameIdx][$NET_GS_P] And $portGS <> ""  then
+	if $g_gameConfig[$iGameIdx][$NET_GS_P] And $portGS <> "" Then
 		$sPortGS = Number($portGS) ;set gamespy reported game port
 		Local $ip = string($sIP &":"& $sPortGS)
 		_GUICtrlListView_SetItem($ListViewA, $ip, $iListIndex,		1,	-1)
@@ -5477,9 +5472,9 @@ Func HEXProcessPlayerResponce($data)
 	local $aASC = StringToASCIIArray($data, 0, Default, $SE_ANSI)
 	local $iLen = UBound($aASC)
 
-	If not IsArray($aASC) or $iLen < 4 Then return ""
-	if not (BitAND(MSG_ReadLong($aASC, $i, $iLen, True), 0xffff0000) = $hex2_NETFLAG_CTL) Then return ""
-	if not (MSG_ReadByte($aASC, $i, $iLen) = $hex2_CCREP_PLAYER_INFO) Then return ""
+	If not IsArray($aASC) or $iLen < 4 Then Return ""
+	if not (BitAND(MSG_ReadLong($aASC, $i, $iLen, True), 0xffff0000) = $hex2_NETFLAG_CTL) Then Return ""
+	if not (MSG_ReadByte($aASC, $i, $iLen) = $hex2_CCREP_PLAYER_INFO) Then Return ""
 
 	$pIdx      = MSG_ReadByte($aASC, $i, $iLen)
 	$name      = MSG_ReadString($aASC, $i, $iLen) ;name
