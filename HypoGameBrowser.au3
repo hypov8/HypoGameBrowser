@@ -5,7 +5,7 @@
 #AutoIt3Wrapper_UseX64=n
 #AutoIt3Wrapper_Res_Comment='Kingpin Game Browser by hypo_v8'
 #AutoIt3Wrapper_Res_Description='HypoGameBrowser for Kingpin, KingpinQ3, Quake2 etc.'
-#AutoIt3Wrapper_Res_Fileversion=1.0.4.10
+#AutoIt3Wrapper_Res_Fileversion=1.0.4.13
 #AutoIt3Wrapper_Res_Fileversion_AutoIncrement=p
 #AutoIt3Wrapper_Res_File_Add=D:\_code_\hypoBrowser\icons\logo_5.bmp,rt_bitmap,logo_1
 #AutoIt3Wrapper_AU3Check_Parameters=-d
@@ -83,6 +83,14 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;      added paintball EOT. 0A
 ;      updated weblinks to be a dropdown list. multiple game support
 ;      hex/heretic masters set to master.maraakate.org as first selection
+;1.0.4.11
+;
+;1.0.4.12
+;      added option to disable minimize on game lunch
+;1.0.4.13
+;      increased server list to 1200. for unreal 1k+
+;      increased GS master try count. for unreal 1k+
+
 
 
 ;1.0.x todo
@@ -98,6 +106,9 @@ Global Const $versionNum = "1.0.4" ;1.0.0
 ;          so it can check for response after getting some servers
 ;      mark setting dirty. prevent endless .ini update
 ;      implement additional weblink support eg quake2://123.12... (move to user config?)
+;      copy/paste ip. copy to fav/offline
+;      option to auto store new servers in offline.ini
+;      fix font scale on dropdown
 ;      ...
 #EndRegion
 
@@ -192,7 +203,7 @@ Global Enum _
 	$COUNT_TABS ;total tabs count
 
 Global Const $MAX_PLAYERS = 64
-Global Const $g_iMaxSer = 750 ; global max servers to get, q2/qw list is huge
+Global Const $g_iMaxSer = 1200 ; global max servers to get, q2/qw/unreal list is huge
 Global Const $g_iMaxIP = 50 ;max servers ping will get at once. update
 Global Const $GUIMINWID = 824, $GUIMINHT = 650 ;set restricted GUI size
 
@@ -207,16 +218,18 @@ Global Enum _ ;BOT TYPES
 	$BOT_Q3    ;ping < 2
 
 
-Global Enum _
+Global Enum _ ;client to server message
 	$C2S_NONE, _
 	$C2S_Q1, _
 	$C2S_Q2, _
 	$C2S_Q3, _
+	$C2S_D3, _
 	$C2S_MOH, _
 	$C2S_HEX2, _
 	$C2S_HW, _
 	$C2S_QW, _
-	$C2S_GS
+	$C2S_GS ;,_
+	;$C2S_Q4
 Func GetData_C2S($idx)
 	Switch $idx
 		Case $C2S_NONE
@@ -229,6 +242,10 @@ Func GetData_C2S($idx)
 			Return 'ÿÿÿÿstatus'&@LF
 		Case $C2S_Q3
 			Return 'ÿÿÿÿgetstatus'&@LF ;&Chr(0)
+		Case $C2S_D3
+			;Return "ÿÿÿÿgetInfo" & BinaryToString("0x00") & BinaryToString('0x0002000A') ;"0x0002012E"); ASYNC_PROTOCOL_VERSION);  // e.g., 131374
+			Return "ÿÿgetInfo" & BinaryToString("0x00") ; & BinaryToString('0x0002000A')
+
 		Case $C2S_MOH
 			Return BinaryToString('0xFFFFFFFF02') &'getstatus'&@LF
 		Case $C2S_HW
@@ -244,11 +261,14 @@ Func GetData_C2S($idx)
 			Return 'ÿÿÿÿstatus 31'&@LF ; (1+2+4+8+16)
 		Case $C2S_GS
 			Return '\status\'&@LF
+		;Case $C2S_Q4
+		;	Return 'ÿÿ\status\'& chr(0)
+
 	EndSwitch
 	Return ''
 EndFunc
 
-Global Enum _ ;S2C
+Global Enum _ ;SERVER TO CLIENT
 	$S2C_NONE, _
 	$S2C_Q1, _
 	$S2C_HEX2, _
@@ -256,6 +276,7 @@ Global Enum _ ;S2C
 	$S2C_QW, _
 	$S2C_Q2, _
 	$S2C_Q3, _
+	$S2C_D3, _
 	$S2C_GS
 Func GetData_S2C($idx)
 	;most are ignored. using first '\'
@@ -272,6 +293,9 @@ Func GetData_S2C($idx)
 			Return 'ÿÿÿÿprint'
 		Case $S2C_Q3
 			Return 'ÿÿÿÿstatusResponse'
+		Case $S2C_D3
+			;Return "ÿÿgetServers" & BinaryToString("0x0028000100000A")
+			Return "ÿÿinfoResponse"& BinaryToString("0x00") ; & BinaryToString("0x0028000100000A")
 		Case $S2C_GS
 			Return '\TODO\' ;known by gs port anyway
 	EndSwitch
@@ -284,6 +308,7 @@ Global Enum _ ;C2M
 	$C2M_Q2, _
 	$C2M_Q3, _
 	$C2M_Q3ET, _ ;no filters
+	$C2M_D3, _ ;DOOM3
 	$C2M_HEX2, _
 	$C2M_HW, _
 	$C2M_AA, _ ;alien arena
@@ -297,6 +322,8 @@ Func GetData_C2M($idx)
 			Return 'query'&@lf
 		Case $C2M_Q3, $C2M_Q3ET
 			Return 'ÿÿÿÿgetservers'
+		Case $C2M_D3
+			Return "ÿÿgetServers" & BinaryToString("0x0028000100000A")
 		Case $C2M_HEX2
 			Return 'ÿc'&chr(0)
 		Case $C2M_HW
@@ -431,7 +458,7 @@ Global $UI_Combo_master, $UI_Text_setupTitle, $UI_In_master_Cust, $UI_In_gamePat
 	$UI_Grp_mBrowser, $UI_In_getPortM, $UI_MHost_removeServer, $UI_MHost_addServer, $UI_MHost_excludeSrever, _
 	$UI_Grp_webLinks, $UI_Text_linkKPInfo, $UI_Text_linkMServers, $UI_Text_linkSupport, $UI_Text_linkContactM, _
 	$UI_CBox_sound, $UI_Grp_gameSetup, $UI_Text_linkKPQ3, $UI_Text_linkHypoEmail, $UI_Text_linkDiscord, $UI_Btn_gameNew, _
-	$UI_Grp_browserOpt, $UI_CBox_minToTray, $UI_In_hotKey, $UI_Btn_setHotKey, $UI_Text_masterUser, $UI_Text_masterProto, _
+	$UI_Grp_browserOpt, $UI_CBox_minToTray, $UI_CBox_minimize, $UI_In_hotKey, $UI_Btn_setHotKey, $UI_Text_masterUser, $UI_Text_masterProto, _
 	$UI_CBox_gamePingOff, $UI_CBox_gamePingFav, $UI_Btn_runWebLinks, $UI_Combo_runWebLinks
 
 ;m-browser TAB
@@ -762,10 +789,10 @@ Func BuildTabViewPage($iTab, $sName)
 				$UI_CBox_sound = GUICtrlCreateCheckbox("Play Sounds", 353, 62, 105, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Play a sound if there is a player in a server")
-				$UI_CBox_minToTray = GUICtrlCreateCheckbox("Minimize to Tray", 353, 82, 105, 21)
+				$UI_CBox_minToTray = GUICtrlCreateCheckbox("Tray", 421, 82, 41, 21)
 				GUICtrlSetState(-1, $GUI_CHECKED)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
-				GUICtrlSetTip(-1, "This is used in tray menu(Minimize) and on game lunch")
+				GUICtrlSetTip(-1, "Minimize to Tray."&@CRLF&"This is used in tray menu(Minimize) and on game lunch")
 				$UI_CBox_tryNextMaster = GUICtrlCreateCheckbox("Ping Next Master", 353, 102, 105, 21)
 				GUICtrlSetState(-1, $GUI_CHECKED)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
@@ -800,6 +827,10 @@ Func BuildTabViewPage($iTab, $sName)
 				$UI_Btn_setHotKey = GUICtrlCreateButton("Apply", 393, 314, 64, 21)
 				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 				GUICtrlSetTip(-1, "Apply a Windows global hotkey")
+				$UI_CBox_minimize = GUICtrlCreateCheckbox("Minimize", 353, 82, 61, 21)
+				GUICtrlSetState(-1, $GUI_CHECKED)
+				GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKTOP+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
+				GUICtrlSetTip(-1, "Minimize window on lunch")
 			GUICtrlCreateGroup("", -99, -99, 1, 1)
 			;end browser
 			;===============
@@ -904,7 +935,9 @@ Func BulidMainGui()
 	GUICtrlCreateTabItem("")
 
 	;==> game selector
-	$UI_Combo_gameSelector = _GUICtrlComboBoxEx_Create($HypoGameBrowser, "", 652, 8, 149, 582, $CBS_DROPDOWNLIST )
+	$UI_Combo_gameSelector = _GUICtrlComboBoxEx_Create($HypoGameBrowser, "", 632, 8, 169, 582, $CBS_DROPDOWNLIST )
+	;GUICtrlSetFont(-1, 16* $aDPI[0], 800, 0, "MS Sans Serif") ;todo
+
 
 	;==> buttons
 	$UI_Btn_refreshMaster = GUICtrlCreateButton("Refresh", 3, 56+8, 56, 41) ;, $BS_BITMAP)
@@ -937,7 +970,7 @@ Func BulidMainGui()
 	GUICtrlSetResizing(-1, $GUI_DOCKLEFT+$GUI_DOCKBOTTOM+$GUI_DOCKRIGHT+$GUI_DOCKHEIGHT)
 
 	;==> statusbar master
-	$UI_Text_masterDisplay = GUICtrlCreateLabel("Master:", 515, 591, 288, 17, BitOR($SS_RIGHT,$SS_CENTERIMAGE), $WS_EX_STATICEDGE)
+	$UI_Text_masterDisplay = GUICtrlCreateLabel("Master:", 515, 591, 288, 17, BitOR($SS_RIGHT,$SS_CENTERIMAGE, $SS_NOPREFIX), $WS_EX_STATICEDGE)
 	GUICtrlSetResizing(-1, $GUI_DOCKRIGHT+$GUI_DOCKBOTTOM+$GUI_DOCKWIDTH+$GUI_DOCKHEIGHT)
 	GUICtrlSetTip(-1, "Sklvggh")
 	GUICtrlSetState(-1, $GUI_ONTOP)
@@ -993,9 +1026,12 @@ Func BulidMainGui_Finish()
 
 	_GUICtrlComboBoxEx_SetImageList($UI_Combo_gameSelector, $ImageListGames) ; icons
 	_GUICtrlComboBoxEx_InitStorage($UI_Combo_gameSelector, $COUNT_GAME, 160)
-	_GUICtrlComboBoxEx_SetItemHeight($UI_Combo_gameSelector, -1, 16)
-	_GUICtrlComboBoxEx_SetItemHeight($UI_Combo_gameSelector, 0, 18)
+	_GUICtrlComboBoxEx_SetItemHeight($UI_Combo_gameSelector, -1, 16) ;comboBox height
+	_GUICtrlComboBoxEx_SetItemHeight($UI_Combo_gameSelector, 0, 18 * $aDPI[0]) ;list item height
 	_GUICtrlComboBoxEx_BeginUpdate($UI_Combo_gameSelector)
+
+	;_WinAPI_CreateFont
+
 	for $i = 0 to $COUNT_GAME-1 ; COUNT_GAME
 		_GUICtrlComboBoxEx_AddString($UI_Combo_gameSelector, $g_gameConfig[$i][$GNAME_MENU], $g_aIconIdx[$i], $g_aIconIdx[$i])
 	Next
@@ -1052,6 +1088,7 @@ Func startupMainUI()
 	;add this to let everything load
 	EnableUIButtons(False)
 	GameSetup_UpdateUI()
+	StartupSetMinimizeOption() ;test minimize values
 
 	;load dark theme
 	$g_UseTheme = _GUICtrlComboBox_GetCurSel($UI_Combo_theme)
@@ -1119,7 +1156,7 @@ Func GUISetColor()
 		$UI_Text_linkKPInfo, $UI_Text_linkMServers, $UI_Text_linkSupport, $UI_Text_linkContactM, _ ;web links
 		$UI_Text_linkKPQ3, $UI_Text_linkHypoEmail, $UI_Text_linkDiscord, _ ;web links
 		$UI_CBox_sound, $UI_Tex_refreshTime, $UI_Grp_gameSetup, $UI_CBox_autoRefresh, _
-		$UI_CBox_gameRefresh, $UI_CBox_gamePingAll, $UI_CBox_minToTray, $UI_CBox_tryNextMaster, _
+		$UI_CBox_gameRefresh, $UI_CBox_gamePingAll, $UI_CBox_minToTray, $UI_CBox_minimize, $UI_CBox_tryNextMaster, _
 		$UI_Grp_browserOpt, $UI_Label_hotkey, $UI_TextAbout, $UI_Grp_hosted, $UI_Text_setupTitle, _
 		$UI_Text_masterAddress, $UI_Text_playerName, $UI_Text_runCmd, $UI_Btn_gamePath, _
 		$UI_Text_masterUser, $UI_Text_masterProto, $UI_CBox_gamePingOff, $UI_CBox_gamePingFav]
@@ -1380,7 +1417,7 @@ Func UpdateMasterDisplay()
 	switch $idx
 		Case 0 to $COUNT_GAME -1
 			local $aMaster_addy = GetMasterAddressFromSettings($idx)
-			GUICtrlSetData($UI_Text_masterDisplay,  " " &$aMaster_addy& " ") ;"Master: "&
+			GUICtrlSetData($UI_Text_masterDisplay, StringFormat(' %s ', $aMaster_addy)) ;"Master: "&
 			GUICtrlSetTip($UI_Text_masterDisplay, $aMaster_addy)
 		case else
 			GUICtrlSetData($UI_Text_masterDisplay, "")
@@ -1590,6 +1627,8 @@ Func gameCFG_C2S_type($sData)
 			Return $C2S_Q2
 		Case StringCompare($sData,'Q3') = 0
 			Return $C2S_Q3
+		Case StringCompare($sData,'DOOM3') = 0
+			Return $C2S_D3
 		Case StringCompare($sData,'MOH') = 0
 			Return $C2S_MOH
 		Case StringCompare($sData,'HEX2') = 0
@@ -1600,6 +1639,9 @@ Func gameCFG_C2S_type($sData)
 			Return $C2S_QW
 		Case StringCompare($sData,'GS') = 0
 			Return $C2S_GS
+;~ 		Case StringCompare($sData,'Q4') = 0
+;~ 			Return $C2S_Q4
+
 		Case Else
 			Return $C2S_NONE
 	EndSelect
@@ -1613,6 +1655,8 @@ Func gameCFG_S2C_type($sData)
 			Return $S2C_Q2
 		Case StringCompare($sData,'Q3') = 0
 			Return $S2C_Q3
+		Case StringCompare($sData,'DOOM3') = 0
+			Return $S2C_D3
 		Case StringCompare($sData,'HEX2') = 0
 			Return $S2C_HEX2
 		Case StringCompare($sData,'HW') = 0
@@ -1636,6 +1680,8 @@ Func gameCFG_C2M_type($sData)
 			Return $C2M_Q3
 		Case StringCompare($sData,'Q3ET') = 0
 			Return $C2M_Q3ET
+		Case StringCompare($sData,'DOOM3') = 0
+			Return $C2M_D3
 		Case StringCompare($sData,'HEX2') = 0
 			Return $C2M_HEX2
 		Case StringCompare($sData,'HW') = 0
@@ -1793,6 +1839,7 @@ Func iniFile_Load()
 	iniFileSetDropdownEx(IniRead($sFileName, 'Settings', 'StartupGame',     '0'), $UI_Combo_gameSelector)
 	iniFileSetChkBox(IniRead($sFileName,     'Settings', 'PlaySounds',      '0'), $UI_CBox_sound,         $_null)
 	iniFileSetChkBox(IniRead($sFileName,     'Settings', 'MinimizeToTray',  '0'), $UI_CBox_minToTray,     $_null)
+	iniFileSetChkBox(IniRead($sFileName,     'Settings', 'MinimizeWin',     '0'), $UI_CBox_minimize,      $_null)
 	iniFileSetDropdown(IniRead($sFileName,   'Settings', 'UseTheme',        '1'), $UI_Combo_theme)
 	iniFileSetChkBox(IniRead($sFileName,     'Settings', 'PingNextMaster',  '0'), $UI_CBox_tryNextMaster, $_null)
 	iniFileSetChkBox(IniRead($sFileName,     'Settings', 'AutoRefresh',     '0'), $UI_CBox_autoRefresh,   $g_bAutoRefresh)
@@ -1915,6 +1962,7 @@ Func iniFile_Save()
 		'StartupGame='     & StringFormat('%s', getComboExStr($UI_Combo_gameSelector)) &@LF& _
 		'PlaySounds='      & StringFormat('%s', getCboxStr($UI_CBox_sound)) &@LF& _
 		'MinimizeToTray='  & StringFormat('%s', getCboxStr($UI_CBox_minToTray)) &@LF& _
+		'MinimizeWin='     & StringFormat('%s', getCboxStr($UI_CBox_minimize)) &@LF& _
 		'UseTheme='        & StringFormat('%s', getComboStr($UI_Combo_theme)) &@LF& _
 		'PingNextMaster='  & StringFormat('%s', getCboxStr($UI_CBox_tryNextMaster)) &@LF& _
 		'AutoRefresh='     & StringFormat('%s', getCboxStr($UI_CBox_autoRefresh)) &@LF& _
@@ -2175,12 +2223,12 @@ Func GUI_GameSetup_Build()
 	$UI3_Text_c2sMSG = GUICtrlCreateLabel("Send MSG", 284, 28, 80, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Message type sent to server.")
 	$UI3_Combo_c2sMSG = GUICtrlCreateCombo("", 372, 28, 117, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
-	GUICtrlSetData(-1, "NONE|Q1|Q2|Q3|MOH|HEX2|HW|QW|GS", "NONE")
+	GUICtrlSetData(-1, "NONE|Q1|Q2|Q3|DOOM3|MOH|HEX2|HW|QW|GS", "NONE") ;todo: make dynamic?
 	GUICtrlSetTip(-1, "Message type sent to server.")
 	$UI3_Text_s2cMSG = GUICtrlCreateLabel("Responce", 284, 52, 80, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Message type recieved from server.")
 	$UI3_Combo_s2cMSG = GUICtrlCreateCombo("", 372, 52, 117, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
-	GUICtrlSetData(-1, "NONE|Q1|HEX2|HW|QW|Q2|Q3|GS", "NONE")
+	GUICtrlSetData(-1, "NONE|Q1|HEX2|HW|QW|Q2|Q3|DOOM3|GS", "NONE")
 	GUICtrlSetTip(-1, "Message type recieved from server.")
 	$UI3_Text_gsPort = GUICtrlCreateLabel("GameSpy Port", 284, 76, 80, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Gamespy query port, offset. Kingpin  uses -10(31500) for browser communication.")
@@ -2201,7 +2249,7 @@ Func GUI_GameSetup_Build()
 	$UI3_Text_c2mMSG = GUICtrlCreateLabel("Send MSG", 24, 200, 60, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Message type sent to master.")
 	$UI3_Combo_c2mMSG = GUICtrlCreateCombo("", 92, 200, 101, 25, BitOR($CBS_DROPDOWNLIST,$CBS_AUTOHSCROLL))
-	GUICtrlSetData(-1, "NONE|Q1|Q2|Q3|Q3ET|HEX2|HW|AA|PB2|GS", "NONE")
+	GUICtrlSetData(-1, "NONE|Q1|Q2|Q3|Q3ET|DOOM3|HEX2|HW|AA|PB2|GS", "NONE")
 	GUICtrlSetTip(-1, "Message type sent to master.")
 	$UI3_Text_q3Protocol = GUICtrlCreateLabel("Q3 Protocol", 208, 200, 60, 21, $SS_CENTERIMAGE)
 	GUICtrlSetTip(-1, "Quake 3 querry protocol/number. Use pipe (|) to use multiple query.")
@@ -3131,7 +3179,7 @@ Func GetListFromMasterTCP($iGameIdx, $sIPAddressDNS, $iPort)
 		;ConsoleWrite("-gs querry:"&$gameSpyString&@CRLF)
 
 		;$dataRecv = ""
-		For $i4 = 0 To 5 ;recieve upto 5 more lists, if long
+		For $i4 = 0 To 15 ;recieve upto 15 more lists, if long
 			if Not TcpRecvDataFromMaster($tcpSocket, $dataRecv, 2500) Then
 				ConsoleWrite("!error TCP 3"&@CRLF)
 				Return -1 ;recieve= \ip\10.10.10:31510\ip\10.10.10:31520\final\
@@ -3150,7 +3198,7 @@ Func GetListFromMasterTCP($iGameIdx, $sIPAddressDNS, $iPort)
 	If $data <> "" Then
 		Local $countIP = StringSplit($data, "ip\", 1)
 		if Not @error and $countIP[0] > 0 Then
-			;ConsoleWrite("num servers:" &$countIP[0]-1&@CRLF)
+			ConsoleWrite("num servers:" &$countIP[0]-1&@CRLF)
 			;ConsoleWrite("data recievedTCP1=" & $data&@CRLF)
 			Return $data
 		Else
@@ -3908,6 +3956,12 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 				EndIf
 			Case IsQ1Hexen_ServerResponce($g_gameConfig[$iGameIdx][$NET_S2C])
 				$data = Hexen2ServerResponce($aResponce[$i][$PACKET_DATA]) ;special case
+
+			Case IsDOOM3_ServerResponce($g_gameConfig[$iGameIdx][$NET_S2C]) ;$S2C_D3
+				$data = StringTrimLeft($aResponce[$i][$PACKET_DATA], 15+4+4) ;remove 15-byte inforesponce, 4-byte header, 4-byte challenge
+				;ConsoleWrite(">D3 data:"&  $data &@CRLF)
+				;$idx = StringInStr($data, BinaryToString("0x000000002A00"))
+
 			Case Else
 				$data = StringTrimLeft($aResponce[$i][$PACKET_DATA], StringInStr($aResponce[$i][$PACKET_DATA], "\")) ;remove prefix, upto "\"
 				;player data
@@ -3919,7 +3973,28 @@ Func listenIncommingServers($iGameIdx, $aServerIdx, $start, $end) ;, $iOffset) ;
 			;todo ADD GAMES
 		EndSelect
 
-		$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOSTR] = StringSplit($data, "\", $STR_NOCOUNT)
+
+		if IsDOOM3_ServerResponce($g_gameConfig[$iGameIdx][$NET_S2C]) Then ;$S2C_D3
+			$data = StringSplit($data, chr(0), $STR_NOCOUNT)
+			local $idx = UBound($data)
+			For $j = 0 To $idx - 2 Step 2
+				if $data[$j] = "" Then ; and $data[$j+1] = "" Then
+					$data = _ArrayExtract($data, -1, $j-1)
+					if $j < $idx-2 Then ;has player data
+						local $pData = _ArrayExtract($data, $j+2, -1)
+						_ArrayDisplay($pData)
+						$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOPLYR] = _ArrayToString($pData, chr(0)) ;DOOM3 player handeling
+
+					EndIf
+					ExitLoop
+				EndIf
+			Next
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOSTR] = $data
+			;$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOSTR] = StringSplit($data, chr(0), $STR_NOCOUNT) ;split at null
+
+		Else
+			$g_aServerStrings[$iGameIdx][$iOff][$COL_INFOSTR] = StringSplit($data, "\", $STR_NOCOUNT)
+		EndIf
 		$g_aServerStrings[$iGameIdx][$iOff][$COL_PING] = int($aResponce[$i][$PACKET_PING])
 		;ConsoleWrite(StringFormat( ">id:%i\n-data:%s\n+p:%s l:%i", _
 		;	$iOff, $data, $g_aServerStrings[$iGameIdx][$iOff][$COL_INFOPLYR], $g_aServerStrings[$iGameIdx][$iOff][$COL_IDX]) &@CRLF)
@@ -3936,6 +4011,16 @@ Func IsQ1Hexen_ServerResponce(ByRef $s2cType)
 			Return False
 	EndSwitch
 EndFunc
+
+Func IsDOOM3_ServerResponce(ByRef $s2cType)
+	Switch $s2cType
+		Case $S2C_D3 ; , $S2C_Q4
+			Return True
+		Case Else
+			Return False
+	EndSwitch
+EndFunc
+
 
 Func ReadStringInArray(ByRef $aChars, ByRef $idx, $numChars)
 	Local $sRet = ""
@@ -4696,7 +4781,7 @@ EndFunc ; -->send YYYYStatus
 ;=======================================================
 ; --> fill array kp server
 Func InfoStr_GetServerName(ByRef $aData)
-	Local $sTmp = parseInfoString($aData, "hostname|sv_hostname") ;todo check game?
+	Local $sTmp = parseInfoString($aData, "hostname|sv_hostname|si_name") ;todo check game? si_name=D3
 	Return StringRegExpReplace($sTmp, "[^ -ÿ]+" ,"") ;remove < asc(32)
 EndFunc
 
@@ -4724,28 +4809,52 @@ Func InfoStr_GetPlayerCount(ByRef $aData, ByRef $sPData, $iGameIdx)
 		Next
 	Else
 		if $sPData = "" Then Return 0
-		$aTmp = StringSplit($sPData, Chr(10))
-		If @error Then
-			ConsoleWrite("player error no @LF" & $sPData&@CRLF)
-			Return 0
-		EndIf
-		local $isQW = ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_QW)
-		;3 lines standard >= players
-		For $iply = 1 To $aTmp[0]
-			If $aTmp[$iply] <> "" Then ;catch end line @LF, EOT
-				If Not parsePlayerString($aTmp[$iply], $name, $frags, $ping, $death, $team, $isQW) Then ContinueLoop
-				;remove bots from player counts
-				Switch $g_gameConfig[$iGameIdx][$BOT_TYPE]
-					Case $BOT_Q2 ; $ID_Q2, $ID_DDAY
-						If StringInStr($name, "WallFly", $STR_NOCASESENSEBASIC) Then ContinueLoop ;WTF is this. skip bot?
-						if Number($ping) < 3 Then ContinueLoop ;skip bot
-					Case $BOT_Q3
-						if Number($ping) = 0 Then ContinueLoop ;skip bot
-					;todo ADD GAMES
-				EndSwitch
+
+		if IsDOOM3_ServerResponce($g_gameConfig[$iGameIdx][$NET_S2C]) Then ;$S2C_D3
+			local $aASC = StringToASCIIArray($sPData, 0, Default, $SE_ANSI)
+			local $iLen = UBound($aASC)
+			local $cl_num, $cl_ping, $cl_rate, $cl_name, $cl_clan
+			local $i = 0 ; skip null
+			ConsoleWrite("+len:"&$iLen&@CRLF)
+			while $i < ($iLen - 3)
+				$cl_num = MSG_ReadByte($aASC, $i, $iLen)
+				$i+=1
+				$cl_ping = MSG_ReadShort($aASC, $i, $iLen)
+				$i+=1
+				$cl_rate = MSG_ReadLong($aASC, $i, $iLen)
+				$i+=1
+				$cl_name = MSG_ReadString($aASC, $i, $iLen)
+				$cl_clan = MSG_ReadString($aASC, $i, $iLen)
+				local $tmpStr = StringFormat(">Doom3 num:%i ping:%i rate:%i name:%s clan:%s", $cl_num, $cl_ping, $cl_rate, $cl_name, $cl_clan)
+				ConsoleWrite($tmpStr &@CRLF)
 				$player += 1
+			WEnd
+
+
+		Else ;Q2 protocol
+			$aTmp = StringSplit($sPData, Chr(10))
+			If @error Then
+				ConsoleWrite("player error no @LF" & $sPData&@CRLF)
+				Return 0
 			EndIf
-		Next
+			local $isQW = ($g_gameConfig[$iGameIdx][$NET_S2C] = $S2C_QW)
+			;3 lines standard >= players
+			For $iply = 1 To $aTmp[0]
+				If $aTmp[$iply] <> "" Then ;catch end line @LF, EOT
+					If Not parsePlayerString($aTmp[$iply], $name, $frags, $ping, $death, $team, $isQW) Then ContinueLoop
+					;remove bots from player counts
+					Switch $g_gameConfig[$iGameIdx][$BOT_TYPE]
+						Case $BOT_Q2 ; $ID_Q2, $ID_DDAY
+							If StringInStr($name, "WallFly", $STR_NOCASESENSEBASIC) Then ContinueLoop ;WTF is this. skip bot?
+							if Number($ping) < 3 Then ContinueLoop ;skip bot
+						Case $BOT_Q3
+							if Number($ping) = 0 Then ContinueLoop ;skip bot
+						;todo ADD GAMES
+					EndSwitch
+					$player += 1
+				EndIf
+			Next
+		EndIf
 	EndIf
 
 	Return $player
@@ -4767,7 +4876,7 @@ EndFunc
 
 ;=======================
 Func InfoStr_GetPlayerMax(ByRef $aData)
-	Local $aServVars = parseInfoString($aData, "maxclients|maxplayers|sv_maxclients|") ;
+	Local $aServVars = parseInfoString($aData, "maxclients|maxplayers|sv_maxclients|si_maxPlayers") ;si_=D3
 	if $aServVars <> "" Then
 		Return $aServVars
 	EndIf
@@ -4775,11 +4884,11 @@ Func InfoStr_GetPlayerMax(ByRef $aData)
 EndFunc
 ;=======================
 Func InfoStr_GetMapName(ByRef $aData)
-	Return parseInfoString($aData, "mapname|map")
+	Return parseInfoString($aData, "mapname|map|si_map") ;si_=D3
 EndFunc
 ;=======================
 Func InfoStr_GetModName(ByRef $aData)
-	Return parseInfoString($aData, "gametype|gamename|game|*gamedir|*version")
+	Return parseInfoString($aData, "gametype|gamename|game|*gamedir|*version") ;todo doom3? si_
 EndFunc ; --> fill array kp server
 ;=======================
 Func InfoStr_GetGamePort(ByRef $aData)
@@ -6377,6 +6486,29 @@ Func ConvertIPtoInt($ip)
 	Return 0
 EndFunc
 
+;=================
+;browser options
+Func StartupSetMinimizeOption()
+	if _IsChecked($UI_CBox_minToTray) Then          ;force minimize
+		_SetCheckedState($UI_CBox_minimize, True)
+	;ElseIf Not _IsChecked($UI_CBox_minimize) Then   ;disable min to tray
+	;	_SetCheckedState($UI_CBox_minToTray, False)
+	EndIf
+EndFunc
+
+GUICtrlSetOnEvent($UI_CBox_minimize, "UI_CBox_minimizeClicked")
+	Func UI_CBox_minimizeClicked()
+		If Not _IsChecked($UI_CBox_minimize) Then ;disable min to tray
+			_SetCheckedState($UI_CBox_minToTray, False)
+		EndIf
+	EndFunc
+GUICtrlSetOnEvent($UI_CBox_minToTray, "UI_CBox_minToTrayClicked")
+	Func UI_CBox_minToTrayClicked()
+		if _IsChecked($UI_CBox_minToTray) Then ;force minimize
+			_SetCheckedState($UI_CBox_minimize, True)
+		EndIf
+	EndFunc
+
 
 ;=================
 ;sort server rules
@@ -6906,7 +7038,7 @@ TraySetOnEvent($TRAY_EVENT_PRIMARYUP, "Tray_Single") ;hypo todo: check focus?
 	Func Tray_Single()
 		local $stateMinimized = WinGetState($HypoGameBrowser)
 
-		If  BitAND($stateMinimized,16) Then ; Return ;$WIN_STATE_MINIMIZED
+		If  BitAND($stateMinimized, 16) Then ; Return ;$WIN_STATE_MINIMIZED
 			ConsoleWrite("traySingleClick " & $stateMinimized&@CRLF)
 			Tray_RestoreWindow()
 		Else
@@ -6953,17 +7085,29 @@ TrayItemSetOnEvent($UI_Tray_max, "Tray_RestoreWindow")
 		;EnableUIButtons(True)
 	EndFunc ;--> tray events
 
-TrayItemSetOnEvent($UI_Tray_minimize, "Tray_MinimizeWindow")
-	Func Tray_MinimizeWindow()
-		Local $getWinState = WinGetState($HypoGameBrowser)
-		if BitAND($getWinState,32) Then $g_bWasMaximized = True
+TrayItemSetOnEvent($UI_Tray_minimize, "Tray_MinimizeWindow_forced")
+	Func Tray_MinimizeWindow_forced()
+		Tray_MinimizeWindow(True)
+	EndFunc
 
-		ConsoleWrite("Tray Minimize wasMax= "&$g_bWasMaximized & @CRLF)
-		GuiSetState(@SW_MINIMIZE,  $HypoGameBrowser)
-		If _IsChecked($UI_CBox_minToTray) Then
-			GuiSetState(@SW_HIDE, $HypoGameBrowser) ;
+	Func Tray_MinimizeWindow($force_minimize = False)
+		Local $getWinState = WinGetState($HypoGameBrowser)
+		if BitAND($getWinState,32) Then
+			$g_bWasMaximized = True
+			ConsoleWrite("Tray Minimized. was Maximized= "&$g_bWasMaximized & @CRLF)
 		EndIf
-		$g_bWasMinimized = True
+
+		;new minimize window option
+		if _IsChecked($UI_CBox_minimize) Then
+			$g_bWasMinimized = True
+			GuiSetState(@SW_MINIMIZE,  $HypoGameBrowser)
+		EndIf
+		;minimize to tray
+		If _IsChecked($UI_CBox_minToTray) Or $force_minimize Then
+			$g_bWasMinimized = True
+			GuiSetState(@SW_MINIMIZE,  $HypoGameBrowser) ;force minimize
+			GuiSetState(@SW_HIDE, $HypoGameBrowser)      ;hide. to tray
+		EndIf
 	EndFunc
 
 TrayItemSetOnEvent($UI_Tray_exit, "ExitScript")
